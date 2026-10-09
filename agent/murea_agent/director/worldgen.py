@@ -252,8 +252,9 @@ def _fallbacks() -> list[dict[str, str]]:
     return _FALLBACK if config.LANGUAGE == "zh" else _FALLBACK_EN
 
 
-def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
-    """Roll one. `styles` are the frontend's style presets (only id and label)."""
+def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str, str]:
+    """Develop a player's idea, or roll a world when no idea is supplied."""
+    idea = idea.strip()
     styles = [s for s in (styles or []) if s.get("id")][:24]
     ids = [s["id"] for s in styles]
     genres, eras, places, troubles = _ingredients()
@@ -272,12 +273,27 @@ def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
         f"Available style_id values:\n{menu or '- (none)'}\n\n"
         "Build the world from these four ingredients. Use all four."
     )
+    if idea:
+        user = (
+            f"Player's world idea:\n{idea}\n\n"
+            f"Available style_id values:\n{menu or '- (none)'}\n\n"
+            "Develop this idea into a playable world. Preserve its named places, beings, genre, "
+            "and the player's intent. Fill unspecified details with a coherent starting location, "
+            "the player's role, the surroundings and a reason to explore. The mainline should "
+            "support an unfolding adventure; the opening is its first visible moment."
+        )
     title_rule = (
         "a short Chinese name of 2-8 characters."
         if config.LANGUAGE == "zh"
         else "a short English name of one to four words."
     )
     system = _SYSTEM.replace("{LANGUAGE}", config.LANGUAGE_NAME).replace("{TITLE_RULE}", title_rule)
+    if idea:
+        system = system.replace(
+            "`setting`: ONE sentence. Where this is and what kind of place it is. No plot.",
+            "`setting`: Two or three concrete sentences establishing the world, the player's "
+            "role and the starting location. Include distinctive environmental details.",
+        )
     try:
         for attempt in range(2):
             out = llm.chat(
@@ -287,7 +303,7 @@ def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
                 schema=_SCHEMA,
                 temperature=1.0,
                 thinking=0,
-                tag="dice",
+                tag="world_idea" if idea else "dice",
             )
             # The ingredients can pull a model into another language; ask once more if they did.
             text = (
@@ -299,6 +315,8 @@ def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
                 break
             user += f"\n\nWrite every field, including the title, in {config.LANGUAGE_NAME}."
     except Exception:
+        if idea:
+            raise
         out = dict(random.choice(_fallbacks()))
         out["style_id"] = random.choice(ids) if ids else ""
         return out
@@ -306,8 +324,11 @@ def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
     if not isinstance(out, dict):
         out = {}
     got = {
-        k: " ".join(str(out.get(k) or "").split())[:200] for k in ("title", "setting", "mainline", "opening")
+        k: " ".join(str(out.get(k) or "").split())[: 1200 if idea and k == "setting" else 200]
+        for k in ("title", "setting", "mainline", "opening")
     }
+    if idea and not all(got.values()):
+        raise ValueError("World planning returned incomplete details; please retry")
     # The model sometimes invents an id that is not in the list or leaves it out; then pick one at
     # random instead of sending an id the frontend does not know, which would silently apply no
     # style.

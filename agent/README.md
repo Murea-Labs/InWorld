@@ -1,5 +1,12 @@
 # Murea Agent
 
+With no world selected, type a short idea into the home input, such as "Explore the world of
+the Dragon of Icespire Peak", and send it. The agent develops the setting, player role,
+starting location, main objective and opening, creates the world, and starts filming its
+first clip automatically. Input within an existing world remains an action in that world.
+If world planning fails, the idea stays in the input for retry; it is never replaced by an
+unrelated random world. Text/image credentials and a working video service are required.
+
 **English** | [中文](README_zh.md)
 
 An open-world **video agent**, part of [Murea](../README.md). You say what you do;

@@ -48,11 +48,11 @@ export const deleteUser = (id: string, password = '') =>
     body: JSON.stringify({ password }),
   })
 /** Roll a world setting. Roll only, never create; creating goes through createWorld. */
-export const randomWorld = (styles: { id: string; label: string }[]) =>
+export const randomWorld = (styles: { id: string; label: string }[], idea = '') =>
   json<RandomWorld>('api/worlds/random', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ styles }),
+    body: JSON.stringify({ styles, idea }),
   })
 
 
