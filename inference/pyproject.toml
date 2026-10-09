@@ -1,0 +1,22 @@
+[build-system]
+# An SPDX `license` string needs setuptools 77 or newer.
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "murea-fast"
+version = "0.1.0"
+description = "Murea-Fast multi-reference audio-video inference and clean-latent continuation"
+requires-python = ">=3.10"
+license = "Apache-2.0"
+dependencies = []
+
+[project.scripts]
+murea-fast = "murea_fast.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]

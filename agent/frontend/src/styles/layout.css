@@ -1,0 +1,425 @@
+/* ═══ Shell ═══
+   The screen is one stage. The picture column holds the video, the transport bar and the controls;
+   drawers float over it. */
+
+#app{
+  position:relative;
+  height:100dvh;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 8% 12%,rgba(121,196,188,.09),transparent 32%),
+    radial-gradient(circle at 92% 6%,rgba(211,167,109,.08),transparent 30%),
+    linear-gradient(145deg,#1b2530,var(--bg-0) 58%,#202a35);
+  /* Drawer widths scale smoothly with the window: the map needs readable nodes and asset cards need room. */
+  --rail-l:clamp(248px,18vw,318px);
+  --rail-r:clamp(284px,21vw,344px);
+  --rail-gap:14px;
+  --head-h:56px;
+  --content-r:calc(var(--rail-r) + var(--rail-gap) * 2);
+  --main-left:calc(var(--rail-l) + var(--rail-gap) * 2);
+  --transport-h:34px;
+  /* In normal mode the story controls sit under the video; reserve their real height so the video is never covered. */
+  --hud-gap:10px;
+  --hud-h:clamp(132px,18vh,170px);
+  /* Both are written by App from the video's real metadata (not every model outputs 16:9).
+     The inverse keeps the formulas below to multiplication; dividing by a var in calc is newer syntax. */
+  --video-ratio:1.7777778;
+  --video-ratio-inv:.5625;
+
+  /* ── The picture's rectangle ──
+     The video, the transport bar above and the controls below share the middle column. Subtract the bar
+     and the controls from the height first, then size the picture by its aspect ratio, so no control
+     ever overlaps it. */
+  /* The transport bar sits **outside** the picture (on its top edge), so its height is subtracted first;
+     it can never cover the picture or slide under the header. In normal mode the picture is width-bound,
+     so this costs no pixels. */
+  --transport-gap:8px;
+  --main-w:calc(100vw - var(--main-left) - var(--content-r));
+  --main-h:calc(100dvh - var(--head-h) - var(--rail-gap) * 3
+                - var(--transport-h) - var(--transport-gap)
+                - var(--hud-h) - var(--hud-gap));
+  --reel-w:min(var(--main-w),calc(var(--main-h) * var(--video-ratio)));
+  --reel-h:min(var(--main-h),calc(var(--main-w) * var(--video-ratio-inv)));
+  --reel-l:calc(var(--main-left) + (var(--main-w) - var(--reel-w)) / 2);
+  --reel-t:calc(var(--head-h) + var(--rail-gap) * 2
+                + var(--transport-h) + var(--transport-gap)
+                + (var(--main-h) - var(--reel-h)) / 2);
+  --reel-b:calc(var(--rail-gap) + var(--hud-h) + var(--hud-gap)
+                + (var(--main-h) - var(--reel-h)) / 2);
+
+  /* ── Immersive geometry ──
+     The picture fills the screen. --immersive-crop is the maximum overscan: compute the size that fits
+     entirely, then scale up at most this much to remove black bars; beyond that leave some atmosphere,
+     because people in the picture matter more than filling it. The element box never exceeds the viewport;
+     object-fit:cover crops inside it. */
+  --immersive-crop:1.14;
+  --immersive-fit-w:min(100vw,calc(100dvh * var(--video-ratio)));
+  --immersive-fit-h:min(100dvh,calc(100vw * var(--video-ratio-inv)));
+  --immersive-stage-w:min(100vw,calc(var(--immersive-fit-w) * var(--immersive-crop)));
+  --immersive-stage-h:min(100dvh,calc(var(--immersive-fit-h) * var(--immersive-crop)));
+
+  /* Side padding of the HUD column follows the picture width, not the viewport: on wide screens it stays
+     one column instead of three choices spanning the whole screen. */
+  --hud-inline:max(calc((var(--reel-w) - 1000px) / 2),clamp(14px,2.4vw,36px));
+}
+#app.no-assets{--rail-r:0px;--content-r:var(--rail-gap)}
+
+/* ═══ Immersive: only the picture and the HUD remain ═══
+   Header, transport bar and drawers all hide: a permanent toolbar is what breaks immersion most.
+   When the mouse reaches the top edge (measured in App, adds .chrome) the header and transport return,
+   so exiting, the map and the inspector are still reachable. Esc exits too. */
+#app.immersive{
+  --main-left:0px;--content-r:0px;
+  --reel-w:var(--immersive-stage-w);--reel-h:var(--immersive-stage-h);
+  --reel-l:calc((100vw - var(--immersive-stage-w)) / 2);
+  --reel-t:calc((100dvh - var(--immersive-stage-h)) / 2);
+  --reel-b:calc((100dvh - var(--immersive-stage-h)) / 2);
+}
+#side-rail,#assets,header,#transport,.rail-handle{
+  /* Dimming on play and brightening on stop use the same slow transition; otherwise stopping would
+     light everything up at once like a flash. */
+  transition:opacity .9s ease-in-out,
+             transform var(--t-slow) var(--ease-out);
+}
+/* Shrink toward its own edge instead of sliding out: sliding out would overflow #app and cause implicit scrolling */
+#app.immersive #side-rail{
+  opacity:0;pointer-events:none;transform:scale(.97);transform-origin:left center;
+}
+#app.immersive #assets{
+  opacity:0;pointer-events:none;transform:scale(.97);transform-origin:right center;
+}
+#app.immersive header,#app.immersive #transport{
+  opacity:0;pointer-events:none;transform:translateY(-8px);
+}
+#app.immersive.chrome header,#app.immersive.chrome #transport{
+  opacity:1;pointer-events:auto;transform:none;
+}
+/* In immersive mode --reel-t is 0 and the transport bar would land under the header; they appear
+   together, so keep it clear of the header. */
+#app.immersive #transport{top:calc(var(--head-h) + var(--rail-gap) * 2 + 4px)}
+
+/* Switch to a single side layout earlier as drawers widen, so the controls always keep usable width. */
+/* On narrow screens the asset panel still takes its space instead of floating over the picture, where it
+   would cover "other…" and the send button. The cost is a narrower picture, so App keeps it closed by
+   default on narrow screens. */
+@media(max-width:1180px){
+  #app{--rail-r:clamp(200px,26vw,300px)}
+}
+
+/* ─────────── Header ─────────── */
+header{
+  position:absolute;z-index:5;
+  left:var(--rail-gap);right:var(--rail-gap);top:var(--rail-gap);
+  height:var(--head-h);
+  display:flex;align-items:center;gap:10px;
+  padding:0 8px 0 16px;
+  border-radius:var(--r-lg);
+  background:
+    linear-gradient(180deg,rgba(245,249,252,.10),rgba(221,234,243,.035)),
+    rgba(38,49,62,.92);
+  border:1px solid rgba(225,236,244,.18);
+  box-shadow:var(--shadow-card),var(--lip);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+}
+
+/* Who gives way first when the header is too narrow: the setting text → world dropdown → status pills.
+   The buttons on the right never shrink (flex:none): they are clickable.
+   flex shrinks all shrinkable items **at once**, in proportion to base width × shrink; only very
+   different weights (100 : 1 : .01) create an order, because fully shrunk items freeze and the rest of
+   the deficit goes to the others. */
+.brand{display:flex;align-items:baseline;gap:9px;min-width:0;flex:0 100 auto}
+.brand h1{
+  margin:0;font:600 var(--text-lg)/1 var(--font-display);
+  letter-spacing:.01em;white-space:nowrap;color:#f7f5f0;flex:none;
+}
+.brand .setting{
+  font-size:var(--text-xs);color:var(--dimmer);white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis;max-width:260px;min-width:0;
+}
+
+/* overflow:hidden is the last guard: min-width:0 lets this row shrink below its content, and flex
+   overflow **paints outside** instead of growing the parent, so the pills would cover .head-actions and
+   make the buttons unclickable. Better to cut the last pill than cover the buttons. */
+.head-status{display:flex;align-items:center;gap:7px;min-width:0;flex:0 .01 auto;overflow:hidden}
+.head-actions{position:relative;display:flex;align-items:center;gap:7px;flex:none}
+.head-sep{width:1px;height:20px;background:var(--w-09);flex:none;margin:0 3px}
+.head-user{max-width:126px;padding-left:6px;background:var(--w-05)}
+.head-user>span{
+  width:20px;height:20px;display:grid;place-items:center;flex:none;border-radius:50%;
+  color:var(--accent-ink);background:var(--accent);font:600 9px/1 var(--font-ui);
+}
+.head-user>b{min-width:0;overflow:hidden;text-overflow:ellipsis;font-size:var(--text-xs);font-weight:500}
+.head-new{
+  color:#17302d;background:var(--accent);border-color:transparent;font-weight:600;box-shadow:none;
+}
+.head-new:hover:not(:disabled){color:#122523;background:#a6ddd7;border-color:transparent}
+.head-more-trigger svg{
+  width:10px;height:7px;fill:none;stroke:currentColor;stroke-width:1.5;
+  stroke-linecap:round;stroke-linejoin:round;transition:transform var(--t-fast);
+}
+.head-more-trigger.on svg{transform:rotate(180deg)}
+.head-more-menu{
+  position:absolute;z-index:var(--z-menu);right:0;top:calc(100% + 10px);
+  width:286px;padding:7px;
+  background:linear-gradient(180deg,rgba(57,71,86,.98),rgba(37,48,60,.98));
+  border:1px solid var(--glass-border);border-radius:var(--r-lg);
+  box-shadow:var(--shadow-float),var(--lip);animation:menu-in .14s var(--ease-out);
+}
+.head-theme-section{padding:5px}
+.head-more-label{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:2px 4px 9px;color:var(--dimmer);
+  font:600 10px/1 var(--font-ui);letter-spacing:var(--tracking-caps);
+}
+.head-more-label em{
+  color:var(--faint);font:9px/1 var(--font-ui);font-style:normal;
+  letter-spacing:.02em;text-transform:none;
+}
+.head-theme-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+.head-theme-option{
+  position:relative;flex-direction:column;justify-content:center;gap:4px;min-width:0;height:62px;padding:6px 4px;
+  border-radius:var(--r-sm);background:transparent;border-color:transparent;box-shadow:none;
+  color:var(--dim);text-align:center;
+}
+.head-theme-option:hover:not(:disabled){background:var(--w-05);border-color:var(--w-07)}
+.head-theme-option.on{background:var(--w-09);border-color:var(--w-14);color:var(--fg)}
+.head-theme-option>i{
+  width:18px;height:18px;border-radius:50%;flex:none;
+  border:2px solid rgba(255,255,255,.34);box-shadow:0 0 0 3px rgba(0,0,0,.12);
+}
+.head-theme-option>span{display:block;min-width:0;width:100%}
+.head-theme-option b,.head-theme-option small{
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.head-theme-option b{font-size:11px;line-height:1.25;font-weight:600}
+.head-theme-option small{margin-top:3px;color:var(--faint);font-size:8.5px;line-height:1.2}
+.head-theme-option>svg{
+  position:absolute;right:6px;top:6px;width:11px;height:11px;opacity:0;
+  fill:none;stroke:var(--fg);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+}
+.head-theme-option.on>svg{opacity:.72}
+.head-more-divider{height:1px;margin:4px 7px;background:linear-gradient(90deg,transparent,var(--w-14),transparent)}
+/* Runtime status rows in "more": once the header pills collapse, this is where they live. */
+.head-facts{padding:0 5px 3px}
+.head-fact{
+  display:flex;align-items:baseline;justify-content:space-between;gap:12px;
+  padding:4px 6px;color:var(--dim);font:500 var(--text-xs)/1.3 var(--font-ui);
+}
+.head-fact>span{flex:none}
+.head-fact em{
+  min-width:0;text-align:right;color:var(--faint);
+  font:9px/1.3 var(--mono);font-style:normal;letter-spacing:.05em;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.head-fact em.is-stale{color:#e2a6a1}
+.head-more-item{
+  width:100%;height:36px;padding:0 11px;display:flex;align-items:center;justify-content:space-between;
+  color:var(--dim);font:500 var(--text-sm)/1 var(--font-ui);text-decoration:none;text-align:left;
+  background:transparent;border:0;border-radius:var(--r-sm);box-shadow:none;
+}
+.head-more-item:hover:not(:disabled){color:var(--fg);background:var(--w-07)}
+.head-more-item em{color:var(--faint);font:9px/1 var(--mono);font-style:normal;letter-spacing:.08em}
+.head-more-item.is-danger{color:#e1aaa6}
+.head-more-item.is-danger:hover:not(:disabled){color:#f1c1bd;background:rgba(201,124,120,.13)}
+.head-more-item[aria-disabled=true]{opacity:.36;pointer-events:none}
+
+/* ─────────── Floating panels ─────────── */
+.rail{
+  position:absolute;z-index:4;
+  top:calc(var(--head-h) + var(--rail-gap) * 2);
+  bottom:var(--rail-gap);
+  display:flex;flex-direction:column;min-height:0;
+}
+
+/* Every floating panel looks like this */
+.panel{
+  background:
+    linear-gradient(180deg,rgba(242,247,251,.075),transparent 42%),
+    rgba(36,47,59,.91);
+  border:1px solid var(--glass-border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--shadow-card),var(--lip);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+}
+
+.panel-head{
+  position:relative;flex:none;
+  height:38px;padding:0 8px 0 14px;
+  display:flex;align-items:center;gap:8px;
+  font:600 10px/1 var(--font-ui);
+  letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dim);
+}
+.panel-head::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--w-09),transparent);
+}
+
+/* ─────────── Left drawer: map / chat tabs ─────────── */
+/* One place, two uses. The map is the default: "where am I in this world" is always relevant; the chat
+   is for looking back, the dialogue is already on the picture. */
+#side-rail{
+  left:var(--rail-gap);right:auto;
+  width:var(--rail-l);
+  overflow:hidden;
+}
+.rail-tabs{
+  position:relative;flex:none;
+  height:38px;padding:0 8px 0 8px;
+  display:flex;align-items:center;gap:2px;
+}
+.rail-tabs::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:0;height:1px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,var(--w-09),transparent);
+}
+.rail-tab{
+  position:relative;
+  height:28px;padding:0 12px;
+  display:inline-flex;align-items:center;gap:6px;
+  background:transparent;border:0;box-shadow:none;border-radius:var(--r-sm);
+  color:var(--faint);font:600 10.5px/1 var(--font-ui);
+  letter-spacing:var(--tracking-caps);text-transform:uppercase;
+}
+.rail-tab:hover:not(:disabled){color:var(--dim);background:var(--w-05)}
+.rail-tab.on{color:var(--fg);background:var(--w-09)}
+.rail-tab.on::after{
+  content:"";position:absolute;left:12px;right:12px;bottom:-5px;height:2px;
+  border-radius:1px;background:var(--accent);
+}
+.rail-tab em{
+  font:600 9px/1 var(--mono);font-style:normal;letter-spacing:var(--tracking-code);
+  color:var(--faint);
+}
+.rail-body{flex:1;min-height:0;display:flex;flex-direction:column}
+.rail-body[hidden]{display:none}
+
+/* ─────────── Toasts ─────────── */
+#toast{
+  position:fixed;left:50%;bottom:20px;transform:translateX(-50%);
+  z-index:var(--z-toast);max-width:min(70vw,660px);
+  display:flex;align-items:center;gap:12px;
+  padding:11px 12px 11px 16px;
+  font-size:var(--text-sm);line-height:1.55;
+  background:var(--glass-bg);border:1px solid var(--glass-border);
+  border-radius:var(--r-lg);box-shadow:var(--shadow-float),var(--lip);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  animation:toast-in .22s var(--ease-out);
+}
+@keyframes toast-in{from{opacity:0;transform:translate(-50%,10px)}}
+#toast span{min-width:0;word-break:break-word}
+
+/* Pills leave in order of least loss. The breakpoints are measured: the fixed header cost besides the pills
+   is about 1159px and the five pills with gaps are 582px, so everything fits from about 1741px.
+   Nothing is lost when they leave: the same items are listed at the top of the "more" menu. */
+@media(max-width:1700px){.pill-version{display:none}}
+@media(max-width:1560px){.pill-style{display:none}}
+@media(max-width:1400px){.pill-video{display:none}}
+@media(max-width:1240px){.pill-model{display:none}}
+@media(max-width:1080px){.brand .setting{display:none}}
+@media(max-width:970px){.head-user>b{display:none}.head-user{padding-right:6px}}
+.head-status{min-width:0}
+.head-status .pill{flex:none}
+/* The style is the only pill of unpredictable length (a sentence the world writes); let it absorb the
+   leftover so the pixels between breakpoints do not cut another pill in half. */
+.head-status .pill-style{flex:0 1 auto;min-width:0}
+.pill-style>span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+@media(max-width:880px){
+  /* The header wraps into two rows. --head-h must be a concrete value: auto would break every
+     calc(var(--head-h) + …) and push the picture and drawers under the header. */
+  #app{--head-h:92px}
+  header{height:auto;min-height:var(--head-h);padding:9px 11px;gap:7px;flex-wrap:wrap}
+  .brand .setting,.head-sep{display:none}
+  .head-status{order:5;flex:1 0 100%}
+  .head-status .pill{display:inline-flex}
+}
+
+/* The server runs old code: this must be loud, or latency gets blamed on the model */
+.pill.stale{
+  color:#e2a6a1;border-color:rgba(176,82,75,.45);background:rgba(176,82,75,.14);
+  font-weight:600;
+}
+
+@media(max-width:640px){#app{--rail-l:200px}}
+@media(max-width:500px){#app{--rail-l:150px}}
+
+/* ─────────── Voice switch ─────────── */
+.tts-btn{display:inline-flex;align-items:center;gap:6px}
+.tts-speaker{display:inline-flex;width:16px;height:16px;flex:none}
+.tts-speaker svg{display:block;width:100%;height:100%;overflow:visible}
+.tts-speaker-body{fill:currentColor}
+.tts-speaker-wave{
+  fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;
+  opacity:.48;transform-box:view-box;transform-origin:11px 12px;
+}
+/* Waves spread only while speaking; at rest it is a plain speaker. */
+.tts-btn.speaking .tts-speaker-wave{animation:tts-wave-out 1.15s ease-out infinite}
+.tts-btn.speaking .tts-speaker-wave.wave-far{animation-delay:.28s}
+@keyframes tts-wave-out{
+  0%{opacity:.15;transform:scale(.82)}
+  45%{opacity:1}
+  100%{opacity:.12;transform:scale(1.08)}
+}
+
+/* ─────────── Drawer handles on both sides of the picture ───────────
+   Left is map / chat, right is assets; the handle sits on the side it controls. */
+.rail-handle{
+  position:absolute;z-index:4;top:50%;
+  width:16px;height:56px;padding:0;margin-top:-28px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(36,47,59,.82);border:1px solid var(--glass-border);
+  box-shadow:var(--shadow-card);
+  -webkit-backdrop-filter:var(--glass-blur);backdrop-filter:var(--glass-blur);
+  color:var(--faint);opacity:.5;
+  transition:opacity var(--t-fast),color var(--t-fast),background var(--t-fast);
+}
+.rail-handle:hover:not(:disabled){opacity:1;color:var(--fg);background:rgba(46,59,73,.94)}
+.rail-handle svg{
+  width:8px;height:14px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+/* On the outer edge of its drawer; on the screen edge when the drawer is closed. */
+.rail-handle.left{
+  left:calc(var(--main-left) - 8px);
+  border-radius:0 var(--r-sm) var(--r-sm) 0;border-left:0;
+}
+.rail-handle.right{
+  right:calc(var(--content-r) - 8px);
+  border-radius:var(--r-sm) 0 0 var(--r-sm);border-right:0;
+}
+#app.no-rail .rail-handle.left{left:0}
+#app.no-assets .rail-handle.right{right:0}
+/* Left drawer closed: the middle takes its width, same formula as the asset side. */
+#app.no-rail{--rail-l:0px;--main-left:var(--rail-gap)}
+#app.no-rail #side-rail{display:none}
+
+/* ─────────── Dim the surroundings while a clip plays ───────────
+   While a clip plays the eyes are on the picture, and permanent panels say "this is a web page".
+   Not hidden (hidden is unclickable), only dimmed; hovering restores them at once. The choices for the
+   next step are not in these panels and are unaffected. */
+#app.playing header,
+#app.playing #side-rail,
+#app.playing #assets,
+#app.playing #transport,
+#app.playing .rail-handle{
+  opacity:.26;
+  transition:opacity .9s ease-in-out;
+}
+#app.playing header:hover,
+#app.playing header:focus-within,
+#app.playing #side-rail:hover,
+#app.playing #side-rail:focus-within,
+#app.playing #assets:hover,
+#app.playing #assets:focus-within,
+#app.playing #transport:hover,
+#app.playing #transport:focus-within,
+#app.playing .rail-handle:hover{
+  opacity:1;
+  transition:opacity var(--t-fast) var(--ease-out);
+}
+/* Immersive mode's own rules (everything hidden) win; this translucency must not bring them back. */
+#app.immersive.playing header,
+#app.immersive.playing #side-rail,
+#app.immersive.playing #assets,
+#app.immersive.playing #transport{opacity:0}
+#app.immersive.playing.chrome header:hover,
+#app.immersive.playing.chrome #transport:hover{opacity:1}

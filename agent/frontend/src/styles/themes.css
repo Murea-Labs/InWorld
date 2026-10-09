@@ -1,0 +1,171 @@
+/* ═══ Themes ═══
+   A theme is a UI preference, not world data. Override the design tokens first, then the core
+   surfaces that need an opaque background. Videos and reference images are never filtered,
+   so the colors of the generated content stay true. */
+
+#app[data-theme]{
+  color-scheme:dark;
+  color:var(--fg);
+  --theme-bg-a:#1b2530;
+  --theme-bg-c:#202a35;
+  --theme-panel-rgb:38,49,62;
+  --theme-card-rgb:48,61,75;
+  --theme-deep-rgb:24,33,43;
+  --theme-menu-top-rgb:57,71,86;
+  --theme-menu-bottom-rgb:37,48,60;
+  --accent-rgb:121,196,188;
+  --story-rgb:211,167,109;
+  /* The immersive HUD sits on the video; its backing follows the theme's panel color */
+  --hud-veil:rgba(var(--theme-panel-rgb),.76);
+  transition:background .32s var(--ease-out),color .2s var(--ease-out);
+}
+
+#app[data-theme='paper']{
+  color-scheme:light;
+  --theme-bg-a:#f8fafb;--theme-bg-c:#e9eef1;
+  --theme-panel-rgb:255,255,255;--theme-card-rgb:244,247,249;
+  --theme-deep-rgb:235,240,243;--theme-menu-top-rgb:255,255,255;--theme-menu-bottom-rgb:246,248,249;
+  --accent-rgb:74,139,134;--story-rgb:167,121,65;
+  --bg-0:#e9eef1;--bg-1:#f5f7f8;--bg-2:#ffffff;
+  --w-02:rgba(31,48,58,.025);--w-03:rgba(31,48,58,.045);
+  --w-05:rgba(31,48,58,.065);--w-07:rgba(31,48,58,.09);
+  --w-09:rgba(31,48,58,.12);--w-14:rgba(31,48,58,.17);
+  --w-22:rgba(31,48,58,.25);--w-38:rgba(31,48,58,.40);
+  --fg:#202b32;--dim:rgba(31,45,53,.72);--dimmer:rgba(42,57,65,.53);--faint:rgba(52,68,77,.39);
+  --c-ok:#4f8f89;--c-warn:#a77941;--c-err:#b56560;--c-map:#4a8b86;--c-story:#a77941;
+  --accent:#77b9b3;--accent-ink:#122b29;--focus-ring:0 0 0 2px rgba(74,139,134,.42);
+  --surface-deep:rgba(235,240,243,.92);--surface-panel:rgba(255,255,255,.92);
+  --surface-card:rgba(244,247,249,.94);--surface-hover:rgba(230,237,240,.96);
+  --glass-border:rgba(41,57,66,.15);--input-bg:rgba(244,247,248,.96);--input-border:rgba(41,57,66,.18);
+  --lip:inset 0 1px 0 rgba(255,255,255,.92);
+  --shadow-card:0 12px 30px rgba(42,56,66,.12);--shadow-float:0 24px 68px rgba(42,56,66,.18);
+  --shadow-drawer:-24px 0 70px rgba(42,56,66,.16);
+  /* In the light theme the HUD is a white veil with dark text; the backing must be dense
+     enough or dark text on a bright picture becomes unreadable. */
+  --hud-scrim:linear-gradient(180deg,transparent,rgba(236,241,244,.42) 38%,rgba(246,249,250,.84));
+  --hud-veil:rgba(255,255,255,.88);
+  --hud-line:rgba(41,57,66,.18);
+}
+
+#app[data-theme='noir']{
+  --theme-bg-a:#0d0f12;--theme-bg-c:#080a0c;
+  --theme-panel-rgb:18,21,25;--theme-card-rgb:27,31,36;
+  --theme-deep-rgb:8,10,13;--theme-menu-top-rgb:31,35,40;--theme-menu-bottom-rgb:12,14,17;
+  --accent-rgb:137,180,174;--story-rgb:185,151,103;
+  --bg-0:#07090b;--bg-1:#111419;--bg-2:#191d22;
+  --w-02:rgba(235,239,242,.03);--w-03:rgba(235,239,242,.05);
+  --w-05:rgba(235,239,242,.07);--w-07:rgba(235,239,242,.10);
+  --w-09:rgba(235,239,242,.13);--w-14:rgba(235,239,242,.18);
+  --w-22:rgba(235,239,242,.28);--w-38:rgba(235,239,242,.44);
+  --fg:#f1f3f4;--dim:rgba(225,229,232,.70);--dimmer:rgba(213,218,222,.48);--faint:rgba(203,210,215,.34);
+  --c-ok:#89b4ae;--c-warn:#b99767;--c-map:#89b4ae;--c-story:#b99767;
+  --accent:#89b4ae;--accent-ink:#091211;--focus-ring:0 0 0 2px rgba(137,180,174,.54);
+  --surface-deep:rgba(8,10,13,.88);--surface-panel:rgba(18,21,25,.94);
+  --surface-card:rgba(27,31,36,.82);--surface-hover:rgba(39,44,50,.78);
+  --glass-border:rgba(231,236,239,.14);--input-bg:rgba(8,10,13,.90);
+  --shadow-card:0 14px 34px rgba(0,0,0,.42);--shadow-float:0 26px 76px rgba(0,0,0,.62);
+  --shadow-drawer:-24px 0 70px rgba(0,0,0,.68);
+  --hud-scrim:linear-gradient(180deg,transparent,rgba(4,6,8,.42) 38%,rgba(3,5,7,.82));
+  --hud-veil:rgba(var(--theme-panel-rgb),.86);
+  --hud-line:rgba(231,236,239,.15);
+}
+
+/* Material recipe shared by all themes. RGB tokens keep each component's own opacity levels. */
+#app[data-theme]{
+  background:
+    radial-gradient(circle at 8% 12%,rgba(var(--accent-rgb),.10),transparent 32%),
+    radial-gradient(circle at 92% 6%,rgba(var(--story-rgb),.08),transparent 30%),
+    linear-gradient(145deg,var(--theme-bg-a),var(--bg-0) 58%,var(--theme-bg-c));
+}
+#app[data-theme] header{
+  background:linear-gradient(180deg,rgba(245,249,252,.10),rgba(221,234,243,.035)),rgba(var(--theme-panel-rgb),.92);
+}
+#app[data-theme] .panel{
+  background:linear-gradient(180deg,rgba(242,247,251,.075),transparent 42%),rgba(var(--theme-panel-rgb),.91);
+}
+#app[data-theme] .head-more-menu{
+  background:linear-gradient(180deg,rgba(var(--theme-menu-top-rgb),.99),rgba(var(--theme-menu-bottom-rgb),.99));
+}
+/* The HUD and the transport bar sit on the picture and do not follow the theme: the theme
+   changes the workbench, the picture stays the picture. Painting them white in the light
+   theme would bury the text in the video. */
+#app[data-theme] .msg.user{background:rgba(var(--accent-rgb),.18);border-color:rgba(var(--accent-rgb),.28)}
+#app[data-theme] .msg.gm{background:rgba(var(--theme-card-rgb),.62)}
+#app[data-theme] .msg.gm:hover{border-color:rgba(var(--accent-rgb),.34);background:rgba(var(--theme-card-rgb),.82)}
+/* The world has spoken but the video is still rendering: not clickable yet, so no hover */
+#app[data-theme] .msg.gm.live,
+#app[data-theme] .msg.gm.live:hover{
+  background:rgba(var(--theme-card-rgb),.46);border-color:rgba(var(--accent-rgb),.22);
+}
+#app[data-theme] .asset-card{background:rgba(var(--theme-card-rgb),.72)}
+#app[data-theme] .asset-card:hover:not(:disabled){border-color:rgba(var(--accent-rgb),.38)}
+#app[data-theme] .world-map-mini-context{background:rgba(var(--theme-deep-rgb),.52)}
+#app[data-theme] .world-map-shell{
+  background:linear-gradient(180deg,rgba(var(--theme-card-rgb),.97),rgba(var(--theme-deep-rgb),.99));
+}
+#app[data-theme] .world-map-board{
+  background:radial-gradient(circle at 42% 40%,rgba(var(--accent-rgb),.075),transparent 48%),linear-gradient(145deg,var(--theme-bg-c),var(--bg-0));
+}
+#app[data-theme] #inspector{
+  background:linear-gradient(180deg,rgba(var(--theme-card-rgb),.96),rgba(var(--theme-deep-rgb),.98));
+}
+#app[data-theme] dialog{
+  background:linear-gradient(180deg,rgba(var(--theme-card-rgb),.98),rgba(var(--theme-deep-rgb),.99));
+}
+#app[data-theme] dialog .actions,
+#app[data-theme] .box,
+#app[data-theme] #notes{background:rgba(var(--theme-deep-rgb),.72)}
+#app[data-theme] button.primary,
+#app[data-theme] .head-new,
+#app[data-theme] .tts-btn.on{background:var(--accent);color:var(--accent-ink);border-color:transparent;box-shadow:none}
+#app[data-theme] button.primary:hover:not(:disabled),
+#app[data-theme] .head-new:hover:not(:disabled),
+#app[data-theme] .tts-btn.on:hover:not(:disabled){background:color-mix(in srgb,var(--accent) 82%,white);color:var(--accent-ink)}
+/* Confirm buttons of irreversible actions keep the danger color, not the theme's primary. */
+#app[data-theme] button.primary.danger{
+  background:rgba(181,101,96,.14);color:var(--c-err);border-color:rgba(181,101,96,.38);box-shadow:none
+}
+#app[data-theme] button.primary.danger:hover:not(:disabled){
+  background:rgba(181,101,96,.23);color:var(--c-err);border-color:rgba(181,101,96,.52)
+}
+#app[data-theme] input:focus,
+#app[data-theme] textarea:focus,
+#app[data-theme] select:focus{border-color:rgba(var(--accent-rgb),.48);background:rgba(var(--theme-deep-rgb),.96)}
+#app[data-theme] .tag.cont{border-color:rgba(var(--accent-rgb),.42);background:rgba(var(--accent-rgb),.14)}
+#app[data-theme] #tree a.head{background:rgba(var(--accent-rgb),.12)}
+#app[data-theme] #tree a.is-current{
+  color:var(--fg);background:rgba(var(--accent-rgb),.22);
+  box-shadow:inset 2px 0 0 var(--c-map);
+}
+#app[data-theme] #tree a.is-current .n{color:var(--c-map)}
+#app[data-theme] .world-map-route-line.is-current{stroke:rgba(var(--accent-rgb),.82)}
+#app[data-theme] .world-map-node.is-current{border-color:rgba(var(--accent-rgb),.78);box-shadow:0 12px 32px rgba(0,0,0,.4),0 0 0 7px rgba(var(--accent-rgb),.10)}
+
+/* The light theme fixes a few details that were deliberately light text or dark scrims. */
+#app[data-theme='paper'] header{border-color:rgba(41,57,66,.16)}
+#app[data-theme='paper'] .brand h1{color:var(--fg)}
+#app[data-theme='paper'] .head-theme-option>i{border-color:rgba(31,48,58,.24);box-shadow:0 0 0 3px rgba(31,48,58,.07)}
+#app[data-theme='paper'] .stage-atmos{opacity:.22}
+#app[data-theme='paper'] .stage-atmos::after{
+  background:radial-gradient(ellipse at center,transparent 0 44%,rgba(224,231,235,.40) 100%),linear-gradient(180deg,rgba(235,240,243,.25),transparent 36%,rgba(226,232,236,.42));
+}
+#app[data-theme='paper'] .tag.cont,
+#app[data-theme='paper'] #tree a.head,
+#app[data-theme='paper'] .asset-card-image em{color:#356f6b}
+#app[data-theme='paper'] .asset-card-image em{background:rgba(255,255,255,.88);border-color:rgba(var(--accent-rgb),.34)}
+#app[data-theme='paper'] .asset-card-image::after{background:linear-gradient(180deg,transparent,rgba(26,34,39,.64))}
+#app[data-theme='paper'] .world-map-overlay{background:rgba(40,51,58,.46)}
+#app[data-theme='paper'] .world-map-grid{
+  background-image:linear-gradient(rgba(31,48,58,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(31,48,58,.055) 1px,transparent 1px),radial-gradient(circle,rgba(var(--accent-rgb),.22) .55px,transparent .8px);
+}
+#app[data-theme='paper'] .world-map-route-shadow{stroke:rgba(31,48,58,.13);stroke-width:8}
+#app[data-theme='paper'] .world-map-route-caption{
+  background:rgba(255,255,255,.84);color:var(--dimmer);box-shadow:0 8px 22px rgba(42,56,66,.08);
+}
+#app[data-theme='paper'] #scrim,
+#app[data-theme='paper'] dialog::backdrop{background:rgba(40,51,58,.36)}
+
+/* The pure black theme dims the scene atmosphere and keeps the old black workbench outline. */
+#app[data-theme='noir'] .stage-atmos{opacity:.28;filter:blur(60px) saturate(82%)}
+
+@media(prefers-reduced-motion:reduce){#app[data-theme]{transition:none}}

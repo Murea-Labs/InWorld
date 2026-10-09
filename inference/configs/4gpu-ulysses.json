@@ -1,0 +1,16 @@
+{
+  "python": "/path/to/murea/inference/.venv/bin/python",
+  "model_dir": "/path/to/LTX-2.5-Diffusers",
+  "checkpoint": "/path/to/model_ema_distilled8_step_07000.safetensors",
+  "runtime_dir": "/path/to/murea-runtime",
+  "gpus": "0,1,2,3",
+  "parallel": "ulysses",
+  "attention": "sdpa",
+  "packed_qkv": false,
+  "compile": false,
+  "allow_server_paths": false,
+  "host": "127.0.0.1",
+  "port": 30260,
+  "scheduler_port": 5560,
+  "master_port": 30261
+}

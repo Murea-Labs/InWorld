@@ -1,0 +1,20 @@
+/* Murea Agent stylesheet entry.
+   Split by UI area so a change in one place does not touch the others.
+   To change the overall look, edit tokens.css (and studio.css for the skin).
+   
+   The font is bundled (Inter, see studio.css), no CDN: it works offline and behind firewalls.
+   Chinese falls back to PingFang / HarmonyOS Sans / Microsoft YaHei. */
+
+@import './tokens.css';
+@import './base.css';
+@import './layout.css';
+@import './chat.css';
+@import './hud.css';
+@import './stage.css';
+@import './assets.css';
+@import './inspector.css';
+@import './dialogs.css';
+@import './map.css';
+@import './themes.css';
+@import './users.css';
+@import './studio.css';

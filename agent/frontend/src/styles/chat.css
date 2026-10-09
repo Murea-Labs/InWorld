@@ -1,0 +1,140 @@
+/* ═══ Chat log: the content of the left drawer's chat tab ═══
+   Dialogue and choices are already on the picture (HUD); this is for looking back:
+   which line made this clip, open a clip in the inspector. So it is a tab, not a panel
+   that must always be visible; the map is the default tab. */
+
+#log{
+  flex:1;min-height:0;overflow-y:auto;
+  padding:16px 14px 12px;
+  display:flex;flex-direction:column;gap:13px;
+  /* Fade at the top edge instead of a hard cut */
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 26px);
+  mask-image:linear-gradient(180deg,transparent,#000 26px);
+}
+
+.msg{max-width:94%;white-space:pre-wrap;word-break:break-word;font-size:var(--text-base)}
+
+.msg.user{
+  align-self:flex-end;
+  padding:9px 13px;
+  border-radius:var(--r-lg) var(--r-lg) 4px var(--r-lg);
+  background:rgba(121,196,188,.18);border:1px solid rgba(121,196,188,.28);
+  box-shadow:var(--lip);
+}
+
+.msg.gm{
+  align-self:flex-start;
+  padding:10px 13px 9px;
+  border-radius:var(--r-lg) var(--r-lg) var(--r-lg) 4px;
+  background:rgba(48,61,75,.62);border:1px solid var(--w-09);
+  box-shadow:var(--lip);
+  cursor:pointer;
+  transition:border-color var(--t-fast),background var(--t-fast);
+}
+.msg.gm:hover{border-color:rgba(121,196,188,.34);background:rgba(58,73,89,.76)}
+
+.msg.sys{
+  align-self:center;text-align:center;
+  color:var(--dimmer);font-size:var(--text-sm);line-height:1.85;
+  padding:14px 16px;max-width:92%;
+  border:1px dashed var(--line);border-radius:var(--r-md);
+}
+
+/* The meta line under each director reply */
+.beat{
+  margin-top:9px;padding-top:8px;
+  border-top:1px solid var(--w-07);
+  display:flex;gap:6px;align-items:center;flex-wrap:wrap;
+}
+.beat .go{margin-left:auto;color:var(--faint);font-size:var(--text-xs);
+  transition:color var(--t-fast)}
+.msg.gm:hover .beat .go{color:var(--fg)}
+
+/* ─────────── Sent but not saved yet ─────────── */
+.msg.user.pending{
+  background:rgba(121,196,188,.09);border-style:dashed;border-color:rgba(121,196,188,.24);
+  color:var(--dim);
+}
+
+/* The opening the system sends itself: a divider, not a message */
+.msg.sys.opening{
+  border:0;padding:4px 0;max-width:100%;
+  font:600 10px/1 var(--font-ui);
+  letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--faint);
+  display:flex;align-items:center;gap:10px;
+}
+.msg.sys.opening::before,.msg.sys.opening::after{
+  content:"";flex:1;height:1px;background:var(--w-07);
+}
+
+/* ─────────── Beats the system keeps playing on its own ─────────── */
+.msg.user.auto{background:var(--w-05);border-style:dashed}
+.auto-tag{
+  display:inline-block;margin-right:7px;padding:1px 6px;border-radius:var(--r-xs);
+  background:var(--w-09);color:var(--faint);
+  font:600 9px/1.6 var(--font-ui);letter-spacing:var(--tracking-caps);
+  vertical-align:1px;
+}
+
+/* The director has spoken but the video is still rendering. No clip to inspect yet, so it is
+   not clickable; background and hover follow the theme in themes.css. */
+.msg.gm.live{cursor:default}
+
+/* ─────────── Reference images drawn in this beat ─────────── */
+/* When the world creates a place or a person for the user, show it right away. These
+   images are not intermediate output: every later clip is generated from them.
+   (The pop-up card on the picture, .stage-pop in stage.css, is the live moment;
+   this copy is the record you can scroll back to.) */
+.sketches{
+  margin-top:9px;display:flex;gap:7px;
+  overflow-x:auto;overscroll-behavior-x:contain;
+  padding-bottom:2px;
+  scrollbar-width:none;
+}
+.sketches::-webkit-scrollbar{display:none}
+.sketch{
+  flex:0 0 auto;max-width:232px;margin:0;
+  display:flex;gap:8px;align-items:center;
+  padding:5px 9px 5px 5px;
+  border:1px solid var(--w-09);border-radius:var(--r-sm);
+  background:var(--w-05);
+  animation:sketch-in .3s var(--ease-out) backwards;
+}
+.sketch:nth-child(2){animation-delay:.06s}
+.sketch:nth-child(3){animation-delay:.12s}
+.sketch:nth-child(4){animation-delay:.18s}
+.sketch:nth-child(5){animation-delay:.24s}
+.sketch img{
+  flex:none;width:76px;height:57px;object-fit:cover;
+  border-radius:var(--r-xs);background:var(--w-09);
+}
+.sketch figcaption{
+  min-width:0;display:flex;flex-direction:column;gap:1px;
+  font-size:var(--text-xs);line-height:1.45;
+}
+.sketch figcaption b{
+  display:flex;align-items:center;gap:5px;
+  font-weight:600;color:var(--fg);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.sketch figcaption span{
+  color:var(--faint);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+.sketch .dot{
+  width:5px;height:5px;border-radius:50%;flex:none;
+  background:var(--c-image);
+}
+.sketch .dot.place{background:var(--c-gm)}
+@keyframes sketch-in{from{opacity:0;transform:translateY(6px)}}
+
+/* Cards open on click: large view, replace image, edit description */
+.sketch.open{cursor:pointer;transition:border-color var(--t-fast),background var(--t-fast)}
+.sketch.open:hover{border-color:rgba(121,196,188,.34);background:var(--w-09)}
+/* Creatures / objects: mark what is not a person */
+.sketch-kind,.asset-kind{
+  display:inline-block;margin-left:5px;padding:0 5px;border-radius:var(--r-xs);
+  background:var(--w-09);color:var(--dimmer);
+  font:600 9px/1.7 var(--font-ui);letter-spacing:var(--tracking-caps);
+  font-style:normal;vertical-align:1px;
+}

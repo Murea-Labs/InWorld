@@ -1,0 +1,561 @@
+/* ═══ Studio (dark) / Daylight (white) ═══
+   In the language of video-model sites: Inter, pure black or pure white background, borderless
+   grey panels without shadows, pill buttons and segmented controls, one blue accent.
+   No serif, warm paper, color blocks, frosted glass or gradients.
+   Both themes share the component rules below and only define their color tokens up front. */
+
+@font-face{
+  font-family:"Inter";
+  src:url("../assets/fonts/inter-variable.woff2") format("woff2");
+  font-weight:100 900;
+  font-display:swap;
+}
+
+body #app[data-theme]{
+  --font-ui:Inter,"PingFang SC","HarmonyOS Sans SC","Microsoft YaHei",-apple-system,sans-serif;
+  --font-display:var(--font-ui);
+  --text-xs:12px;--text-sm:13px;--text-base:14px;--text-md:15px;--text-lg:18px;--text-xl:22px;
+  --r-sm:10px;--r-md:14px;--r-lg:20px;--r-xl:28px;
+  --glass-blur:none;--hud-blur:blur(20px) saturate(120%);
+  --lip:none;--shadow-card:none;--shadow-drawer:none;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  font-family:var(--font-ui);
+  font-feature-settings:"cv11","ss01";
+  -webkit-font-smoothing:antialiased;
+  letter-spacing:-.006em;
+}
+
+body #app[data-theme='studio']{
+  color-scheme:dark;
+  --s-bg:#000;--s-panel:#111113;--s-panel-2:#1c1c1f;--s-panel-3:#2c2c30;
+  --s-ink:#f5f5f7;--s-ink-2:rgba(245,245,247,.80);--s-muted:rgba(245,245,247,.56);--s-faint:rgba(245,245,247,.34);
+  --s-line:rgba(255,255,255,.08);--s-accent:#4d8dff;--s-solid:#f5f5f7;--s-solid-ink:#000;
+  --w-02:rgba(255,255,255,.02);--w-03:rgba(255,255,255,.04);--w-05:rgba(255,255,255,.06);
+  --w-07:rgba(255,255,255,.08);--w-09:rgba(255,255,255,.11);--w-14:rgba(255,255,255,.16);
+  --w-22:rgba(255,255,255,.24);--w-38:rgba(255,255,255,.40);
+  --shadow-float:0 30px 90px rgba(0,0,0,.6);
+  --hud-scrim:linear-gradient(180deg,transparent,rgba(0,0,0,.42) 40%,rgba(0,0,0,.82));
+  --hud-veil:rgba(17,17,19,.78);--hud-line:rgba(255,255,255,.10);
+  --theme-panel-rgb:17,17,19;--theme-card-rgb:28,28,31;--theme-deep-rgb:0,0,0;
+  --theme-menu-top-rgb:28,28,31;--theme-menu-bottom-rgb:28,28,31;
+}
+body #app[data-theme='daylight']{
+  color-scheme:light;
+  --s-bg:#fff;--s-panel:#f5f5f7;--s-panel-2:#e8e8ed;--s-panel-3:#d2d2d7;
+  --s-ink:#1d1d1f;--s-ink-2:rgba(29,29,31,.80);--s-muted:#6e6e73;--s-faint:#a1a1a6;
+  --s-line:rgba(0,0,0,.07);--s-accent:#1f6bff;--s-solid:#1d1d1f;--s-solid-ink:#fff;
+  --w-02:rgba(0,0,0,.02);--w-03:rgba(0,0,0,.035);--w-05:rgba(0,0,0,.05);
+  --w-07:rgba(0,0,0,.07);--w-09:rgba(0,0,0,.09);--w-14:rgba(0,0,0,.14);
+  --w-22:rgba(0,0,0,.22);--w-38:rgba(0,0,0,.38);
+  --shadow-float:0 30px 90px rgba(0,0,0,.14);
+  --hud-scrim:linear-gradient(180deg,transparent,rgba(255,255,255,.42) 40%,rgba(255,255,255,.86));
+  --hud-veil:rgba(255,255,255,.86);--hud-line:rgba(0,0,0,.08);
+  --theme-panel-rgb:245,245,247;--theme-card-rgb:255,255,255;--theme-deep-rgb:232,232,237;
+  --theme-menu-top-rgb:255,255,255;--theme-menu-bottom-rgb:255,255,255;
+}
+/* Both themes map the older tokens onto the same roles, so older components need no theme logic. */
+body #app[data-theme]{
+  --bg-0:var(--s-bg);--bg-1:var(--s-panel);--bg-2:var(--s-panel-2);
+  --fg:var(--s-ink);--dim:var(--s-ink-2);--dimmer:var(--s-muted);--faint:var(--s-faint);
+  --line:var(--s-line);--line-strong:var(--w-14);
+  --surface-deep:var(--s-bg);--surface-panel:var(--s-panel);--surface-card:var(--s-panel-2);--surface-hover:var(--s-panel-3);
+  --glass-border:transparent;--input-bg:var(--s-panel-2);--input-border:transparent;
+  --accent:var(--s-accent);--accent-ink:#fff;--accent-rgb:77,141,255;--story-rgb:160,160,165;
+  --c-ok:#30d158;--c-warn:#ff9f0a;--c-err:#ff453a;--c-map:var(--s-ink);--c-story:var(--s-muted);
+  --c-gm:var(--s-ink);--c-image:var(--s-muted);--c-rewrite:var(--s-faint);--c-video:var(--s-accent);
+  --focus-ring:0 0 0 2px var(--s-accent);
+  background:var(--s-bg);
+  color:var(--s-ink);
+}
+
+/* ─── Common: pill buttons, borderless grey inputs ─── */
+body #app[data-theme] button{
+  font-family:var(--font-ui);border-radius:999px;box-shadow:none;
+  background:var(--s-panel-2);border:0;color:var(--s-ink);
+  transition:background .2s var(--ease-out),color .2s var(--ease-out),transform .2s var(--ease-out),opacity .2s;
+}
+body #app[data-theme] button:hover:not(:disabled){background:var(--s-panel-3);color:var(--s-ink)}
+body #app[data-theme] button:active:not(:disabled){transform:scale(.97)}
+body #app[data-theme] button.ghost{background:transparent;color:var(--s-ink-2)}
+body #app[data-theme] button.ghost:hover:not(:disabled){background:var(--s-panel-2);color:var(--s-ink)}
+body #app[data-theme] button.primary,
+body #app[data-theme] .head-new,
+body #app[data-theme] .tts-btn.on{background:var(--s-solid);color:var(--s-solid-ink);font-weight:600}
+body #app[data-theme] button.primary:hover:not(:disabled),
+body #app[data-theme] .head-new:hover:not(:disabled),
+body #app[data-theme] .tts-btn.on:hover:not(:disabled){background:var(--s-solid);color:var(--s-solid-ink);opacity:.86}
+body #app[data-theme] button.primary.danger{background:rgba(255,69,58,.14);color:var(--c-err)}
+body #app[data-theme] button:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+body #app[data-theme] input,
+body #app[data-theme] textarea,
+body #app[data-theme] select{
+  font-family:var(--font-ui);background:var(--s-panel-2);border:0;border-radius:14px;color:var(--s-ink);
+}
+body #app[data-theme] input:focus,
+body #app[data-theme] textarea:focus,
+body #app[data-theme] select:focus{background:var(--s-panel-2);box-shadow:var(--focus-ring)}
+body #app[data-theme] ::placeholder{color:var(--s-faint)}
+body #app[data-theme] .tag{
+  background:var(--s-panel-2);border:0;border-radius:999px;color:var(--s-muted);font-weight:500;
+}
+body #app[data-theme] .tag.cont{background:var(--s-panel-2);color:var(--s-ink-2)}
+
+/* ─── Panels: no border, no shadow, no glass ─── */
+body #app[data-theme] header,
+body #app[data-theme] .panel{
+  background:var(--s-panel);border:0;box-shadow:none;border-radius:20px;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+}
+body #app[data-theme] .panel-head{color:var(--s-muted);font:600 13px/1 var(--font-ui);letter-spacing:0;text-transform:none}
+body #app[data-theme] .panel-head::after{display:none}
+
+/* ─── Header ─── */
+body #app[data-theme] header{background:transparent;padding:0 6px 0 14px;gap:14px}
+body #app[data-theme] .brand h1{font:700 19px/1 var(--font-ui);letter-spacing:-.035em;color:var(--s-ink)}
+body #app[data-theme] .brand .setting,
+body #app[data-theme] .head-status,
+body #app[data-theme] .head-sep{display:none}
+body #app[data-theme] .picker-btn{background:transparent;padding:6px 10px;border-radius:999px}
+body #app[data-theme] .picker-btn:hover:not(:disabled){background:var(--s-panel-2)}
+body #app[data-theme] .picker-name{font:600 15px/1 var(--font-ui);letter-spacing:-.015em;color:var(--s-ink)}
+body #app[data-theme] .picker-seg{background:transparent;color:var(--s-faint);border:0;font:500 12px/1 var(--font-ui)}
+body #app[data-theme] .picker-rename-trigger{opacity:.5;background:transparent}
+body #app[data-theme] .head-actions{gap:4px}
+body #app[data-theme] .head-actions button.sm{
+  height:34px;padding:0 14px;font:500 13px/1 var(--font-ui);background:transparent;color:var(--s-ink-2);
+}
+body #app[data-theme] .head-actions button.sm:hover:not(:disabled){background:var(--s-panel-2);color:var(--s-ink)}
+body #app[data-theme] .head-actions button.sm.head-agent{color:var(--s-ink);background:var(--s-panel-2)}
+body #app[data-theme] .head-user{padding:0 12px 0 5px;background:transparent}
+body #app[data-theme] .head-user>span{width:24px;height:24px;background:var(--s-solid);color:var(--s-solid-ink);font-size:11px;font-weight:700}
+body #app[data-theme] .head-user>b{font-size:13px;font-weight:500;color:var(--s-ink)}
+body #app[data-theme] .head-actions .head-new,
+body #app[data-theme] .head-actions button.sm.head-new{background:var(--s-solid);color:var(--s-solid-ink);padding:0 18px;margin-left:4px;font-weight:600}
+body #app[data-theme] .head-more-menu{
+  background:var(--s-panel-2);border:0;border-radius:20px;box-shadow:var(--shadow-float);
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+}
+body #app[data-theme] .head-more-divider{background:var(--s-line)}
+body #app[data-theme] .head-theme-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+body #app[data-theme] .head-theme-option{background:transparent;border:0;border-radius:14px}
+body #app[data-theme] .head-theme-option.on{background:var(--s-panel-3)}
+body #app[data-theme] .head-theme-option>i{border:1px solid var(--w-22);box-shadow:none}
+body #app[data-theme] .head-more-item{border-radius:12px}
+
+/* ─── Stage: the picture comes first ─── */
+body #app[data-theme] .stage-atmos{opacity:0}
+body #app[data-theme] #stage video.reel{border-radius:28px;box-shadow:none;background:var(--s-panel)}
+body #app[data-theme] #transport{background:transparent;border:0;padding:0 4px}
+body #app[data-theme] #seg-label{color:var(--s-muted);font:500 13px/1 var(--font-ui)}
+body #app[data-theme] #seg-label .idx{font:600 13px/1 var(--font-ui);font-variant-numeric:tabular-nums;color:var(--s-ink);letter-spacing:0}
+body #app[data-theme] #seg-label .tag{padding:3px 9px;font-size:11.5px}
+body #app[data-theme] #transport .sm{background:var(--s-panel-2);color:var(--s-ink-2);padding:6px 14px;font-size:12.5px}
+body #app[data-theme] #transport .sm:hover:not(:disabled){background:var(--s-panel-3);color:var(--s-ink)}
+body #app[data-theme] .rail-handle{background:var(--s-panel-2);color:var(--s-muted);border:0;box-shadow:none}
+
+/* ─── Controls under the picture (not immersive) ─── */
+body #app[data-theme]:not(.immersive) .hud-objective{
+  background:transparent;border:0;color:var(--s-muted);text-shadow:none;
+  font:500 13px/1.6 var(--font-ui);padding:2px 4px;
+}
+body #app[data-theme]:not(.immersive) .hud-objective i{background:var(--s-accent);box-shadow:none}
+body #app[data-theme]:not(.immersive) .option{
+  background:var(--s-panel);border:0;color:var(--s-ink);text-shadow:none;box-shadow:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  padding:13px 18px;font:500 14px/1.45 var(--font-ui);letter-spacing:-.01em;border-radius:18px;
+}
+body #app[data-theme]:not(.immersive) .option:hover:not(:disabled){background:var(--s-panel-2);color:var(--s-ink);transform:translateY(-1px)}
+body #app[data-theme]:not(.immersive) .option.pick{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme]:not(.immersive) .option.pick:hover:not(:disabled){background:var(--s-solid);color:var(--s-solid-ink);opacity:.9}
+body #app[data-theme]:not(.immersive) .option.pick em{
+  background:var(--s-accent);color:#fff;border-radius:999px;font:600 10.5px/1.8 var(--font-ui);letter-spacing:0;padding:0 8px;
+}
+body #app[data-theme]:not(.immersive) .option.other{background:transparent;color:var(--s-muted);box-shadow:inset 0 0 0 1px var(--s-line)}
+body #app[data-theme]:not(.immersive) .hud-input{
+  background:var(--s-panel);border:0;border-radius:24px;padding:7px;box-shadow:none;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+}
+body #app[data-theme]:not(.immersive) .hud-input:focus-within{box-shadow:0 0 0 1px var(--w-22)}
+body #app[data-theme]:not(.immersive) .input-highlight,
+body #app[data-theme]:not(.immersive) .input-highlight .input-text,
+body #app[data-theme]:not(.immersive) #input{color:var(--s-ink);font:400 15px/1.5 var(--font-ui);caret-color:var(--s-accent)}
+body #app[data-theme]:not(.immersive) #input::placeholder{color:var(--s-faint);-webkit-text-fill-color:var(--s-faint)}
+body #app[data-theme] .addbtn{background:var(--s-panel-2);color:var(--s-muted)}
+body #app[data-theme] #btn-send{background:var(--s-solid);color:var(--s-solid-ink);border-radius:999px;padding:10px 24px;font-weight:600}
+body #app[data-theme] #btn-send:hover:not(:disabled){opacity:.86;background:var(--s-solid);color:var(--s-solid-ink)}
+
+/* Card while generating: phase pills */
+body #app[data-theme] .turn-card{background:var(--s-panel);border:0;box-shadow:none;border-radius:20px;-webkit-backdrop-filter:none;backdrop-filter:none}
+body #app[data-theme] .turn-step{
+  background:transparent;color:var(--s-faint);border:0;border-radius:999px;padding:4px 11px;font:500 12.5px/1 var(--font-ui);
+}
+body #app[data-theme] .turn-step.done{color:var(--s-ink-2)}
+body #app[data-theme] .turn-step.now{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme] .turn-step::before,body #app[data-theme] .turn-step::after{display:none}
+body #app[data-theme] .turn-time{font:600 13px/1 var(--font-ui);font-variant-numeric:tabular-nums;color:var(--s-ink)}
+body #app[data-theme] .turn-detail{color:var(--s-muted);font-size:13px}
+
+/* ─── Left drawer: map / chat ─── */
+body #app[data-theme] .rail-tabs{padding:10px 10px 6px}
+body #app[data-theme] .rail-tabs::after{display:none}
+body #app[data-theme] .rail-tab{border-radius:999px;font:500 13px/1 var(--font-ui);color:var(--s-muted);padding:8px 14px;background:transparent}
+body #app[data-theme] .rail-tab.on{background:var(--s-panel-3);color:var(--s-ink)}
+body #app[data-theme] .rail-tab.on::after{display:none}
+body #app[data-theme] .world-map-mini{background:transparent;border:0;box-shadow:none}
+body #app[data-theme] .world-map-mini-canvas{background:var(--s-panel-2);border-radius:16px;margin:0 10px}
+body #app[data-theme] .world-map-mini-context{background:transparent;font-size:13px;color:var(--s-ink-2)}
+body #app[data-theme] .world-story-block small,
+body #app[data-theme] .world-quest-section>small,
+body #app[data-theme] .world-map-mini-people small,
+body #app[data-theme] .world-map-mini-event small{color:var(--s-faint);font:600 12px/1 var(--font-ui);letter-spacing:0;text-transform:none}
+body #app[data-theme] .world-quest-list>*{background:var(--s-panel-2);border:0;border-radius:14px}
+body #app[data-theme] .msg.user{background:var(--s-solid);color:var(--s-solid-ink);border:0}
+body #app[data-theme] .msg.gm{background:var(--s-panel-2);border:0}
+body #app[data-theme] .msg.gm:hover{background:var(--s-panel-3)}
+body #app[data-theme] .msg.gm.live,
+body #app[data-theme] .msg.gm.live:hover{background:var(--s-panel-2);box-shadow:inset 0 0 0 1px var(--s-line)}
+
+/* ─── Right drawer: assets ─── */
+body #app[data-theme] #assets .group h3{color:var(--s-muted);font:600 13px/1 var(--font-ui);letter-spacing:0;text-transform:none}
+body #app[data-theme] .asset-card{background:var(--s-panel-2);border:0;border-radius:16px;box-shadow:none;overflow:hidden}
+body #app[data-theme] .asset-card:hover:not(:disabled){background:var(--s-panel-3);transform:translateY(-1px)}
+body #app[data-theme] .asset-card-image{background:var(--s-panel-3)}
+body #app[data-theme] .asset-card-image::after{background:none}
+body #app[data-theme] .asset-card-image em{background:rgba(0,0,0,.55);color:#fff;border:0;border-radius:999px}
+body #app[data-theme] .asset-card-meta{font-size:13px}
+body #app[data-theme] .chip,
+body #app[data-theme] .chip.here{background:var(--s-panel-2);color:var(--s-ink);border:0;border-radius:999px}
+body #app[data-theme] .chip.here{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme] #tree a{border-radius:12px;color:var(--s-ink-2);background:transparent;box-shadow:none}
+body #app[data-theme] #tree a:hover{background:var(--s-panel-2)}
+body #app[data-theme] #tree a.head{background:transparent}
+body #app[data-theme] #tree a.is-current{background:var(--s-panel-3);color:var(--s-ink);box-shadow:none}
+body #app[data-theme] #tree a.is-current .n{color:var(--s-muted)}
+
+/* ─── Dialogs and drawers ─── */
+body #app[data-theme] dialog{
+  background:var(--s-panel);border:0;border-radius:28px;box-shadow:var(--shadow-float);color:var(--s-ink);
+}
+body #app[data-theme] dialog h2{font:700 28px/1.15 var(--font-ui);letter-spacing:-.035em}
+body #app[data-theme] dialog .sub{color:var(--s-muted);font-size:14px}
+body #app[data-theme] dialog .actions{background:transparent;border-top:0}
+body #app[data-theme] dialog label,
+body #app[data-theme] dialog .label{color:var(--s-muted);font:600 12.5px/1.2 var(--font-ui);letter-spacing:0;text-transform:none}
+body #app[data-theme] #scrim,
+body #app[data-theme] dialog::backdrop{background:rgba(0,0,0,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+body #app[data-theme] .box,
+body #app[data-theme] #notes{background:var(--s-panel-2);border:0}
+body #app[data-theme] .refcard{background:var(--s-panel-2);border:0;border-radius:20px}
+body #app[data-theme] .refthumb{background:var(--s-panel-3);border:0;border-radius:14px}
+body #app[data-theme] .seg{background:var(--s-panel-2);border:0;border-radius:999px;padding:3px}
+body #app[data-theme] .seg button{border-radius:999px;background:transparent;color:var(--s-muted)}
+body #app[data-theme] .seg button.on{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme] .preset{background:var(--s-panel-2);border:0;color:var(--s-ink-2)}
+body #app[data-theme] .preset:hover:not(:disabled),
+body #app[data-theme] .preset.on{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme] .nw-dice,
+body #app[data-theme] .nw-cast-card{background:var(--s-panel-2);border:0;border-radius:20px;box-shadow:none}
+body #app[data-theme] .nw-cast-img{background:var(--s-panel-3)}
+body #app[data-theme] dialog.nw .nw-roll{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme] dialog.nw .nw-roll b{color:var(--s-solid-ink)}
+body #app[data-theme] dialog.nw .nw-roll .dice-face rect{stroke:var(--s-solid-ink)}
+body #app[data-theme] dialog.nw .nw-roll .dice-face circle{fill:var(--s-solid-ink)}
+
+/* Inspector drawer */
+body #app[data-theme] #inspector{background:var(--s-panel);border:0;box-shadow:var(--shadow-float);border-radius:28px 0 0 28px}
+body #app[data-theme] #ins-head::after,
+body #app[data-theme] #ins-tabs::after{display:none}
+body #app[data-theme] #ins-head b{font:700 22px/1.1 var(--font-ui);letter-spacing:-.03em}
+body #app[data-theme] #ins-tabs{gap:2px;margin:0 14px;padding:3px;background:var(--s-panel-2);border-radius:999px;width:max-content}
+body #app[data-theme] #ins-tabs button{border-radius:999px;padding:7px 14px;color:var(--s-muted);background:transparent;font:500 13px/1 var(--font-ui)}
+body #app[data-theme] #ins-tabs button.on{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme] #ins-tabs button.on::after{display:none}
+body #app[data-theme] #ins-foot{background:transparent;border-top:1px solid var(--s-line)}
+
+/* Map */
+body #app[data-theme] .world-map-shell{background:var(--s-panel);border:0;border-radius:28px}
+body #app[data-theme] .world-map-board{background:var(--s-bg)}
+body #app[data-theme] .world-map-node{background:var(--s-panel-2);border:0;box-shadow:none}
+body #app[data-theme] .world-map-node.is-current{background:var(--s-solid);color:var(--s-solid-ink);box-shadow:0 0 0 6px rgba(77,141,255,.18)}
+body #app[data-theme] .world-map-route-line.is-current{stroke:var(--s-accent)}
+body #app[data-theme] .world-map-overlay{background:rgba(0,0,0,.5)}
+
+/* Toast */
+body #app[data-theme] #toast{background:var(--s-solid);color:var(--s-solid-ink);border:0;border-radius:999px;box-shadow:var(--shadow-float)}
+
+/* ─── Motion: blur-in, only opacity / transform / filter ─── */
+@keyframes studio-rise{from{opacity:0;transform:translateY(14px);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+@media (prefers-reduced-motion:no-preference){
+  body #app[data-theme] header,
+  body #app[data-theme] #stage video.reel{animation:studio-rise 1.1s var(--ease-out) both .08s}
+  body #app[data-theme] .option{animation:studio-rise .7s var(--ease-out) both}
+  body #app[data-theme] .option:nth-child(2){animation-delay:.06s}
+  body #app[data-theme] .option:nth-child(3){animation-delay:.12s}
+  body #app[data-theme] .option:nth-child(4){animation-delay:.18s}
+  body #app[data-theme] dialog[open]{animation:studio-rise .5s var(--ease-out) both}
+}
+
+/* ─── Detail fixes (both themes) ─── */
+body #app[data-theme] .picker-btn{min-width:0;gap:8px}
+body #app[data-theme] .picker-btn svg{margin-left:2px}
+body #app[data-theme] .option.pick em{flex:none;white-space:nowrap;margin-right:10px}
+body #app[data-theme] .world-quest-card{background:var(--s-panel-2);border:0;border-radius:14px}
+body #app[data-theme] .world-quest-card:hover{background:var(--s-panel-3)}
+body #app[data-theme] .world-quest-card-head em{color:var(--s-accent);font-weight:600;font-style:normal}
+body #app[data-theme] .world-quest-card.completed .world-quest-card-head em{color:var(--s-muted)}
+body #app[data-theme] .world-quest-card.failed .world-quest-card-head em{color:var(--c-err)}
+
+/* ─── Daylight: white space; side drawers are not grey blocks ─── */
+body #app[data-theme='daylight'] .panel{background:transparent}
+body #app[data-theme='daylight'] #side-rail,
+body #app[data-theme='daylight'] #assets{background:transparent}
+body #app[data-theme='daylight'] .rail-tabs{padding:8px 4px 6px}
+body #app[data-theme='daylight'] .rail-tab.on{background:var(--s-solid);color:var(--s-solid-ink)}
+body #app[data-theme='daylight'] .world-map-mini-canvas{background:var(--s-panel);margin:0 4px}
+body #app[data-theme='daylight'] .world-map-mini-context{padding-left:4px;padding-right:4px}
+body #app[data-theme='daylight'] .world-map-grid{
+  background-image:linear-gradient(rgba(0,0,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.035) 1px,transparent 1px);
+}
+body #app[data-theme='daylight'] .world-quest-card{background:var(--s-panel)}
+body #app[data-theme='daylight'] .world-quest-card:hover{background:var(--s-panel-2)}
+body #app[data-theme='daylight'] .asset-card{background:var(--s-panel)}
+body #app[data-theme='daylight'] .asset-card:hover:not(:disabled){background:var(--s-panel-2)}
+body #app[data-theme='daylight'] #tree a.is-current{background:var(--s-panel)}
+body #app[data-theme='daylight'] #stage video.reel{box-shadow:0 30px 80px -30px rgba(0,0,0,.35)}
+body #app[data-theme='daylight']:not(.immersive) .option{background:var(--s-panel)}
+body #app[data-theme='daylight']:not(.immersive) .option:hover:not(:disabled){background:var(--s-panel-2)}
+body #app[data-theme='daylight']:not(.immersive) .hud-input{background:var(--s-panel)}
+body #app[data-theme='daylight'] .world-map-mini-head,
+body #app[data-theme='daylight'] #assets .panel-head{padding-left:4px}
+
+/* ─── Agent trace (first inspector tab) ─── */
+body #app[data-theme] #inspector{background:var(--s-bg)}
+body #app[data-theme] .agent-trace{gap:12px}
+body #app[data-theme] .trace-intro{color:var(--s-muted);font-size:13px}
+body #app[data-theme] .trace-phase{background:var(--s-panel);border:0;border-radius:20px;padding:14px 14px 10px}
+body #app[data-theme] .trace-phase-head{margin:0 4px 6px}
+body #app[data-theme] .trace-phase-head b{font:700 15px/1 var(--font-ui);letter-spacing:-.02em;text-transform:none;color:var(--s-ink)}
+body #app[data-theme] .trace-phase-head span{color:var(--s-muted);font-size:12.5px}
+body #app[data-theme] .trace-phase-head em,
+body #app[data-theme] .trace-step-head em{font:600 12.5px/1 var(--font-ui);font-variant-numeric:tabular-nums;color:var(--s-ink-2)}
+body #app[data-theme] .trace-step-head{background:transparent;border-radius:12px;padding:8px 6px;color:var(--s-ink-2)}
+body #app[data-theme] .trace-step-head:not(:disabled):hover{background:var(--s-panel-2)}
+body #app[data-theme] .trace-step-head:active:not(:disabled){transform:none}
+body #app[data-theme] .trace-step-head b{font-weight:600;color:var(--s-ink)}
+body #app[data-theme] .trace-summary{color:var(--s-muted)}
+body #app[data-theme] .trace-dot{background:var(--s-panel-3)}
+body #app[data-theme] .trace-step.is-done .trace-dot{background:var(--s-ink)}
+body #app[data-theme] .trace-step.is-running .trace-dot{background:var(--s-accent)}
+body #app[data-theme] .trace-bar{height:2px;margin:0 6px 4px 22px;background:transparent}
+body #app[data-theme] .trace-bar span{background:var(--s-accent);opacity:.55}
+body #app[data-theme] .trace-data{background:var(--s-bg);border-radius:14px;padding:12px 14px;margin:4px 4px 10px 22px}
+body #app[data-theme] .trace-data dt{color:var(--s-muted);font-family:var(--font-ui);font-weight:600}
+body #app[data-theme] .trace-data dd{color:var(--s-ink-2)}
+
+/* ─── Daylight: dialogs and drawers are white, inputs and cards light grey ─── */
+body #app[data-theme='daylight'] dialog{background:#fff}
+body #app[data-theme='daylight'] input,
+body #app[data-theme='daylight'] textarea,
+body #app[data-theme='daylight'] select{background:var(--s-panel)}
+body #app[data-theme='daylight'] .refcard{background:var(--s-panel)}
+body #app[data-theme='daylight'] .refthumb{background:var(--s-panel-2)}
+body #app[data-theme='daylight'] .refthumb:hover{background:#dedee3}
+body #app[data-theme='daylight'] .seg{background:#fff}
+body #app[data-theme='daylight'] #scrim,
+body #app[data-theme='daylight'] dialog::backdrop{background:rgba(0,0,0,.22);-webkit-backdrop-filter:blur(14px) saturate(120%);backdrop-filter:blur(14px) saturate(120%)}
+body #app[data-theme='daylight'] #inspector:not(.on){box-shadow:none}
+
+/* ─── User picker: white, centered, large title, no glow or card ─── */
+body #app[data-theme].user-entry{background:var(--s-bg)}
+body #app[data-theme] .user-gate::before,
+body #app[data-theme] .user-gate::after,
+body #app[data-theme] .user-gate-glow{display:none}
+body #app[data-theme] .user-gate-card{
+  width:min(100%,520px);background:transparent;border:0;box-shadow:none;padding:0;
+  -webkit-backdrop-filter:none;backdrop-filter:none;
+  animation:studio-rise .9s var(--ease-out) both;
+}
+body #app[data-theme] .user-gate-brand{margin-bottom:56px;justify-content:center}
+body #app[data-theme] .user-gate-mark{display:none}
+body #app[data-theme] .user-gate-brand p{font:700 22px/1 var(--font-ui);letter-spacing:-.04em;color:var(--s-ink);text-align:center}
+body #app[data-theme] .user-gate-brand span:not(.user-gate-mark){display:none}
+body #app[data-theme] .user-gate-copy{text-align:center}
+body #app[data-theme] .user-gate-copy .eyebrow{display:none}
+body #app[data-theme] .user-gate-copy h1{font:700 clamp(34px,5vw,48px)/1.08 var(--font-ui);letter-spacing:-.045em;color:var(--s-ink)}
+body #app[data-theme] .user-gate-copy>p:last-child{margin:16px auto 36px;color:var(--s-muted);font-size:15px;line-height:1.6}
+body #app[data-theme] .user-gate-users{gap:8px}
+body #app[data-theme] .user-profile{
+  min-height:64px;background:var(--s-panel);border:0;border-radius:20px;padding:10px 16px 10px 10px;
+}
+body #app[data-theme] .user-profile:hover:not(:disabled){background:var(--s-panel-2);transform:none}
+body #app[data-theme] .user-profile-avatar{background:var(--s-solid);color:var(--s-solid-ink);border:0;font:700 15px/1 var(--font-ui)}
+body #app[data-theme] .user-profile-copy b{font:600 15px/1.2 var(--font-ui);letter-spacing:-.01em}
+body #app[data-theme] .user-profile-copy small{font-size:12.5px;color:var(--s-muted)}
+body #app[data-theme] .user-profile-delete{width:auto;padding:0 16px;background:transparent;color:var(--s-faint);font-size:12.5px;border-radius:20px}
+body #app[data-theme] .user-profile-delete:hover:not(:disabled){background:rgba(255,69,58,.08);color:var(--c-err)}
+body #app[data-theme] .user-gate-divider{margin:36px 0 22px;color:var(--s-faint);font-size:12.5px}
+body #app[data-theme] .user-gate-divider::before,
+body #app[data-theme] .user-gate-divider::after{background:var(--s-line)}
+body #app[data-theme] .user-create>label{color:var(--s-muted);font-size:12.5px}
+body #app[data-theme] .user-create input{height:48px;border-radius:999px;padding:0 20px;background:var(--s-panel)}
+body #app[data-theme] .user-create button{height:48px;padding-inline:24px;background:var(--s-solid);color:var(--s-solid-ink);font-weight:600}
+body #app[data-theme] .user-create>p{color:var(--s-faint);font-size:12px}
+
+/* ─── Stage first: drawers open from the header ─── */
+body #app[data-theme] .rail-handle{display:none}
+body #app[data-theme] #seg-label .tag{display:none}
+body #app[data-theme] .picker-rename-trigger{opacity:0}
+body #app[data-theme] .picker:hover .picker-rename-trigger{opacity:.5}
+body #app[data-theme] .picker-seg{display:none}
+body #app[data-theme] .head-actions button.sm.head-toggle{color:var(--s-ink-2);background:transparent}
+body #app[data-theme] .head-actions button.sm.head-toggle.on{color:var(--s-solid-ink);background:var(--s-solid)}
+body #app[data-theme] .head-actions button.sm.head-more-trigger{width:34px;padding:0;justify-content:center}
+body #app[data-theme] .head-more-trigger svg{width:18px;height:18px;fill:currentColor;stroke:none;transform:none}
+body #app[data-theme] .head-actions button.sm.head-user{width:34px;padding:0;justify-content:center;margin-left:2px}
+body #app[data-theme] .head-user>span{width:30px;height:30px;font-size:12px}
+body #app[data-theme] .head-more-item em{font-family:var(--font-ui);font-size:12px;letter-spacing:0;color:var(--s-faint)}
+body #app[data-theme] .head-more-menu{min-width:260px;padding:8px}
+body #app[data-theme].no-assets #assets,
+body #app[data-theme].no-rail #side-rail{visibility:hidden;box-shadow:none}
+body #app[data-theme='daylight'] #stage video.reel{box-shadow:0 24px 60px -28px rgba(0,0,0,.28)}
+
+/* ─── Drawers float over the stage instead of three columns ─── */
+body #app[data-theme]{--main-left:var(--rail-gap);--content-r:var(--rail-gap)}
+body #app[data-theme] #side-rail,
+body #app[data-theme] #assets{
+  z-index:40;top:calc(var(--head-h) + var(--rail-gap));bottom:var(--rail-gap);
+  width:clamp(300px,24vw,360px);border-radius:24px;padding:10px 6px;
+  background:var(--s-bg);
+  box-shadow:0 30px 80px -20px rgba(0,0,0,.28),0 0 0 1px rgba(0,0,0,.04);
+  transition:transform .45s var(--ease-out),opacity .3s ease,visibility 0s;
+}
+body #app[data-theme='daylight'] #side-rail,
+body #app[data-theme='daylight'] #assets{background:#fff}
+body #app[data-theme].no-rail #side-rail{display:flex;visibility:hidden;opacity:0;transform:translateX(-24px);
+  transition:transform .35s var(--ease-out),opacity .25s ease,visibility 0s .35s}
+body #app[data-theme].no-assets #assets{visibility:hidden;opacity:0;transform:translateX(24px);
+  transition:transform .35s var(--ease-out),opacity .25s ease,visibility 0s .35s}
+body #app[data-theme] .drawer-scrim{position:fixed;inset:0;z-index:39;
+  background:rgba(255,255,255,.55);animation:scrim-in .3s ease both}
+body #app[data-theme='studio'] .drawer-scrim{background:rgba(0,0,0,.45)}
+@keyframes scrim-in{from{opacity:0}}
+body #app[data-theme] header{z-index:41}
+
+/* ─── Lighter choices, one input box, one black element in the header ─── */
+/* Header toggles: selected is light grey; black is only for "new world" */
+body #app[data-theme] .head-actions button.sm.head-toggle{font-weight:500;padding:8px 14px}
+body #app[data-theme] .head-actions button.sm.head-toggle:hover{background:var(--s-panel);color:var(--s-ink)}
+body #app[data-theme] .head-actions button.sm.head-toggle.on{background:var(--s-panel-2);color:var(--s-ink)}
+body #app[data-theme] .head-actions button.sm.head-agent{font-weight:500}
+
+/* The row above the picture: plain text, buttons are text links */
+body #app[data-theme] #seg-label{font:500 13px/1 var(--font-ui);color:var(--s-faint)}
+body #app[data-theme] #seg-label .idx{color:var(--s-muted);font-weight:500}
+body #app[data-theme] #transport .sm{background:transparent;color:var(--s-muted);padding:6px 10px;font-weight:500}
+body #app[data-theme] #transport .sm:hover:not(:disabled){background:transparent;color:var(--s-ink)}
+
+/* Video: smaller radius, lighter shadow */
+body #app[data-theme] #stage video.reel{border-radius:20px}
+body #app[data-theme='daylight'] #stage video.reel{box-shadow:0 1px 2px rgba(0,0,0,.06),0 20px 50px -30px rgba(0,0,0,.25)}
+
+/* Objective: one muted line, no colored dot */
+body #app[data-theme]:not(.immersive) .hud-objective{color:var(--s-faint);font:500 12.5px/1.5 var(--font-ui)}
+body #app[data-theme]:not(.immersive) .hud-objective i{display:none}
+
+/* Choices: single-line pills with a thin outline; the recommended one is only bolder */
+body #app[data-theme]:not(.immersive) .hud-options{gap:8px}
+body #app[data-theme]:not(.immersive) .option,
+body #app[data-theme='daylight']:not(.immersive) .option{
+  background:transparent;color:var(--s-ink-2);box-shadow:inset 0 0 0 1px var(--s-panel-2);
+  border-radius:999px;padding:11px 18px;font:500 13.5px/1.3 var(--font-ui);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block;text-align:left;
+}
+body #app[data-theme]:not(.immersive) .option:hover:not(:disabled),
+body #app[data-theme='daylight']:not(.immersive) .option:hover:not(:disabled){
+  background:var(--s-panel);color:var(--s-ink);box-shadow:inset 0 0 0 1px var(--s-panel);transform:none}
+body #app[data-theme]:not(.immersive) .option.pick{background:transparent;color:var(--s-ink);font-weight:600;box-shadow:inset 0 0 0 1px var(--s-panel-3)}
+body #app[data-theme]:not(.immersive) .option.pick:hover:not(:disabled){background:var(--s-panel);color:var(--s-ink);opacity:1}
+body #app[data-theme]:not(.immersive) .option.pick em{
+  background:none;color:var(--s-accent);padding:0;margin-right:8px;font:600 12px/1 var(--font-ui)}
+body #app[data-theme]:not(.immersive) .option.other{display:none}
+
+/* Input: one white box, thin outline and a faint shadow; send is a round arrow */
+body #app[data-theme]:not(.immersive) .hud-input,
+body #app[data-theme='daylight']:not(.immersive) .hud-input{
+  background:var(--s-bg);border-radius:28px;padding:8px 8px 8px 10px;
+  box-shadow:0 0 0 1px var(--s-panel-2),0 8px 30px -12px rgba(0,0,0,.12);
+}
+body #app[data-theme]:not(.immersive) .hud-input:focus-within{box-shadow:0 0 0 1px var(--s-panel-3),0 10px 34px -12px rgba(0,0,0,.18)}
+body #app[data-theme] #btn-send.primary{width:40px;height:40px;padding:0;display:grid;place-items:center;border-radius:50%}
+body #app[data-theme] #btn-send.primary svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+body #app[data-theme] #btn-send.primary:disabled{background:var(--s-panel-2);color:var(--s-faint);opacity:1}
+body #app[data-theme='daylight']:not(.immersive) .stage-atmos{display:none}
+body #app[data-theme]:not(.immersive) .hud-objective{color:var(--s-muted)}
+
+/* ─── Inspector / agent trace: one timeline instead of a stack of grey cards ─── */
+body #app[data-theme='daylight'] #scrim,
+body #app[data-theme='daylight'] dialog::backdrop{background:rgba(255,255,255,.6);-webkit-backdrop-filter:none;backdrop-filter:none}
+body #app[data-theme='daylight'] #inspector{border-radius:0;box-shadow:none}
+body #app[data-theme='daylight'] #inspector.on{box-shadow:-1px 0 0 var(--s-panel-2),-40px 0 80px -40px rgba(0,0,0,.18)}
+body #app[data-theme] #ins-tabs{background:transparent;padding:0;gap:18px;margin:0 22px;border-bottom:1px solid var(--s-panel-2);width:auto;border-radius:0}
+body #app[data-theme] #ins-tabs button{padding:12px 0;border-radius:0;font:500 13.5px/1 var(--font-ui);color:var(--s-muted);box-shadow:none}
+body #app[data-theme] #ins-tabs button:hover:not(.on){background:transparent;color:var(--s-ink)}
+body #app[data-theme] #ins-tabs button.on{background:transparent;color:var(--s-ink);box-shadow:inset 0 -2px 0 var(--s-ink)}
+body #app[data-theme] #ins-tabs button.on::after{display:none}
+body #app[data-theme] #inspector .tag{background:transparent;color:var(--s-muted);padding:0 4px;font:500 13px/1 var(--font-ui)}
+body #app[data-theme] #inspector>div:first-child .sm{background:transparent;color:var(--s-muted)}
+
+body #app[data-theme] .agent-trace{gap:0}
+body #app[data-theme] .trace-intro{color:var(--s-faint);font-size:12.5px;margin-bottom:8px}
+body #app[data-theme] .trace-phase{background:transparent;border-radius:0;padding:16px 0 10px;border-top:1px solid var(--s-panel-2)}
+body #app[data-theme] .trace-phase:first-of-type{border-top:0}
+body #app[data-theme] .trace-phase-head{margin:0 0 4px}
+body #app[data-theme] .trace-phase-head b{font:600 14px/1 var(--font-ui);letter-spacing:-.01em}
+body #app[data-theme] .trace-phase-head span{color:var(--s-faint);font-size:12px}
+body #app[data-theme] .trace-phase-head em{color:var(--s-ink);font-weight:600}
+body #app[data-theme] .trace-step-head{padding:7px 8px;margin:0 -8px;border-radius:10px}
+body #app[data-theme] .trace-step-head:not(:disabled):hover{background:var(--s-panel)}
+body #app[data-theme] .trace-step-head b{font-weight:500;color:var(--s-ink-2);font-size:13.5px}
+body #app[data-theme] .trace-summary{color:var(--s-faint);font-size:13px}
+body #app[data-theme] .trace-step-head em{color:var(--s-faint);font-weight:500}
+body #app[data-theme] .trace-dot{width:5px;height:5px;background:var(--s-panel-3)}
+body #app[data-theme] .trace-step.is-done .trace-dot{background:var(--s-faint)}
+body #app[data-theme] .trace-bar{margin:0 0 4px 14px}
+body #app[data-theme] .trace-bar span{opacity:.35;border-radius:2px}
+body #app[data-theme] .trace-data{background:var(--s-panel);margin:2px 0 10px 14px}
+
+/* ─── World drawer: text hierarchy instead of grey blocks ─── */
+body #app[data-theme] .world-quest-list>*,
+body #app[data-theme] .world-quest-card,
+body #app[data-theme='daylight'] .world-quest-card{background:transparent;border-radius:0;padding-left:0;padding-right:0}
+body #app[data-theme] .world-quest-card:hover,
+body #app[data-theme='daylight'] .world-quest-card:hover{background:transparent}
+body #app[data-theme] .world-map-mini-context{font-size:13.5px;line-height:1.6}
+body #app[data-theme] .rail-tabs::after{display:none}
+
+/* ─── Co-op room: the same subtraction, picture + party column; log / outline as a drawer ─── */
+body #app.coop-app[data-theme] .coop-panel{background:transparent;border:0;box-shadow:none}
+body #app.coop-app[data-theme] .coop-screen{background:var(--s-bg);border:0;box-shadow:none}
+body #app.coop-app[data-theme] .coop-workbar .ghost,
+body #app.coop-app[data-theme] .coop-workbar .sm{background:transparent;color:var(--s-muted);font-weight:500}
+body #app.coop-app[data-theme] .coop-workbar .ghost:hover:not(:disabled),
+body #app.coop-app[data-theme] .coop-workbar .sm:hover:not(:disabled){background:transparent;color:var(--s-ink)}
+body #app.coop-app[data-theme] .coop-round{color:var(--s-faint)}
+body #app.coop-app[data-theme] .coop-party{border-left:1px solid var(--s-panel-2);border-radius:0;padding-left:6px}
+body #app.coop-app[data-theme] .coop-party-heading{border-bottom:0}
+@media (min-width:761px){
+  body #app.coop-app[data-theme] .coop-workspace{grid-template-columns:minmax(0,1fr) clamp(280px,22vw,330px)}
+  body #app.coop-app[data-theme] .coop-play-main{grid-column:1}
+  body #app.coop-app[data-theme] .coop-party{grid-column:2}
+  body #app.coop-app[data-theme] .coop-action-chat{
+    display:none;position:fixed;z-index:40;left:14px;top:120px;bottom:14px;width:clamp(300px,26vw,380px);
+    background:var(--s-bg);border-radius:24px;padding:8px;
+    box-shadow:0 30px 80px -20px rgba(0,0,0,.28),0 0 0 1px rgba(0,0,0,.04)}
+  body #app.coop-app[data-theme] .show-journal .coop-action-chat{display:flex;flex-direction:column;animation:studio-rise .45s var(--ease-out) both}
+  body #app.coop-app[data-theme] .coop-workbar .coop-mobile-toggle:nth-last-child(2){display:inline-flex}
+}
+body #app.coop-app[data-theme] .coop-fragment-tree{background:transparent;border-top:1px solid var(--s-panel-2)}
+body #app.coop-app[data-theme] .coop-composer-input textarea{background:var(--s-bg);border:0;border-radius:24px;
+  box-shadow:0 0 0 1px var(--s-panel-2),0 8px 30px -12px rgba(0,0,0,.12)}
+body #app.coop-app[data-theme] .coop-composer-input textarea:focus{box-shadow:0 0 0 1px var(--s-panel-3),0 10px 34px -12px rgba(0,0,0,.18)}
+body #app[data-theme] #inspector:not(.on){box-shadow:none}

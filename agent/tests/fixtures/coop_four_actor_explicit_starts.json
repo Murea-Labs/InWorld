@@ -1,0 +1,107 @@
+{
+  "plan": {
+    "actions": [
+      {
+        "user_id": "u1",
+        "source_action": "起始时站在中央石台近侧，面朝石台。起步时先向左侧横移两步，让出石台正前方的通路，长弓保持贴近身体。然后沿浅色石板向前跑到石台左前角，降低身体重心，贴着石台左缘绕行。经过第一根石柱时从柱子内侧侧身穿过，跨过地上的碎石，继续沿长廊方向前进。到第二根石柱前转向右侧，绕过石台后方凸起的地砖，再沿后缘跑向靠近拱门的一端。接近终点时先缩短步幅，右脚稳稳落地，再让左脚跟上，身体逐渐转向庭院中央。最后停在石台后侧与拱门之间的开阔位置，双脚分开，膝盖微弯，左手握弓，右手搭在弓弦上，视线朝向队友，保持与石台边缘一步的距离。",
+        "action": "<Subject 1> starts near the platform, steps left to clear the path, and runs to the front-left corner. <Subject 1> lowers the center of gravity, skirts the left edge past the first pillar, and crosses gravel. <Subject 1> turns right at the second pillar, runs around the rear of the platform toward the archway, and stops in the open space behind the platform. <Subject 1> lands with the right foot, follows with the left, and turns toward the courtyard center.",
+        "beat": "runs around the platform to the rear and turns toward the courtyard center",
+        "target": "The open area between the rear of the stone platform and the archway.",
+        "path": "Moves two steps left to clear the path, runs to the front-left corner, skirts the left edge, passes inside the first stone pillar, crosses debris, turns right behind the platform, and runs along the rear edge toward the archway.",
+        "start_state": "Standing near the central stone platform, facing it.",
+        "end_state": "Stops between the stone platform and the archway, feet apart, knees slightly bent, holding the bow with left hand and drawing string with right, facing teammates.",
+        "visibility": "full body",
+        "retention_level": "fully_preserved"
+      },
+      {
+        "user_id": "u2",
+        "source_action": "起始时站在庭院中央，面朝石台。先面对石台沿庭院中央直线向后跑三步，到深浅石板的交界处时朝左转身，沿长廊边缘跑向第一根石柱。右手握着长剑，剑尖始终朝向地面，左臂随着步伐摆动。经过第一根石柱时绕到外侧避开碎石，再从两根石柱之间的空隙穿过，跑到第二根石柱后侧。随后以左脚为支点朝右转半圈，沿第二根石柱的半圆路径减速移动到靠庭院的一面。最后从柱边向前走两步，停在长廊入口右侧的平整石板上，双脚错开站稳，长剑斜向下握在身侧，肩膀放松，上身转向石台与拱门之间的队友，保留身后一小段可以后退的空间。",
+        "action": "<Subject 2> starts in the center, runs backward three steps, and turns left at the stone boundary. <Subject 2> runs along the colonnade edge to the first pillar, passes outside it to avoid gravel, and moves through the gap between the first and second pillars. <Subject 2> pivots on the left foot, moves along the second pillar's curve, and walks two steps to stop on the flat stone at the colonnade entrance.",
+        "beat": "runs backward, turns left, and moves along the colonnade edge to the entrance",
+        "target": "The flat stone slab to the right of the corridor entrance.",
+        "path": "Runs three steps backward from the courtyard center, turns left at the stone boundary, runs along the corridor edge to the first pillar, passes outside it, moves through the gap between pillars to the rear of the second pillar, turns right, and moves along the pillar's curve.",
+        "start_state": "Standing in the center of the courtyard, facing the stone platform.",
+        "end_state": "Stops on the flat stone slab to the right of the corridor entrance, feet staggered, sword held diagonally downward at the side, shoulders relaxed, facing teammates.",
+        "visibility": "full body",
+        "retention_level": "fully_preserved"
+      },
+      {
+        "user_id": "u3",
+        "source_action": "起始时站在三层石阶底部，面朝拱门。从当前位置朝右前方起跑，沿台阶外缘接近拱门，背上的长弓随身体轻微起伏，双手保持自然摆动。接近第一层台阶时收小步幅，依次踏上三层石阶，先走到拱门左侧，再沿门洞边缘转身朝向庭院。观察队友的位置后，沿拱门旁石柱的内侧绕半圈，跨过门槛旁凸起的石块，再从台阶另一侧依次走下三层石阶。落地时左脚先踏稳，随后向中央石台方向小跑三步，沿一条右弧线避开地上的碎石堆，逐渐减速。最后停在石台右前角与台阶底部之间的浅色石板上，双脚分开，身体面向左侧长廊，右脚略微后撤，头部转向两位队友。",
+        "action": "<Subject 3> starts at the bottom of the steps, runs toward the archway, and climbs the three steps. <Subject 3> turns toward the courtyard, walks around the pillar inside, and steps over the threshold stone. <Subject 3> descends the steps, runs three steps toward the platform, and stops on the light stone between the platform corner and the steps.",
+        "beat": "climbs the steps, descends, and runs toward the platform to stop between the steps and the platform",
+        "target": "The light-colored stone slab between the front-right corner of the stone platform and the bottom of the steps.",
+        "path": "Runs forward-right along the step edge to the archway, ascends the three steps, moves to the left of the archway, turns toward the courtyard, circles inside the pillar next to the archway, crosses a raised stone, descends the steps, and runs three steps toward the platform center.",
+        "start_state": "Standing at the bottom of the three-tiered stone steps, facing the archway.",
+        "end_state": "Stops on the light-colored stone slab between the platform's front-right corner and the steps, feet apart, body facing the left corridor, right foot slightly back, head turned toward teammates.",
+        "visibility": "full body",
+        "retention_level": "fully_preserved"
+      },
+      {
+        "user_id": "u4",
+        "source_action": "起始时站在石台右侧，面朝长廊。先向左侧横移两步，让出庭院中央的行进路线，随后沿石台近侧边缘朝长廊方向跑去。经过第一个拐角时向右前方转弯，双膝稍微弯曲，绕开一块凸起的石板，右手保持握剑且剑尖朝下。跑到长廊入口时先减速，左脚踏稳后转身朝向庭院中央，一边面朝队友一边向后跑三步，再向右侧横移跨过碎石旁的窄缝。接着沿石台后方的短直线跑向右缘，经过石台右后角时转入台阶前的通路。最后逐步缩短步幅，在石台右缘与台阶之间停稳，双脚分开形成稳定站姿，右手将长剑贴近腿侧，左手抬到胸前，肩膀与视线同时转向中央石台。",
+        "action": "<Subject 4> starts on the right side, steps left to clear the path, and runs along the platform edge toward the colonnade. <Subject 4> turns right at the corner, avoids a raised stone, and slows down at the entrance. <Subject 4> turns toward the courtyard, runs backward three steps, and crosses a narrow gap. <Subject 4> runs along the rear of the platform to the right edge, turns into the path before the steps, and stops between the platform edge and the steps.",
+        "beat": "runs along the platform edge, turns back, and stops between the platform edge and the steps",
+        "target": "The space between the right edge of the stone platform and the steps.",
+        "path": "Moves two steps left to clear the path, runs along the near edge of the platform toward the corridor, turns right-front at the corner to avoid a raised slab, slows down at the corridor entrance, turns to face the courtyard, runs backward three steps, crosses a narrow gap, runs along the rear of the platform to the right edge, and approaches the path before the steps.",
+        "start_state": "Standing to the right of the stone platform, facing the corridor.",
+        "end_state": "Stops between the right edge of the stone platform and the steps, feet apart in a stable stance, sword held close to the right leg, left hand raised to the chest, shoulders and gaze turned toward the central platform.",
+        "visibility": "full body",
+        "retention_level": "fully_preserved"
+      }
+    ],
+    "scene": "Open stone courtyard with a central circular platform, left colonnade, right stone steps, morning light.",
+    "sound": "Footsteps on stone, light wind, distant mountain silence.",
+    "event_action": "",
+    "camera": "A continuous wide shot follows the players and their ground paths through the shared environment."
+  },
+  "players": [
+    {
+      "user_id": "u1",
+      "action": "起始时站在中央石台近侧，面朝石台。起步时先向左侧横移两步，让出石台正前方的通路，长弓保持贴近身体。然后沿浅色石板向前跑到石台左前角，降低身体重心，贴着石台左缘绕行。经过第一根石柱时从柱子内侧侧身穿过，跨过地上的碎石，继续沿长廊方向前进。到第二根石柱前转向右侧，绕过石台后方凸起的地砖，再沿后缘跑向靠近拱门的一端。接近终点时先缩短步幅，右脚稳稳落地，再让左脚跟上，身体逐渐转向庭院中央。最后停在石台后侧与拱门之间的开阔位置，双脚分开，膝盖微弯，左手握弓，右手搭在弓弦上，视线朝向队友，保持与石台边缘一步的距离。"
+    },
+    {
+      "user_id": "u2",
+      "action": "起始时站在庭院中央，面朝石台。先面对石台沿庭院中央直线向后跑三步，到深浅石板的交界处时朝左转身，沿长廊边缘跑向第一根石柱。右手握着长剑，剑尖始终朝向地面，左臂随着步伐摆动。经过第一根石柱时绕到外侧避开碎石，再从两根石柱之间的空隙穿过，跑到第二根石柱后侧。随后以左脚为支点朝右转半圈，沿第二根石柱的半圆路径减速移动到靠庭院的一面。最后从柱边向前走两步，停在长廊入口右侧的平整石板上，双脚错开站稳，长剑斜向下握在身侧，肩膀放松，上身转向石台与拱门之间的队友，保留身后一小段可以后退的空间。"
+    },
+    {
+      "user_id": "u3",
+      "action": "起始时站在三层石阶底部，面朝拱门。从当前位置朝右前方起跑，沿台阶外缘接近拱门，背上的长弓随身体轻微起伏，双手保持自然摆动。接近第一层台阶时收小步幅，依次踏上三层石阶，先走到拱门左侧，再沿门洞边缘转身朝向庭院。观察队友的位置后，沿拱门旁石柱的内侧绕半圈，跨过门槛旁凸起的石块，再从台阶另一侧依次走下三层石阶。落地时左脚先踏稳，随后向中央石台方向小跑三步，沿一条右弧线避开地上的碎石堆，逐渐减速。最后停在石台右前角与台阶底部之间的浅色石板上，双脚分开，身体面向左侧长廊，右脚略微后撤，头部转向两位队友。"
+    },
+    {
+      "user_id": "u4",
+      "action": "起始时站在石台右侧，面朝长廊。先向左侧横移两步，让出庭院中央的行进路线，随后沿石台近侧边缘朝长廊方向跑去。经过第一个拐角时向右前方转弯，双膝稍微弯曲，绕开一块凸起的石板，右手保持握剑且剑尖朝下。跑到长廊入口时先减速，左脚踏稳后转身朝向庭院中央，一边面朝队友一边向后跑三步，再向右侧横移跨过碎石旁的窄缝。接着沿石台后方的短直线跑向右缘，经过石台右后角时转入台阶前的通路。最后逐步缩短步幅，在石台右缘与台阶之间停稳，双脚分开形成稳定站姿，右手将长剑贴近腿侧，左手抬到胸前，肩膀与视线同时转向中央石台。"
+    }
+  ],
+  "pictures": [
+    {
+      "n": 1,
+      "kind": "character"
+    },
+    {
+      "n": 2,
+      "kind": "character"
+    },
+    {
+      "n": 3,
+      "kind": "character"
+    },
+    {
+      "n": 4,
+      "kind": "character"
+    },
+    {
+      "n": 5,
+      "kind": "scene"
+    }
+  ],
+  "duration": 10,
+  "six": {
+    "subject_definitions": "<Subject 1> is the character shown in <Picture 1> as a single full-body view. Adult adventurer, refined light armor, carrying a longbow, agile.\n<Subject 2> is the character shown in <Picture 2> as a single full-body view. Adult adventurer, light leather armor, wearing a longsword at the waist.\n<Subject 3> is the character shown in <Picture 3> as a single full-body view. Adult adventurer, refined light armor, carrying a longbow, skilled at observing paths.\n<Subject 4> is the character shown in <Picture 4> as a single full-body view. Adult adventurer, light leather armor, wearing a longsword at the waist, skilled at guarding.\n<Subject 5> is the shared environment shown in <Picture 5> as a single wide scene view. Open stone courtyard with a central circular platform, left colonnade, right stone steps, morning light.",
+    "summary": "[reference_generation] <Subject 1>, <Subject 2>, <Subject 3>, <Subject 4> act together.",
+    "retention_analysis": "<Subject 1> (appears in [Shot 1] (full body)): fully_preserved - Visible traits retained; pose follows the action. Preserve the original traits. Preserve the original traits. Preserve the original traits.\n<Subject 2> (appears in [Shot 1] (full body)): fully_preserved - Visible traits retained; pose follows the action. Preserve the original traits. Preserve the original traits. Preserve the original traits.\n<Subject 3> (appears in [Shot 1] (full body)): fully_preserved - Visible traits retained; pose follows the action. Preserve the original traits. Preserve the original traits. Preserve the original traits.\n<Subject 4> (appears in [Shot 1] (full body)): fully_preserved - Visible traits retained; pose follows the action. Preserve the original traits. Preserve the original traits. Preserve the original traits.\n<Subject 5> (appears in [Shot 1] (wide scene view)): partially_preserved - Layout and lighting retained; framing changes. Preserve the original traits. Preserve the original traits. Preserve the original traits.",
+    "detailed_description": "[Shot 1] The action unfolds inside <Subject 5>, with its established layout and lighting. A continuous wide shot follows the players and their ground paths through the shared environment. Exactly 4 people share the frame: <Subject 1>, <Subject 2>, <Subject 3>, <Subject 4>. At the start, <Subject 1> is Standing near the central stone platform, facing it. Meanwhile, <Subject 2> is Standing in the center of the courtyard, facing the stone platform. Meanwhile, <Subject 3> is Standing at the bottom of the three-tiered stone steps, facing the archway. Meanwhile, <Subject 4> is Standing to the right of the stone platform, facing the corridor. Over the shot, <Subject 1> starts near the platform, steps left to clear the path, and runs to the front-left corner. <Subject 1> lowers the center of gravity, skirts the left edge past the first pillar, and crosses gravel. <Subject 1> turns right at the second pillar, runs around the rear of the platform toward the archway, and stops in the open space behind the platform. <Subject 1> lands with the right foot, follows with the left, and turns toward the courtyard center. Meanwhile, <Subject 2> starts in the center, runs backward three steps, and turns left at the stone boundary. <Subject 2> runs along the colonnade edge to the first pillar, passes outside it to avoid gravel, and moves through the gap between the first and second pillars. <Subject 2> pivots on the left foot, moves along the second pillar's curve, and walks two steps to stop on the flat stone at the colonnade entrance. Meanwhile, <Subject 3> starts at the bottom of the steps, runs toward the archway, and climbs the three steps. <Subject 3> turns toward the courtyard, walks around the pillar inside, and steps over the threshold stone. <Subject 3> descends the steps, runs three steps toward the platform, and stops on the light stone between the platform corner and the steps. Meanwhile, <Subject 4> starts on the right side, steps left to clear the path, and runs along the platform edge toward the colonnade. <Subject 4> turns right at the corner, avoids a raised stone, and slows down at the entrance. <Subject 4> turns toward the courtyard, runs backward three steps, and crosses a narrow gap. <Subject 4> runs along the rear of the platform to the right edge, turns into the path before the steps, and stops between the platform edge and the steps. As the movement unfolds, <Subject 1> follows Moves two steps left to clear the path, runs to the front-left corner, skirts the left edge, passes inside the first stone pillar, crosses debris, turns right behind the platform, and runs along the rear edge toward the archway, relative to The open area between the rear of the stone platform and the archway. Meanwhile, <Subject 2> follows Runs three steps backward from the courtyard center, turns left at the stone boundary, runs along the corridor edge to the first pillar, passes outside it, moves through the gap between pillars to the rear of the second pillar, turns right, and moves along the pillar's curve, relative to The flat stone slab to the right of the corridor entrance. Meanwhile, <Subject 3> follows Runs forward-right along the step edge to the archway, ascends the three steps, moves to the left of the archway, turns toward the courtyard, circles inside the pillar next to the archway, crosses a raised stone, descends the steps, and runs three steps toward the platform center, relative to The light-colored stone slab between the front-right corner of the stone platform and the bottom of the steps. Meanwhile, <Subject 4> follows Moves two steps left to clear the path, runs along the near edge of the platform toward the corridor, turns right-front at the corner to avoid a raised slab, slows down at the corridor entrance, turns to face the courtyard, runs backward three steps, crosses a narrow gap, runs along the rear of the platform to the right edge, and approaches the path before the steps, relative to The space between the right edge of the stone platform and the steps. By the end, <Subject 1>'s final state is: Stops between the stone platform and the archway, feet apart, knees slightly bent, holding the bow with left hand and drawing string with right, facing teammates. Meanwhile, <Subject 2>'s final state is: Stops on the flat stone slab to the right of the corridor entrance, feet staggered, sword held diagonally downward at the side, shoulders relaxed, facing teammates. Meanwhile, <Subject 3>'s final state is: Stops on the light-colored stone slab between the platform's front-right corner and the steps, feet apart, body facing the left corridor, right foot slightly back, head turned toward teammates. Meanwhile, <Subject 4>'s final state is: Stops between the right edge of the stone platform and the steps, feet apart in a stable stance, sword held close to the right leg, left hand raised to the chest, shoulders and gaze turned toward the central platform. Visual style: Realistic film style, natural morning light, clear character and environmental details.",
+    "overall_soundscape": "Footsteps on stone, light wind, distant mountain silence. No speech or narration.",
+    "non_diegetic_music": "N/A"
+  }
+}
