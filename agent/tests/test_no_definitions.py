@@ -72,6 +72,7 @@ class Wiring(unittest.TestCase):
             world.subjects[sid]["definition"] = "the man in a blue shirt shown in <Picture 1>."
             world.places["会议室"]["definition"] = "the room with a wooden table shown in <Picture 2>."
             shot = {
+                "subject_definitions": "<Subject 1> is someone else shown in <Picture 1>.",
                 "summary": "[reference_generation] <Subject 1> looks around inside <Subject 2>.",
                 "detailed_description": "[Shot 1] In a wide shot, <Subject 1> looks at the wooden table inside <Subject 2>.",
                 "overall_soundscape": "A quiet room tone.",
@@ -99,13 +100,20 @@ class Wiring(unittest.TestCase):
                 with (
                     self.subTest(all_locked=locked),
                     patch.object(config, "REFS", Path(tmp)),
-                    patch.object(director, "_decide_early", return_value=(copy.deepcopy(decision), None)),
+                    patch.object(
+                        director,
+                        "_decide_early",
+                        return_value=(
+                            copy.deepcopy({k: v for k, v in decision.items() if locked or k != "subject_definitions"}),
+                            None,
+                        ),
+                    ),
                     patch.object(
                         loop,
                         "_rewrite",
                         return_value={
                             **shot,
-                            "subject_definitions": "<Subject 2> is " + world.places["会议室"]["definition"],
+                            "subject_definitions": shot["subject_definitions"] + " <Subject 2> is " + world.places["会议室"]["definition"],
                         },
                     ) as rewrite,
                     patch.object(loop.video, "generate", side_effect=Submitted) as generate,
@@ -119,6 +127,9 @@ class Wiring(unittest.TestCase):
                     self.assertIn("wooden table", prompt)
                     self.assertIn("<Picture 1>", prompt)
                     self.assertIn("<Picture 2>", prompt)
+                    self.assertNotIn("someone else", prompt)
+                    self.assertEqual(1, prompt.count("<Subject 1> is"))
+                    self.assertEqual(1, prompt.count("<Subject 2> is"))
 
     def test_locked_assets_reuse_merged_shot_without_second_model_call(self) -> None:
         d = {key: "shot content" for key in agent_schema._MODEL_SECTIONS if key != "subject_definitions"}
@@ -149,6 +160,24 @@ class ComposeMissingDefinitionTest(unittest.TestCase):
     computed from **this beat's references**. If one image had no settled wording, the section
     counted as missing and a separate rewriter call followed, about 1 s each time.
     """
+
+    def test_merge_keeps_missing_definitions_and_prefers_locked_identity(self):
+        locked = "<Subject 1> is the traveler shown in <Picture 1>."
+        generated = (
+            "<Subject 1> is someone else shown in <Picture 1>. "
+            "<Subject 2> is a room shown in <Picture 2>. "
+            "<Subject 2> is a duplicate room shown in <Picture 2>."
+        )
+        merged = video_prompt._merge_definitions(locked, generated)
+        self.assertIn(locked, merged)
+        self.assertIn("<Subject 2> is a room shown in <Picture 2>", merged)
+        self.assertNotIn("someone else", merged)
+        self.assertNotIn("duplicate room", merged)
+        self.assertEqual(1, merged.count("<Subject 2> is"))
+
+    def test_merge_leaves_invalid_references_for_existing_validation(self):
+        invalid = "<Subject 99> is a room shown in <Picture 99>."
+        self.assertIn(invalid, video_prompt._merge_definitions("", invalid))
 
     def test_english_desc_becomes_a_definition(self):
         got = video_prompt._definition_from_desc(

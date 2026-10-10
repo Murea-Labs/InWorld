@@ -34,7 +34,6 @@ from murea_agent.shot.definitions import (
     _definition_body,
     _is_item_record,
     _object_appearance,
-    _short_definition,
     _subject_name_token,
 )
 from murea_agent.shot.soundscape import (
@@ -61,63 +60,36 @@ _FRAMING_VISIBILITY = {
 def _build_retention(
     pictures: list[dict[str, Any]], world: World, motion_plan: dict[str, Any], carry: str = ""
 ) -> str:
-    """`retention_analysis` is built by the server and no longer asked from the model.
+    """Describe visibility and reference changes, leaving stable appearance in subject definitions.
 
-    ⚠️ This is not "dropping a field": **the field never held any judgement by the model**:
-
-        <Subject 1> (appears in [Shot 1] (full body)): fully_preserved - <description>
-
-    Object references use `occlusion` (handheld) or `whole object` (still), and the description
-    locks a single instance, real scale and an inanimate prop identity.
-
-    · which Subjects exist and which image each is: `pictures` is ordered by the server itself
-    · visibility: a synonym of `motion_plan.framing` (wide → full body …)
-    · retention_level: always fully_preserved in this design; references are attached to be kept, and a model
-      writing weak_reference is giving up the lock
-    · the closing description: the locked asset brief. The model rephrased the same thing every beat
-      ("character attributes match reference image" / "consistent character appearance"), uninformative and unstable
-
-    It was about 126 tokens ≈ 0.4 s of output rewritten every beat. It also removes a class of
-    errors: the model sometimes referenced a nonexistent <Picture N>; built by the server it cannot.
+    Foreground identity is retained while pose, framing and background belong to this shot.
+    Objects also retain their physical scale, with occlusion when held.
     """
     scale = _FRAMING_VISIBILITY.get(str(motion_plan.get("framing") or "none"), "most of the body")
     scene = next((f"<Subject {p['n']}>" for p in pictures if p.get("kind") == "scene"), "")
-    environment = f" ({scene})" if scene else " established in the shot"
+    environment = scene or "the current story scene"
     lines: list[str] = []
     for pic in pictures:
         n = pic.get("n")
         if pic.get("kind") == "scene":
-            # Places use the locked **English** definition too, never the Chinese place name
-            place = world.places.get(str(pic.get("id") or pic.get("name") or "")) or {}
             lines.append(
                 f"<Subject {n}> (appears in [Shot 1] (wide scene view)): "
-                f"fully_preserved - {_short_definition(place)}."
+                "partially_preserved - layout, materials and lighting retained; framing follows the shot."
             )
             continue
         rec = world.subjects.get(str(pic.get("id") or "")) or {}
-        # ⚠️ This section is English (the video model was trained on English captions), so only the locked English
-        # definition can be used, never the Chinese brief; Chinese in an English section skews the
-        # format.
-        what = _short_definition(rec)
-        if _is_item_record(rec):
+        if pic.get("kind") == "object" or _is_item_record(rec):
             held = _object_is_held({**rec, "id": pic.get("id")}, motion_plan, carry)
             vis = "occlusion" if held else "whole object"
             object_scale = _object_scale_anchor(rec, held=held)
-            what = _object_appearance(rec.get("definition") or rec.get("desc"))
-            what = f"the same single inanimate object prop with scale anchor {object_scale}; {what}"
+            what = f"shape, material and color retained at {object_scale} scale"
         else:
             vis = scale
-        # The retention line describes "what is kept in the picture" rather than pasting the
-        # reference as a background. Foreground entities (people, creatures, objects) only inherit
-        # their own visible features; the reference's white / grey backdrop, floor, shadows and
-        # studio lighting are explicitly excluded, the current scene provides the environment.
+            what = "identity and visible appearance retained"
         lines.append(
             f"<Subject {n}> (appears in [Shot 1] ({vis})): "
-            f"fully_preserved - {what}; only the entity's identity and "
-            "appearance are retained. The reference backdrop, floor, shadows, "
-            "lighting and framing are replaced by the current story scene"
-            f"{environment} throughout the shot. The reference image itself "
-            "is never displayed as a frame or transition target."
+            f"partially_preserved - {what}; pose and framing follow the action; "
+            f"{environment} provides the background and lighting."
         )
     return "\n".join(lines)
 
@@ -822,6 +794,21 @@ def _rewrite(
 _DEF_SPAN = re.compile(r"<Subject\s*(\d+)>\s+is\s+(.*?)(?=<Subject\s*\d+>\s+is\s|\Z)", re.S)
 
 _PICTURE_REF = re.compile(r"<Picture\s*\d+>")
+
+
+def _merge_definitions(locked: str, generated: str) -> str:
+    """Keep each binding once, preferring the established asset definition."""
+    seen = {int(m.group(1)) for m in _DEF_SPAN.finditer(locked)}
+
+    def missing_only(match: re.Match) -> str:
+        n = int(match.group(1))
+        if n in seen:
+            return ""
+        seen.add(n)
+        return match.group(0)
+
+    generated = _DEF_SPAN.sub(missing_only, generated).strip()
+    return "\n".join(part for part in (locked.strip(), generated) if part)
 
 
 def _definition_from_desc(rec: dict[str, Any], picture: dict[str, Any]) -> str:

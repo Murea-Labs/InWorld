@@ -1,17 +1,4 @@
-"""`retention_analysis` is built by the server and no longer asked from the model.
-
-Not "dropping a field": the field **never held any judgement by the model**:
-
-    <Subject 1> (appears in [Shot 1] (full body)): fully_preserved - <description>
-
-which Subjects, which image each  → `pictures` is ordered by the server visibility
-→ a synonym of `motion_plan.framing` retention_level                   → always fully_preserved in
-this design (references exist to be kept) the closing description           → the locked English
-definition
-
-Rewriting it cost ~126 tokens ≈ 0.4 s per beat, for rephrasings of the same sentence ("character
-attributes match reference image" / "consistent character appearance").
-"""
+"""Retention describes visibility and changes without repeating subject definitions."""
 
 from __future__ import annotations
 
@@ -68,7 +55,7 @@ class RetentionTest(unittest.TestCase):
         self.assertEqual(3, len(lines))
         for i, line in enumerate(lines, start=1):
             self.assertTrue(line.startswith(f"<Subject {i}> (appears in [Shot 1]"))
-            self.assertIn("fully_preserved", line)
+            self.assertIn("partially_preserved", line)
 
     def test_framing_maps_to_visibility(self) -> None:
         self.assertIn("(full body)", self._build("wide"))
@@ -84,12 +71,12 @@ class RetentionTest(unittest.TestCase):
         out = self._build("wide")
         character, scene, item = out.splitlines()
         for line in (character, item):
-            self.assertIn("reference backdrop", line)
-            self.assertIn("replaced by the current story scene", line)
-        self.assertNotIn("reference backdrop", scene)
+            self.assertIn("<Subject 2> provides the background and lighting", line)
+            self.assertIn("pose and framing follow the action", line)
+        self.assertIn("layout, materials and lighting retained", scene)
 
     def test_long_visible_description_is_not_cut_at_ninety_characters(self) -> None:
-        """The stable appearance enters retention complete, never leaving fragments like ``with a.``."""
+        """The appearance parser still keeps identifying details for its other callers."""
         long_definition = (
             "<Subject 1> is the young male traveler in a heavy oiled leather "
             "trench coat with brass fasteners, charcoal trousers, weathered boots, "
@@ -161,17 +148,19 @@ class RetentionTest(unittest.TestCase):
         self.assertIn("young man in his 20s", definitions._short_definition({"definition": b}))
         self.assertNotIn("character sheet", definitions._short_definition({"definition": b}))
 
-    def test_the_real_description_comes_from_after_the_semicolon(self) -> None:
-        """The format is `<type phrase> shown in <Picture N> as <view>; <real description>`.
-
-        The front half would produce "the single character sheet" or "the scene reference", telling
-        the video model to preserve the character sheet instead of what this person looks like.
-        """
+    def test_appearance_is_not_repeated_in_retention(self) -> None:
         out = self._build("wide")
-        self.assertIn("a young man in his 20s", out)
-        self.assertIn("rainy old railway platform", out)
+        self.assertNotIn("a young man in his 20s", out)
+        self.assertNotIn("rainy old railway platform", out)
         self.assertNotIn("character sheet", out)
-        self.assertNotIn("wide scene view): fully_preserved - the single", out)
+        self.assertIn("identity and visible appearance retained", out)
+        self.assertLess(len(out), 800)
+
+    def test_unreferenced_environment_uses_the_shot_background(self) -> None:
+        world, sid, _ = _world()
+        out = video_prompt._build_retention([{"n": 1, "kind": "character", "id": sid}], world, {})
+        self.assertIn("the current story scene provides the background and lighting", out)
+        self.assertNotIn("<Subject 2>", out)
 
     def test_words_are_not_cut_in_half(self) -> None:
         out = self._build("wide")

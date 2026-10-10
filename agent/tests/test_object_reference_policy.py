@@ -105,12 +105,12 @@ class ObjectReferencePolicyTest(unittest.TestCase):
                     self.assertEqual("previous-latent", generate.call_args.kwargs["continue_from"])
                     self.assertNotIn("<Picture", prompt)
                     full = generate.call_args.kwargs["continuation_fallback_prompt"]
-                    self.assertIn("current story scene (<Subject 3>)", full)
+                    self.assertIn("<Subject 3> provides the background and lighting", full)
                     self.assertNotIn("the character shown in <Picture 2>", full)
                 else:
                     self.assertIsNone(generate.call_args.kwargs["continue_from"])
                     self.assertNotIn("the character shown in <Picture 2>", prompt)
-                    self.assertIn("current story scene (<Subject 3>)", prompt)
+                    self.assertIn("<Subject 3> provides the background and lighting", prompt)
 
     def test_legacy_object_definition_keeps_appearance_without_character_wrapper(self) -> None:
         world, actor, item = _world()
@@ -148,15 +148,15 @@ class ObjectReferencePolicyTest(unittest.TestCase):
 
         retention = video_prompt._build_retention(pictures, world, {"framing": "medium"})
         item_line, person_line, scene_line = retention.splitlines()
-        self.assertIn(appearance, item_line)
+        self.assertNotIn(appearance, item_line)
+        self.assertIn("shape, material and color retained", item_line)
         self.assertNotIn("the character", item_line)
         self.assertNotIn("full-body", item_line)
         for line in (item_line, person_line):
-            self.assertIn("current story scene (<Subject 3>)", line)
-            self.assertIn("never displayed as a frame or transition target", line)
-        self.assertIn("white jacket", person_line)
-        self.assertIn("white walls", scene_line)
-        self.assertNotIn("reference backdrop", scene_line)
+            self.assertIn("<Subject 3> provides the background and lighting", line)
+        self.assertNotIn("white jacket", person_line)
+        self.assertNotIn("white walls", scene_line)
+        self.assertIn("layout, materials and lighting retained", scene_line)
 
     def test_passive_carried_item_uses_parent_latent(self) -> None:
         world, actor, item = _world()

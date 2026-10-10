@@ -12,17 +12,17 @@ from murea_agent.memory.world import World
 
 class PromptBudgetTest(unittest.TestCase):
     def test_repeated_reference_rules_fit_without_replanning_or_cutting_prose(self):
-        world = World(here="court")
-        world.subjects = {
-            f"S{i}": {"name": f"elf{i}", "definition": "An elf in a green cloak."} for i in range(1, 4)
-        }
-        world.places = {"court": {"definition": "A wet stone courtyard."}}
-        pictures = [{"n": i, "kind": "character", "id": f"S{i}"} for i in range(1, 4)]
-        pictures.append({"n": 4, "kind": "scene", "id": "court"})
         fields = {
             "subject_definitions": "<Subject 1> is the elf in <Picture 1>.",
             "summary": "[reference_generation] Rescue.",
-            "retention_analysis": video_prompt._build_retention(pictures, world, {}),
+            "retention_analysis": "\n".join(
+                f"<Subject {i}> (appears in [Shot 1] (full body)): fully_preserved - An elf; "
+                "only the entity's identity and appearance are retained. The reference "
+                "backdrop, floor, shadows, lighting and framing are replaced by the current "
+                "story scene (<Subject 4>) throughout the shot. The reference image itself "
+                "is never displayed as a frame or transition target."
+                for i in range(1, 4)
+            ) + "\n<Subject 4> (appears in [Shot 1] (wide scene view)): fully_preserved - A courtyard.",
             "detailed_description": "[Shot 1] The arrow hits. (S1)<d>[Chinese]快动手！</d>",
             "overall_soundscape": "Rain and thunder.",
             "non_diegetic_music": "N/A",
@@ -40,6 +40,31 @@ class PromptBudgetTest(unittest.TestCase):
         for i in range(1, 5):
             self.assertIn(f"<Subject {i}>", fitted["retention_analysis"])
         self.assertEqual(fitted, prompt_budget._fit_video_prompt(fitted))
+
+    def test_compact_retention_fits_without_an_extra_model_call(self):
+        world = World(here="court")
+        world.subjects = {
+            f"S{i}": {"name": f"elf{i}", "definition": "An elf in a green cloak. " * 12}
+            for i in range(1, 5)
+        }
+        world.places = {"court": {"definition": "A wet stone courtyard. " * 12}}
+        pictures = [{"n": i, "kind": "character", "id": f"S{i}"} for i in range(1, 5)]
+        pictures.append({"n": 5, "kind": "scene", "id": "court"})
+        locked, missing = video_prompt._compose_definitions(world, pictures)
+        self.assertEqual([], missing)
+        fields = {
+            "subject_definitions": locked,
+            "summary": "[reference_generation] The elves cross the courtyard.",
+            "retention_analysis": video_prompt._build_retention(pictures, world, {}),
+            "detailed_description": "[Shot 1] The four elves walk across the wet courtyard.",
+            "overall_soundscape": "Rain and footsteps.",
+            "non_diegetic_music": "N/A",
+        }
+        self.assertLess(len(fields["retention_analysis"]), 1200)
+        with patch.object(loop.llm, "chat") as rewrite:
+            fitted = prompt_budget._fit_video_prompt(fields, limit=4200)
+        rewrite.assert_not_called()
+        self.assertEqual(fields, fitted)
 
     def test_caption_only_repair_preserves_locked_sections_and_dialogue(self):
         fields = {

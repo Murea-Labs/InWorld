@@ -60,6 +60,7 @@ from murea_agent.director.narration import (
 from murea_agent.shot.video_prompt import (
     _build_retention,
     _compose_definitions,
+    _merge_definitions,
     _ending_of,
     _ensure_prompt_english,
     _learn_definitions,
@@ -785,9 +786,7 @@ class TurnLoop:
                 )
         # Old caches and hand-written prompts may still carry `<Ref:Name>`.
         six, _unknown = _substitute_refs(six, pictures, world)
-        six["subject_definitions"] = "\n".join(
-            x for x in (locked_defs, six.get("subject_definitions", "")) if x.strip()
-        )
+        six["subject_definitions"] = _merge_definitions(locked_defs, six.get("subject_definitions", ""))
         six = _lock_visual_style(six, world.visual_style)
         six = _lock_bound_subject_tokens(six, pictures)
         six = _lock_motion_plan(six, motion_plan, pictures=pictures)
