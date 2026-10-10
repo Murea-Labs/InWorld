@@ -104,7 +104,9 @@ class Wiring(unittest.TestCase):
                         director,
                         "_decide_early",
                         return_value=(
-                            copy.deepcopy({k: v for k, v in decision.items() if locked or k != "subject_definitions"}),
+                            copy.deepcopy(
+                                {k: v for k, v in decision.items() if locked or k != "subject_definitions"}
+                            ),
                             None,
                         ),
                     ),
@@ -113,7 +115,9 @@ class Wiring(unittest.TestCase):
                         "_rewrite",
                         return_value={
                             **shot,
-                            "subject_definitions": shot["subject_definitions"] + " <Subject 2> is " + world.places["会议室"]["definition"],
+                            "subject_definitions": shot["subject_definitions"]
+                            + " <Subject 2> is "
+                            + world.places["会议室"]["definition"],
                         },
                     ) as rewrite,
                     patch.object(loop.video, "generate", side_effect=Submitted) as generate,

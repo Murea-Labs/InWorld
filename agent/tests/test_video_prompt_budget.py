@@ -22,7 +22,8 @@ class PromptBudgetTest(unittest.TestCase):
                 "story scene (<Subject 4>) throughout the shot. The reference image itself "
                 "is never displayed as a frame or transition target."
                 for i in range(1, 4)
-            ) + "\n<Subject 4> (appears in [Shot 1] (wide scene view)): fully_preserved - A courtyard.",
+            )
+            + "\n<Subject 4> (appears in [Shot 1] (wide scene view)): fully_preserved - A courtyard.",
             "detailed_description": "[Shot 1] The arrow hits. (S1)<d>[Chinese]快动手！</d>",
             "overall_soundscape": "Rain and thunder.",
             "non_diegetic_music": "N/A",
@@ -44,8 +45,7 @@ class PromptBudgetTest(unittest.TestCase):
     def test_compact_retention_fits_without_an_extra_model_call(self):
         world = World(here="court")
         world.subjects = {
-            f"S{i}": {"name": f"elf{i}", "definition": "An elf in a green cloak. " * 12}
-            for i in range(1, 5)
+            f"S{i}": {"name": f"elf{i}", "definition": "An elf in a green cloak. " * 12} for i in range(1, 5)
         }
         world.places = {"court": {"definition": "A wet stone courtyard. " * 12}}
         pictures = [{"n": i, "kind": "character", "id": f"S{i}"} for i in range(1, 5)]
