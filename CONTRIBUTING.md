@@ -2,7 +2,7 @@
 
 **English** | [中文](CONTRIBUTING_zh.md)
 
-Murea has two parts, each with its own checks. Run the checks of the part you changed, from
+InWorld has two parts, each with its own checks. Run the checks of the part you changed, from
 its directory, before sending a pull request. CI runs the same checks when that directory
 changes.
 
@@ -24,7 +24,7 @@ bash -n scripts/murea-fast
 A change to the vendored engine (`inference/vendor/sglang/`) also needs:
 
 - the change notice in the first line of every file you modify
-  (`# Modified by the Murea authors from SGLang; see inference/docs/provenance.md.`), and a
+  (`# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.`), and a
   row for it in [Provenance](inference/docs/provenance.md) and its Chinese version, with the
   file counts there kept up to date;
 - the vendored tests of the code you changed, such as

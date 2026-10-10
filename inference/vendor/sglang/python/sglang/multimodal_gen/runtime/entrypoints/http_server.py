@@ -1,4 +1,4 @@
-# Modified by the Murea authors from SGLang; see inference/docs/provenance.md.
+# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.
 # Copied and adapted from: https://github.com/hao-ai-lab/FastVideo
 
 import asyncio
@@ -358,7 +358,7 @@ vertex_router = APIRouter()
 
 # Murea-Fast serves one verified checkpoint. The endpoints that load other weights or
 # LoRA adapters, release GPU memory or run RL rollouts are not mounted: nothing in
-# Murea uses them, and the service has no authentication. That is all of
+# InWorld uses them, and the service has no authentication. That is all of
 # post_training/weights_api.py and post_training/rollout_api.py, and these routes of
 # openai/common_api.py.
 UNMOUNTED_PATHS = frozenset(

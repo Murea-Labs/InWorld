@@ -2,7 +2,7 @@
 
 [English](README.md) | **中文**
 
-一个开放世界**视频 Agent**，是 [Murea](../README_zh.md) 的一部分。你说想做什么，Agent 决定接下来发生什么，并用 [Murea-Fast](../inference/README_zh.md) 推理服务把这一拍拍成一段带声音的生成视频。每一拍都接着上一拍往下演：人物、地点、画风保持一致。
+一个开放世界**视频 Agent**，是 [InWorld](../README_zh.md) 的一部分。你说想做什么，Agent 决定接下来发生什么，并用 [Murea-Fast](../inference/README_zh.md) 推理服务把这一拍拍成一段带声音的生成视频。每一拍都接着上一拍往下演：人物、地点、画风保持一致。
 
 每一拍都走同一个固定、可追踪的循环：
 
@@ -35,7 +35,7 @@ flowchart LR
 需要装好 [uv](https://docs.astral.sh/uv/)，准备一个文字和出图用的 key，再起一个 [Murea-Fast](../inference/README_zh.md) 视频服务：
 
 ```bash
-git clone https://github.com/sjsjhsu/Murea && cd Murea/agent
+git clone https://github.com/sjsjhsu/InWorld && cd InWorld/agent
 cp .env.example .env          # 填好下面两行
 ./run.sh                      # 自动装好依赖，然后打开 http://127.0.0.1:8080
 ```
@@ -53,7 +53,7 @@ Agent 会向服务查询它运行的是哪个模型（`GET /v1/models`），并�
 
 还没有世界时，直接在主页输入一句想法，例如“去冰塔峰之龙的世界探险”，然后发送。
 Agent 会据此补全世界观、玩家身份、起始地点、主线目标和开场，创建世界后自动开始拍第一段。
-已有世界里的输入仍是当前角色的行动。完善世界失败时会保留原句，供你重试，不会换成无关的随机世界。
+已有世界里的输入仍是当前角色的行动。完善世界失败时会保留原句，供你重试，不会换成无关的随机世界。这需要文字和出图的 key，以及能用的视频服务。
 
 单卡 Murea-Fast 服务只测试过 5 秒片段。服务会在 `GET /v1/models` 中报告卡数，单卡时 Agent 会自动把每一拍和双人模式的每一轮都拍成 5 秒片段，见[片段时长](#片段时长)。
 

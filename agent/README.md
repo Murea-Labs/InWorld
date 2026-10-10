@@ -1,15 +1,8 @@
 # Murea Agent
 
-With no world selected, type a short idea into the home input, such as "Explore the world of
-the Dragon of Icespire Peak", and send it. The agent develops the setting, player role,
-starting location, main objective and opening, creates the world, and starts filming its
-first clip automatically. Input within an existing world remains an action in that world.
-If world planning fails, the idea stays in the input for retry; it is never replaced by an
-unrelated random world. Text/image credentials and a working video service are required.
-
 **English** | [中文](README_zh.md)
 
-An open-world **video agent**, part of [Murea](../README.md). You say what you do;
+An open-world **video agent**, part of [InWorld](../README.md). You say what you do;
 the agent decides what happens and films it as a short generated clip with sound on
 the [Murea-Fast](../inference/README.md) inference service. Every beat continues from
 the last one with the same people, places and visual style.
@@ -49,7 +42,7 @@ You need [uv](https://docs.astral.sh/uv/), a key for text and images, and a runn
 [Murea-Fast](../inference/README.md) service for video:
 
 ```bash
-git clone https://github.com/sjsjhsu/Murea && cd Murea/agent
+git clone https://github.com/sjsjhsu/InWorld && cd InWorld/agent
 cp .env.example .env          # fill in the two lines below
 ./run.sh                      # installs everything, then http://127.0.0.1:8080
 ```
@@ -65,6 +58,13 @@ full Murea model, which has not been released yet. If you put an authenticating
 proxy in front of the service, add `MUREA_API_KEY`. That is all; there is no config
 file to edit. Without keys the app still opens, but cannot film, and the terminal
 says which keys are missing.
+
+With no world selected, type a short idea into the home input, such as "Explore the world of
+the Dragon of Icespire Peak", and send it. The agent develops the setting, player role,
+starting location, main objective and opening, creates the world, and starts filming its
+first clip automatically. Input within an existing world remains an action in that world.
+If world planning fails, the idea stays in the input for retry; it is never replaced by an
+unrelated random world. Text/image credentials and a working video service are required.
 
 On a single-GPU Murea-Fast service only 5-second clips have been tested. The service
 reports its GPU count in `GET /v1/models`, and on one GPU the agent films every beat and

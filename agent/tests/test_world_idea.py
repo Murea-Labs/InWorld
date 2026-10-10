@@ -39,8 +39,10 @@ class WorldIdeaTest(unittest.TestCase):
         self.assertIn("`setting`: ONE sentence.", prompt["system"])
         self.assertNotIn("Two or three concrete sentences", prompt["system"])
         self.assertIn("assets", prompt["schema"]["required"])
-        self.assertEqual(["player", "place"],
-                         prompt["schema"]["properties"]["assets"]["items"]["properties"]["kind"]["enum"])
+        self.assertEqual(
+            ["player", "place"],
+            prompt["schema"]["properties"]["assets"]["items"]["properties"]["kind"]["enum"],
+        )
 
     def test_setting_uses_the_same_budget_as_the_original_entry(self):
         concept = {**self.concept, "setting": "冰雪山峰" * 100}
@@ -52,8 +54,14 @@ class WorldIdeaTest(unittest.TestCase):
 
     def test_assets_must_be_ready_to_plan_before_world_creation(self):
         extra = {"kind": "creature", "name": "冰龙", "prompt": "A frost dragon."}
-        for assets in (None, [], [self.concept["assets"][0]], [self.concept["assets"][0]] * 2,
-                       [self.concept["assets"][0], extra], [*self.concept["assets"], extra]):
+        for assets in (
+            None,
+            [],
+            [self.concept["assets"][0]],
+            [self.concept["assets"][0]] * 2,
+            [self.concept["assets"][0], extra],
+            [*self.concept["assets"], extra],
+        ):
             with self.subTest(assets=assets):
                 with patch.object(worldgen.llm, "chat", return_value={**self.concept, "assets": assets}):
                     with self.assertRaises(ValueError):

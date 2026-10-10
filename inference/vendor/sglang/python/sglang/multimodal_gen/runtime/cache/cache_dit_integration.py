@@ -1,4 +1,4 @@
-# Modified by the Murea authors from SGLang; see inference/docs/provenance.md.
+# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.
 # SPDX-License-Identifier: Apache-2.0
 """
 cache-dit integration module for SGLang DiT pipelines.

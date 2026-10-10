@@ -5,7 +5,7 @@
 > **状态：** Murea-Fast 权重尚未发布，将在 Hugging Face 上发布（见[模型](#模型)）。在此之前服务无法启动；
 > 代码、文档和只依赖标准库的测试可以使用。
 
-Murea-Fast 是 [Murea](../README_zh.md) 的推理服务：根据文本提示和按顺序排列的参考图，
+Murea-Fast 是 [InWorld](../README_zh.md) 的推理服务：根据文本提示和按顺序排列的参考图，
 生成带同步音频的视频；也可以从一段已有视频的末尾帧接着往下生成。模型通过 HTTP API 提供服务。
 
 本目录可以独立使用：其中包含带模型实现的固定版本 SGLang（`vendor/sglang/`）、

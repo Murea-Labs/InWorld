@@ -379,8 +379,7 @@ def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str
     if not isinstance(out, dict):
         out = {}
     got: dict[str, Any] = {
-        k: " ".join(str(out.get(k) or "").split())[:200]
-        for k in ("title", "setting", "mainline", "opening")
+        k: " ".join(str(out.get(k) or "").split())[:200] for k in ("title", "setting", "mainline", "opening")
     }
     if idea and not all(got.values()):
         raise ValueError("World planning returned incomplete details; please retry")

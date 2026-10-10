@@ -1,4 +1,4 @@
-# Modified by the Murea authors from SGLang; see inference/docs/provenance.md.
+# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.
 import time
 import uuid
 from abc import ABC

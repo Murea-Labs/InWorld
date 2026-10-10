@@ -6,7 +6,7 @@
 > Face (see [Model](#model)). Until then the service cannot be started; the code, the
 > documentation and the standard-library tests are available.
 
-Murea-Fast is the inference service of [Murea](../README.md). It generates videos with
+Murea-Fast is the inference service of [InWorld](../README.md). It generates videos with
 synchronized audio from a text prompt and an ordered list of reference images, and can
 continue an existing video from its last frames. The model runs behind an HTTP API.
 

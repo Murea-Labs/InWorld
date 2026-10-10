@@ -1,4 +1,4 @@
-# Modified by the Murea authors from SGLang; see inference/docs/provenance.md.
+# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.
 # Copied and adapted from: https://github.com/hao-ai-lab/FastVideo
 
 import asyncio
