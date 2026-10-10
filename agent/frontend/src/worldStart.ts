@@ -16,7 +16,7 @@ export interface WorldStart {
 export async function prepareWorld(start: WorldStart, progress: (name: string, i: number, n: number) => void) {
   const w = start.concept
   const assets = w.assets ?? []
-  if (start.idea && (!assets.length || assets.filter(a => a.kind === 'player').length !== 1
+  if (start.idea && (assets.length !== 2 || assets.filter(a => a.kind === 'player').length !== 1
     || assets.filter(a => a.kind === 'place').length !== 1)) {
     throw new Error(t('开场资产不完整，请重新描述世界'))
   }
@@ -35,8 +35,8 @@ export async function prepareWorld(start: WorldStart, progress: (name: string, i
       form.append('make_current', 'true')
       await api.addPlace(start.worldId, form)
     } else {
-      form.append('control', asset.kind === 'player' ? 'user' : 'ai')
-      form.append('kind', asset.kind === 'object' ? '物件' : asset.kind === 'creature' ? '生物' : '人物')
+      form.append('control', 'user')
+      form.append('kind', '人物')
       await api.addSubject(start.worldId, form)
     }
     start.completed = i + 1

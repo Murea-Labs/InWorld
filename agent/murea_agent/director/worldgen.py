@@ -209,7 +209,7 @@ _ASSET_SCHEMA = {
     "items": {
         "type": "object",
         "properties": {
-            "kind": {"type": "string", "enum": ["player", "character", "creature", "object", "place"]},
+            "kind": {"type": "string", "enum": ["player", "place"]},
             "name": {"type": "string"},
             "prompt": {"type": "string"},
         },
@@ -220,8 +220,8 @@ _ASSET_SCHEMA = {
 
 def _opening_assets(value: Any) -> list[dict[str, str]]:
     """Validate the opening cast before creating a world or drawing its references."""
-    if not isinstance(value, list) or not 2 <= len(value) <= 5:
-        raise ValueError("World planning needs 2-5 opening assets; please retry")
+    if not isinstance(value, list) or len(value) != 2:
+        raise ValueError("World planning needs one player and one starting place; please retry")
     assets = []
     for item in value:
         if not isinstance(item, dict) or any(
@@ -229,7 +229,7 @@ def _opening_assets(value: Any) -> list[dict[str, str]]:
         ):
             raise ValueError("World planning returned an incomplete opening asset; please retry")
         asset = {key: item[key].strip() for key in ("kind", "name", "prompt")}
-        if asset["kind"] not in ("player", "character", "creature", "object", "place"):
+        if asset["kind"] not in ("player", "place"):
             raise ValueError("World planning returned an invalid asset kind; please retry")
         assets.append(asset)
     kinds = [asset["kind"] for asset in assets]
@@ -314,8 +314,7 @@ def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str
             f"Player's world idea:\n{idea}\n\n"
             f"Available style_id values:\n{menu or '- (none)'}\n\n"
             "Develop this idea into a playable world. Preserve its named places, beings, genre, "
-            "and the player's intent. Fill unspecified details with a coherent starting location, "
-            "the player's role, the surroundings and a reason to explore. The mainline should "
+            "and the player's intent. Keep the setting concise. The mainline should "
             "support an unfolding adventure; the opening is its first visible moment."
         )
     title_rule = (
@@ -333,15 +332,9 @@ def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str
             "Keep every field short. Do not explain, do not add fields.",
             "Keep the story fields short. Return only the fields in the response schema.",
         )
-        system = system.replace(
-            "`setting`: ONE sentence. Where this is and what kind of place it is. No plot.",
-            "`setting`: Two or three concrete sentences establishing the world, the player's "
-            "role and the starting location. Include distinctive environmental details.",
-        )
         system += (
-            "\nAlso return `assets`: 2-5 references to prepare before filming the opening. "
-            "Include exactly one player (kind=player) and one starting environment (kind=place). "
-            "Add characters, creatures or objects only when visually central to this opening. "
+            "\nAlso return `assets`: the player (kind=player) and the starting environment "
+            "(kind=place), matching the new-world form's two initial references. "
             "Each asset has kind, a distinct name in the story language, and an English prompt "
             "of 30-60 words describing its stable visible appearance. The player prompt describes "
             "their face, hair, clothing and equipment; the place prompt describes its layout, "
@@ -386,7 +379,7 @@ def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str
     if not isinstance(out, dict):
         out = {}
     got: dict[str, Any] = {
-        k: " ".join(str(out.get(k) or "").split())[: 1200 if idea and k == "setting" else 200]
+        k: " ".join(str(out.get(k) or "").split())[:200]
         for k in ("title", "setting", "mainline", "opening")
     }
     if idea and not all(got.values()):

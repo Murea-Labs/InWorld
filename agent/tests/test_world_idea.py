@@ -14,7 +14,7 @@ class WorldIdeaTest(unittest.TestCase):
         self.idea = "去冰塔峰之龙的世界探险"
         self.concept = {
             "title": "冰塔峰",
-            "setting": "冰塔峰常年积雪，山腰坐落着冒险者的驿站。你是一名寻找巨龙踪迹的旅人。",
+            "setting": "冰塔峰常年积雪，山腰坐落着冒险者的驿站。",
             "mainline": "寻找冰塔峰巨龙并查清雪山异变的缘由。",
             "opening": "你站在雪山驿站门前，仰望云雾中的冰塔峰。",
             "style_id": "fantasy",
@@ -36,11 +36,24 @@ class WorldIdeaTest(unittest.TestCase):
         prompt = chat.call_args.kwargs
         self.assertIn(self.idea, prompt["user"])
         self.assertNotIn("Something is wrong:", prompt["user"])
-        self.assertIn("Two or three concrete sentences", prompt["system"])
+        self.assertIn("`setting`: ONE sentence.", prompt["system"])
+        self.assertNotIn("Two or three concrete sentences", prompt["system"])
         self.assertIn("assets", prompt["schema"]["required"])
+        self.assertEqual(["player", "place"],
+                         prompt["schema"]["properties"]["assets"]["items"]["properties"]["kind"]["enum"])
+
+    def test_setting_uses_the_same_budget_as_the_original_entry(self):
+        concept = {**self.concept, "setting": "冰雪山峰" * 100}
+        with patch.object(worldgen.llm, "chat", return_value=concept):
+            from_idea = worldgen.spin(self.styles, self.idea)
+            from_dice = worldgen.spin(self.styles)
+        self.assertEqual(concept["setting"][:200], from_idea["setting"])
+        self.assertEqual(from_dice["setting"], from_idea["setting"])
 
     def test_assets_must_be_ready_to_plan_before_world_creation(self):
-        for assets in (None, [], [self.concept["assets"][0]], [self.concept["assets"][0]] * 2):
+        extra = {"kind": "creature", "name": "冰龙", "prompt": "A frost dragon."}
+        for assets in (None, [], [self.concept["assets"][0]], [self.concept["assets"][0]] * 2,
+                       [self.concept["assets"][0], extra], [*self.concept["assets"], extra]):
             with self.subTest(assets=assets):
                 with patch.object(worldgen.llm, "chat", return_value={**self.concept, "assets": assets}):
                     with self.assertRaises(ValueError):

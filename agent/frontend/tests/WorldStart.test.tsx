@@ -24,7 +24,6 @@ const concept: RandomWorld = { title: '冰塔峰', setting: '雪山驿站与冰�
   opening: '你站在驿站外，望向雪山。', style_id: '', assets: [
     { kind: 'player', name: '旅人', prompt: 'A traveller in a blue coat.' },
     { kind: 'place', name: '驿站', prompt: 'A stone lodge in snowy mountains.' },
-    { kind: 'object', name: '冰镐', prompt: 'A steel ice axe with a wooden handle.' },
   ] }
 const world = { id: 'ice-world', title: concept.title, subjects: {}, places: {}, nodes: {},
   history: [], head: '', quests: [], place_links: [] } as unknown as World
@@ -57,11 +56,13 @@ it('develops a sentence, saves its concept and starts the opening video automati
   expect(api.createWorld).toHaveBeenCalledWith(concept.title, concept.setting, '', 'murea', concept.mainline)
   expect(api.turn).toHaveBeenCalledWith(world.id, `${OPENING} ${concept.opening}`,
     expect.any(Function), false, expect.any(AbortSignal), [])
-  expect(api.addSubject).toHaveBeenCalledTimes(2)
+  expect(api.addSubject).toHaveBeenCalledTimes(1)
   expect(vi.mocked(api.addSubject).mock.calls[0][1].get('control')).toBe('user')
-  expect(vi.mocked(api.addSubject).mock.calls[1][1].get('kind')).toBe('物件')
+  expect(vi.mocked(api.addSubject).mock.calls[0][1].get('kind')).toBe('人物')
+  expect(api.addPlace).toHaveBeenCalledTimes(1)
   expect(vi.mocked(api.addPlace).mock.calls[0][1].get('make_current')).toBe('true')
-  expect(vi.mocked(api.turn).mock.invocationCallOrder[0]).toBeGreaterThan(vi.mocked(api.addSubject).mock.invocationCallOrder[1])
+  expect(vi.mocked(api.turn).mock.invocationCallOrder[0]).toBeGreaterThan(vi.mocked(api.addSubject).mock.invocationCallOrder[0])
+  expect(vi.mocked(api.turn).mock.invocationCallOrder[0]).toBeGreaterThan(vi.mocked(api.addPlace).mock.invocationCallOrder[0])
 })
 
 it('waits for assets and resumes failed preparation without recreating the world or player', async () => {
@@ -71,7 +72,7 @@ it('waits for assets and resumes failed preparation without recreating the world
   const input = await ui.findByPlaceholderText(/想去怎样的世界/)
   fireEvent.change(input, { target: { value: idea } })
   fireEvent.click(ui.getByRole('button', { name: '发送' }))
-  await ui.findByText('准备世界资产 2/3：驿站')
+  await ui.findByText('准备世界资产 2/2：驿站')
   expect(api.turn).not.toHaveBeenCalled()
   await act(async () => reject(new Error('image unavailable')))
   await ui.findByText('创建世界失败：image unavailable')
@@ -80,7 +81,7 @@ it('waits for assets and resumes failed preparation without recreating the world
   await waitFor(() => expect(api.turn).toHaveBeenCalledTimes(1))
   expect(api.randomWorld).toHaveBeenCalledTimes(1)
   expect(api.createWorld).toHaveBeenCalledTimes(1)
-  expect(api.addSubject).toHaveBeenCalledTimes(2)
+  expect(api.addSubject).toHaveBeenCalledTimes(1)
   expect(api.addPlace).toHaveBeenCalledTimes(2)
 })
 
