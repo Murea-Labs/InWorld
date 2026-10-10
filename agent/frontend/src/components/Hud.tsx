@@ -448,7 +448,7 @@ export default function Hud({
             ref={inputRef}
             rows={1}
             value={draft}
-            placeholder={preparing ? t('正在根据你的想法完善世界、主线与开场…') : !world ? t('想去怎样的世界？例如：去冰塔峰之龙的世界探险') : setupHint || (playbackLocked ? t('本段播放结束后，任务和物品状态会更新') : busy ? t('世界正在演这一拍…') : t('你要做什么（输入 @ 绑定资产）'))}
+            placeholder={preparing ? t('正在根据你的想法完善世界、主线与开场…') : !world ? t('想去怎样的世界？在这里简单描述，或点击右上角「新世界」完善设定。') : setupHint || (playbackLocked ? t('本段播放结束后，任务和物品状态会更新') : busy ? t('世界正在演这一拍…') : t('你要做什么（输入 @ 绑定资产）'))}
             onChange={(e) => {
               onDraft(e.target.value)
               syncMention(e.target.value, e.target.selectionStart)

@@ -99,7 +99,7 @@ export const EN: Record<string, string> = {
   "先写一句提示词，或者点上面的框上传图片": "Write a prompt first, or click the box above to upload an image",
   "先点“生成”查看候选图，再决定是否采用": "Click \"Generate\" to preview a candidate first",
   "先说一句话，世界就开始了": "Say something to start the world",
-  "想去怎样的世界？例如：去冰塔峰之龙的世界探险": "Where would you like to go? For example: explore the world of the Dragon of Icespire Peak",
+  "想去怎样的世界？在这里简单描述，或点击右上角「新世界」完善设定。": "What kind of world would you like to explore? Describe it here, or click “New world” in the top right to refine the details.",
   "正在根据你的想法完善世界、主线与开场…": "Developing your world, quest and opening scene…",
   "创建世界失败：{msg}": "Could not create the world: {msg}",
   "先起个名字": "Give it a name first",
