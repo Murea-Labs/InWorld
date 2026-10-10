@@ -1,4 +1,4 @@
-# Added by the nWorld authors; see inference/docs/provenance.md.
+# Added by the InWorld authors; see inference/docs/provenance.md.
 """Request fields the Murea-Fast service refuses.
 
 Standard library only, so it can be tested without torch or a GPU.

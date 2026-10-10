@@ -1,4 +1,4 @@
-# nWorld
+# InWorld
 
 **English** | [中文](README_zh.md)
 
@@ -7,7 +7,7 @@
 > Until then the inference service cannot be started, so the agent has no video model to
 > film with.
 
-nWorld is an open-source video generation system. It generates videos with synchronized
+InWorld is an open-source video generation system. It generates videos with synchronized
 audio from text prompts and ordered reference images, continues existing videos, and
 includes an agent that turns a player's actions into a continuing, filmed story.
 
@@ -30,7 +30,7 @@ clients can use it too.
 ## Repository layout
 
 ```text
-nWorld/
+InWorld/
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── SECURITY.md

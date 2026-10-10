@@ -2,7 +2,7 @@
 
 [English](CONTRIBUTING.md) | **中文**
 
-nWorld 由两部分组成，各有各的检查。提交 pull request 前，请在你改动的那部分目录下运行它的检查。
+InWorld 由两部分组成，各有各的检查。提交 pull request 前，请在你改动的那部分目录下运行它的检查。
 对应目录有改动时，CI 会运行同样的检查。
 
 ## Murea Agent（`agent/`）
@@ -22,7 +22,7 @@ bash -n scripts/murea-fast
 改动内置引擎（`inference/vendor/sglang/`）时还需要：
 
 - 在每个改过的文件第一行加上修改声明
-  （`# Modified by the nWorld authors from SGLang; see inference/docs/provenance.md.`），
+  （`# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.`），
   并在[来源说明](inference/docs/provenance_zh.md)及其英文版中为它加一行，同时更新其中的文件数；
 - 在完整环境中用 `pytest` 运行所改代码对应的内置测试，例如
   `vendor/sglang/python/sglang/multimodal_gen/` 下的 `test/unit/test_ltx2_ordered_multiref.py`

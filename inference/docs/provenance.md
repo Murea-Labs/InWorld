@@ -29,8 +29,8 @@ with this file set. Without them, the deprecated `sglang/bench_*.py` entry point
 ## Changes to SGLang
 
 Each modified file starts with the line
-`# Modified by the nWorld authors from SGLang; see inference/docs/provenance.md.`
-and the added module with `# Added by the nWorld authors; see inference/docs/provenance.md.`
+`# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.`
+and the added module with `# Added by the InWorld authors; see inference/docs/provenance.md.`
 Paths are relative to `vendor/sglang/python/sglang/multimodal_gen/`.
 
 | File | Change |
@@ -64,7 +64,7 @@ merge, client, configurations and tests.
 
 | Component | License |
 | --- | --- |
-| nWorld code (`src/`, `scripts/`, `tests/`, `configs/`, docs) | [Apache License 2.0](../../LICENSE) |
+| InWorld code (`src/`, `scripts/`, `tests/`, `configs/`, docs) | [Apache License 2.0](../../LICENSE) |
 | Vendored SGLang, including our modifications | [Apache License 2.0](../vendor/sglang/LICENSE), apart from the third-party files in the next row |
 | Third-party files within the vendored SGLang | Their own MIT or BSD-3-Clause license; the headers and notices are kept as they are. Examples, relative to `vendor/sglang/python/sglang/`: CUTLASS-derived kernels in `kernels/aot/csrc/attention/cutlass_sm100_mla/` and `kernels/aot/csrc/cutlass_extensions/`, and the flash-attention CuTe kernels in `kernels/ops/attention/flash_attn/cute/` (with its `LICENSE`), BSD-3-Clause; `multimodal_gen/third_party/pynvml.py`, BSD-3-Clause; `multimodal_gen/runtime/models/vaes/dac.py`, MIT. `kernels/aot/THIRDPARTYNOTICES.txt` collects the notices of the projects the AOT kernels come from (flashinfer, TensorRT-LLM, DeepGEMM, flash-attention) |
 | Murea-Fast weights | [LTX-2.x Community License Agreement](https://github.com/Lightricks/LTX-2/blob/main/LICENSE-2_x) |

@@ -26,8 +26,8 @@ SGLang 依靠它们选择模型实现，保留它们也便于跟进上游。第�
 ## 对 SGLang 的修改
 
 每个修改过的文件开头都有一行
-`# Modified by the nWorld authors from SGLang; see inference/docs/provenance.md.`，
-新增的模块开头是 `# Added by the nWorld authors; see inference/docs/provenance.md.`。
+`# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.`，
+新增的模块开头是 `# Added by the InWorld authors; see inference/docs/provenance.md.`。
 下表路径相对于 `vendor/sglang/python/sglang/multimodal_gen/`。
 
 | 文件 | 修改内容 |
@@ -60,7 +60,7 @@ SGLang 依靠它们选择模型实现，保留它们也便于跟进上游。第�
 
 | 组成部分 | 许可证 |
 | --- | --- |
-| nWorld 代码（`src/`、`scripts/`、`tests/`、`configs/`、文档） | [Apache License 2.0](../../LICENSE) |
+| InWorld 代码（`src/`、`scripts/`、`tests/`、`configs/`、文档） | [Apache License 2.0](../../LICENSE) |
 | vendor 中的 SGLang，含我们的修改 | [Apache License 2.0](../vendor/sglang/LICENSE)，下一行的第三方文件除外 |
 | vendor 中 SGLang 内的第三方文件 | 各自的 MIT 或 BSD-3-Clause 许可证；文件头和声明均原样保留。例如（路径相对于 `vendor/sglang/python/sglang/`）：`kernels/aot/csrc/attention/cutlass_sm100_mla/` 与 `kernels/aot/csrc/cutlass_extensions/` 中源自 CUTLASS 的 kernel，以及 `kernels/ops/attention/flash_attn/cute/` 中的 flash-attention CuTe kernel（附带 `LICENSE`），为 BSD-3-Clause；`multimodal_gen/third_party/pynvml.py`，BSD-3-Clause；`multimodal_gen/runtime/models/vaes/dac.py`，MIT。`kernels/aot/THIRDPARTYNOTICES.txt` 汇总了 AOT kernel 所依据的上游项目（flashinfer、TensorRT-LLM、DeepGEMM、flash-attention）的声明 |
 | Murea-Fast 权重 | [LTX-2.x Community License Agreement](https://github.com/Lightricks/LTX-2/blob/main/LICENSE-2_x) |

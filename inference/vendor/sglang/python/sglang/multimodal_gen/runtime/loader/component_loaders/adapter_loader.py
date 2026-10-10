@@ -1,4 +1,4 @@
-# Modified by the nWorld authors from SGLang; see inference/docs/provenance.md.
+# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.
 import re
 
 from sglang.multimodal_gen.configs.models.adapter.ltx_2_connector import (

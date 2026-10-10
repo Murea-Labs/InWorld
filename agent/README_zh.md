@@ -2,7 +2,7 @@
 
 [English](README.md) | **中文**
 
-一个开放世界**视频 Agent**，是 [nWorld](../README_zh.md) 的一部分。你说想做什么，Agent 决定接下来发生什么，并用 [Murea-Fast](../inference/README_zh.md) 推理服务把这一拍拍成一段带声音的生成视频。每一拍都接着上一拍往下演：人物、地点、画风保持一致。
+一个开放世界**视频 Agent**，是 [InWorld](../README_zh.md) 的一部分。你说想做什么，Agent 决定接下来发生什么，并用 [Murea-Fast](../inference/README_zh.md) 推理服务把这一拍拍成一段带声音的生成视频。每一拍都接着上一拍往下演：人物、地点、画风保持一致。
 
 每一拍都走同一个固定、可追踪的循环：
 
@@ -35,7 +35,7 @@ flowchart LR
 需要装好 [uv](https://docs.astral.sh/uv/)，准备一个文字和出图用的 key，再起一个 [Murea-Fast](../inference/README_zh.md) 视频服务：
 
 ```bash
-git clone https://github.com/sjsjhsu/nWorld && cd nWorld/agent
+git clone https://github.com/sjsjhsu/InWorld && cd InWorld/agent
 cp .env.example .env          # 填好下面两行
 ./run.sh                      # 自动装好依赖，然后打开 http://127.0.0.1:8080
 ```

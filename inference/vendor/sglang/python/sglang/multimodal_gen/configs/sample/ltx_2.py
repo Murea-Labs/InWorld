@@ -1,4 +1,4 @@
-# Modified by the nWorld authors from SGLang; see inference/docs/provenance.md.
+# Modified by the InWorld authors from SGLang; see inference/docs/provenance.md.
 import dataclasses
 from dataclasses import field
 from typing import Any
