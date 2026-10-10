@@ -7,6 +7,8 @@ export interface RandomWorld {
   style_id: string
   /** What the first beat plays. One sentence, second person. */
   opening: string
+  /** References created before the opening video for a player-supplied world idea. */
+  assets?: { kind: 'player' | 'place'; name: string; prompt: string }[]
   visual_style?: string
   refs?: { kind: 'subject' | 'place'; name: string; mine?: boolean; ref: string; prompt?: string }[]
 }

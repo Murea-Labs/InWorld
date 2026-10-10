@@ -4,6 +4,7 @@ from dataclasses import asdict
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import JSONResponse
+from starlette.concurrency import run_in_threadpool
 
 from murea_agent import config
 from app import demo, option_prefetch
@@ -58,7 +59,13 @@ async def random_world(req: Request) -> dict:
     except Exception:
         body = {}
     styles = (body or {}).get("styles") if isinstance(body, dict) else None
-    return worldgen.spin(styles if isinstance(styles, list) else None)
+    idea = body.get("idea", "") if isinstance(body, dict) else ""
+    if not isinstance(idea, str) or len(idea) > 2000:
+        raise HTTPException(400, "World idea must be text of at most 2000 characters")
+    try:
+        return await run_in_threadpool(worldgen.spin, styles if isinstance(styles, list) else None, idea)
+    except Exception as exc:
+        raise HTTPException(502, str(exc)) from exc
 
 
 @router.get("/{wid}")

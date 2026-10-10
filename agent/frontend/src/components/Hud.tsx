@@ -122,6 +122,7 @@ function mentionRanges(text: string, options: MentionOption[]): MentionRange[] {
 }
 
 interface Props {
+  preparing?: boolean
   playbackLocked?: boolean
   world: World | null
   /** The clip being played. Dialogue comes from its reply, choices from its options. */
@@ -237,7 +238,7 @@ function Progress(
  */
 export default function Hud({
   world, current, busy, turn, sequence, draft, onDraft, onSend, onStop, playbackLocked = false,
-  autoRunning, onStopAuto, onAddRef, setupHint,
+  autoRunning, onStopAuto, onAddRef, setupHint, preparing = false,
 }: Props) {
   const inputRef = useRef<HTMLTextAreaElement>(null)
   const highlightRef = useRef<HTMLDivElement>(null)
@@ -337,7 +338,7 @@ export default function Hud({
 
   const send = () => {
     const t = draft.trim()
-    if (!t || busy || playbackLocked) return
+    if (!t || busy || preparing || playbackLocked) return
     setMentionStart(null)
     onSend(t, mentionedIds(t, assets))
   }
@@ -447,7 +448,7 @@ export default function Hud({
             ref={inputRef}
             rows={1}
             value={draft}
-            placeholder={setupHint || (playbackLocked ? t('本段播放结束后，任务和物品状态会更新') : busy ? t('世界正在演这一拍…') : t('你要做什么（输入 @ 绑定资产）'))}
+            placeholder={preparing ? t('正在根据你的想法完善世界、主线与开场…') : !world ? t('想去怎样的世界？在这里简单描述，或点击右上角「新世界」完善设定。') : setupHint || (playbackLocked ? t('本段播放结束后，任务和物品状态会更新') : busy ? t('世界正在演这一拍…') : t('你要做什么（输入 @ 绑定资产）'))}
             onChange={(e) => {
               onDraft(e.target.value)
               syncMention(e.target.value, e.target.selectionStart)
@@ -547,7 +548,7 @@ export default function Hud({
             {t('停止')}
           </button>
         ) : (
-          <button id="btn-send" className="primary" disabled={playbackLocked} onClick={send}
+          <button id="btn-send" className="primary" disabled={playbackLocked || preparing || !draft.trim()} onClick={send}
             title={t('发送')} aria-label={t('发送')}>
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5.5 11.5 12 5l6.5 6.5" /></svg>
           </button>

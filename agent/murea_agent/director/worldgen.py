@@ -204,6 +204,42 @@ _SCHEMA: dict[str, Any] = {
     "required": ["title", "setting", "mainline", "style_id", "opening"],
 }
 
+_ASSET_SCHEMA = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "kind": {"type": "string", "enum": ["player", "place"]},
+            "name": {"type": "string"},
+            "prompt": {"type": "string"},
+        },
+        "required": ["kind", "name", "prompt"],
+    },
+}
+
+
+def _opening_assets(value: Any) -> list[dict[str, str]]:
+    """Validate the opening cast before creating a world or drawing its references."""
+    if not isinstance(value, list) or len(value) != 2:
+        raise ValueError("World planning needs one player and one starting place; please retry")
+    assets = []
+    for item in value:
+        if not isinstance(item, dict) or any(
+            not isinstance(item.get(key), str) or not item[key].strip() for key in ("kind", "name", "prompt")
+        ):
+            raise ValueError("World planning returned an incomplete opening asset; please retry")
+        asset = {key: item[key].strip() for key in ("kind", "name", "prompt")}
+        if asset["kind"] not in ("player", "place"):
+            raise ValueError("World planning returned an invalid asset kind; please retry")
+        assets.append(asset)
+    kinds = [asset["kind"] for asset in assets]
+    if kinds.count("player") != 1 or kinds.count("place") != 1:
+        raise ValueError("Opening assets need one player and one starting place; please retry")
+    if len({asset["name"] for asset in assets}) != len(assets):
+        raise ValueError("Opening asset names must be distinct; please retry")
+    return assets
+
+
 # Fallback when the model is unreachable. The dice must still work when an external service
 # is down: a random button that does nothing is much worse than an ordinary world.
 _FALLBACK = [
@@ -252,8 +288,9 @@ def _fallbacks() -> list[dict[str, str]]:
     return _FALLBACK if config.LANGUAGE == "zh" else _FALLBACK_EN
 
 
-def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
-    """Roll one. `styles` are the frontend's style presets (only id and label)."""
+def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str, Any]:
+    """Develop a player's idea, or roll a world when no idea is supplied."""
+    idea = idea.strip()
     styles = [s for s in (styles or []) if s.get("id")][:24]
     ids = [s["id"] for s in styles]
     genres, eras, places, troubles = _ingredients()
@@ -272,22 +309,53 @@ def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
         f"Available style_id values:\n{menu or '- (none)'}\n\n"
         "Build the world from these four ingredients. Use all four."
     )
+    if idea:
+        user = (
+            f"Player's world idea:\n{idea}\n\n"
+            f"Available style_id values:\n{menu or '- (none)'}\n\n"
+            "Develop this idea into a playable world. Preserve its named places, beings, genre, "
+            "and the player's intent. Keep the setting concise. The mainline should "
+            "support an unfolding adventure; the opening is its first visible moment."
+        )
     title_rule = (
         "a short Chinese name of 2-8 characters."
         if config.LANGUAGE == "zh"
         else "a short English name of one to four words."
     )
     system = _SYSTEM.replace("{LANGUAGE}", config.LANGUAGE_NAME).replace("{TITLE_RULE}", title_rule)
+    schema = _SCHEMA
+    if idea:
+        system = system.replace(
+            f"Write the text fields in {config.LANGUAGE_NAME}.",
+            f"Write the story fields in {config.LANGUAGE_NAME}; asset image prompts are in English.",
+        ).replace(
+            "Keep every field short. Do not explain, do not add fields.",
+            "Keep the story fields short. Return only the fields in the response schema.",
+        )
+        system += (
+            "\nAlso return `assets`: the player (kind=player) and the starting environment "
+            "(kind=place), matching the new-world form's two initial references. "
+            "Each asset has kind, a distinct name in the story language, and an English prompt "
+            "of 30-60 words describing its stable visible appearance. The player prompt describes "
+            "their face, hair, clothing and equipment; the place prompt describes its layout, "
+            "materials and lighting. Use these same names in the opening. These references "
+            "establish the first scene; later locations and encounters belong to later turns."
+        )
+        schema = {
+            **_SCHEMA,
+            "properties": {**_SCHEMA["properties"], "assets": _ASSET_SCHEMA},
+            "required": [*_SCHEMA["required"], "assets"],
+        }
     try:
         for attempt in range(2):
             out = llm.chat(
                 system=system,
                 user=user,
                 model=config.GM_MODEL,
-                schema=_SCHEMA,
+                schema=schema,
                 temperature=1.0,
                 thinking=0,
-                tag="dice",
+                tag="world_idea" if idea else "dice",
             )
             # The ingredients can pull a model into another language; ask once more if they did.
             text = (
@@ -297,17 +365,27 @@ def spin(styles: list[dict[str, str]] | None = None) -> dict[str, str]:
             )
             if attempt or all(_in_story_language(t) for t in text):
                 break
-            user += f"\n\nWrite every field, including the title, in {config.LANGUAGE_NAME}."
+            user += (
+                f"\n\nWrite the title, setting, mainline and opening in {config.LANGUAGE_NAME}. "
+                "Asset image prompts remain in English."
+            )
     except Exception:
+        if idea:
+            raise
         out = dict(random.choice(_fallbacks()))
         out["style_id"] = random.choice(ids) if ids else ""
         return out
 
     if not isinstance(out, dict):
         out = {}
-    got = {
-        k: " ".join(str(out.get(k) or "").split())[:200] for k in ("title", "setting", "mainline", "opening")
+    got: dict[str, Any] = {
+        k: " ".join(str(out.get(k) or "").split())[:200]
+        for k in ("title", "setting", "mainline", "opening")
     }
+    if idea and not all(got.values()):
+        raise ValueError("World planning returned incomplete details; please retry")
+    if idea:
+        got["assets"] = _opening_assets(out.get("assets"))
     # The model sometimes invents an id that is not in the list or leaves it out; then pick one at
     # random instead of sending an id the frontend does not know, which would silently apply no
     # style.

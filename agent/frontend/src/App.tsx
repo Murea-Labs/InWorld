@@ -13,7 +13,8 @@ import AddAsset from './dialogs/AddAsset'
 import NewWorld from './dialogs/NewWorld'
 import WorldLog from './dialogs/WorldLog'
 import { OPENING, STAGE_CN, lineage } from './lib'
-import { styleById, styleMenu } from './presets'
+import { styleMenu } from './presets'
+import { prepareWorld, type WorldStart } from './worldStart'
 import { loadTheme, saveTheme, type MureaTheme } from './theme'
 import { loadTts, saveTts, speak, stopSpeaking, finishSpeaking } from './tts'
 // `Stage` is taken by the component above, so the type is imported under another name
@@ -147,6 +148,7 @@ export default function App() {
   const [inspecting, setInspecting] = useState(false)
   const [newWorld, setNewWorld] = useState(false)
   const [rolling, setRolling] = useState(false)
+  const worldStart = useRef<WorldStart | null>(null)
   const [mapOpen, setMapOpen] = useState(false)
   // The stage comes first: both drawers start closed and open from the header.
   const [assetsOpen, setAssetsOpen] = useState(false)
@@ -622,7 +624,8 @@ export default function App() {
   }
 
   const send = (text: string, mentions: string[] = []) => {
-    if (!world) return
+    if (rolling || busy) return
+    if (!world) return startWorld(text)
     stopSpeaking()               // the user speaks, so the world stops reading
     setSpeaking(false)
     autoStop.current = true      // the user interrupting = stop the auto-continue chain
@@ -683,27 +686,39 @@ export default function App() {
     })
 
   /**
-   * The dice on the home screen: roll, create, play. No questions asked: the value of "random" is
-   * making no choices; a confirmation dialog would turn it into the new-world dialog.
+   * Both the home input and dice develop a concept, create it, then film the opening.
    */
-  const rollWorld = async () => {
+  const startWorld = async (idea = '') => {
     if (rolling || busy) return
     setRolling(true)
     setError('')
+    setTurn({ stage: 'gm', started: Date.now(), say: '', sketches: [],
+      detail: idea ? t('正在根据你的想法完善世界、主线与开场…') : t('正在摇一个世界…') })
     try {
-      const w = await api.randomWorld(styleMenu())
-      const created = await api.createWorld(
-        w.title, w.setting, styleById(w.style_id), health?.video.id ?? '', w.mainline)
-      await refresh(created.id)
+      if (!worldStart.current || worldStart.current.idea !== idea || worldStart.current.owner !== user?.id) {
+        const concept = await api.randomWorld(styleMenu(), idea)
+        worldStart.current = { idea, owner: user?.id ?? '', concept,
+          videoModel: health?.video.id ?? '', completed: 0 }
+      }
+      const start = worldStart.current
+      const id = await prepareWorld(start, (name, i, n) => {
+        setTurn(previous => previous && ({ ...previous, stage: 'image',
+          detail: t('准备世界资产 {i}/{n}：{name}', { i, n, name }) }))
+      })
+      await refresh(id)
+      worldStart.current = null
+      if (idea) setDraft('')
       // Rolling is done. What follows is video generation with its own progress and stop button;
       // the dice should not show "rolling…" during all of that.
       setRolling(false)
       // The opening line is followed by the rolled scene, so the first beat lands on this world's
       // own picture instead of a generic establishing shot. Chat recognizes it by prefix and still
       // shows "world ready".
-      await takeTurn(created.id, `${OPENING} ${w.opening}`.trim(), true)
+      await takeTurn(id, `${OPENING} ${start.concept.opening}`.trim(), true)
     } catch (e) {
-      setError(t('摇世界失败：{msg}', { msg: (e as Error).message }))
+      setTurn(null)
+      if (idea) setDraft((d) => d || idea)
+      setError(t(idea ? '创建世界失败：{msg}' : '摇世界失败：{msg}', { msg: (e as Error).message }))
     } finally {
       setRolling(false)
     }
@@ -852,9 +867,9 @@ export default function App() {
         onOpenLog={() => setLogOpen(true)}
         onOpenAgent={() => setInspecting(true)}
         onNew={() => setNewWorld(true)}
-        onRandom={() => { void rollWorld() }}
+        onRandom={() => { void startWorld() }}
         randomBusy={rolling}
-        busy={busy}
+        busy={busy || rolling}
         onDelete={removeWorld}
         onImport={importWorld}
         model={
@@ -908,6 +923,7 @@ export default function App() {
       )}
 
       <Hud
+        preparing={rolling}
         setupHint={missingKeys.length ? t('演示模式：要拍新片段，在 .env 里填好 {what} 后重启（见 README）', { what: missingKeys.join(' / ') }) : undefined}
         world={shownWorld}
         current={current ? shownWorld?.nodes[current.id] ?? current : null}
