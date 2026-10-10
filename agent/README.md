@@ -1,12 +1,5 @@
 # Murea Agent
 
-With no world selected, type a short idea into the home input, such as "Explore the world of
-the Dragon of Icespire Peak", and send it. The agent develops the setting, player role,
-starting location, main objective and opening, creates the world, and starts filming its
-first clip automatically. Input within an existing world remains an action in that world.
-If world planning fails, the idea stays in the input for retry; it is never replaced by an
-unrelated random world. Text/image credentials and a working video service are required.
-
 **English** | [中文](README_zh.md)
 
 An open-world **video agent**, part of [InWorld](../README.md). You say what you do;
@@ -65,6 +58,13 @@ full Murea model, which has not been released yet. If you put an authenticating
 proxy in front of the service, add `MUREA_API_KEY`. That is all; there is no config
 file to edit. Without keys the app still opens, but cannot film, and the terminal
 says which keys are missing.
+
+With no world selected, type a short idea into the home input, such as "Explore the world of
+the Dragon of Icespire Peak", and send it. The agent develops the setting, player role,
+starting location, main objective and opening, creates the world, and starts filming its
+first clip automatically. Input within an existing world remains an action in that world.
+If world planning fails, the idea stays in the input for retry; it is never replaced by an
+unrelated random world. Text/image credentials and a working video service are required.
 
 On a single-GPU Murea-Fast service only 5-second clips have been tested. The service
 reports its GPU count in `GET /v1/models`, and on one GPU the agent films every beat and
