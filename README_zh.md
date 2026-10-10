@@ -1,11 +1,11 @@
-# Murea
+# nWorld
 
 [English](README.md) | **中文**
 
 > **状态：** Murea-Fast 模型权重尚未发布。权重将在 Hugging Face 上发布，届时链接会补充到
 > [Murea-Fast README](inference/README_zh.md#模型)。在此之前推理服务无法启动，Agent 也就没有可用的视频模型。
 
-Murea 是一个开源的视频生成系统：根据文本提示和按顺序排列的参考图生成带同步音频的视频，
+nWorld 是一个开源的视频生成系统：根据文本提示和按顺序排列的参考图生成带同步音频的视频，
 可以接着已有视频继续生成，还包含一个 agent，把玩家的行动拍成一段段连续的故事。
 
 | 组成部分 | 目录 | 说明 |
@@ -24,7 +24,7 @@ Murea 是一个开源的视频生成系统：根据文本提示和按顺序排�
 ## 目录结构
 
 ```text
-Murea/
+nWorld/
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── SECURITY.md

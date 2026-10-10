@@ -2,7 +2,7 @@
 
 **English** | [中文](README_zh.md)
 
-An open-world **video agent**, part of [Murea](../README.md). You say what you do;
+An open-world **video agent**, part of [nWorld](../README.md). You say what you do;
 the agent decides what happens and films it as a short generated clip with sound on
 the [Murea-Fast](../inference/README.md) inference service. Every beat continues from
 the last one with the same people, places and visual style.
@@ -42,7 +42,7 @@ You need [uv](https://docs.astral.sh/uv/), a key for text and images, and a runn
 [Murea-Fast](../inference/README.md) service for video:
 
 ```bash
-git clone https://github.com/sjsjhsu/Murea && cd Murea/agent
+git clone https://github.com/sjsjhsu/nWorld && cd nWorld/agent
 cp .env.example .env          # fill in the two lines below
 ./run.sh                      # installs everything, then http://127.0.0.1:8080
 ```

@@ -1,4 +1,4 @@
-# Modified by the Murea authors from SGLang; see inference/docs/provenance.md.
+# Modified by the nWorld authors from SGLang; see inference/docs/provenance.md.
 import math
 from contextlib import contextmanager
 from dataclasses import dataclass, field

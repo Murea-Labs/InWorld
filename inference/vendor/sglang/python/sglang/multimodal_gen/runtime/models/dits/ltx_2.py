@@ -1,4 +1,4 @@
-# Modified by the Murea authors from SGLang; see inference/docs/provenance.md.
+# Modified by the nWorld authors from SGLang; see inference/docs/provenance.md.
 # Copied and adapted from LTX-2 and WanVideo implementations.
 #
 # SPDX-License-Identifier: Apache-2.0
