@@ -13,7 +13,8 @@ import AddAsset from './dialogs/AddAsset'
 import NewWorld from './dialogs/NewWorld'
 import WorldLog from './dialogs/WorldLog'
 import { OPENING, STAGE_CN, lineage } from './lib'
-import { styleById, styleMenu } from './presets'
+import { styleMenu } from './presets'
+import { prepareWorld, type WorldStart } from './worldStart'
 import { loadTheme, saveTheme, type MureaTheme } from './theme'
 import { loadTts, saveTts, speak, stopSpeaking, finishSpeaking } from './tts'
 // `Stage` is taken by the component above, so the type is imported under another name
@@ -147,6 +148,7 @@ export default function App() {
   const [inspecting, setInspecting] = useState(false)
   const [newWorld, setNewWorld] = useState(false)
   const [rolling, setRolling] = useState(false)
+  const worldStart = useRef<WorldStart | null>(null)
   const [mapOpen, setMapOpen] = useState(false)
   // The stage comes first: both drawers start closed and open from the header.
   const [assetsOpen, setAssetsOpen] = useState(false)
@@ -693,10 +695,18 @@ export default function App() {
     setTurn({ stage: 'gm', started: Date.now(), say: '', sketches: [],
       detail: idea ? t('正在根据你的想法完善世界、主线与开场…') : t('正在摇一个世界…') })
     try {
-      const w = await api.randomWorld(styleMenu(), idea)
-      const created = await api.createWorld(
-        w.title, w.setting, styleById(w.style_id), health?.video.id ?? '', w.mainline)
-      await refresh(created.id)
+      if (!worldStart.current || worldStart.current.idea !== idea || worldStart.current.owner !== user?.id) {
+        const concept = await api.randomWorld(styleMenu(), idea)
+        worldStart.current = { idea, owner: user?.id ?? '', concept,
+          videoModel: health?.video.id ?? '', completed: 0 }
+      }
+      const start = worldStart.current
+      const id = await prepareWorld(start, (name, i, n) => {
+        setTurn(previous => previous && ({ ...previous, stage: 'image',
+          detail: t('准备世界资产 {i}/{n}：{name}', { i, n, name }) }))
+      })
+      await refresh(id)
+      worldStart.current = null
       if (idea) setDraft('')
       // Rolling is done. What follows is video generation with its own progress and stop button;
       // the dice should not show "rolling…" during all of that.
@@ -704,7 +714,7 @@ export default function App() {
       // The opening line is followed by the rolled scene, so the first beat lands on this world's
       // own picture instead of a generic establishing shot. Chat recognizes it by prefix and still
       // shows "world ready".
-      await takeTurn(created.id, `${OPENING} ${w.opening}`.trim(), true)
+      await takeTurn(id, `${OPENING} ${start.concept.opening}`.trim(), true)
     } catch (e) {
       setTurn(null)
       if (idea) setDraft((d) => d || idea)

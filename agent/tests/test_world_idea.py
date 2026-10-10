@@ -18,6 +18,14 @@ class WorldIdeaTest(unittest.TestCase):
             "mainline": "寻找冰塔峰巨龙并查清雪山异变的缘由。",
             "opening": "你站在雪山驿站门前，仰望云雾中的冰塔峰。",
             "style_id": "fantasy",
+            "assets": [
+                {"kind": "player", "name": "旅人", "prompt": "A traveller in a blue winter coat."},
+                {
+                    "kind": "place",
+                    "name": "雪山驿站",
+                    "prompt": "A stone lodge beside a snowy mountain path.",
+                },
+            ],
         }
         self.styles = [{"id": "fantasy", "label": "Fantasy"}]
 
@@ -29,6 +37,19 @@ class WorldIdeaTest(unittest.TestCase):
         self.assertIn(self.idea, prompt["user"])
         self.assertNotIn("Something is wrong:", prompt["user"])
         self.assertIn("Two or three concrete sentences", prompt["system"])
+        self.assertIn("assets", prompt["schema"]["required"])
+
+    def test_assets_must_be_ready_to_plan_before_world_creation(self):
+        for assets in (None, [], [self.concept["assets"][0]], [self.concept["assets"][0]] * 2):
+            with self.subTest(assets=assets):
+                with patch.object(worldgen.llm, "chat", return_value={**self.concept, "assets": assets}):
+                    with self.assertRaises(ValueError):
+                        worldgen.spin(self.styles, self.idea)
+
+    def test_dice_does_not_require_an_opening_asset_plan(self):
+        concept = {key: value for key, value in self.concept.items() if key != "assets"}
+        with patch.object(worldgen.llm, "chat", return_value=concept):
+            self.assertEqual(concept, worldgen.spin(self.styles))
 
     def test_model_failure_does_not_create_an_unrelated_world(self):
         with patch.object(worldgen.llm, "chat", side_effect=RuntimeError("offline")):

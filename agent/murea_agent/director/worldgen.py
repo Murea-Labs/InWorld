@@ -204,6 +204,42 @@ _SCHEMA: dict[str, Any] = {
     "required": ["title", "setting", "mainline", "style_id", "opening"],
 }
 
+_ASSET_SCHEMA = {
+    "type": "array",
+    "items": {
+        "type": "object",
+        "properties": {
+            "kind": {"type": "string", "enum": ["player", "character", "creature", "object", "place"]},
+            "name": {"type": "string"},
+            "prompt": {"type": "string"},
+        },
+        "required": ["kind", "name", "prompt"],
+    },
+}
+
+
+def _opening_assets(value: Any) -> list[dict[str, str]]:
+    """Validate the opening cast before creating a world or drawing its references."""
+    if not isinstance(value, list) or not 2 <= len(value) <= 5:
+        raise ValueError("World planning needs 2-5 opening assets; please retry")
+    assets = []
+    for item in value:
+        if not isinstance(item, dict) or any(
+            not isinstance(item.get(key), str) or not item[key].strip() for key in ("kind", "name", "prompt")
+        ):
+            raise ValueError("World planning returned an incomplete opening asset; please retry")
+        asset = {key: item[key].strip() for key in ("kind", "name", "prompt")}
+        if asset["kind"] not in ("player", "character", "creature", "object", "place"):
+            raise ValueError("World planning returned an invalid asset kind; please retry")
+        assets.append(asset)
+    kinds = [asset["kind"] for asset in assets]
+    if kinds.count("player") != 1 or kinds.count("place") != 1:
+        raise ValueError("Opening assets need one player and one starting place; please retry")
+    if len({asset["name"] for asset in assets}) != len(assets):
+        raise ValueError("Opening asset names must be distinct; please retry")
+    return assets
+
+
 # Fallback when the model is unreachable. The dice must still work when an external service
 # is down: a random button that does nothing is much worse than an ordinary world.
 _FALLBACK = [
@@ -252,7 +288,7 @@ def _fallbacks() -> list[dict[str, str]]:
     return _FALLBACK if config.LANGUAGE == "zh" else _FALLBACK_EN
 
 
-def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str, str]:
+def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str, Any]:
     """Develop a player's idea, or roll a world when no idea is supplied."""
     idea = idea.strip()
     styles = [s for s in (styles or []) if s.get("id")][:24]
@@ -288,19 +324,42 @@ def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str
         else "a short English name of one to four words."
     )
     system = _SYSTEM.replace("{LANGUAGE}", config.LANGUAGE_NAME).replace("{TITLE_RULE}", title_rule)
+    schema = _SCHEMA
     if idea:
+        system = system.replace(
+            f"Write the text fields in {config.LANGUAGE_NAME}.",
+            f"Write the story fields in {config.LANGUAGE_NAME}; asset image prompts are in English.",
+        ).replace(
+            "Keep every field short. Do not explain, do not add fields.",
+            "Keep the story fields short. Return only the fields in the response schema.",
+        )
         system = system.replace(
             "`setting`: ONE sentence. Where this is and what kind of place it is. No plot.",
             "`setting`: Two or three concrete sentences establishing the world, the player's "
             "role and the starting location. Include distinctive environmental details.",
         )
+        system += (
+            "\nAlso return `assets`: 2-5 references to prepare before filming the opening. "
+            "Include exactly one player (kind=player) and one starting environment (kind=place). "
+            "Add characters, creatures or objects only when visually central to this opening. "
+            "Each asset has kind, a distinct name in the story language, and an English prompt "
+            "of 30-60 words describing its stable visible appearance. The player prompt describes "
+            "their face, hair, clothing and equipment; the place prompt describes its layout, "
+            "materials and lighting. Use these same names in the opening. These references "
+            "establish the first scene; later locations and encounters belong to later turns."
+        )
+        schema = {
+            **_SCHEMA,
+            "properties": {**_SCHEMA["properties"], "assets": _ASSET_SCHEMA},
+            "required": [*_SCHEMA["required"], "assets"],
+        }
     try:
         for attempt in range(2):
             out = llm.chat(
                 system=system,
                 user=user,
                 model=config.GM_MODEL,
-                schema=_SCHEMA,
+                schema=schema,
                 temperature=1.0,
                 thinking=0,
                 tag="world_idea" if idea else "dice",
@@ -313,7 +372,10 @@ def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str
             )
             if attempt or all(_in_story_language(t) for t in text):
                 break
-            user += f"\n\nWrite every field, including the title, in {config.LANGUAGE_NAME}."
+            user += (
+                f"\n\nWrite the title, setting, mainline and opening in {config.LANGUAGE_NAME}. "
+                "Asset image prompts remain in English."
+            )
     except Exception:
         if idea:
             raise
@@ -323,12 +385,14 @@ def spin(styles: list[dict[str, str]] | None = None, idea: str = "") -> dict[str
 
     if not isinstance(out, dict):
         out = {}
-    got = {
+    got: dict[str, Any] = {
         k: " ".join(str(out.get(k) or "").split())[: 1200 if idea and k == "setting" else 200]
         for k in ("title", "setting", "mainline", "opening")
     }
     if idea and not all(got.values()):
         raise ValueError("World planning returned incomplete details; please retry")
+    if idea:
+        got["assets"] = _opening_assets(out.get("assets"))
     # The model sometimes invents an id that is not in the list or leaves it out; then pick one at
     # random instead of sending an id the frontend does not know, which would silently apply no
     # style.

@@ -101,6 +101,8 @@ export const EN: Record<string, string> = {
   "先说一句话，世界就开始了": "Say something to start the world",
   "想去怎样的世界？在这里简单描述，或点击右上角「新世界」完善设定。": "What kind of world would you like to explore? Describe it here, or click “New world” in the top right to refine the details.",
   "正在根据你的想法完善世界、主线与开场…": "Developing your world, quest and opening scene…",
+  "准备世界资产 {i}/{n}：{name}": "Preparing world assets {i}/{n}: {name}",
+  "开场资产不完整，请重新描述世界": "Opening assets are incomplete. Please describe the world again.",
   "创建世界失败：{msg}": "Could not create the world: {msg}",
   "先起个名字": "Give it a name first",
   "光照：{v}": "Lighting: {v}",
