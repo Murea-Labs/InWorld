@@ -11,6 +11,7 @@ and an agent that turns your actions into a continuing, filmed story.
 [![Agent CI](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml)
 [![Inference CI](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#news)
+[![Blog](https://img.shields.io/badge/Blog-few--step%20inference-orange)](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
 
 **English** | [中文](README_zh.md)
 
@@ -25,9 +26,11 @@ and an agent that turns your actions into a continuing, filmed story.
 
 ## News
 
+- **Coming soon** · Murea-Fast weights on Hugging Face, and demo videos.
 - **2026-10** · First open-source release: the Murea-Fast inference service and Murea Agent,
   with documentation in English and Chinese.
-- **Coming soon** · Murea-Fast weights on Hugging Face, and demo videos.
+- **2026-09** · Blog: [few-step inference of the full Murea model: speed and quality](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
+  (the unreleased full model, not Murea-Fast).
 
 ## Highlights
 
@@ -102,6 +105,7 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 | Call the model from my own code | [API reference](inference/docs/api.md) |
 | Run the service on my GPUs | [Deployment](inference/docs/deployment.md) |
 | Know how fast it is and how much memory it needs | [Performance](inference/docs/performance.md) |
+| Read how the full Murea model was sped up with few-step inference | [Blog](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html) |
 | Contribute | [CONTRIBUTING.md](CONTRIBUTING.md) |
 
 ## Components

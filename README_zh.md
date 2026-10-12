@@ -11,6 +11,7 @@
 [![Agent CI](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml)
 [![Inference CI](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#动态)
+[![Blog](https://img.shields.io/badge/Blog-few--step%20inference-orange)](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
 
 [English](README.md) | **中文**
 
@@ -24,8 +25,9 @@
 
 ## 动态
 
-- **2026-10** · 首次开源：Murea-Fast 推理服务与 Murea Agent，文档提供中英文两版。
 - **即将发布** · Murea-Fast 权重（Hugging Face）与演示视频。
+- **2026-10** · 首次开源：Murea-Fast 推理服务与 Murea Agent，文档提供中英文两版。
+- **2026-09** · 博客：[完整版 Murea 模型少步推理的性能与质量评估](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)（评测对象是尚未发布的完整版模型，不是 Murea-Fast）。
 
 ## 亮点
 
@@ -95,6 +97,7 @@ flowchart LR
 | 在自己的代码里调用模型 | [API 文档](inference/docs/api_zh.md) |
 | 在自己的 GPU 上部署服务 | [部署说明](inference/docs/deployment_zh.md) |
 | 了解速度和显存占用 | [性能](inference/docs/performance_zh.md) |
+| 了解完整版 Murea 模型的少步推理加速 | [博客](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html) |
 | 参与贡献 | [CONTRIBUTING_zh.md](CONTRIBUTING_zh.md) |
 
 ## 组成部分
