@@ -48,7 +48,7 @@ cp .env.example .env          # fill in the two lines below
 ```
 
 ```ini
-DASHSCOPE_API_KEY=...         # Alibaba Cloud Model Studio: DeepSeek + Qwen-Image
+GEMINI_API_KEY=...            # Google Gemini: text and images
 MUREA_URL=http://<server>:<port>   # your Murea-Fast service, e.g. http://127.0.0.1:30260
 ```
 
@@ -75,9 +75,9 @@ The service may run on the same machine, on another one, or behind an SSH tunnel
 agent never passes file paths: it sends reference images inline and uploads the
 continuation prefix.
 
-Other providers: set `GEMINI_API_KEY` instead of DashScope (Gemini for text and
-images), or `OPENAI_API_KEY` for any OpenAI-compatible server (then name its
-models in `config.yaml`). Everything else (models, clip length, language, co-op
+Other providers: instead of Gemini, set `OPENAI_API_KEY` for any OpenAI-compatible
+server (then name its models in `config.yaml`), or `DASHSCOPE_API_KEY` for Alibaba Cloud
+Model Studio (DeepSeek for text, Qwen-Image for images). Everything else (models, clip length, language, co-op
 mode) is optional, in a `config.yaml` copied from
 [`config.example.yaml`](config.example.yaml).
 

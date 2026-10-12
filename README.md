@@ -83,7 +83,7 @@ and an agent that turns your actions into a continuing, filmed story.
 ```mermaid
 flowchart LR
     P([Player]) -->|action| A[Murea Agent<br/>plans, checks, remembers]
-    A <-->|text and images| L[(Language and image model APIs<br/>DashScope / Gemini / OpenAI-compatible)]
+    A <-->|text and images| L[(Language and image model APIs<br/>Gemini / OpenAI-compatible / DashScope)]
     A -->|prompt + reference images| F[Murea-Fast<br/>inference service on GPUs]
     F -->|video with sound| A
     A -->|clip + next choices| P
@@ -128,11 +128,11 @@ curl --fail http://127.0.0.1:30260/health
 ```
 
 **2. Run Murea Agent on any machine.** It needs [uv](https://docs.astral.sh/uv/) and a key
-for text and images (DashScope, Gemini or any OpenAI-compatible server):
+for text and images (Gemini, any OpenAI-compatible server, or DashScope):
 
 ```bash
 git clone https://github.com/sjsjhsu/InWorld && cd InWorld/agent
-cp .env.example .env          # set DASHSCOPE_API_KEY and MUREA_URL=http://<gpu-host>:30260
+cp .env.example .env          # set GEMINI_API_KEY and MUREA_URL=http://<gpu-host>:30260
 ./run.sh                      # then open http://127.0.0.1:8080
 ```
 

@@ -76,7 +76,7 @@
 ```mermaid
 flowchart LR
     P([玩家]) -->|动作| A[Murea Agent<br/>规划、检查、记忆]
-    A <-->|文本和图片| L[(语言模型与生图 API<br/>百炼 / Gemini / OpenAI 兼容接口)]
+    A <-->|文本和图片| L[(语言模型与生图 API<br/>Gemini / OpenAI 兼容接口 / 百炼)]
     A -->|提示词 + 参考图| F[Murea-Fast<br/>GPU 上的推理服务]
     F -->|带声音的视频| A
     A -->|片段 + 下一步选项| P
@@ -120,11 +120,11 @@ curl --fail http://127.0.0.1:30260/health
 ```
 
 **2. 在任意机器上运行 Murea Agent。** 需要 [uv](https://docs.astral.sh/uv/)，以及一个文本和出图用的 key
-（百炼、Gemini 或任何 OpenAI 兼容接口）：
+（Gemini、任何 OpenAI 兼容接口，或阿里云百炼）：
 
 ```bash
 git clone https://github.com/sjsjhsu/InWorld && cd InWorld/agent
-cp .env.example .env          # 填好 DASHSCOPE_API_KEY 和 MUREA_URL=http://<GPU 主机>:30260
+cp .env.example .env          # 填好 GEMINI_API_KEY 和 MUREA_URL=http://<GPU 主机>:30260
 ./run.sh                      # 然后打开 http://127.0.0.1:8080
 ```
 

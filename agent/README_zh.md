@@ -41,7 +41,7 @@ cp .env.example .env          # 填好下面两行
 ```
 
 ```ini
-DASHSCOPE_API_KEY=...         # 阿里云百炼：DeepSeek + Qwen-Image
+GEMINI_API_KEY=...            # Google Gemini：文字和出图
 MUREA_URL=http://<服务器>:<端口>   # 你的 Murea-Fast 服务，例如 http://127.0.0.1:30260
 ```
 
@@ -57,7 +57,7 @@ Agent 会据此补全世界观、玩家身份、起始地点、主线目标和�
 
 单卡 Murea-Fast 服务只测试过 5 秒片段。服务会在 `GET /v1/models` 中报告卡数，单卡时 Agent 会自动把每一拍和双人模式的每一轮都拍成 5 秒片段，见[片段时长](#片段时长)。
 
-换别的模型：不填百炼、改填 `GEMINI_API_KEY`（文字和出图都用 Gemini），或者 `OPENAI_API_KEY`（任何 OpenAI 兼容接口，需要在 `config.yaml` 里写上模型名）。其余设置（模型、片段时长、故事语言、双人模式）都是可选的，复制 [`config.example.yaml`](config.example.yaml) 为 `config.yaml` 再改。
+换别的模型：不填 Gemini，改填 `OPENAI_API_KEY`（任何 OpenAI 兼容接口，需要在 `config.yaml` 里写上模型名），或者 `DASHSCOPE_API_KEY`（阿里云百炼：文字用 DeepSeek，出图用 Qwen-Image）。其余设置（模型、片段时长、故事语言、双人模式）都是可选的，复制 [`config.example.yaml`](config.example.yaml) 为 `config.yaml` 再改。
 
 也可以用 Docker：`docker compose up --build`（同样读 `.env`）。页面只发布在 `127.0.0.1:8080` 上。容器里的 `127.0.0.1` 指容器自己，所以同一台机器上的 Murea-Fast 服务（或 SSH 隧道）要写成 `MUREA_URL=http://host.docker.internal:30260`。
 
