@@ -34,8 +34,8 @@ and an agent that turns your actions into a continuing, filmed story.
 - **Video with sound from several references.** Bind people, objects and a place as ordered
   reference images, refer to them in the prompt, and get 1280×704, 24 fps video with
   synchronized audio, spoken lines included.
-- **Clips of up to 20 seconds that keep going.** A continuation picks up from the last 17
-  frames of a clip, with the same people and the same scene.
+- **Clips that keep going.** A continuation picks up from the last 17 frames of a clip, with
+  the same people and the same scene.
 - **Quick to film.** 8-step distilled sampling: a 5-second clip takes about 17 s on four H20
   GPUs with sequence parallelism.
 - **An agent that remembers in pictures.** Every character, object and place is a reference
@@ -109,17 +109,8 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 | | [Murea-Fast](inference/README.md) | [Murea Agent](agent/README.md) |
 | --- | --- | --- |
 | What it is | Inference service for an 8-step distilled derivative of LTX-2.5, on a pinned SGLang | Web app and Python package: a language-model director, deterministic checks, world memory and a critic |
-| Runs on | Linux and NVIDIA GPUs with CUDA. Verified on one H20 (5-second clips) and on four 141 GB H20s (5–20 seconds) | Any machine with Python 3.12; needs a language and image model API key and a Murea-Fast service |
+| Runs on | Linux and NVIDIA GPUs with CUDA. Verified on one H20 and on four H20s | Any machine with Python 3.12; needs a language and image model API key and a Murea-Fast service |
 | Interface | HTTP API, command line | Web UI, terminal, Python API |
-
-Measured on four 141 GB H20s at 1280×704 ([details](inference/docs/performance.md#clip-length)):
-
-| Clip length | 5 s | 10 s | 15 s | 20 s |
-| --- | ---: | ---: | ---: | ---: |
-| Inference time | 17.0 s | 34.7 s | 56.1 s | 80.8 s |
-| Peak reserved memory per GPU | 81,486 MiB | 92,260 MiB | 103,396 MiB | 114,206 MiB |
-
-On one H20, a 5-second clip takes 44–101 s, depending on the size of the reference images.
 
 ## Quick start
 
@@ -170,20 +161,10 @@ InWorld/
     └── tests/
 ```
 
-## Limitations
+## Security
 
-- The weights are not published yet, so nothing can be filmed until they are.
-- Murea-Fast is validated at 1280×704 only. On one GPU only 5-second clips have been tested,
-  and the agent keeps every clip at 5 seconds there. On four GPUs, clips of 10 seconds and
-  longer reserved more than 96 GB per GPU.
-- Three characters in one clip are unreliable: in our tests about half of such clips lost a
-  character or merged two. With two characters every test clip kept both.
-- The agent sends at most five reference images per clip. Three are validated; five were used
-  in an end-to-end test whose quality was not evaluated, and more have not been tried.
-- The agent depends on third-party language and image model APIs; the story quality, speed
-  and cost follow the models you choose.
-- Neither part has authentication. Read [SECURITY.md](SECURITY.md) before you put them on a
-  shared network.
+Neither the inference service nor the agent has authentication. Read [SECURITY.md](SECURITY.md)
+before deploying them on a shared network.
 
 ## Contributing
 
