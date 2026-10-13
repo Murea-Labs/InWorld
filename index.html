@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>InWorld: From Imagination to Living Worlds with Agents and Fast Video Generation | Murea Labs</title>
+<meta name="description" content="InWorld is an interactive audiovisual world model from Murea Labs. A world agent keeps persistent world state; a fast audiovisual generator renders each turn as video with sound.">
+<link rel="canonical" href="https://musee.me/">
+<meta name="theme-color" content="#0b1526">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://musee.me/">
+<meta property="og:site_name" content="Murea Labs">
+<meta property="og:title" content="InWorld: From Imagination to Living Worlds with Agents and Fast Video Generation">
+<meta property="og:description" content="An interactive audiovisual world model: a world agent with explicit memory, and a fast generator for synchronized video and audio.">
+<meta property="og:image" content="https://musee.me/assets/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="InWorld | Murea Labs">
+<meta name="twitter:description" content="An interactive audiovisual world model: a world agent with explicit memory, and a fast generator for synchronized video and audio.">
+<meta name="twitter:image" content="https://musee.me/assets/img/og.jpg">
+
+<link rel="icon" href="favicon.ico" sizes="48x48">
+<link rel="icon" href="assets/img/logo.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+
+<link rel="preload" href="assets/fonts/SchibstedGrotesk-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/Newsreader-normal-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" as="image" href="assets/img/hero.jpg" imagesrcset="assets/img/hero.jpg 1300w, assets/img/hero@2x.jpg 2600w, assets/img/hero@3x.jpg 3900w, assets/img/hero@4x.jpg 5200w" imagesizes="100vw">
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
+<link rel="stylesheet" href="assets/css/site.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "InWorld: From Imagination to Living Worlds with Agents and Fast Video Generation",
+  "author": { "@type": "Organization", "name": "Murea Labs" },
+  "publisher": { "@type": "Organization", "name": "Murea Labs", "logo": { "@type": "ImageObject", "url": "https://musee.me/assets/img/icon-512.png" } },
+  "datePublished": "2026-10",
+  "image": "https://musee.me/assets/img/og.jpg",
+  "url": "https://musee.me/"
+}
+</script>
+<script defer src="assets/vendor/katex/katex.min.js"></script>
+<script defer src="assets/vendor/katex/auto-render.min.js"></script>
+<script defer src="assets/js/data.js"></script>
+<script defer src="assets/js/site.js"></script>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="mark" viewBox="220 331 600 375"><path fill="currentColor" d="M220 331h123l177 232 177-232h123v375H220z"/></symbol>
+</svg>
+
+<header class="nav" id="nav">
+  <div class="wrap nav__inner">
+    <a class="nav__brand" href="#top" aria-label="Murea Labs, back to top">
+      <svg aria-hidden="true"><use href="#mark"/></svg>
+      <span>Murea Labs</span>
+    </a>
+    <ul class="nav__links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#worlds">Worlds</a></li>
+      <li><a href="#agent">World agent</a></li>
+      <li><a href="#generation">Generation</a></li>
+      <li><a href="#inference">Inference</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#cite">Cite</a></li>
+    </ul>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================== HERO ============================== -->
+<section class="hero" id="top" aria-labelledby="title">
+  <img class="hero__img" src="assets/img/hero.jpg" srcset="assets/img/hero.jpg 1300w, assets/img/hero@2x.jpg 2600w, assets/img/hero@3x.jpg 3900w, assets/img/hero@4x.jpg 5200w" sizes="100vw" width="1300" height="734" alt="" fetchpriority="high">
+  <div class="wrap hero__content">
+    <h1 class="hero__title" id="title">InWorld</h1>
+    <p class="hero__subtitle">From imagination to living worlds with agents and fast video generation</p>
+    <p class="hero__byline"><strong>Murea Labs</strong>&ensp;Technical report, 2026</p>
+    <div class="hero__actions">
+      <!-- Set data-href on the paper link once the PDF is uploaded to /paper/. -->
+      <a class="btn btn--light" href="paper/InWorld-technical-report.pdf">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M14 3H6.5A1.5 1.5 0 0 0 5 4.5v15A1.5 1.5 0 0 0 6.5 21h11a1.5 1.5 0 0 0 1.5-1.5V8z"/><path d="M14 3v5h5M8.5 13h7M8.5 16.5h5"/></svg>
+        Read the paper
+      </a>
+      <a class="btn btn--ghost" aria-disabled="true" title="The arXiv version is not public yet">arXiv, coming soon</a>
+      <a class="btn btn--ghost" href="#cite">Cite</a>
+    </div>
+  </div>
+  <p class="hero__credit">Generated by InWorld: an airship leaves the star-sea island.</p>
+</section>
+
+<!-- ============================== OVERVIEW ============================== -->
+<section class="section" id="overview" aria-labelledby="overview-h">
+  <div class="wrap cols cols--text-aside">
+    <div>
+      <h2 id="overview-h" class="visually-hidden">Overview</h2>
+      <p class="overview__lead">InWorld is an interactive world you can see and hear. You say what happens next. A world agent decides how the story moves, and a fast audiovisual generator renders it as video with sound. Each new segment is checked against the plan and written back into the world, so later turns build on what actually appeared on screen.</p>
+      <div class="prose">
+        <p>The agent, <b>Murea-Agent</b>, keeps track of characters, objects, places, and narrative progress. The generator, <b>Murea</b>, comes in two configurations: Murea-Pro, the flagship model for multi-turn interaction, and Murea-Fast, a lightweight few-step model built on LTX-2.5. Branching histories let you return to an earlier decision and try another path, and co-op mode puts several players' actions into the same shot.</p>
+      </div>
+      <details class="abstract prose">
+        <summary>Read the abstract</summary>
+        <p>Interactive world models aim to simulate environments that evolve under user actions while retaining the consequences of past interactions. Extending such worlds to sight and sound requires persistent entities, changing scene states, and local audiovisual dynamics to remain coherent across turns. This paper presents InWorld, an interactive audiovisual world model that couples explicit world-state management with neural audiovisual generation. Its world agent, Murea-Agent, maintains characters, objects, locations, and narrative progress, interprets user actions in context, and compiles planned events into generation conditions. Observations of generated frames inform subsequent planning and selected state updates, closing the interaction loop. Its audiovisual generator, Murea, realizes these events through Omni-Reference Generation, using visual references to anchor entity appearance and structured descriptions to specify actions and dialogue. Streaming generation uses modality-specific histories, with longer audio context for unfinished utterances. Degraded-history training prepares the model for imperfect rollout context, while sequential MeanFlow and distribution matching distillation enable few-step synthesis. Branching histories support alternative continuations, and co-op interaction brings multiple participants' actions into the same world.</p>
+        <p>We evaluate the generation components in complementary configurations. Murea-Pro achieves an Overall score of 81.13 on WBench Full-289, the highest among the compared systems. Murea-Fast achieves a Total score of 64.98 on OpenS2V-Eval and an aggregate score of 69.9 on OS2V-Pro, an extended evaluation of reference fidelity, attribute binding, rendering quality, and audio.</p>
+      </details>
+    </div>
+
+    <aside class="boards" aria-label="Headline results">
+      <div class="board">
+        <h3 class="board__title">WBench Full-289, Overall</h3>
+        <p class="board__note">Multi-turn interaction: 289 cases, 1,058 turns</p>
+        <ol>
+          <li class="is-ours"><span class="rank">1</span><span class="name">Murea-Pro</span><span class="val">81.13</span></li>
+          <li><span class="rank">2</span><span class="name">Kling 3.0</span><span class="val">79.42</span></li>
+          <li><span class="rank">3</span><span class="name">Wan 2.7</span><span class="val">78.37</span></li>
+        </ol>
+      </div>
+      <div class="board">
+        <h3 class="board__title">OpenS2V-Eval Open-Domain, Total</h3>
+        <p class="board__note">Reference-to-video: highest among open-source models</p>
+        <ol>
+          <li><span class="rank">1</span><span class="name">Seedance 2.0<span class="cov">148 of 180 clips</span></span><span class="val">67.13</span></li>
+          <li class="is-ours"><span class="rank">2</span><span class="name">Murea-Fast</span><span class="val">64.98</span></li>
+          <li><span class="rank">3</span><span class="name">Bernini</span><span class="val">63.21</span></li>
+        </ol>
+      </div>
+      <div class="board board--plain">
+        <h3 class="board__title">Latency for one 5.04 s clip</h3>
+        <p class="board__note">End-to-end, eight NVIDIA H20 GPUs</p>
+        <ol>
+          <li><span class="name">50-step baseline</span><span class="val">231.6 s</span></li>
+          <li class="is-ours"><span class="name">Fully optimized</span><span class="val">6.96 s</span></li>
+          <li><span class="name">Same pipeline, RTX PRO 6000 Blackwell</span><span class="val">3.6 s</span></li>
+        </ol>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================== WORLDS ============================== -->
+<section class="section worlds" id="worlds" aria-labelledby="worlds-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="worlds-h">Shape your story in every world</h2>
+      <p class="lede">Frames generated by InWorld, from the report's overview figure. The quoted lines are what players typed; each one became the next segment of the story.</p>
+    </div>
+
+    <div class="world-grid">
+      <figure><img src="assets/img/world-snow.jpg" srcset="assets/img/world-snow.jpg 1003w, assets/img/world-snow@2x.jpg 2006w, assets/img/world-snow@4x.jpg 4012w" sizes="(min-width: 80rem) 24rem, (min-width: 52rem) 31vw, 50vw" width="1003" height="553" alt="Ink-wash style mountains under snow, a figure holding a small glowing light" loading="lazy"><figcaption>Snowbound outpost</figcaption></figure>
+      <figure><img src="assets/img/world-academy.jpg" srcset="assets/img/world-academy.jpg 1043w, assets/img/world-academy@2x.jpg 2086w, assets/img/world-academy@4x.jpg 4172w" sizes="(min-width: 80rem) 24rem, (min-width: 52rem) 31vw, 50vw" width="1043" height="574" alt="A boy standing in a dark gothic hall with red light glowing through cracks in the floor" loading="lazy"><figcaption>Dark magic academy</figcaption></figure>
+      <figure><img src="assets/img/world-gusu.jpg" srcset="assets/img/world-gusu.jpg 854w, assets/img/world-gusu@2x.jpg 1708w, assets/img/world-gusu@4x.jpg 3416w" sizes="(min-width: 80rem) 24rem, (min-width: 52rem) 31vw, 50vw" width="854" height="469" alt="A flooded water town of tiled roofs and stone bridges under mist" loading="lazy"><figcaption>Flooded Gusu</figcaption></figure>
+    </div>
+
+    <div class="reels">
+      <div class="reel">
+        <div class="reel__head"><h3>An ongoing journey</h3><p>One story on the star-sea island, continued turn by turn.</p></div>
+        <ol class="reel__track">
+          <li><img src="assets/img/journey-1.jpg" srcset="assets/img/journey-1.jpg 913w, assets/img/journey-1@2x.jpg 1826w, assets/img/journey-1@4x.jpg 3652w" sizes="(min-width: 80rem) 24rem, (min-width: 60rem) 31vw, 15rem" width="913" height="501" alt="A character climbs a ladder onto a steampunk airship inside a hangar" loading="lazy"><p class="turn"><span class="turn__n">Turn 1</span><span class="turn__say">“Climb aboard.”</span></p></li>
+          <li><img src="assets/img/journey-2.jpg" srcset="assets/img/journey-2.jpg 1072w, assets/img/journey-2@2x.jpg 2144w, assets/img/journey-2@4x.jpg 4288w" sizes="(min-width: 80rem) 24rem, (min-width: 60rem) 31vw, 15rem" width="1072" height="591" alt="The airship fires its engines inside the hangar" loading="lazy"><p class="turn"><span class="turn__n">Turn 2</span><span class="turn__say">“Keep going.”</span></p></li>
+          <li><img src="assets/img/hero.jpg" srcset="assets/img/hero.jpg 1300w, assets/img/hero@2x.jpg 2600w, assets/img/hero@3x.jpg 3900w, assets/img/hero@4x.jpg 5200w" sizes="100vw" width="1300" height="734" alt="The airship flies toward a glowing vortex in a starry sky, seen through a hangar door" loading="lazy"><p class="turn"><span class="turn__n">Turn 3</span><span class="turn__say">“@Mechanic, keep flying home.”</span></p></li>
+        </ol>
+      </div>
+
+      <div class="reel">
+        <div class="reel__head"><h3>A world you can change</h3><p>Actions leave lasting effects that later segments respect.</p></div>
+        <ol class="reel__track">
+          <li><img src="assets/img/mech-1.jpg" srcset="assets/img/mech-1.jpg 880w, assets/img/mech-1@2x.jpg 1760w, assets/img/mech-1@4x.jpg 3520w" sizes="(min-width: 80rem) 24rem, (min-width: 60rem) 31vw, 15rem" width="880" height="484" alt="A mechanic types on a terminal whose screen glows red" loading="lazy"><p class="turn"><span class="turn__n">Turn 1</span><span class="turn__say">“Enter the code.”</span></p></li>
+          <li><img src="assets/img/mech-2.jpg" srcset="assets/img/mech-2.jpg 878w, assets/img/mech-2@2x.jpg 1756w, assets/img/mech-2@4x.jpg 3512w" sizes="(min-width: 80rem) 24rem, (min-width: 60rem) 31vw, 15rem" width="878" height="484" alt="The mechanic pulls a plug from the terminal; the screen goes dark" loading="lazy"><p class="turn"><span class="turn__n">Turn 2</span><span class="turn__say">“Unplug it.”</span></p></li>
+          <li><img src="assets/img/mech-3.jpg" srcset="assets/img/mech-3.jpg 880w, assets/img/mech-3@2x.jpg 1760w, assets/img/mech-3@4x.jpg 3520w" sizes="(min-width: 80rem) 24rem, (min-width: 60rem) 31vw, 15rem" width="880" height="484" alt="The mechanic looks at the terminal again; its screen is still dark" loading="lazy"><p class="turn"><span class="turn__n">Turn 3</span><span class="turn__say">“Look again.”<span class="turn__note">The screen is still dark.</span></span></p></li>
+        </ol>
+      </div>
+
+      <div class="reel">
+        <div class="reel__head"><h3>Everyday adventures</h3><p>Small moments in a harbour town.</p></div>
+        <ol class="reel__track" style="grid-auto-columns: minmax(15rem, 1fr); max-width: 52rem;">
+          <li><img src="assets/img/everyday-1.jpg" srcset="assets/img/everyday-1.jpg 1095w, assets/img/everyday-1@2x.jpg 2190w, assets/img/everyday-1@4x.jpg 4380w" sizes="(min-width: 80rem) 24rem, (min-width: 60rem) 31vw, 15rem" width="1095" height="600" alt="An anime-style boy at a harbour food stall reaches for a steamed bun" loading="lazy"><p class="turn"><span class="turn__n">Turn 1</span><span class="turn__say">“A warm bun, please.”</span></p></li>
+          <li><img src="assets/img/everyday-2.jpg" srcset="assets/img/everyday-2.jpg 992w, assets/img/everyday-2@2x.jpg 1984w, assets/img/everyday-2@4x.jpg 3968w" sizes="(min-width: 80rem) 24rem, (min-width: 60rem) 31vw, 15rem" width="992" height="546" alt="The vendor hands the boy a cup of soy milk" loading="lazy"><p class="turn"><span class="turn__n">Turn 2</span><span class="turn__say">“And soy milk.”</span></p></li>
+        </ol>
+      </div>
+
+      <div class="reel">
+        <div class="reel__head"><h3>A shared adventure</h3><p>In co-op mode, each player's action is bound to their own character and rendered in one shared shot.</p></div>
+        <div class="coop">
+          <figure>
+            <img src="assets/img/coop-dragon.jpg" srcset="assets/img/coop-dragon.jpg 1274w, assets/img/coop-dragon@2x.jpg 2548w, assets/img/coop-dragon@4x.jpg 5096w" sizes="(min-width: 80rem) 51rem, (min-width: 52rem) 68vw, 100vw" width="1274" height="768" alt="Two sword fighters face a dragon on a hoard of gold coins inside a cave" loading="lazy">
+            <ul class="coop__players">
+              <li><b>P1</b>“Go around.”</li>
+              <li><b>P2</b>“I'll hold it off.”</li>
+            </ul>
+          </figure>
+          <figure class="coop__escape">
+            <img src="assets/img/coop-escape.jpg" srcset="assets/img/coop-escape.jpg 641w, assets/img/coop-escape@2x.jpg 1282w, assets/img/coop-escape@4x.jpg 2564w" sizes="(min-width: 80rem) 23rem, (min-width: 52rem) 30vw, 100vw" width="641" height="641" alt="The two fighters walk side by side along a sunny mountain road" loading="lazy">
+            <p class="turn"><span class="turn__n">Next round</span><span class="turn__say">Escape together</span></p>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== AGENT ============================== -->
+<section class="section" id="agent" aria-labelledby="agent-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="agent-h">A world agent with explicit memory</h2>
+      <p class="lede">The generator keeps no memory between calls, and there is no simulator behind the world. So Murea-Agent keeps an explicit, inspectable world state outside the generator, plans in natural language, and checks every rendered segment against what it intended.</p>
+      <p class="paper-ref">Report section 2</p>
+    </div>
+
+    <div class="loop" id="loop">
+      <div class="loop__dial">
+        <svg viewBox="0 0 100 100" aria-hidden="true">
+          <circle class="loop__ring" cx="50" cy="50" r="46"/>
+          <circle class="loop__arc" id="loop-arc" cx="50" cy="50" r="46"/>
+          <g id="loop-arrows"></g>
+        </svg>
+        <div class="loop__core" aria-hidden="true">
+          <span class="core-sym">\(\mathcal{W}_t\)</span>
+          <span class="core-label">World state</span>
+          <span class="core-parts">\(\mathcal{E}\;\mathcal{S}\;\mathcal{N}\;\mathcal{G}\;\mathcal{T}\)</span>
+        </div>
+        <div role="tablist" aria-label="The four operators of one turn">
+          <button class="loop__node" role="tab" data-i="0" id="tab-plan" aria-controls="panel-plan" aria-selected="true"><span class="op">\(\pi\)</span><span class="lbl">Plan</span><span class="who">Murea-Agent</span></button>
+          <button class="loop__node" role="tab" data-i="1" id="tab-compile" aria-controls="panel-compile" aria-selected="false" tabindex="-1"><span class="op">\(\mathcal{C}\)</span><span class="lbl">Compile</span><span class="who">Murea-Agent</span></button>
+          <button class="loop__node" role="tab" data-i="2" id="tab-render" aria-controls="panel-render" aria-selected="false" tabindex="-1"><span class="op">\(p_\theta\)</span><span class="lbl">Render</span><span class="who">Murea</span></button>
+          <button class="loop__node" role="tab" data-i="3" id="tab-observe" aria-controls="panel-observe" aria-selected="false" tabindex="-1"><span class="op">\(\rho,\ \mathcal{U}\)</span><span class="lbl">Observe</span><span class="who">Murea-Agent</span></button>
+        </div>
+      </div>
+
+      <div>
+        <div class="loop__panel" role="tabpanel" id="panel-plan" aria-labelledby="tab-plan">
+          <p class="loop__step">Step 1 of 4</p>
+          <h3>Plan the next event</h3>
+          <p>The planner, a multimodal language model, reads a snapshot of the world state, your instruction, a duration budget for one segment, and the final frame of the previous segment. The symbolic state says who exists and what they look like; the frame shows how the last segment actually ended.</p>
+          <p>It returns a directive: the location, the participating assets, the event, dialogue and speakers, how the new segment connects to its parent, and proposed state changes. A request that needs more than one segment is split into ordered events that fit the budget, and only the first group is rendered now.</p>
+          <div class="loop__eq">\[\sum_{\beta\in B_j}\hat{d}(\beta)\le\bar{d},\qquad j=1,\dots,J\]</div>
+          <div class="example"><span class="example__label">Example from the report</span><p>“Go to the market and talk to the guard.” This turn shows the walk to the market. The conversation with the guard is rewritten as a complete instruction and becomes the input to the next turn. You can interrupt at any point.</p></div>
+        </div>
+
+        <div class="loop__panel" role="tabpanel" id="panel-compile" aria-labelledby="tab-compile" hidden>
+          <p class="loop__step">Step 2 of 4</p>
+          <h3>Compile the conditions</h3>
+          <p>A deterministic compiler turns the directive into generator conditions: prompt text, ordered reference images, and voice references. Selected characters go first, then other characters and focal objects, then the location. Voices follow who is speaking, never a reference's position, so a place or an object cannot be handed a voice by accident.</p>
+          <p>Prompts use the six-section format the generator was trained on: subject definitions, a summary, reference-retention statements, the shot, the soundscape, and music. The compiler also decides whether to continue from the parent segment's latents or cut to a new shot.</p>
+          <div class="loop__eq">\[c_t=\big(y_t,\ \mathcal{R}_{v,t},\ \mathcal{R}_{a,t}\big),\qquad \mathcal{R}_{v,t}=\big(I_{e_{(1)}},\dots,I_{e_{(n_t)}}\big)\]</div>
+          <div class="example"><span class="example__label">In the example</span><p>The market is new, so it is registered with a generated reference image before it first appears, and its soundscape is fixed on this first visit for reuse later. Walking into it is a continuous move, so the segment continues from the previous one. A jump to a distant known place would start a new shot from that place's reference image.</p></div>
+        </div>
+
+        <div class="loop__panel" role="tabpanel" id="panel-render" aria-labelledby="tab-render" hidden>
+          <p class="loop__step">Step 3 of 4</p>
+          <h3>Render video and sound together</h3>
+          <p>Murea jointly generates the segment's video and audio. Reference images anchor each entity's appearance, optional voice samples supply timbre, and on continuation the parent's tail latents carry pose, motion, camera, and layout across the boundary.</p>
+          <p>Planning happens before rendering, so its latency adds directly to waiting time. The planner emits the fields needed for rendering first, and directives for the suggested next actions are prepared in the background, so choosing a suggestion skips a planning call.</p>
+          <div class="loop__eq">\[X_t\sim p_\theta\big(X\mid c_t,\ \tilde{Z}_t\big),\qquad \tilde{Z}_t=\begin{cases}Z_{h_{t-1}} & \text{continue}\\ \varnothing & \text{cut}\end{cases}\]</div>
+          <div class="example"><span class="example__label">In the example</span><p>The parent's latents keep the character's pose and the camera moving smoothly out of the previous segment, while the registered reference image keeps the character recognisable on the way to the market.</p></div>
+        </div>
+
+        <div class="loop__panel" role="tabpanel" id="panel-observe" aria-labelledby="tab-observe" hidden>
+          <p class="loop__step">Step 4 of 4</p>
+          <h3>Observe what actually happened</h3>
+          <p>Whether a requested change happened can only be seen in the frames. While the segment plays, an observation model compares its final frame with the planned event and the current characters and inventory, then updates next-turn suggestions, the objective, and which items were picked up or dropped.</p>
+          <p>Observation runs asynchronously, so playback never waits for it. A result is applied only if the world is still at the version that was observed. If you have already continued, undone a turn, or edited the world, the stale result is discarded.</p>
+          <div class="loop__eq">\[\hat{o}_t=\rho\big(F_t,\,D_t,\,\mathcal{E}_t\big),\qquad \mathcal{W}\leftarrow\mathcal{U}_{\mathrm{obs}}\big(\mathcal{W},\,\hat{o}_t\big)\ \text{ only if }\ \mathrm{ver}(\mathcal{W})=\mathrm{ver}(\mathcal{W}_t)\]</div>
+          <div class="example"><span class="example__label">In the example</span><p>The final frame is checked against the planned walk. Items the character visibly picked up, like the backpack in the overview figure below, are added to the inventory, and the conversation with the guard waits as the next turn.</p></div>
+        </div>
+
+        <div class="loop__nav">
+          <button type="button" id="loop-prev">Previous step</button>
+          <button type="button" id="loop-next">Next step</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="equation-block" role="group" aria-label="One turn of InWorld">
+      \[D_t=\pi\big(u_t,\,\Sigma(\mathcal{W}_{t-1}),\,F_{t-1}\big),\quad c_t=\mathcal{C}\big(D_t,\,\mathcal{W}_{t-1}\big),\quad X_t\sim p_\theta\big(X\mid c_t,\,\tilde{Z}_t\big),\quad \mathcal{W}_t=\mathcal{U}\big(\mathcal{W}_{t-1},\,D_t,\,X_t\big)\]
+      <p>One turn: instruction \(u_t\), state snapshot \(\Sigma\), previous final frame \(F_{t-1}\), directive \(D_t\), generator condition \(c_t\), optional parent latents \(\tilde{Z}_t\), rendered segment \(X_t\).</p>
+    </div>
+
+    <div class="sub cols cols--2">
+      <div>
+        <h3>What the world remembers</h3>
+        <p class="small muted sans" style="margin:0 0 1.25rem">Persistent symbolic state is the long-range memory; audiovisual latents are the short-range context.</p>
+        <dl class="state-list">
+          <div><dt>\(\mathcal{E}\)</dt><dd><b>Asset registry</b><span>Every character, object, and location, each with a reference image, an optional voice sample, and a locked description that is reused word for word. Returning to a known place retrieves the same image instead of describing it again.</span></dd></div>
+          <div><dt>\(\mathcal{S}\)</dt><dd><b>Dynamic state</b><span>What changes: a character's location, outfit, visible state, mood, goals, and carried items; a location's time of day, weather, lighting, and props.</span></dd></div>
+          <div><dt>\(\mathcal{N}\)</dt><dd><b>Narrative context</b><span>The main storyline and its milestones, side quests, the current objective, and a turn history of instructions and one-line summaries. Generation prompts are left out so planning stays about the story.</span></dd></div>
+          <div><dt>\(\mathcal{G}\)</dt><dd><b>Place graph</b><span>Connections between locations, so movement follows known paths and the agent can tell a continuous walk from a jump.</span></dd></div>
+          <div><dt>\(\mathcal{T}\)</dt><dd><b>Segment tree</b><span>Every generated segment as a node with its directive, prompt, reference order, frames, continuation link, and state snapshots from before and after.</span></dd></div>
+        </dl>
+      </div>
+      <div>
+        <h3>Branches and shared play</h3>
+        <ul class="points" style="margin-top:1.25rem">
+          <li><b>Undo, regenerate, branch</b><span>Undo restores the state saved before a segment and moves back to its parent; the next turn grows a sibling. Regenerating also adds a sibling. Branches never overwrite each other, and registered assets and place connections are shared by all of them.</span></li>
+          <li><b>Action contracts for each player</b><span>In co-op, each input becomes a structured contract of actor, action, target, path, and end state. Contracts are prepared as soon as a player submits, while the others are still deciding.</span></li>
+          <li><b>One joint shot</b><span>A director model plans composition, camera, staging, and timing, and a writer drafts the shot with one placeholder per action. The compiler then inserts each locked contract exactly once, bound to its actor.</span></li>
+          <li><b>Forecasts are not facts</b><span>Each round forecasts a world event and suggests an action for each player. Only what the observation model sees in the keyframes enters the confirmed history.</span></li>
+          <li><b>Less waiting</b><span>While a segment plays, the next joint shot is rendered speculatively for the suggested actions. It is kept only if the submitted round matches it exactly: same head node, shared assets, characters, and action text.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <a class="figure__frame" href="assets/img/fig-agent@4x.jpg">
+        <img src="assets/img/fig-agent-1200.jpg" srcset="assets/img/fig-agent-1200.jpg 1200w, assets/img/fig-agent.jpg 2400w, assets/img/fig-agent@2x.jpg 4800w, assets/img/fig-agent@4x.jpg 9600w" sizes="(min-width: 80rem) 75rem, 100vw" alt="Diagram of Murea-Agent in three bands: (a) persistent world memory with asset registry, dynamic state, narrative history, place graph and segment tree; (b) online generation from user turn through merged agent call, server controller, video backend and node store; (c) playback-time adjudication comparing the final frame with the planned beat." loading="lazy" width="1200" height="684">
+      </a>
+      <figcaption><b>Murea-Agent.</b> (a) The persistent world state. (b) One turn: a single planner call returns the directive and the six-section prompt; the compiler resolves events, motion plan, and state updates and binds every name to a registered asset; the video backend renders by continuation or cut; the result is stored as a node. (c) During playback, the observation model compares the final frame with the planned event and writes back what was seen. <a class="figure__open" href="assets/img/fig-agent@4x.jpg">Open full size</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================== GENERATION ============================== -->
+<section class="section section--panel" id="generation" aria-labelledby="gen-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="gen-h">One generator for sight and sound</h2>
+      <p class="lede">Murea turns the agent's conditions into synchronized video and audio. Text specifies the scene, actions, and dialogue; reference images specify appearance; optional voice samples specify timbre. The three parts below address reference fidelity, sampling cost, and temporal continuity.</p>
+      <p class="paper-ref">Report section 3</p>
+    </div>
+
+    <div class="parts">
+      <div class="part">
+        <h3>Omni-Reference Generation</h3>
+        <p>Each reference image is encoded by the video VAE into one clean latent frame. Each voice sample becomes an audio-VAE latent sequence that keeps its timing, rather than a single speaker embedding. References join the target along the token dimension, up to 20 per modality, and are never noised or supervised.</p>
+        <p>Learned slot IDs tell references apart. In rotary position coordinates, images sit at \(-N_v,\dots,-1\) s before the target and voice samples end at \(-0.04\) s, so they read as context, not as past events. Audio–video cross-attention excludes reference tokens in both directions; reference information reaches the other modality only through the target.</p>
+      </div>
+      <div class="part">
+        <h3>MeanFlow, then distribution matching</h3>
+        <p>Stage one, audiovisual MeanFlow, learns the average velocity over a time interval under a frozen teacher, so one model can sample in a single step or several. Its Jacobian–vector product runs through a custom FlashAttention-4 kernel.</p>
+        <div class="loop__eq">\[x_r^m=x_t^m+\Delta_m\,u_\theta^m(x_t,t,r;c)\]</div>
+        <p>Stage two, Distribution Matching Distillation, starts from the MeanFlow weights. The score difference between the frozen teacher and an auxiliary denoiser that tracks the student guides it toward better visual detail and motion. The two stages run one after the other.</p>
+      </div>
+      <div class="part">
+        <h3>Streaming with bounded memory</h3>
+        <p>For long rollouts the model extends the stream one interval at a time. Video keeps one preceding chunk. Audio keeps several, so an unfinished sentence and its prosody carry across the boundary instead of restarting or repeating words.</p>
+        <p>In training, the history comes from ground truth and is deliberately degraded with noise or latent perturbations, preparing the model for the imperfect context it meets at inference. The same MeanFlow-to-DMD recipe extends to streaming with the history added to the conditions.</p>
+      </div>
+    </div>
+
+    <div class="memory" role="group" aria-labelledby="memory-h">
+      <div class="memory__head">
+        <h3 id="memory-h">What the model sees when it generates interval \(k\)</h3>
+        <p>\(H_k^v=[z_{k-1}^v],\quad H_k^a=[z^a_{\max(1,k-N_a)},\dots,z^a_{k-1}]\)</p>
+      </div>
+      <div class="memory__rows">
+        <div class="memory__row" aria-label="Video: one history chunk, then the current interval">
+          <span class="lab">Video</span>
+          <span class="c x">not kept</span><span class="c x">not kept</span><span class="c x">not kept</span><span class="c x">not kept</span>
+          <span class="c h">history</span><span class="c t">target</span><span class="c">unseen</span><span class="c">unseen</span>
+        </div>
+        <div class="memory__row" aria-label="Audio: several history chunks, then the current interval">
+          <span class="lab">Audio</span>
+          <span class="c h">history</span><span class="c h">history</span><span class="c h">history</span><span class="c h">history</span>
+          <span class="c h">history</span><span class="c t">target</span><span class="c">unseen</span><span class="c">unseen</span>
+        </div>
+      </div>
+      <div class="memory__axis" aria-hidden="true"><span></span><span>\(k-N_a\)</span><span>\(\cdots\)</span><span>\(k-3\)</span><span>\(k-2\)</span><span>\(k-1\)</span><span>\(k\)</span><span>\(k+1\)</span><span>\(k+2\)</span></div>
+      <div class="memory__legend">
+        <span><i style="background:var(--panel-2)"></i>History, degraded during training</span>
+        <span><i style="background:var(--ink)"></i>Current interval, denoised and supervised</span>
+        <span><i style="border:1px dashed var(--rule)"></i>Future, never visible</span>
+        <span>Reference images and voice samples stay clean throughout.</span>
+      </div>
+    </div>
+
+    <figure class="figure">
+      <a class="figure__frame" href="assets/img/fig-generation@4x.jpg">
+        <img src="assets/img/fig-generation-1200.jpg" srcset="assets/img/fig-generation-1200.jpg 1200w, assets/img/fig-generation.jpg 2400w, assets/img/fig-generation@2x.jpg 4800w, assets/img/fig-generation@4x.jpg 9600w" sizes="(min-width: 80rem) 75rem, 100vw" alt="Diagram of the audiovisual generation framework: (a) omni-reference joint training with image and voice references, a DiT block, and target-only masked flow matching; (b) two-stage few-step distillation, AV MeanFlow then distribution matching; (c) streaming continuation with degraded video and audio memory." loading="lazy" width="1200" height="882">
+      </a>
+      <figcaption><b>The generation framework.</b> (a) Omni-reference joint training: clean references, text through cross-attention, flow-matching supervision on valid target entries only. (b) Few-step distillation: AV MeanFlow with a custom FlashAttention-4 JVP kernel, then distribution matching with alternating student and auxiliary updates. (c) Streaming continuation on bounded, degraded histories; at inference, generated intervals fill the history buffer. Video frames and audio illustrate the workflows using validation samples. <a class="figure__open" href="assets/img/fig-generation@4x.jpg">Open full size</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================== INFERENCE ============================== -->
+<section class="section" id="inference" aria-labelledby="inf-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="inf-h">From minutes to seconds</h2>
+      <p class="lede">Long audiovisual token sequences make every denoising step expensive. Distillation cuts the number of steps; the rest of the stack cuts the cost of each step. Together they take one 5.04-second clip from 231.6 s to 6.96 s on eight NVIDIA H20 GPUs.</p>
+      <p class="paper-ref">Report section 4</p>
+    </div>
+
+    <div class="cols cols--text-aside">
+      <div class="viz" id="latency-viz" style="margin-top:0"></div>
+      <div>
+        <ul class="techs">
+          <li><b>Ulysses sequence parallelism</b><span>Splits the audiovisual sequence across GPUs; all-to-all exchanges let each device attend to the full sequence for a subset of heads.</span></li>
+          <li><b>SageAttention or FlashAttention-4</b><span>Chosen per GPU architecture. The measured configuration uses SageAttention's low-precision kernels.</span></li>
+          <li><b>Adaptive BlockCache and reference caching</b><span>Reuses a cached residual for a range of Transformer blocks while hidden-state drift stays small, and reuses VAE encodings of unchanged reference images.</span></li>
+          <li><b>1.5× spatial super-resolution</b><span>VideoSharpenSR lets the base generator work at a lower resolution while keeping the delivered output size.</span></li>
+        </ul>
+        <div class="facts">
+          <div><span class="fv">0.71</span><span class="fl">Real-time factor on NVIDIA RTX PRO 6000 Blackwell GPUs: the 5.04 s clip is generated in 3.6 s.</span></div>
+          <div><span class="fv">1.38</span><span class="fl">Real-time factor on eight NVIDIA H20 GPUs.<small>Both are full-clip latencies, not first-frame latency of the streaming path. WBench results use a separate 50-step configuration.</small></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== RESULTS ============================== -->
+<section class="section section--panel" id="results" aria-labelledby="res-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="res-h">Results</h2>
+      <p class="lede">The two generator configurations are evaluated on complementary benchmarks: Murea-Pro on multi-turn interaction, Murea-Fast on reference-conditioned generation. The full agent loop is specified by the system design rather than scored end to end.</p>
+      <p class="paper-ref">Report section 5</p>
+    </div>
+
+    <div>
+      <h3>Multi-turn interaction on WBench</h3>
+      <div class="cols cols--2" style="margin-top:1rem">
+        <div class="prose small" style="font-size:var(--fs-base)">
+          <p>WBench Full-289 has 289 cases and 1,058 interaction turns covering navigation, subject action, event editing, and perspective switching. Each turn receives the instruction and the final frame of the model's own previous segment, so later turns are judged in the context the model itself produced.</p>
+        </div>
+        <div class="prose small" style="font-size:var(--fs-base)">
+          <p>Murea-Pro has the highest Overall score, 1.71 points above Kling 3.0. The lead comes from Interaction (+9.52) and Physical (+5.23). It is within 0.05 of Kling 3.0 on Quality and trails it on Setting (−4.48) and Consistency (−1.70).</p>
+        </div>
+      </div>
+      <div class="viz" id="wbench-viz"></div>
+
+      <div class="sub" style="margin-top:3.5rem">
+        <h4>Per-metric scores against four baselines</h4>
+        <p class="small muted sans" style="margin:.3rem 0 0;max-width:46rem">Murea-Pro leads all four on navigation trajectory, event-edit, subject-action, and perspective-switch adherence, and causal fidelity. By task it scores 90.92 on event editing, 87.04 on subject action, 80.65 on perspective switching, and 71.79 on navigation, its weakest task.</p>
+        <div class="heat-wrap" id="heat-viz"></div>
+        <div class="heat-scale" aria-hidden="true"><span>30</span><i></i><span>100</span><span>Bold and underlined: best in the row</span></div>
+      </div>
+    </div>
+
+    <div class="sub">
+      <h3>Reference-conditioned generation</h3>
+      <div class="cols cols--2" style="margin-top:1rem">
+        <div class="prose" style="font-size:var(--fs-base)">
+          <p>OpenS2V-Eval's Open-Domain split has 180 cases across seven reference configurations, from a single face to several people with objects. OS2V-Pro is our extended evaluation of the same clips, adding per-reference fidelity, attribute binding, rendering quality, and audio. Murea-Fast uses eight distilled steps and generates 121 frames at 24 fps.</p>
+        </div>
+        <div class="prose" style="font-size:var(--fs-base)">
+          <p>On OpenS2V-Eval, Murea-Fast scores 64.98, the highest among open-source models, with the best NexusScore of any system. Seedance 2.0 scores 67.13 but returned 148 of 180 clips; on those 148 shared cases the gap is 1.02 points. On OS2V-Pro, Murea-Fast scores 69.9, 0.2 below Kling V3 Omni, with the best per-reference fidelity and the joint-best identity consistency.</p>
+        </div>
+      </div>
+      <div class="viz" id="s2v-viz"></div>
+      <p class="viz__foot">Murea-Fast is prompted with expanded captions, and OS2V-Pro's task-following (VTF) and binding (Bind) checklists are derived from them, which gives it an input advantage on those two metrics and on the OS2V-Pro aggregate. API systems were queried with the official prompts. Clips a system did not return are not scored as zero, so read results alongside clip counts. Audio quality (ATQ) and event–sound alignment (VESA) are excluded from the aggregate; on both, Murea-Fast trails Kling V3 Omni (59.7 vs 66.3 and 75.0 vs 88.7).</p>
+    </div>
+
+    <div class="sub" id="gallery">
+      <h3>Qualitative results</h3>
+      <p class="small muted sans" style="margin:.3rem 0 0;max-width:46rem">Each example pairs the input references with frames sampled from the generated video, in temporal order. References range from single images to three-view sheets, and up to five are combined in one clip.</p>
+      <div class="gallery">
+        <div class="demo">
+          <div class="demo__refs" aria-label="Four references">
+            <img src="assets/img/demo-1-ref1.jpg" srcset="assets/img/demo-1-ref1.jpg 520w, assets/img/demo-1-ref1@2x.jpg 1040w, assets/img/demo-1-ref1@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="An older man in an apron" loading="lazy"><img src="assets/img/demo-1-ref2.jpg" srcset="assets/img/demo-1-ref2.jpg 520w, assets/img/demo-1-ref2@2x.jpg 1040w, assets/img/demo-1-ref2@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="A black and white cat" loading="lazy"><img src="assets/img/demo-1-ref3.jpg" srcset="assets/img/demo-1-ref3.jpg 520w, assets/img/demo-1-ref3@2x.jpg 1040w, assets/img/demo-1-ref3@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="An indigo-dyed cloth" loading="lazy"><img src="assets/img/demo-1-ref4.jpg" srcset="assets/img/demo-1-ref4.jpg 520w, assets/img/demo-1-ref4@2x.jpg 1040w, assets/img/demo-1-ref4@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="A courtyard with three dye vats" loading="lazy">
+          </div>
+          <div>
+            <ol class="demo__frames" aria-label="The man spreads the indigo cloth on a courtyard table; the cat walks onto it"><li><a href="assets/img/demo-1-f1@4x.jpg"><img src="assets/img/demo-1-f1.jpg" srcset="assets/img/demo-1-f1.jpg 1096w, assets/img/demo-1-f1@2x.jpg 2192w, assets/img/demo-1-f1@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 1 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-1-f2@4x.jpg"><img src="assets/img/demo-1-f2.jpg" srcset="assets/img/demo-1-f2.jpg 1096w, assets/img/demo-1-f2@2x.jpg 2192w, assets/img/demo-1-f2@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 2 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-1-f3@4x.jpg"><img src="assets/img/demo-1-f3.jpg" srcset="assets/img/demo-1-f3.jpg 1096w, assets/img/demo-1-f3@2x.jpg 2192w, assets/img/demo-1-f3@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 3 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-1-f4@4x.jpg"><img src="assets/img/demo-1-f4.jpg" srcset="assets/img/demo-1-f4.jpg 1096w, assets/img/demo-1-f4@2x.jpg 2192w, assets/img/demo-1-f4@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 4 of 4" loading="lazy" width="1096" height="601"></a></li></ol>
+            <p class="demo__cap">A person, an animal, an object, and a scene in one shot</p>
+          </div>
+        </div>
+        <div class="demo">
+          <div class="demo__refs" aria-label="Four references">
+            <img src="assets/img/demo-2-ref1.jpg" srcset="assets/img/demo-2-ref1.jpg 520w, assets/img/demo-2-ref1@2x.jpg 1040w, assets/img/demo-2-ref1@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="Three-view sheet of a woman in a white apron" loading="lazy"><img src="assets/img/demo-2-ref2.jpg" srcset="assets/img/demo-2-ref2.jpg 520w, assets/img/demo-2-ref2@2x.jpg 1040w, assets/img/demo-2-ref2@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="Three-view sheet of an older man in a brown robe" loading="lazy"><img src="assets/img/demo-2-ref3.jpg" srcset="assets/img/demo-2-ref3.jpg 520w, assets/img/demo-2-ref3@2x.jpg 1040w, assets/img/demo-2-ref3@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="A steamer basket of dumplings" loading="lazy"><img src="assets/img/demo-2-ref4.jpg" srcset="assets/img/demo-2-ref4.jpg 520w, assets/img/demo-2-ref4@2x.jpg 1040w, assets/img/demo-2-ref4@4x.jpg 2080w" sizes="158px" width="520" height="289" alt="A tea-house dining room" loading="lazy">
+          </div>
+          <div>
+            <ol class="demo__frames" aria-label="The woman serves the man a basket of dumplings in the dining room; close-ups of the dumplings follow"><li><a href="assets/img/demo-2-f1@4x.jpg"><img src="assets/img/demo-2-f1.jpg" srcset="assets/img/demo-2-f1.jpg 1096w, assets/img/demo-2-f1@2x.jpg 2192w, assets/img/demo-2-f1@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 1 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-2-f2@4x.jpg"><img src="assets/img/demo-2-f2.jpg" srcset="assets/img/demo-2-f2.jpg 1096w, assets/img/demo-2-f2@2x.jpg 2192w, assets/img/demo-2-f2@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 2 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-2-f3@4x.jpg"><img src="assets/img/demo-2-f3.jpg" srcset="assets/img/demo-2-f3.jpg 1096w, assets/img/demo-2-f3@2x.jpg 2192w, assets/img/demo-2-f3@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 3 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-2-f4@4x.jpg"><img src="assets/img/demo-2-f4.jpg" srcset="assets/img/demo-2-f4.jpg 1096w, assets/img/demo-2-f4@2x.jpg 2192w, assets/img/demo-2-f4@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 4 of 4" loading="lazy" width="1096" height="601"></a></li></ol>
+            <p class="demo__cap">Three-view reference sheets with a dish and a room</p>
+          </div>
+        </div>
+        <div class="demo">
+          <div class="demo__refs" aria-label="Five references">
+            <img src="assets/img/demo-3-ref1.jpg" srcset="assets/img/demo-3-ref1.jpg 253w, assets/img/demo-3-ref1@2x.jpg 506w, assets/img/demo-3-ref1@4x.jpg 1012w" sizes="73px" width="253" height="304" alt="Portrait of a curly-haired teenager" loading="lazy"><img src="assets/img/demo-3-ref2.jpg" srcset="assets/img/demo-3-ref2.jpg 259w, assets/img/demo-3-ref2@2x.jpg 518w, assets/img/demo-3-ref2@4x.jpg 1036w" sizes="77px" width="259" height="295" alt="Portrait of a young woman in green" loading="lazy"><img src="assets/img/demo-3-ref3.jpg" srcset="assets/img/demo-3-ref3.jpg 511w, assets/img/demo-3-ref3@2x.jpg 1022w, assets/img/demo-3-ref3@4x.jpg 2044w" sizes="73px" width="511" height="616" alt="A laptop on a desk" loading="lazy"><img src="assets/img/demo-3-ref4.jpg" srcset="assets/img/demo-3-ref4.jpg 244w, assets/img/demo-3-ref4@2x.jpg 488w, assets/img/demo-3-ref4@4x.jpg 976w" sizes="73px" width="244" height="295" alt="Portrait of a young woman with glasses" loading="lazy"><img src="assets/img/demo-3-ref5.jpg" srcset="assets/img/demo-3-ref5.jpg 256w, assets/img/demo-3-ref5@2x.jpg 512w, assets/img/demo-3-ref5@4x.jpg 1024w" sizes="76px" width="256" height="295" alt="Portrait of a teenager in a white shirt" loading="lazy">
+          </div>
+          <div>
+            <ol class="demo__frames" aria-label="The four young people sit on the grass in a park, gathered around the laptop"><li><a href="assets/img/demo-3-f1@4x.jpg"><img src="assets/img/demo-3-f1.jpg" srcset="assets/img/demo-3-f1.jpg 1096w, assets/img/demo-3-f1@2x.jpg 2192w, assets/img/demo-3-f1@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 1 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-3-f2@4x.jpg"><img src="assets/img/demo-3-f2.jpg" srcset="assets/img/demo-3-f2.jpg 1096w, assets/img/demo-3-f2@2x.jpg 2192w, assets/img/demo-3-f2@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 2 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-3-f3@4x.jpg"><img src="assets/img/demo-3-f3.jpg" srcset="assets/img/demo-3-f3.jpg 1096w, assets/img/demo-3-f3@2x.jpg 2192w, assets/img/demo-3-f3@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 3 of 4" loading="lazy" width="1096" height="601"></a></li><li><a href="assets/img/demo-3-f4@4x.jpg"><img src="assets/img/demo-3-f4.jpg" srcset="assets/img/demo-3-f4.jpg 1096w, assets/img/demo-3-f4@2x.jpg 2192w, assets/img/demo-3-f4@4x.jpg 4384w" sizes="(min-width: 80rem) 18.5rem, 11rem" alt="Frame 4 of 4" loading="lazy" width="1096" height="601"></a></li></ol>
+            <p class="demo__cap">Four faces and a laptop in one group scene</p>
+          </div>
+        </div>
+        <div class="demo">
+          <div class="demo__refs" aria-label="Five references">
+            <img src="assets/img/demo-4-ref1.jpg" srcset="assets/img/demo-4-ref1.jpg 250w, assets/img/demo-4-ref1@2x.jpg 500w, assets/img/demo-4-ref1@4x.jpg 1000w" sizes="57px" width="250" height="385" alt="An anime boy in a black jacket and helmet" loading="lazy"><img src="assets/img/demo-4-ref2.jpg" srcset="assets/img/demo-4-ref2.jpg 247w, assets/img/demo-4-ref2@2x.jpg 494w, assets/img/demo-4-ref2@4x.jpg 988w" sizes="56px" width="247" height="385" alt="An anime girl in a green ski suit with goggles" loading="lazy"><img src="assets/img/demo-4-ref3.jpg" srcset="assets/img/demo-4-ref3.jpg 481w, assets/img/demo-4-ref3@2x.jpg 962w, assets/img/demo-4-ref3@4x.jpg 1924w" sizes="53px" width="481" height="796" alt="A ski slope with mountains" loading="lazy"><img src="assets/img/demo-4-ref4.jpg" srcset="assets/img/demo-4-ref4.jpg 250w, assets/img/demo-4-ref4@2x.jpg 500w, assets/img/demo-4-ref4@4x.jpg 1000w" sizes="57px" width="250" height="385" alt="A pair of skis and poles" loading="lazy"><img src="assets/img/demo-4-ref5.jpg" srcset="assets/img/demo-4-ref5.jpg 250w, assets/img/demo-4-ref5@2x.jpg 500w, assets/img/demo-4-ref5@4x.jpg 1000w" sizes="57px" width="250" height="385" alt="A red snowmobile" loading="lazy">
+          </div>
+          <div>
+            <ol class="demo__frames demo__frames--portrait" aria-label="Vertical frames: the boy skis down the slope; the girl arrives on the snowmobile and helps him"><li><a href="assets/img/demo-4-f1@4x.jpg"><img src="assets/img/demo-4-f1.jpg" srcset="assets/img/demo-4-f1.jpg 444w, assets/img/demo-4-f1@2x.jpg 888w, assets/img/demo-4-f1@4x.jpg 1776w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 1 of 9" loading="lazy" width="444" height="810"></a></li><li><a href="assets/img/demo-4-f2@4x.jpg"><img src="assets/img/demo-4-f2.jpg" srcset="assets/img/demo-4-f2.jpg 444w, assets/img/demo-4-f2@2x.jpg 888w, assets/img/demo-4-f2@4x.jpg 1776w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 2 of 9" loading="lazy" width="444" height="810"></a></li><li><a href="assets/img/demo-4-f3@4x.jpg"><img src="assets/img/demo-4-f3.jpg" srcset="assets/img/demo-4-f3.jpg 444w, assets/img/demo-4-f3@2x.jpg 888w, assets/img/demo-4-f3@4x.jpg 1776w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 3 of 9" loading="lazy" width="444" height="810"></a></li><li><a href="assets/img/demo-4-f4@4x.jpg"><img src="assets/img/demo-4-f4.jpg" srcset="assets/img/demo-4-f4.jpg 444w, assets/img/demo-4-f4@2x.jpg 888w, assets/img/demo-4-f4@4x.jpg 1776w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 4 of 9" loading="lazy" width="444" height="810"></a></li><li><a href="assets/img/demo-4-f5@4x.jpg"><img src="assets/img/demo-4-f5.jpg" srcset="assets/img/demo-4-f5.jpg 443w, assets/img/demo-4-f5@2x.jpg 886w, assets/img/demo-4-f5@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 5 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-4-f6@4x.jpg"><img src="assets/img/demo-4-f6.jpg" srcset="assets/img/demo-4-f6.jpg 443w, assets/img/demo-4-f6@2x.jpg 886w, assets/img/demo-4-f6@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 6 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-4-f7@4x.jpg"><img src="assets/img/demo-4-f7.jpg" srcset="assets/img/demo-4-f7.jpg 443w, assets/img/demo-4-f7@2x.jpg 886w, assets/img/demo-4-f7@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 7 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-4-f8@4x.jpg"><img src="assets/img/demo-4-f8.jpg" srcset="assets/img/demo-4-f8.jpg 443w, assets/img/demo-4-f8@2x.jpg 886w, assets/img/demo-4-f8@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 8 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-4-f9@4x.jpg"><img src="assets/img/demo-4-f9.jpg" srcset="assets/img/demo-4-f9.jpg 443w, assets/img/demo-4-f9@2x.jpg 886w, assets/img/demo-4-f9@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 9 of 9" loading="lazy" width="443" height="809"></a></li></ol>
+            <p class="demo__cap">A stylized scene from five references in vertical format</p>
+          </div>
+        </div>
+        <div class="demo">
+          <div class="demo__refs" aria-label="Five references">
+            <img src="assets/img/demo-5-ref1.jpg" srcset="assets/img/demo-5-ref1.jpg 250w, assets/img/demo-5-ref1@2x.jpg 500w, assets/img/demo-5-ref1@4x.jpg 1000w" sizes="57px" width="250" height="385" alt="An anime boy in a yellow jacket" loading="lazy"><img src="assets/img/demo-5-ref2.jpg" srcset="assets/img/demo-5-ref2.jpg 247w, assets/img/demo-5-ref2@2x.jpg 494w, assets/img/demo-5-ref2@4x.jpg 988w" sizes="56px" width="247" height="385" alt="An anime girl in a grey hoodie with headphones" loading="lazy"><img src="assets/img/demo-5-ref3.jpg" srcset="assets/img/demo-5-ref3.jpg 481w, assets/img/demo-5-ref3@2x.jpg 962w, assets/img/demo-5-ref3@4x.jpg 1924w" sizes="53px" width="481" height="799" alt="A neon-lit outdoor stage" loading="lazy"><img src="assets/img/demo-5-ref4.jpg" srcset="assets/img/demo-5-ref4.jpg 250w, assets/img/demo-5-ref4@2x.jpg 500w, assets/img/demo-5-ref4@4x.jpg 1000w" sizes="58px" width="250" height="382" alt="A DJ controller" loading="lazy"><img src="assets/img/demo-5-ref5.jpg" srcset="assets/img/demo-5-ref5.jpg 250w, assets/img/demo-5-ref5@2x.jpg 500w, assets/img/demo-5-ref5@4x.jpg 1000w" sizes="57px" width="250" height="385" alt="A pink skateboard" loading="lazy">
+          </div>
+          <div>
+            <ol class="demo__frames demo__frames--portrait" aria-label="Vertical frames: the boy skateboards in front of the neon stage, then the girl plays the DJ controller"><li><a href="assets/img/demo-5-f1@4x.jpg"><img src="assets/img/demo-5-f1.jpg" srcset="assets/img/demo-5-f1.jpg 443w, assets/img/demo-5-f1@2x.jpg 886w, assets/img/demo-5-f1@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 1 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f2@4x.jpg"><img src="assets/img/demo-5-f2.jpg" srcset="assets/img/demo-5-f2.jpg 443w, assets/img/demo-5-f2@2x.jpg 886w, assets/img/demo-5-f2@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 2 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f3@4x.jpg"><img src="assets/img/demo-5-f3.jpg" srcset="assets/img/demo-5-f3.jpg 443w, assets/img/demo-5-f3@2x.jpg 886w, assets/img/demo-5-f3@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 3 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f4@4x.jpg"><img src="assets/img/demo-5-f4.jpg" srcset="assets/img/demo-5-f4.jpg 443w, assets/img/demo-5-f4@2x.jpg 886w, assets/img/demo-5-f4@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 4 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f5@4x.jpg"><img src="assets/img/demo-5-f5.jpg" srcset="assets/img/demo-5-f5.jpg 443w, assets/img/demo-5-f5@2x.jpg 886w, assets/img/demo-5-f5@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 5 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f6@4x.jpg"><img src="assets/img/demo-5-f6.jpg" srcset="assets/img/demo-5-f6.jpg 443w, assets/img/demo-5-f6@2x.jpg 886w, assets/img/demo-5-f6@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 6 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f7@4x.jpg"><img src="assets/img/demo-5-f7.jpg" srcset="assets/img/demo-5-f7.jpg 443w, assets/img/demo-5-f7@2x.jpg 886w, assets/img/demo-5-f7@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 7 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f8@4x.jpg"><img src="assets/img/demo-5-f8.jpg" srcset="assets/img/demo-5-f8.jpg 443w, assets/img/demo-5-f8@2x.jpg 886w, assets/img/demo-5-f8@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 8 of 9" loading="lazy" width="443" height="809"></a></li><li><a href="assets/img/demo-5-f9@4x.jpg"><img src="assets/img/demo-5-f9.jpg" srcset="assets/img/demo-5-f9.jpg 443w, assets/img/demo-5-f9@2x.jpg 886w, assets/img/demo-5-f9@4x.jpg 1772w" sizes="(min-width: 80rem) 8rem, 6rem" alt="Frame 9 of 9" loading="lazy" width="443" height="809"></a></li></ol>
+            <p class="demo__cap">Two characters, two props, one stage across several shots</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== DATA ============================== -->
+<section class="section" id="data" aria-labelledby="data-h">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 id="data-h">Data and captions</h2>
+      <p class="lede">Multi-reference audiovisual training needs captions that say which reference defines each entity, which voice belongs to each speaker, and when things are said and done.</p>
+    </div>
+    <div class="cols cols--2">
+      <div class="prose"><p>The dataset combines data created for this work with a curated subset of HuMoSet. Automated filters screen resolution, duration, audio availability, visual quality with DOVER and LAION-Aesthetics, and reference–target identity with ArcFace across sampled frames. Human annotators then judge reference consistency, audio consistency, and video quality.</p></div>
+      <div class="prose"><p>TransNet finds shot boundaries and speech recognition extracts transcripts with timing. Gemini 3.1 Pro then writes structured caption JSON from the pre- and post-cut frames, the transcript, and the visual and voice references. Each caption binds characters to their voice references, attributes every line of dialogue, and describes each shot with its start time.</p></div>
+    </div>
+    <figure class="figure">
+      <a class="figure__frame" href="assets/img/fig-captioning@4x.jpg">
+        <img src="assets/img/fig-captioning-1200.jpg" srcset="assets/img/fig-captioning-1200.jpg 1200w, assets/img/fig-captioning.jpg 2400w, assets/img/fig-captioning@2x.jpg 4800w, assets/img/fig-captioning@4x.jpg 9600w" sizes="(min-width: 80rem) 75rem, 100vw" alt="Captioning pipeline in four panels: multimodal input of reference assets and source video; parallel evidence extraction of shot boundaries, per-shot evidence and speech recognition; multi-reference captioning with Gemini; and the resulting caption JSON with global references and timestamped shots." loading="lazy" width="1200" height="539">
+      </a>
+      <figcaption><b>Multi-reference audiovisual captioning.</b> Shot boundaries and ASR provide temporal evidence; Gemini integrates frames around each cut, transcripts, and visual and voice references into caption JSON with explicit character–voice bindings and dialogue attribution. <a class="figure__open" href="assets/img/fig-captioning@4x.jpg">Open full size</a></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============================== TEAM ============================== -->
+<section class="section section--panel" id="team" aria-labelledby="team-h">
+  <div class="wrap">
+    <div class="section-head"><h2 id="team-h">Team</h2></div>
+    <div class="team">
+      <div>
+        <h3>Core contributors</h3>
+        <p class="team__names">
+          <span class="n">Linux<sup>4,5</sup></span>, <span class="n">Hexin Zhang<sup>3,4</sup></span>, <span class="n">Haoshuai Fu<sup>1,3,4</sup></span>, <span class="n">North Ge<sup>5</sup></span>, <span class="n">Jun Huang<sup>1,2</sup></span>, <span class="n">Yuankang Shi<sup>1,2</sup></span>, <span class="n">Lingfei Li<sup>1,2</sup></span>, <span class="n">Ryan Xu<sup>6</sup></span>, <span class="n">Captain<sup>6,<svg class="env" viewBox="0 0 16 12" aria-label="corresponding author" role="img"><rect x=".75" y=".75" width="14.5" height="10.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 1.5 8 7l6.5-5.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg></sup></span>
+        </p>
+        <p class="team__key">Listed by task, with no indication of priority: <sup>1</sup>&#8202;Agent, <sup>2</sup>&#8202;Bench, <sup>3</sup>&#8202;Data, <sup>4</sup>&#8202;Training, <sup>5</sup>&#8202;Infra, <sup>6</sup>&#8202;Project lead. <svg class="env" viewBox="0 0 16 12" aria-hidden="true"><rect x=".75" y=".75" width="14.5" height="10.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 1.5 8 7l6.5-5.5" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>&#8202;Corresponding author.</p>
+      </div>
+      <div class="team__aside">
+        <div>
+          <h3>Contributors</h3>
+          <p class="team__plain">Bin Chen, Haodong Yuan, Lu Fan, Rui Lan, Shaobin Gao, Xiwei Zheng</p>
+          <p class="team__key" style="margin-top:.4rem">Listed alphabetically.</p>
+        </div>
+        <div>
+          <h3>Project sponsors</h3>
+          <p class="team__plain">Jianqi Zhang, Xu Chen</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================== CITE ============================== -->
+<section class="section" id="cite" aria-labelledby="cite-h">
+  <div class="wrap">
+    <div class="section-head"><h2 id="cite-h">Cite this work</h2></div>
+    <div class="cite">
+      <button type="button" id="copy-bib">Copy BibTeX</button>
+<pre id="bibtex"><code>@techreport{murealabs2026inworld,
+  title       = {InWorld: From Imagination to Living Worlds with
+                 Agents and Fast Video Generation},
+  author      = {{Murea Labs}},
+  institution = {Murea Labs},
+  type        = {Technical Report},
+  year        = {2026},
+  url         = {https://musee.me}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__inner">
+    <span class="footer__brand"><svg aria-hidden="true"><use href="#mark"/></svg>Murea Labs</span>
+    <span>© 2026 Murea Labs. Benchmark baselines are reported from the sources cited in the technical report.</span>
+  </div>
+</footer>
+
+<div class="tooltip" id="tooltip" role="status" aria-live="off"></div>
+</body>
+</html>
