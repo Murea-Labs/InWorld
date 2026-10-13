@@ -1,0 +1,2701 @@
+{
+  "source": "https://aura-data-training.vicoo.ai/Musee/AuraWorld/figure1-selection-20260916-1637/index.html",
+  "clips": [
+    {
+      "world": "wa6d24985",
+      "node": "n2cbec5d3",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/01-n2cbec5d3.mp4",
+      "poster": "assets/img/stories/wa6d24985/01-n2cbec5d3.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "nc37f8e50",
+      "parent": "n2cbec5d3",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/02-nc37f8e50.mp4",
+      "poster": "assets/img/stories/wa6d24985/02-nc37f8e50.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "nb84c7e46",
+      "parent": "nc37f8e50",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/03-nb84c7e46.mp4",
+      "poster": "assets/img/stories/wa6d24985/03-nb84c7e46.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "n76a237f2",
+      "parent": "nb84c7e46",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/04-n76a237f2.mp4",
+      "poster": "assets/img/stories/wa6d24985/04-n76a237f2.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "nd30a5aaf",
+      "parent": "n76a237f2",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/05-nd30a5aaf.mp4",
+      "poster": "assets/img/stories/wa6d24985/05-nd30a5aaf.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "nb0f34e7d",
+      "parent": "nd30a5aaf",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/06-nb0f34e7d.mp4",
+      "poster": "assets/img/stories/wa6d24985/06-nb0f34e7d.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "n5eade96f",
+      "parent": "nb0f34e7d",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/07-n5eade96f.mp4",
+      "poster": "assets/img/stories/wa6d24985/07-n5eade96f.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "n3419859c",
+      "parent": "n5eade96f",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/08-n3419859c.mp4",
+      "poster": "assets/img/stories/wa6d24985/08-n3419859c.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "n76d34779",
+      "parent": "n3419859c",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/09-n76d34779.mp4",
+      "poster": "assets/img/stories/wa6d24985/09-n76d34779.jpg"
+    },
+    {
+      "world": "wa6d24985",
+      "node": "n8faa36ef",
+      "parent": "n76d34779",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa6d24985/10-n8faa36ef.mp4",
+      "poster": "assets/img/stories/wa6d24985/10-n8faa36ef.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n465c8867",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/01-n465c8867.mp4",
+      "poster": "assets/img/stories/wf89db94d/01-n465c8867.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n4d7f6dff",
+      "parent": "n465c8867",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/02-n4d7f6dff.mp4",
+      "poster": "assets/img/stories/wf89db94d/02-n4d7f6dff.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n03f27c28",
+      "parent": "n4d7f6dff",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/03-n03f27c28.mp4",
+      "poster": "assets/img/stories/wf89db94d/03-n03f27c28.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "nffd2f671",
+      "parent": "n03f27c28",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/04-nffd2f671.mp4",
+      "poster": "assets/img/stories/wf89db94d/04-nffd2f671.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n53175d70",
+      "parent": "nffd2f671",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/05-n53175d70.mp4",
+      "poster": "assets/img/stories/wf89db94d/05-n53175d70.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n1f1f2535",
+      "parent": "n53175d70",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/06-n1f1f2535.mp4",
+      "poster": "assets/img/stories/wf89db94d/06-n1f1f2535.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n6acb3267",
+      "parent": "n1f1f2535",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/07-n6acb3267.mp4",
+      "poster": "assets/img/stories/wf89db94d/07-n6acb3267.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n41fd2faa",
+      "parent": "n6acb3267",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/08-n41fd2faa.mp4",
+      "poster": "assets/img/stories/wf89db94d/08-n41fd2faa.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "nce0314e6",
+      "parent": "n41fd2faa",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/09-nce0314e6.mp4",
+      "poster": "assets/img/stories/wf89db94d/09-nce0314e6.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n1e8905ff",
+      "parent": "nce0314e6",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/10-n1e8905ff.mp4",
+      "poster": "assets/img/stories/wf89db94d/10-n1e8905ff.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "nf9d3b1ea",
+      "parent": "n1e8905ff",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/11-nf9d3b1ea.mp4",
+      "poster": "assets/img/stories/wf89db94d/11-nf9d3b1ea.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n66228b91",
+      "parent": "nf9d3b1ea",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/12-n66228b91.mp4",
+      "poster": "assets/img/stories/wf89db94d/12-n66228b91.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n77d53f86",
+      "parent": "n66228b91",
+      "order": 13,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/13-n77d53f86.mp4",
+      "poster": "assets/img/stories/wf89db94d/13-n77d53f86.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n602343ab",
+      "parent": "n77d53f86",
+      "order": 14,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/14-n602343ab.mp4",
+      "poster": "assets/img/stories/wf89db94d/14-n602343ab.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "nf893d8b8",
+      "parent": "n602343ab",
+      "order": 15,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/15-nf893d8b8.mp4",
+      "poster": "assets/img/stories/wf89db94d/15-nf893d8b8.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n1815f501",
+      "parent": "nf893d8b8",
+      "order": 16,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/16-n1815f501.mp4",
+      "poster": "assets/img/stories/wf89db94d/16-n1815f501.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "nd568d518",
+      "parent": "n1815f501",
+      "order": 17,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/17-nd568d518.mp4",
+      "poster": "assets/img/stories/wf89db94d/17-nd568d518.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n6b16f794",
+      "parent": "nd568d518",
+      "order": 18,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/18-n6b16f794.mp4",
+      "poster": "assets/img/stories/wf89db94d/18-n6b16f794.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "nbf9556cd",
+      "parent": "n6b16f794",
+      "order": 19,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/19-nbf9556cd.mp4",
+      "poster": "assets/img/stories/wf89db94d/19-nbf9556cd.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "ne0a1e166",
+      "parent": "nbf9556cd",
+      "order": 20,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/20-ne0a1e166.mp4",
+      "poster": "assets/img/stories/wf89db94d/20-ne0a1e166.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "na19a7e23",
+      "parent": "ne0a1e166",
+      "order": 21,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/21-na19a7e23.mp4",
+      "poster": "assets/img/stories/wf89db94d/21-na19a7e23.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n78e43f18",
+      "parent": "na19a7e23",
+      "order": 22,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/22-n78e43f18.mp4",
+      "poster": "assets/img/stories/wf89db94d/22-n78e43f18.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n8782e12a",
+      "parent": "n78e43f18",
+      "order": 23,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/23-n8782e12a.mp4",
+      "poster": "assets/img/stories/wf89db94d/23-n8782e12a.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "nfb9278ae",
+      "parent": "n8782e12a",
+      "order": 24,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/24-nfb9278ae.mp4",
+      "poster": "assets/img/stories/wf89db94d/24-nfb9278ae.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n4986c6f6",
+      "parent": "nfb9278ae",
+      "order": 25,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/25-n4986c6f6.mp4",
+      "poster": "assets/img/stories/wf89db94d/25-n4986c6f6.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n8c30421e",
+      "parent": "n4986c6f6",
+      "order": 26,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/26-n8c30421e.mp4",
+      "poster": "assets/img/stories/wf89db94d/26-n8c30421e.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n7c507e1f",
+      "parent": "n8c30421e",
+      "order": 27,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/27-n7c507e1f.mp4",
+      "poster": "assets/img/stories/wf89db94d/27-n7c507e1f.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n47b287ad",
+      "parent": "n7c507e1f",
+      "order": 28,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/28-n47b287ad.mp4",
+      "poster": "assets/img/stories/wf89db94d/28-n47b287ad.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n9ba91ada",
+      "parent": "n47b287ad",
+      "order": 29,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/29-n9ba91ada.mp4",
+      "poster": "assets/img/stories/wf89db94d/29-n9ba91ada.jpg"
+    },
+    {
+      "world": "wf89db94d",
+      "node": "n2b1c7b67",
+      "parent": "n9ba91ada",
+      "order": 30,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf89db94d/30-n2b1c7b67.mp4",
+      "poster": "assets/img/stories/wf89db94d/30-n2b1c7b67.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "na045a72e",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/01-na045a72e.mp4",
+      "poster": "assets/img/stories/w0a0518a8/01-na045a72e.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "n8e13b61d",
+      "parent": "na045a72e",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/02-n8e13b61d.mp4",
+      "poster": "assets/img/stories/w0a0518a8/02-n8e13b61d.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "ned602f63",
+      "parent": "n8e13b61d",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/03-ned602f63.mp4",
+      "poster": "assets/img/stories/w0a0518a8/03-ned602f63.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "n6131280f",
+      "parent": "ned602f63",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/04-n6131280f.mp4",
+      "poster": "assets/img/stories/w0a0518a8/04-n6131280f.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "nbaca1d7a",
+      "parent": "n6131280f",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/05-nbaca1d7a.mp4",
+      "poster": "assets/img/stories/w0a0518a8/05-nbaca1d7a.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "n3887ac57",
+      "parent": "nbaca1d7a",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/06-n3887ac57.mp4",
+      "poster": "assets/img/stories/w0a0518a8/06-n3887ac57.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "n2ce1970c",
+      "parent": "n3887ac57",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/07-n2ce1970c.mp4",
+      "poster": "assets/img/stories/w0a0518a8/07-n2ce1970c.jpg"
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "n5dd3e0be",
+      "parent": "n2ce1970c",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/08-n5dd3e0be.mp4",
+      "poster": "assets/img/stories/w0a0518a8/08-n5dd3e0be.jpg"
+    },
+    {
+      "world": "wadb2b8dc",
+      "node": "n0cd56799",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wadb2b8dc/01-n0cd56799.mp4",
+      "poster": "assets/img/stories/wadb2b8dc/01-n0cd56799.jpg"
+    },
+    {
+      "world": "wadb2b8dc",
+      "node": "nf23c02c3",
+      "parent": "n0cd56799",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wadb2b8dc/02-nf23c02c3.mp4",
+      "poster": "assets/img/stories/wadb2b8dc/02-nf23c02c3.jpg"
+    },
+    {
+      "world": "wadb2b8dc",
+      "node": "n2e0e23aa",
+      "parent": "nf23c02c3",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wadb2b8dc/03-n2e0e23aa.mp4",
+      "poster": "assets/img/stories/wadb2b8dc/03-n2e0e23aa.jpg"
+    },
+    {
+      "world": "wadb2b8dc",
+      "node": "n4a571f60",
+      "parent": "n2e0e23aa",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wadb2b8dc/04-n4a571f60.mp4",
+      "poster": "assets/img/stories/wadb2b8dc/04-n4a571f60.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "nb8f3c243",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/01-nb8f3c243.mp4",
+      "poster": "assets/img/stories/w0fc2c344/01-nb8f3c243.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n5d72e327",
+      "parent": "nb8f3c243",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/02-n5d72e327.mp4",
+      "poster": "assets/img/stories/w0fc2c344/02-n5d72e327.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n3b05bd2b",
+      "parent": "n5d72e327",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/03-n3b05bd2b.mp4",
+      "poster": "assets/img/stories/w0fc2c344/03-n3b05bd2b.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n77aa6c17",
+      "parent": "n3b05bd2b",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/04-n77aa6c17.mp4",
+      "poster": "assets/img/stories/w0fc2c344/04-n77aa6c17.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "nf7fcf51f",
+      "parent": "n77aa6c17",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/05-nf7fcf51f.mp4",
+      "poster": "assets/img/stories/w0fc2c344/05-nf7fcf51f.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "naa342eac",
+      "parent": "nf7fcf51f",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/06-naa342eac.mp4",
+      "poster": "assets/img/stories/w0fc2c344/06-naa342eac.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n3a8c78e9",
+      "parent": "naa342eac",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/07-n3a8c78e9.mp4",
+      "poster": "assets/img/stories/w0fc2c344/07-n3a8c78e9.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n93dfeeb1",
+      "parent": "n3a8c78e9",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/08-n93dfeeb1.mp4",
+      "poster": "assets/img/stories/w0fc2c344/08-n93dfeeb1.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n5d431f09",
+      "parent": "n93dfeeb1",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/09-n5d431f09.mp4",
+      "poster": "assets/img/stories/w0fc2c344/09-n5d431f09.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n1f2ca2dc",
+      "parent": "n5d431f09",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/10-n1f2ca2dc.mp4",
+      "poster": "assets/img/stories/w0fc2c344/10-n1f2ca2dc.jpg"
+    },
+    {
+      "world": "w0fc2c344",
+      "node": "n2148528e",
+      "parent": "n1f2ca2dc",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0fc2c344/11-n2148528e.mp4",
+      "poster": "assets/img/stories/w0fc2c344/11-n2148528e.jpg"
+    },
+    {
+      "world": "w483afc9a",
+      "node": "n2042262f",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w483afc9a/01-n2042262f.mp4",
+      "poster": "assets/img/stories/w483afc9a/01-n2042262f.jpg"
+    },
+    {
+      "world": "w483afc9a",
+      "node": "nbdab332b",
+      "parent": "n2042262f",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w483afc9a/02-nbdab332b.mp4",
+      "poster": "assets/img/stories/w483afc9a/02-nbdab332b.jpg"
+    },
+    {
+      "world": "w483afc9a",
+      "node": "nfb73070f",
+      "parent": "nbdab332b",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w483afc9a/03-nfb73070f.mp4",
+      "poster": "assets/img/stories/w483afc9a/03-nfb73070f.jpg"
+    },
+    {
+      "world": "w483afc9a",
+      "node": "n2aa02ef8",
+      "parent": "nfb73070f",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w483afc9a/04-n2aa02ef8.mp4",
+      "poster": "assets/img/stories/w483afc9a/04-n2aa02ef8.jpg"
+    },
+    {
+      "world": "w483afc9a",
+      "node": "ne32a53a4",
+      "parent": "n2aa02ef8",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w483afc9a/05-ne32a53a4.mp4",
+      "poster": "assets/img/stories/w483afc9a/05-ne32a53a4.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "n5eeddcf3",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/01-n5eeddcf3.mp4",
+      "poster": "assets/img/stories/w93774343/01-n5eeddcf3.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "n99cc94e7",
+      "parent": "n5eeddcf3",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/02-n99cc94e7.mp4",
+      "poster": "assets/img/stories/w93774343/02-n99cc94e7.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "n64d89ecf",
+      "parent": "n99cc94e7",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/03-n64d89ecf.mp4",
+      "poster": "assets/img/stories/w93774343/03-n64d89ecf.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "n0bab5eca",
+      "parent": "n64d89ecf",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/04-n0bab5eca.mp4",
+      "poster": "assets/img/stories/w93774343/04-n0bab5eca.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "nb24a9661",
+      "parent": "n0bab5eca",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/05-nb24a9661.mp4",
+      "poster": "assets/img/stories/w93774343/05-nb24a9661.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "nb068e5bd",
+      "parent": "nb24a9661",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/06-nb068e5bd.mp4",
+      "poster": "assets/img/stories/w93774343/06-nb068e5bd.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "n3ed7fa0d",
+      "parent": "nb068e5bd",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/07-n3ed7fa0d.mp4",
+      "poster": "assets/img/stories/w93774343/07-n3ed7fa0d.jpg"
+    },
+    {
+      "world": "w93774343",
+      "node": "nf6d2d043",
+      "parent": "n3ed7fa0d",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w93774343/08-nf6d2d043.mp4",
+      "poster": "assets/img/stories/w93774343/08-nf6d2d043.jpg"
+    },
+    {
+      "world": "w52b61fb3",
+      "node": "n86faf582",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w52b61fb3/01-n86faf582.mp4",
+      "poster": "assets/img/stories/w52b61fb3/01-n86faf582.jpg"
+    },
+    {
+      "world": "w52b61fb3",
+      "node": "nd121130e",
+      "parent": "n86faf582",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w52b61fb3/02-nd121130e.mp4",
+      "poster": "assets/img/stories/w52b61fb3/02-nd121130e.jpg"
+    },
+    {
+      "world": "w52b61fb3",
+      "node": "n3596d57c",
+      "parent": "nd121130e",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w52b61fb3/03-n3596d57c.mp4",
+      "poster": "assets/img/stories/w52b61fb3/03-n3596d57c.jpg"
+    },
+    {
+      "world": "w52b61fb3",
+      "node": "n30673e22",
+      "parent": "n3596d57c",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w52b61fb3/04-n30673e22.mp4",
+      "poster": "assets/img/stories/w52b61fb3/04-n30673e22.jpg"
+    },
+    {
+      "world": "w52b61fb3",
+      "node": "nf34a1caa",
+      "parent": "n30673e22",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w52b61fb3/05-nf34a1caa.mp4",
+      "poster": "assets/img/stories/w52b61fb3/05-nf34a1caa.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n23d62445",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/01-n23d62445.mp4",
+      "poster": "assets/img/stories/w152fbaaf/01-n23d62445.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "nad6c5e14",
+      "parent": "n23d62445",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/02-nad6c5e14.mp4",
+      "poster": "assets/img/stories/w152fbaaf/02-nad6c5e14.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n68092967",
+      "parent": "nad6c5e14",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/03-n68092967.mp4",
+      "poster": "assets/img/stories/w152fbaaf/03-n68092967.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "nf33adde3",
+      "parent": "n68092967",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/04-nf33adde3.mp4",
+      "poster": "assets/img/stories/w152fbaaf/04-nf33adde3.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "na6cc8f07",
+      "parent": "nf33adde3",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/05-na6cc8f07.mp4",
+      "poster": "assets/img/stories/w152fbaaf/05-na6cc8f07.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "nd26edfa9",
+      "parent": "na6cc8f07",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/06-nd26edfa9.mp4",
+      "poster": "assets/img/stories/w152fbaaf/06-nd26edfa9.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "nfe269060",
+      "parent": "nd26edfa9",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/07-nfe269060.mp4",
+      "poster": "assets/img/stories/w152fbaaf/07-nfe269060.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n01c48846",
+      "parent": "nfe269060",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/08-n01c48846.mp4",
+      "poster": "assets/img/stories/w152fbaaf/08-n01c48846.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "ne04e1e17",
+      "parent": "n01c48846",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/09-ne04e1e17.mp4",
+      "poster": "assets/img/stories/w152fbaaf/09-ne04e1e17.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n894bb3cc",
+      "parent": "ne04e1e17",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/10-n894bb3cc.mp4",
+      "poster": "assets/img/stories/w152fbaaf/10-n894bb3cc.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n89f1cb71",
+      "parent": "n894bb3cc",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/11-n89f1cb71.mp4",
+      "poster": "assets/img/stories/w152fbaaf/11-n89f1cb71.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n9ea05641",
+      "parent": "n89f1cb71",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/12-n9ea05641.mp4",
+      "poster": "assets/img/stories/w152fbaaf/12-n9ea05641.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n2c72f0dd",
+      "parent": "n9ea05641",
+      "order": 13,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/13-n2c72f0dd.mp4",
+      "poster": "assets/img/stories/w152fbaaf/13-n2c72f0dd.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n04e9a2a7",
+      "parent": "n2c72f0dd",
+      "order": 14,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/14-n04e9a2a7.mp4",
+      "poster": "assets/img/stories/w152fbaaf/14-n04e9a2a7.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "ndc2fd376",
+      "parent": "n04e9a2a7",
+      "order": 15,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/15-ndc2fd376.mp4",
+      "poster": "assets/img/stories/w152fbaaf/15-ndc2fd376.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "nbddedd76",
+      "parent": "ndc2fd376",
+      "order": 16,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/16-nbddedd76.mp4",
+      "poster": "assets/img/stories/w152fbaaf/16-nbddedd76.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n021062c3",
+      "parent": "nbddedd76",
+      "order": 17,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/17-n021062c3.mp4",
+      "poster": "assets/img/stories/w152fbaaf/17-n021062c3.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n38163d03",
+      "parent": "n021062c3",
+      "order": 18,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/18-n38163d03.mp4",
+      "poster": "assets/img/stories/w152fbaaf/18-n38163d03.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n9a41ee27",
+      "parent": "n38163d03",
+      "order": 19,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/19-n9a41ee27.mp4",
+      "poster": "assets/img/stories/w152fbaaf/19-n9a41ee27.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n3df6fc56",
+      "parent": "n9a41ee27",
+      "order": 20,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/20-n3df6fc56.mp4",
+      "poster": "assets/img/stories/w152fbaaf/20-n3df6fc56.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "nc47c76e7",
+      "parent": "n3df6fc56",
+      "order": 21,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/21-nc47c76e7.mp4",
+      "poster": "assets/img/stories/w152fbaaf/21-nc47c76e7.jpg"
+    },
+    {
+      "world": "w152fbaaf",
+      "node": "n6a3b1da8",
+      "parent": "nc47c76e7",
+      "order": 22,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w152fbaaf/22-n6a3b1da8.mp4",
+      "poster": "assets/img/stories/w152fbaaf/22-n6a3b1da8.jpg"
+    },
+    {
+      "world": "w5fb40400",
+      "node": "n428180fa",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5fb40400/01-n428180fa.mp4",
+      "poster": "assets/img/stories/w5fb40400/01-n428180fa.jpg"
+    },
+    {
+      "world": "w5fb40400",
+      "node": "ncdaf8997",
+      "parent": "n428180fa",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5fb40400/02-ncdaf8997.mp4",
+      "poster": "assets/img/stories/w5fb40400/02-ncdaf8997.jpg"
+    },
+    {
+      "world": "w5fb40400",
+      "node": "n50ea0ae9",
+      "parent": "ncdaf8997",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5fb40400/03-n50ea0ae9.mp4",
+      "poster": "assets/img/stories/w5fb40400/03-n50ea0ae9.jpg"
+    },
+    {
+      "world": "w5fb40400",
+      "node": "n0fa6d1a7",
+      "parent": "n50ea0ae9",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5fb40400/04-n0fa6d1a7.mp4",
+      "poster": "assets/img/stories/w5fb40400/04-n0fa6d1a7.jpg"
+    },
+    {
+      "world": "w5fb40400",
+      "node": "nf832d0dd",
+      "parent": "n0fa6d1a7",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5fb40400/05-nf832d0dd.mp4",
+      "poster": "assets/img/stories/w5fb40400/05-nf832d0dd.jpg"
+    },
+    {
+      "world": "w5fb40400",
+      "node": "ne2a7fc75",
+      "parent": "nf832d0dd",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5fb40400/06-ne2a7fc75.mp4",
+      "poster": "assets/img/stories/w5fb40400/06-ne2a7fc75.jpg"
+    },
+    {
+      "world": "w67c52885",
+      "node": "n65833a5c",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w67c52885/01-n65833a5c.mp4",
+      "poster": "assets/img/stories/w67c52885/01-n65833a5c.jpg"
+    },
+    {
+      "world": "w67c52885",
+      "node": "na8280f88",
+      "parent": "n65833a5c",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w67c52885/02-na8280f88.mp4",
+      "poster": "assets/img/stories/w67c52885/02-na8280f88.jpg"
+    },
+    {
+      "world": "w67c52885",
+      "node": "n0f300cec",
+      "parent": "na8280f88",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w67c52885/03-n0f300cec.mp4",
+      "poster": "assets/img/stories/w67c52885/03-n0f300cec.jpg"
+    },
+    {
+      "world": "w67c52885",
+      "node": "n4f9f7ecc",
+      "parent": "n0f300cec",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w67c52885/04-n4f9f7ecc.mp4",
+      "poster": "assets/img/stories/w67c52885/04-n4f9f7ecc.jpg"
+    },
+    {
+      "world": "w67c52885",
+      "node": "n43b22ca2",
+      "parent": "n4f9f7ecc",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w67c52885/05-n43b22ca2.mp4",
+      "poster": "assets/img/stories/w67c52885/05-n43b22ca2.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "na819e66c",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/01-na819e66c.mp4",
+      "poster": "assets/img/stories/wcf7564d8/01-na819e66c.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n75ea39c2",
+      "parent": "na819e66c",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/02-n75ea39c2.mp4",
+      "poster": "assets/img/stories/wcf7564d8/02-n75ea39c2.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "nf2d1b005",
+      "parent": "n75ea39c2",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/03-nf2d1b005.mp4",
+      "poster": "assets/img/stories/wcf7564d8/03-nf2d1b005.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n7f4ae3cd",
+      "parent": "nf2d1b005",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/04-n7f4ae3cd.mp4",
+      "poster": "assets/img/stories/wcf7564d8/04-n7f4ae3cd.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n74cb2ced",
+      "parent": "n7f4ae3cd",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/05-n74cb2ced.mp4",
+      "poster": "assets/img/stories/wcf7564d8/05-n74cb2ced.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "nd26143e3",
+      "parent": "n74cb2ced",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/06-nd26143e3.mp4",
+      "poster": "assets/img/stories/wcf7564d8/06-nd26143e3.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n48f20605",
+      "parent": "nd26143e3",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/07-n48f20605.mp4",
+      "poster": "assets/img/stories/wcf7564d8/07-n48f20605.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n2f60751e",
+      "parent": "n48f20605",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/08-n2f60751e.mp4",
+      "poster": "assets/img/stories/wcf7564d8/08-n2f60751e.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n955a85d3",
+      "parent": "n2f60751e",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/09-n955a85d3.mp4",
+      "poster": "assets/img/stories/wcf7564d8/09-n955a85d3.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n66b08241",
+      "parent": "n955a85d3",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/10-n66b08241.mp4",
+      "poster": "assets/img/stories/wcf7564d8/10-n66b08241.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n0e5a1ad4",
+      "parent": "n66b08241",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/11-n0e5a1ad4.mp4",
+      "poster": "assets/img/stories/wcf7564d8/11-n0e5a1ad4.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "nb22b5fa6",
+      "parent": "n0e5a1ad4",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/12-nb22b5fa6.mp4",
+      "poster": "assets/img/stories/wcf7564d8/12-nb22b5fa6.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n227025d7",
+      "parent": "nb22b5fa6",
+      "order": 13,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/13-n227025d7.mp4",
+      "poster": "assets/img/stories/wcf7564d8/13-n227025d7.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "nc6c10ad1",
+      "parent": "n227025d7",
+      "order": 14,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/14-nc6c10ad1.mp4",
+      "poster": "assets/img/stories/wcf7564d8/14-nc6c10ad1.jpg"
+    },
+    {
+      "world": "wcf7564d8",
+      "node": "n24aa15b0",
+      "parent": "nc6c10ad1",
+      "order": 15,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wcf7564d8/15-n24aa15b0.mp4",
+      "poster": "assets/img/stories/wcf7564d8/15-n24aa15b0.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n65ee93c7",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/01-n65ee93c7.mp4",
+      "poster": "assets/img/stories/w3911e1d0/01-n65ee93c7.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n1c16d46b",
+      "parent": "n65ee93c7",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/02-n1c16d46b.mp4",
+      "poster": "assets/img/stories/w3911e1d0/02-n1c16d46b.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ne4d0117c",
+      "parent": "n1c16d46b",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/03-ne4d0117c.mp4",
+      "poster": "assets/img/stories/w3911e1d0/03-ne4d0117c.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "nd1beea10",
+      "parent": "ne4d0117c",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/04-nd1beea10.mp4",
+      "poster": "assets/img/stories/w3911e1d0/04-nd1beea10.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ne8504321",
+      "parent": "nd1beea10",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/05-ne8504321.mp4",
+      "poster": "assets/img/stories/w3911e1d0/05-ne8504321.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "nbdc1eb9d",
+      "parent": "ne8504321",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/06-nbdc1eb9d.mp4",
+      "poster": "assets/img/stories/w3911e1d0/06-nbdc1eb9d.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ne478b60e",
+      "parent": "nbdc1eb9d",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/07-ne478b60e.mp4",
+      "poster": "assets/img/stories/w3911e1d0/07-ne478b60e.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n774430a1",
+      "parent": "ne478b60e",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/08-n774430a1.mp4",
+      "poster": "assets/img/stories/w3911e1d0/08-n774430a1.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "na0d3f3d2",
+      "parent": "n774430a1",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/09-na0d3f3d2.mp4",
+      "poster": "assets/img/stories/w3911e1d0/09-na0d3f3d2.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n804912aa",
+      "parent": "na0d3f3d2",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/10-n804912aa.mp4",
+      "poster": "assets/img/stories/w3911e1d0/10-n804912aa.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "nb89237ee",
+      "parent": "n804912aa",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/11-nb89237ee.mp4",
+      "poster": "assets/img/stories/w3911e1d0/11-nb89237ee.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n4c1d6589",
+      "parent": "nb89237ee",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/12-n4c1d6589.mp4",
+      "poster": "assets/img/stories/w3911e1d0/12-n4c1d6589.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ne6c3d46a",
+      "parent": "n4c1d6589",
+      "order": 13,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/13-ne6c3d46a.mp4",
+      "poster": "assets/img/stories/w3911e1d0/13-ne6c3d46a.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ndc33f9b5",
+      "parent": "ne6c3d46a",
+      "order": 14,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/14-ndc33f9b5.mp4",
+      "poster": "assets/img/stories/w3911e1d0/14-ndc33f9b5.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n748e1c5e",
+      "parent": "ndc33f9b5",
+      "order": 15,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/15-n748e1c5e.mp4",
+      "poster": "assets/img/stories/w3911e1d0/15-n748e1c5e.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n8a333049",
+      "parent": "n748e1c5e",
+      "order": 16,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/16-n8a333049.mp4",
+      "poster": "assets/img/stories/w3911e1d0/16-n8a333049.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "nb66231d7",
+      "parent": "n8a333049",
+      "order": 17,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/17-nb66231d7.mp4",
+      "poster": "assets/img/stories/w3911e1d0/17-nb66231d7.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n9af75483",
+      "parent": "nb66231d7",
+      "order": 18,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/18-n9af75483.mp4",
+      "poster": "assets/img/stories/w3911e1d0/18-n9af75483.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "nb1a8d64a",
+      "parent": "n9af75483",
+      "order": 19,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/19-nb1a8d64a.mp4",
+      "poster": "assets/img/stories/w3911e1d0/19-nb1a8d64a.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n31e85a77",
+      "parent": "nb1a8d64a",
+      "order": 20,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/20-n31e85a77.mp4",
+      "poster": "assets/img/stories/w3911e1d0/20-n31e85a77.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n947d20c0",
+      "parent": "n31e85a77",
+      "order": 21,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/21-n947d20c0.mp4",
+      "poster": "assets/img/stories/w3911e1d0/21-n947d20c0.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n5bd04bcf",
+      "parent": "n947d20c0",
+      "order": 22,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/22-n5bd04bcf.mp4",
+      "poster": "assets/img/stories/w3911e1d0/22-n5bd04bcf.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n0e403183",
+      "parent": "n5bd04bcf",
+      "order": 23,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/23-n0e403183.mp4",
+      "poster": "assets/img/stories/w3911e1d0/23-n0e403183.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ndb2a6db9",
+      "parent": "n0e403183",
+      "order": 24,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/24-ndb2a6db9.mp4",
+      "poster": "assets/img/stories/w3911e1d0/24-ndb2a6db9.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ne175267e",
+      "parent": "ndb2a6db9",
+      "order": 25,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/25-ne175267e.mp4",
+      "poster": "assets/img/stories/w3911e1d0/25-ne175267e.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "ncd711ca0",
+      "parent": "ne175267e",
+      "order": 26,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/26-ncd711ca0.mp4",
+      "poster": "assets/img/stories/w3911e1d0/26-ncd711ca0.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n0450e6b8",
+      "parent": "ncd711ca0",
+      "order": 27,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/27-n0450e6b8.mp4",
+      "poster": "assets/img/stories/w3911e1d0/27-n0450e6b8.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n145b450a",
+      "parent": "n0450e6b8",
+      "order": 28,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/28-n145b450a.mp4",
+      "poster": "assets/img/stories/w3911e1d0/28-n145b450a.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n891e68ba",
+      "parent": "n145b450a",
+      "order": 29,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/29-n891e68ba.mp4",
+      "poster": "assets/img/stories/w3911e1d0/29-n891e68ba.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n57a06b7d",
+      "parent": "n891e68ba",
+      "order": 30,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/30-n57a06b7d.mp4",
+      "poster": "assets/img/stories/w3911e1d0/30-n57a06b7d.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n1c2a6339",
+      "parent": "n57a06b7d",
+      "order": 31,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/31-n1c2a6339.mp4",
+      "poster": "assets/img/stories/w3911e1d0/31-n1c2a6339.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "nfad09350",
+      "parent": "n1c2a6339",
+      "order": 32,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/32-nfad09350.mp4",
+      "poster": "assets/img/stories/w3911e1d0/32-nfad09350.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n66b4fe2d",
+      "parent": "nfad09350",
+      "order": 33,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/33-n66b4fe2d.mp4",
+      "poster": "assets/img/stories/w3911e1d0/33-n66b4fe2d.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n4db3a45d",
+      "parent": "n66b4fe2d",
+      "order": 34,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/34-n4db3a45d.mp4",
+      "poster": "assets/img/stories/w3911e1d0/34-n4db3a45d.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n4854add6",
+      "parent": "n4db3a45d",
+      "order": 35,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/35-n4854add6.mp4",
+      "poster": "assets/img/stories/w3911e1d0/35-n4854add6.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n2f1941b3",
+      "parent": "n4854add6",
+      "order": 36,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/36-n2f1941b3.mp4",
+      "poster": "assets/img/stories/w3911e1d0/36-n2f1941b3.jpg"
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n35fac0d2",
+      "parent": "n2f1941b3",
+      "order": 37,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3911e1d0/37-n35fac0d2.mp4",
+      "poster": "assets/img/stories/w3911e1d0/37-n35fac0d2.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "nbdf77feb",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/01-nbdf77feb.mp4",
+      "poster": "assets/img/stories/w5cf94675/01-nbdf77feb.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n022f656d",
+      "parent": "nbdf77feb",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/02-n022f656d.mp4",
+      "poster": "assets/img/stories/w5cf94675/02-n022f656d.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n0bd5729a",
+      "parent": "n022f656d",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/03-n0bd5729a.mp4",
+      "poster": "assets/img/stories/w5cf94675/03-n0bd5729a.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "nf2c4bf8f",
+      "parent": "n0bd5729a",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/04-nf2c4bf8f.mp4",
+      "poster": "assets/img/stories/w5cf94675/04-nf2c4bf8f.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "nd433c91c",
+      "parent": "nf2c4bf8f",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/05-nd433c91c.mp4",
+      "poster": "assets/img/stories/w5cf94675/05-nd433c91c.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n8997ed83",
+      "parent": "nd433c91c",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/06-n8997ed83.mp4",
+      "poster": "assets/img/stories/w5cf94675/06-n8997ed83.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "nf1df7d0b",
+      "parent": "n8997ed83",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/07-nf1df7d0b.mp4",
+      "poster": "assets/img/stories/w5cf94675/07-nf1df7d0b.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n2c2e6dd5",
+      "parent": "nf1df7d0b",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/08-n2c2e6dd5.mp4",
+      "poster": "assets/img/stories/w5cf94675/08-n2c2e6dd5.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "ncbf4dfb7",
+      "parent": "n2c2e6dd5",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/09-ncbf4dfb7.mp4",
+      "poster": "assets/img/stories/w5cf94675/09-ncbf4dfb7.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n4925ea6c",
+      "parent": "ncbf4dfb7",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/10-n4925ea6c.mp4",
+      "poster": "assets/img/stories/w5cf94675/10-n4925ea6c.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n8ac724fb",
+      "parent": "n4925ea6c",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/11-n8ac724fb.mp4",
+      "poster": "assets/img/stories/w5cf94675/11-n8ac724fb.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n22268afd",
+      "parent": "n8ac724fb",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/12-n22268afd.mp4",
+      "poster": "assets/img/stories/w5cf94675/12-n22268afd.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n968fc4f0",
+      "parent": "n22268afd",
+      "order": 13,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/13-n968fc4f0.mp4",
+      "poster": "assets/img/stories/w5cf94675/13-n968fc4f0.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n312caf59",
+      "parent": "n968fc4f0",
+      "order": 14,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/14-n312caf59.mp4",
+      "poster": "assets/img/stories/w5cf94675/14-n312caf59.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n2992774a",
+      "parent": "n312caf59",
+      "order": 15,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/15-n2992774a.mp4",
+      "poster": "assets/img/stories/w5cf94675/15-n2992774a.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n828ca13e",
+      "parent": "n2992774a",
+      "order": 16,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/16-n828ca13e.mp4",
+      "poster": "assets/img/stories/w5cf94675/16-n828ca13e.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "nea69830f",
+      "parent": "n828ca13e",
+      "order": 17,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/17-nea69830f.mp4",
+      "poster": "assets/img/stories/w5cf94675/17-nea69830f.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "naf0bda28",
+      "parent": "nea69830f",
+      "order": 18,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/18-naf0bda28.mp4",
+      "poster": "assets/img/stories/w5cf94675/18-naf0bda28.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n8dfa28cf",
+      "parent": "naf0bda28",
+      "order": 19,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/19-n8dfa28cf.mp4",
+      "poster": "assets/img/stories/w5cf94675/19-n8dfa28cf.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "na9ee9e83",
+      "parent": "n8dfa28cf",
+      "order": 20,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/20-na9ee9e83.mp4",
+      "poster": "assets/img/stories/w5cf94675/20-na9ee9e83.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n7a4ddded",
+      "parent": "na9ee9e83",
+      "order": 21,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/21-n7a4ddded.mp4",
+      "poster": "assets/img/stories/w5cf94675/21-n7a4ddded.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "nfb5aea32",
+      "parent": "n7a4ddded",
+      "order": 22,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/22-nfb5aea32.mp4",
+      "poster": "assets/img/stories/w5cf94675/22-nfb5aea32.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n324e1fa6",
+      "parent": "nfb5aea32",
+      "order": 23,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/23-n324e1fa6.mp4",
+      "poster": "assets/img/stories/w5cf94675/23-n324e1fa6.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n4844d892",
+      "parent": "n324e1fa6",
+      "order": 24,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/24-n4844d892.mp4",
+      "poster": "assets/img/stories/w5cf94675/24-n4844d892.jpg"
+    },
+    {
+      "world": "w5cf94675",
+      "node": "n1277c0de",
+      "parent": "n4844d892",
+      "order": 25,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5cf94675/25-n1277c0de.mp4",
+      "poster": "assets/img/stories/w5cf94675/25-n1277c0de.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nbdcc4992",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/01-nbdcc4992.mp4",
+      "poster": "assets/img/stories/w3601e4f4/01-nbdcc4992.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n6ee037fd",
+      "parent": "nbdcc4992",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/02-n6ee037fd.mp4",
+      "poster": "assets/img/stories/w3601e4f4/02-n6ee037fd.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "ndc32d596",
+      "parent": "n6ee037fd",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/03-ndc32d596.mp4",
+      "poster": "assets/img/stories/w3601e4f4/03-ndc32d596.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n671742f4",
+      "parent": "ndc32d596",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/04-n671742f4.mp4",
+      "poster": "assets/img/stories/w3601e4f4/04-n671742f4.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n4aa93be6",
+      "parent": "n671742f4",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/05-n4aa93be6.mp4",
+      "poster": "assets/img/stories/w3601e4f4/05-n4aa93be6.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "neb9d23aa",
+      "parent": "n4aa93be6",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/06-neb9d23aa.mp4",
+      "poster": "assets/img/stories/w3601e4f4/06-neb9d23aa.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n582ba2e1",
+      "parent": "neb9d23aa",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/07-n582ba2e1.mp4",
+      "poster": "assets/img/stories/w3601e4f4/07-n582ba2e1.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n15541c70",
+      "parent": "n582ba2e1",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/08-n15541c70.mp4",
+      "poster": "assets/img/stories/w3601e4f4/08-n15541c70.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "na26f4284",
+      "parent": "n15541c70",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/09-na26f4284.mp4",
+      "poster": "assets/img/stories/w3601e4f4/09-na26f4284.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n9fed4489",
+      "parent": "na26f4284",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/10-n9fed4489.mp4",
+      "poster": "assets/img/stories/w3601e4f4/10-n9fed4489.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n9d047eb3",
+      "parent": "n9fed4489",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/11-n9d047eb3.mp4",
+      "poster": "assets/img/stories/w3601e4f4/11-n9d047eb3.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n3bb3e1ac",
+      "parent": "n9d047eb3",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/12-n3bb3e1ac.mp4",
+      "poster": "assets/img/stories/w3601e4f4/12-n3bb3e1ac.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n5765b6ea",
+      "parent": "n3bb3e1ac",
+      "order": 13,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/13-n5765b6ea.mp4",
+      "poster": "assets/img/stories/w3601e4f4/13-n5765b6ea.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "ne809633e",
+      "parent": "n5765b6ea",
+      "order": 14,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/14-ne809633e.mp4",
+      "poster": "assets/img/stories/w3601e4f4/14-ne809633e.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nb820126d",
+      "parent": "ne809633e",
+      "order": 15,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/15-nb820126d.mp4",
+      "poster": "assets/img/stories/w3601e4f4/15-nb820126d.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n21d86c57",
+      "parent": "nb820126d",
+      "order": 16,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/16-n21d86c57.mp4",
+      "poster": "assets/img/stories/w3601e4f4/16-n21d86c57.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nc6d46516",
+      "parent": "n21d86c57",
+      "order": 17,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/17-nc6d46516.mp4",
+      "poster": "assets/img/stories/w3601e4f4/17-nc6d46516.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n84bc6ebf",
+      "parent": "nc6d46516",
+      "order": 18,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/18-n84bc6ebf.mp4",
+      "poster": "assets/img/stories/w3601e4f4/18-n84bc6ebf.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n0d1795d2",
+      "parent": "n84bc6ebf",
+      "order": 19,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/19-n0d1795d2.mp4",
+      "poster": "assets/img/stories/w3601e4f4/19-n0d1795d2.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n1e6bf97a",
+      "parent": "n0d1795d2",
+      "order": 20,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/20-n1e6bf97a.mp4",
+      "poster": "assets/img/stories/w3601e4f4/20-n1e6bf97a.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n6f456864",
+      "parent": "n1e6bf97a",
+      "order": 21,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/21-n6f456864.mp4",
+      "poster": "assets/img/stories/w3601e4f4/21-n6f456864.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nc3aa658c",
+      "parent": "n6f456864",
+      "order": 22,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/22-nc3aa658c.mp4",
+      "poster": "assets/img/stories/w3601e4f4/22-nc3aa658c.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n62d14ba2",
+      "parent": "nc3aa658c",
+      "order": 23,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/23-n62d14ba2.mp4",
+      "poster": "assets/img/stories/w3601e4f4/23-n62d14ba2.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n4959496d",
+      "parent": "n62d14ba2",
+      "order": 24,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/24-n4959496d.mp4",
+      "poster": "assets/img/stories/w3601e4f4/24-n4959496d.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n55627faa",
+      "parent": "n4959496d",
+      "order": 25,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/25-n55627faa.mp4",
+      "poster": "assets/img/stories/w3601e4f4/25-n55627faa.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n31bdeadc",
+      "parent": "n55627faa",
+      "order": 26,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/26-n31bdeadc.mp4",
+      "poster": "assets/img/stories/w3601e4f4/26-n31bdeadc.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "naa5bb474",
+      "parent": "n31bdeadc",
+      "order": 27,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/27-naa5bb474.mp4",
+      "poster": "assets/img/stories/w3601e4f4/27-naa5bb474.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nb03086c1",
+      "parent": "naa5bb474",
+      "order": 28,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/28-nb03086c1.mp4",
+      "poster": "assets/img/stories/w3601e4f4/28-nb03086c1.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n464fad18",
+      "parent": "nb03086c1",
+      "order": 29,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/29-n464fad18.mp4",
+      "poster": "assets/img/stories/w3601e4f4/29-n464fad18.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nf866dc73",
+      "parent": "n464fad18",
+      "order": 30,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/30-nf866dc73.mp4",
+      "poster": "assets/img/stories/w3601e4f4/30-nf866dc73.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nf316e8a5",
+      "parent": "nf866dc73",
+      "order": 31,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/31-nf316e8a5.mp4",
+      "poster": "assets/img/stories/w3601e4f4/31-nf316e8a5.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n6fe81d56",
+      "parent": "nf316e8a5",
+      "order": 32,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/32-n6fe81d56.mp4",
+      "poster": "assets/img/stories/w3601e4f4/32-n6fe81d56.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n4bd319e8",
+      "parent": "n6fe81d56",
+      "order": 33,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/33-n4bd319e8.mp4",
+      "poster": "assets/img/stories/w3601e4f4/33-n4bd319e8.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nd494517f",
+      "parent": "n4bd319e8",
+      "order": 34,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/34-nd494517f.mp4",
+      "poster": "assets/img/stories/w3601e4f4/34-nd494517f.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n4f84fad2",
+      "parent": "nd494517f",
+      "order": 35,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/35-n4f84fad2.mp4",
+      "poster": "assets/img/stories/w3601e4f4/35-n4f84fad2.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nbec85f44",
+      "parent": "n4f84fad2",
+      "order": 36,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/36-nbec85f44.mp4",
+      "poster": "assets/img/stories/w3601e4f4/36-nbec85f44.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nf7a78460",
+      "parent": "nbec85f44",
+      "order": 37,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/37-nf7a78460.mp4",
+      "poster": "assets/img/stories/w3601e4f4/37-nf7a78460.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n100d9603",
+      "parent": "nf7a78460",
+      "order": 38,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/38-n100d9603.mp4",
+      "poster": "assets/img/stories/w3601e4f4/38-n100d9603.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n2489309a",
+      "parent": "n100d9603",
+      "order": 39,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/39-n2489309a.mp4",
+      "poster": "assets/img/stories/w3601e4f4/39-n2489309a.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n713eed15",
+      "parent": "n2489309a",
+      "order": 40,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/40-n713eed15.mp4",
+      "poster": "assets/img/stories/w3601e4f4/40-n713eed15.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n9d2e9aea",
+      "parent": "n713eed15",
+      "order": 41,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/41-n9d2e9aea.mp4",
+      "poster": "assets/img/stories/w3601e4f4/41-n9d2e9aea.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "ndd34e97d",
+      "parent": "n9d2e9aea",
+      "order": 42,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/42-ndd34e97d.mp4",
+      "poster": "assets/img/stories/w3601e4f4/42-ndd34e97d.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "nd82aebba",
+      "parent": "ndd34e97d",
+      "order": 43,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/43-nd82aebba.mp4",
+      "poster": "assets/img/stories/w3601e4f4/43-nd82aebba.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n326e0e8f",
+      "parent": "nd82aebba",
+      "order": 44,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/44-n326e0e8f.mp4",
+      "poster": "assets/img/stories/w3601e4f4/44-n326e0e8f.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "naff8e549",
+      "parent": "n326e0e8f",
+      "order": 45,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/45-naff8e549.mp4",
+      "poster": "assets/img/stories/w3601e4f4/45-naff8e549.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n99dc8890",
+      "parent": "naff8e549",
+      "order": 46,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/46-n99dc8890.mp4",
+      "poster": "assets/img/stories/w3601e4f4/46-n99dc8890.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "ne6020e72",
+      "parent": "n99dc8890",
+      "order": 47,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/47-ne6020e72.mp4",
+      "poster": "assets/img/stories/w3601e4f4/47-ne6020e72.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n66397319",
+      "parent": "ne6020e72",
+      "order": 48,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/48-n66397319.mp4",
+      "poster": "assets/img/stories/w3601e4f4/48-n66397319.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "na79d33c5",
+      "parent": "n66397319",
+      "order": 49,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/49-na79d33c5.mp4",
+      "poster": "assets/img/stories/w3601e4f4/49-na79d33c5.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n9d309ad3",
+      "parent": "na79d33c5",
+      "order": 50,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/50-n9d309ad3.mp4",
+      "poster": "assets/img/stories/w3601e4f4/50-n9d309ad3.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "ned3a72f0",
+      "parent": "n9d309ad3",
+      "order": 51,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/51-ned3a72f0.mp4",
+      "poster": "assets/img/stories/w3601e4f4/51-ned3a72f0.jpg"
+    },
+    {
+      "world": "w3601e4f4",
+      "node": "n86e221d0",
+      "parent": "ned3a72f0",
+      "order": 52,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3601e4f4/52-n86e221d0.mp4",
+      "poster": "assets/img/stories/w3601e4f4/52-n86e221d0.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n967a10b1",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/01-n967a10b1.mp4",
+      "poster": "assets/img/stories/wed62bfd6/01-n967a10b1.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "nf51db018",
+      "parent": "n967a10b1",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/02-nf51db018.mp4",
+      "poster": "assets/img/stories/wed62bfd6/02-nf51db018.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n3a91d2ee",
+      "parent": "nf51db018",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/03-n3a91d2ee.mp4",
+      "poster": "assets/img/stories/wed62bfd6/03-n3a91d2ee.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n367bcac3",
+      "parent": "n3a91d2ee",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/04-n367bcac3.mp4",
+      "poster": "assets/img/stories/wed62bfd6/04-n367bcac3.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n2156559b",
+      "parent": "n367bcac3",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/05-n2156559b.mp4",
+      "poster": "assets/img/stories/wed62bfd6/05-n2156559b.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "nd0a6daf2",
+      "parent": "n2156559b",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/06-nd0a6daf2.mp4",
+      "poster": "assets/img/stories/wed62bfd6/06-nd0a6daf2.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "nc9239c41",
+      "parent": "nd0a6daf2",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/07-nc9239c41.mp4",
+      "poster": "assets/img/stories/wed62bfd6/07-nc9239c41.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n933d4e3a",
+      "parent": "nc9239c41",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/08-n933d4e3a.mp4",
+      "poster": "assets/img/stories/wed62bfd6/08-n933d4e3a.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n7676956a",
+      "parent": "n933d4e3a",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/09-n7676956a.mp4",
+      "poster": "assets/img/stories/wed62bfd6/09-n7676956a.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "nc9d90d64",
+      "parent": "n7676956a",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/10-nc9d90d64.mp4",
+      "poster": "assets/img/stories/wed62bfd6/10-nc9d90d64.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n3f9582cb",
+      "parent": "nc9d90d64",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/11-n3f9582cb.mp4",
+      "poster": "assets/img/stories/wed62bfd6/11-n3f9582cb.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n51a34903",
+      "parent": "n3f9582cb",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/12-n51a34903.mp4",
+      "poster": "assets/img/stories/wed62bfd6/12-n51a34903.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n41257d4c",
+      "parent": "n51a34903",
+      "order": 13,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/13-n41257d4c.mp4",
+      "poster": "assets/img/stories/wed62bfd6/13-n41257d4c.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "n38dbc28b",
+      "parent": "n41257d4c",
+      "order": 14,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/14-n38dbc28b.mp4",
+      "poster": "assets/img/stories/wed62bfd6/14-n38dbc28b.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "nff1d902a",
+      "parent": "n38dbc28b",
+      "order": 15,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/15-nff1d902a.mp4",
+      "poster": "assets/img/stories/wed62bfd6/15-nff1d902a.jpg"
+    },
+    {
+      "world": "wed62bfd6",
+      "node": "nb7b8eab9",
+      "parent": "nff1d902a",
+      "order": 16,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wed62bfd6/16-nb7b8eab9.mp4",
+      "poster": "assets/img/stories/wed62bfd6/16-nb7b8eab9.jpg"
+    },
+    {
+      "world": "w4739b07e",
+      "node": "nabca061b",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w4739b07e/01-nabca061b.mp4",
+      "poster": "assets/img/stories/w4739b07e/01-nabca061b.jpg"
+    },
+    {
+      "world": "w4739b07e",
+      "node": "nd10a6931",
+      "parent": "nabca061b",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w4739b07e/02-nd10a6931.mp4",
+      "poster": "assets/img/stories/w4739b07e/02-nd10a6931.jpg"
+    },
+    {
+      "world": "w639b3bcc",
+      "node": "n0b0f1f3b",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w639b3bcc/01-n0b0f1f3b.mp4",
+      "poster": "assets/img/stories/w639b3bcc/01-n0b0f1f3b.jpg"
+    },
+    {
+      "world": "w639b3bcc",
+      "node": "n45c314eb",
+      "parent": "n0b0f1f3b",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w639b3bcc/02-n45c314eb.mp4",
+      "poster": "assets/img/stories/w639b3bcc/02-n45c314eb.jpg"
+    },
+    {
+      "world": "w33aefabd",
+      "node": "n71820849",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w33aefabd/01-n71820849.mp4",
+      "poster": "assets/img/stories/w33aefabd/01-n71820849.jpg"
+    },
+    {
+      "world": "w33aefabd",
+      "node": "n036cee4a",
+      "parent": "n71820849",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w33aefabd/02-n036cee4a.mp4",
+      "poster": "assets/img/stories/w33aefabd/02-n036cee4a.jpg"
+    },
+    {
+      "world": "w5a7b9f20",
+      "node": "n130cd012",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w5a7b9f20/01-n130cd012.mp4",
+      "poster": "assets/img/stories/w5a7b9f20/01-n130cd012.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "nd36601b0",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/01-nd36601b0.mp4",
+      "poster": "assets/img/stories/wa2609173/01-nd36601b0.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "nfad24f41",
+      "parent": "nd36601b0",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/02-nfad24f41.mp4",
+      "poster": "assets/img/stories/wa2609173/02-nfad24f41.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n8931248d",
+      "parent": "nfad24f41",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/03-n8931248d.mp4",
+      "poster": "assets/img/stories/wa2609173/03-n8931248d.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n71d7a64e",
+      "parent": "n8931248d",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/04-n71d7a64e.mp4",
+      "poster": "assets/img/stories/wa2609173/04-n71d7a64e.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n5fd63fa2",
+      "parent": "n71d7a64e",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/05-n5fd63fa2.mp4",
+      "poster": "assets/img/stories/wa2609173/05-n5fd63fa2.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n7972c275",
+      "parent": "n5fd63fa2",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/06-n7972c275.mp4",
+      "poster": "assets/img/stories/wa2609173/06-n7972c275.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n77263bf8",
+      "parent": "n7972c275",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/07-n77263bf8.mp4",
+      "poster": "assets/img/stories/wa2609173/07-n77263bf8.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n66e2893b",
+      "parent": "n77263bf8",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/08-n66e2893b.mp4",
+      "poster": "assets/img/stories/wa2609173/08-n66e2893b.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n287ee1e2",
+      "parent": "n66e2893b",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/09-n287ee1e2.mp4",
+      "poster": "assets/img/stories/wa2609173/09-n287ee1e2.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n8416fe3b",
+      "parent": "n287ee1e2",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/10-n8416fe3b.mp4",
+      "poster": "assets/img/stories/wa2609173/10-n8416fe3b.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "n6233ae85",
+      "parent": "n8416fe3b",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/11-n6233ae85.mp4",
+      "poster": "assets/img/stories/wa2609173/11-n6233ae85.jpg"
+    },
+    {
+      "world": "wa2609173",
+      "node": "nc90263a0",
+      "parent": "n6233ae85",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wa2609173/12-nc90263a0.mp4",
+      "poster": "assets/img/stories/wa2609173/12-nc90263a0.jpg"
+    },
+    {
+      "world": "wf9e40569",
+      "node": "n8daf15bb",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf9e40569/01-n8daf15bb.mp4",
+      "poster": "assets/img/stories/wf9e40569/01-n8daf15bb.jpg"
+    },
+    {
+      "world": "wf9e40569",
+      "node": "n8e957f43",
+      "parent": "n8daf15bb",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wf9e40569/02-n8e957f43.mp4",
+      "poster": "assets/img/stories/wf9e40569/02-n8e957f43.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n878fa573",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/01-n878fa573.mp4",
+      "poster": "assets/img/stories/wca3639d2/01-n878fa573.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n260c46a6",
+      "parent": "n878fa573",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/02-n260c46a6.mp4",
+      "poster": "assets/img/stories/wca3639d2/02-n260c46a6.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "nb3507f58",
+      "parent": "n260c46a6",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/03-nb3507f58.mp4",
+      "poster": "assets/img/stories/wca3639d2/03-nb3507f58.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n953f6e81",
+      "parent": "nb3507f58",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/04-n953f6e81.mp4",
+      "poster": "assets/img/stories/wca3639d2/04-n953f6e81.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n55b40ff7",
+      "parent": "n953f6e81",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/05-n55b40ff7.mp4",
+      "poster": "assets/img/stories/wca3639d2/05-n55b40ff7.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "nc316e905",
+      "parent": "n55b40ff7",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/06-nc316e905.mp4",
+      "poster": "assets/img/stories/wca3639d2/06-nc316e905.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n3f705c30",
+      "parent": "nc316e905",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/07-n3f705c30.mp4",
+      "poster": "assets/img/stories/wca3639d2/07-n3f705c30.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "nd6f29f95",
+      "parent": "n3f705c30",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/08-nd6f29f95.mp4",
+      "poster": "assets/img/stories/wca3639d2/08-nd6f29f95.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "nbde58bdf",
+      "parent": "nd6f29f95",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/09-nbde58bdf.mp4",
+      "poster": "assets/img/stories/wca3639d2/09-nbde58bdf.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n4c86782d",
+      "parent": "nbde58bdf",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/10-n4c86782d.mp4",
+      "poster": "assets/img/stories/wca3639d2/10-n4c86782d.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n95d0fe99",
+      "parent": "n4c86782d",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/11-n95d0fe99.mp4",
+      "poster": "assets/img/stories/wca3639d2/11-n95d0fe99.jpg"
+    },
+    {
+      "world": "wca3639d2",
+      "node": "n5464227d",
+      "parent": "n95d0fe99",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wca3639d2/12-n5464227d.mp4",
+      "poster": "assets/img/stories/wca3639d2/12-n5464227d.jpg"
+    },
+    {
+      "world": "w3d3db860",
+      "node": "nbeb7d034",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3d3db860/01-nbeb7d034.mp4",
+      "poster": "assets/img/stories/w3d3db860/01-nbeb7d034.jpg"
+    },
+    {
+      "world": "w3d3db860",
+      "node": "nac5bc5d1",
+      "parent": "nbeb7d034",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3d3db860/02-nac5bc5d1.mp4",
+      "poster": "assets/img/stories/w3d3db860/02-nac5bc5d1.jpg"
+    },
+    {
+      "world": "w3d3db860",
+      "node": "nf328bfd7",
+      "parent": "nac5bc5d1",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3d3db860/03-nf328bfd7.mp4",
+      "poster": "assets/img/stories/w3d3db860/03-nf328bfd7.jpg"
+    },
+    {
+      "world": "w3d3db860",
+      "node": "n235f0a69",
+      "parent": "nf328bfd7",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3d3db860/04-n235f0a69.mp4",
+      "poster": "assets/img/stories/w3d3db860/04-n235f0a69.jpg"
+    },
+    {
+      "world": "w3d3db860",
+      "node": "ncd0950d1",
+      "parent": "n235f0a69",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3d3db860/05-ncd0950d1.mp4",
+      "poster": "assets/img/stories/w3d3db860/05-ncd0950d1.jpg"
+    },
+    {
+      "world": "w3d3db860",
+      "node": "n0546a230",
+      "parent": "ncd0950d1",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3d3db860/06-n0546a230.mp4",
+      "poster": "assets/img/stories/w3d3db860/06-n0546a230.jpg"
+    },
+    {
+      "world": "w3d3db860",
+      "node": "nf3379039",
+      "parent": "n0546a230",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w3d3db860/07-nf3379039.mp4",
+      "poster": "assets/img/stories/w3d3db860/07-nf3379039.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n7cc27641",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/01-n7cc27641.mp4",
+      "poster": "assets/img/stories/w0ac762aa/01-n7cc27641.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n94f52f33",
+      "parent": "n7cc27641",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/02-n94f52f33.mp4",
+      "poster": "assets/img/stories/w0ac762aa/02-n94f52f33.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "nea954a28",
+      "parent": "n94f52f33",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/03-nea954a28.mp4",
+      "poster": "assets/img/stories/w0ac762aa/03-nea954a28.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "nb35ef85d",
+      "parent": "nea954a28",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/04-nb35ef85d.mp4",
+      "poster": "assets/img/stories/w0ac762aa/04-nb35ef85d.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n46b5ee06",
+      "parent": "nb35ef85d",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/05-n46b5ee06.mp4",
+      "poster": "assets/img/stories/w0ac762aa/05-n46b5ee06.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n3e2715d3",
+      "parent": "n46b5ee06",
+      "order": 6,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/06-n3e2715d3.mp4",
+      "poster": "assets/img/stories/w0ac762aa/06-n3e2715d3.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n3363a921",
+      "parent": "n3e2715d3",
+      "order": 7,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/07-n3363a921.mp4",
+      "poster": "assets/img/stories/w0ac762aa/07-n3363a921.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n82d54660",
+      "parent": "n3363a921",
+      "order": 8,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/08-n82d54660.mp4",
+      "poster": "assets/img/stories/w0ac762aa/08-n82d54660.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "nb0d37ff6",
+      "parent": "n82d54660",
+      "order": 9,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/09-nb0d37ff6.mp4",
+      "poster": "assets/img/stories/w0ac762aa/09-nb0d37ff6.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "ned21dd91",
+      "parent": "nb0d37ff6",
+      "order": 10,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/10-ned21dd91.mp4",
+      "poster": "assets/img/stories/w0ac762aa/10-ned21dd91.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n72e8ca89",
+      "parent": "ned21dd91",
+      "order": 11,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/11-n72e8ca89.mp4",
+      "poster": "assets/img/stories/w0ac762aa/11-n72e8ca89.jpg"
+    },
+    {
+      "world": "w0ac762aa",
+      "node": "n21c6da1b",
+      "parent": "n72e8ca89",
+      "order": 12,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0ac762aa/12-n21c6da1b.mp4",
+      "poster": "assets/img/stories/w0ac762aa/12-n21c6da1b.jpg"
+    },
+    {
+      "world": "wff17017d",
+      "node": "na4958348",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wff17017d/01-na4958348.mp4",
+      "poster": "assets/img/stories/wff17017d/01-na4958348.jpg"
+    },
+    {
+      "world": "wff17017d",
+      "node": "n54f8dd22",
+      "parent": "na4958348",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wff17017d/02-n54f8dd22.mp4",
+      "poster": "assets/img/stories/wff17017d/02-n54f8dd22.jpg"
+    },
+    {
+      "world": "wff17017d",
+      "node": "n077f028f",
+      "parent": "n54f8dd22",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wff17017d/03-n077f028f.mp4",
+      "poster": "assets/img/stories/wff17017d/03-n077f028f.jpg"
+    },
+    {
+      "world": "wff17017d",
+      "node": "n83012c7c",
+      "parent": "n077f028f",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wff17017d/04-n83012c7c.mp4",
+      "poster": "assets/img/stories/wff17017d/04-n83012c7c.jpg"
+    },
+    {
+      "world": "wff17017d",
+      "node": "n4be5014a",
+      "parent": "n83012c7c",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wff17017d/05-n4be5014a.mp4",
+      "poster": "assets/img/stories/wff17017d/05-n4be5014a.jpg"
+    },
+    {
+      "world": "w7598e5bd",
+      "node": "n271f6cf0",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w7598e5bd/01-n271f6cf0.mp4",
+      "poster": "assets/img/stories/w7598e5bd/01-n271f6cf0.jpg"
+    },
+    {
+      "world": "w7598e5bd",
+      "node": "nbfbfbf48",
+      "parent": "n271f6cf0",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w7598e5bd/02-nbfbfbf48.mp4",
+      "poster": "assets/img/stories/w7598e5bd/02-nbfbfbf48.jpg"
+    },
+    {
+      "world": "w7598e5bd",
+      "node": "nd7a0c478",
+      "parent": "nbfbfbf48",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w7598e5bd/03-nd7a0c478.mp4",
+      "poster": "assets/img/stories/w7598e5bd/03-nd7a0c478.jpg"
+    },
+    {
+      "world": "wae5c9fc5",
+      "node": "n9459c299",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wae5c9fc5/01-n9459c299.mp4",
+      "poster": "assets/img/stories/wae5c9fc5/01-n9459c299.jpg"
+    },
+    {
+      "world": "wae5c9fc5",
+      "node": "n9b5db0dc",
+      "parent": "n9459c299",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wae5c9fc5/02-n9b5db0dc.mp4",
+      "poster": "assets/img/stories/wae5c9fc5/02-n9b5db0dc.jpg"
+    },
+    {
+      "world": "wae5c9fc5",
+      "node": "n9517eb36",
+      "parent": "n9b5db0dc",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wae5c9fc5/03-n9517eb36.mp4",
+      "poster": "assets/img/stories/wae5c9fc5/03-n9517eb36.jpg"
+    },
+    {
+      "world": "wae5c9fc5",
+      "node": "nd58b296c",
+      "parent": "n9517eb36",
+      "order": 4,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wae5c9fc5/04-nd58b296c.mp4",
+      "poster": "assets/img/stories/wae5c9fc5/04-nd58b296c.jpg"
+    },
+    {
+      "world": "wae5c9fc5",
+      "node": "n0ed38149",
+      "parent": "nd58b296c",
+      "order": 5,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wae5c9fc5/05-n0ed38149.mp4",
+      "poster": "assets/img/stories/wae5c9fc5/05-n0ed38149.jpg"
+    },
+    {
+      "world": "w162e3039",
+      "node": "na4680bf5",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w162e3039/01-na4680bf5.mp4",
+      "poster": "assets/img/stories/w162e3039/01-na4680bf5.jpg"
+    },
+    {
+      "world": "w162e3039",
+      "node": "nd94a4b6f",
+      "parent": "na4680bf5",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w162e3039/02-nd94a4b6f.mp4",
+      "poster": "assets/img/stories/w162e3039/02-nd94a4b6f.jpg"
+    },
+    {
+      "world": "w9bf7dfa1",
+      "node": "n8cad8f27",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w9bf7dfa1/01-n8cad8f27.mp4",
+      "poster": "assets/img/stories/w9bf7dfa1/01-n8cad8f27.jpg"
+    },
+    {
+      "world": "w9bf7dfa1",
+      "node": "ncc4c1adb",
+      "parent": "n8cad8f27",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w9bf7dfa1/02-ncc4c1adb.mp4",
+      "poster": "assets/img/stories/w9bf7dfa1/02-ncc4c1adb.jpg"
+    },
+    {
+      "world": "wea0f76cd",
+      "node": "ncd59ff7d",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wea0f76cd/01-ncd59ff7d.mp4",
+      "poster": "assets/img/stories/wea0f76cd/01-ncd59ff7d.jpg"
+    },
+    {
+      "world": "wea0f76cd",
+      "node": "n0e2edcc4",
+      "parent": "ncd59ff7d",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wea0f76cd/02-n0e2edcc4.mp4",
+      "poster": "assets/img/stories/wea0f76cd/02-n0e2edcc4.jpg"
+    },
+    {
+      "world": "wea0f76cd",
+      "node": "n9e0decf0",
+      "parent": "n0e2edcc4",
+      "order": 3,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wea0f76cd/03-n9e0decf0.mp4",
+      "poster": "assets/img/stories/wea0f76cd/03-n9e0decf0.jpg"
+    },
+    {
+      "world": "w4825684f",
+      "node": "n79b3a9f7",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w4825684f/01-n79b3a9f7.mp4",
+      "poster": "assets/img/stories/w4825684f/01-n79b3a9f7.jpg"
+    },
+    {
+      "world": "w4825684f",
+      "node": "n2b4ba508",
+      "parent": "n79b3a9f7",
+      "order": 2,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w4825684f/02-n2b4ba508.mp4",
+      "poster": "assets/img/stories/w4825684f/02-n2b4ba508.jpg"
+    },
+    {
+      "world": "w113814c6",
+      "node": "nc3c8b236",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w113814c6/01-nc3c8b236.mp4",
+      "poster": "assets/img/stories/w113814c6/01-nc3c8b236.jpg"
+    },
+    {
+      "world": "waa3ad17e",
+      "node": "nd93751e3",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/waa3ad17e/01-nd93751e3.mp4",
+      "poster": "assets/img/stories/waa3ad17e/01-nd93751e3.jpg"
+    },
+    {
+      "world": "wc7c00124",
+      "node": "n7f7033eb",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wc7c00124/01-n7f7033eb.mp4",
+      "poster": "assets/img/stories/wc7c00124/01-n7f7033eb.jpg"
+    },
+    {
+      "world": "wd3171f31",
+      "node": "n91522dc8",
+      "parent": null,
+      "order": 1,
+      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wd3171f31/01-n91522dc8.mp4",
+      "poster": "assets/img/stories/wd3171f31/01-n91522dc8.jpg"
+    }
+  ]
+}
