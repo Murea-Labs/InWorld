@@ -323,67 +323,57 @@
     },
     {
       "world": "w0a0518a8",
-      "node": "na045a72e",
-      "parent": null,
-      "order": 1,
-      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/01-na045a72e.mp4",
-      "poster": "assets/img/stories/w0a0518a8/01-na045a72e.jpg"
-    },
-    {
-      "world": "w0a0518a8",
-      "node": "n8e13b61d",
-      "parent": "na045a72e",
-      "order": 2,
-      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/02-n8e13b61d.mp4",
-      "poster": "assets/img/stories/w0a0518a8/02-n8e13b61d.jpg"
-    },
-    {
-      "world": "w0a0518a8",
       "node": "ned602f63",
       "parent": "n8e13b61d",
-      "order": 3,
+      "order": 1,
       "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/03-ned602f63.mp4",
-      "poster": "assets/img/stories/w0a0518a8/03-ned602f63.jpg"
+      "poster": "assets/img/stories/w0a0518a8/03-ned602f63.jpg",
+      "source_order": 3
     },
     {
       "world": "w0a0518a8",
       "node": "n6131280f",
       "parent": "ned602f63",
-      "order": 4,
+      "order": 2,
       "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/04-n6131280f.mp4",
-      "poster": "assets/img/stories/w0a0518a8/04-n6131280f.jpg"
+      "poster": "assets/img/stories/w0a0518a8/04-n6131280f.jpg",
+      "source_order": 4
     },
     {
       "world": "w0a0518a8",
       "node": "nbaca1d7a",
       "parent": "n6131280f",
-      "order": 5,
+      "order": 3,
       "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/05-nbaca1d7a.mp4",
-      "poster": "assets/img/stories/w0a0518a8/05-nbaca1d7a.jpg"
+      "poster": "assets/img/stories/w0a0518a8/05-nbaca1d7a.jpg",
+      "source_order": 5
     },
     {
       "world": "w0a0518a8",
       "node": "n3887ac57",
       "parent": "nbaca1d7a",
-      "order": 6,
+      "order": 4,
       "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/06-n3887ac57.mp4",
-      "poster": "assets/img/stories/w0a0518a8/06-n3887ac57.jpg"
+      "poster": "assets/img/stories/w0a0518a8/06-n3887ac57.jpg",
+      "source_order": 6
     },
     {
       "world": "w0a0518a8",
       "node": "n2ce1970c",
       "parent": "n3887ac57",
-      "order": 7,
+      "order": 5,
       "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/07-n2ce1970c.mp4",
-      "poster": "assets/img/stories/w0a0518a8/07-n2ce1970c.jpg"
+      "poster": "assets/img/stories/w0a0518a8/07-n2ce1970c.jpg",
+      "source_order": 7
     },
     {
       "world": "w0a0518a8",
       "node": "n5dd3e0be",
       "parent": "n2ce1970c",
-      "order": 8,
+      "order": 6,
       "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/w0a0518a8/08-n5dd3e0be.mp4",
-      "poster": "assets/img/stories/w0a0518a8/08-n5dd3e0be.jpg"
+      "poster": "assets/img/stories/w0a0518a8/08-n5dd3e0be.jpg",
+      "source_order": 8
     },
     {
       "world": "wadb2b8dc",
@@ -2680,14 +2670,6 @@
       "order": 1,
       "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/waa3ad17e/01-nd93751e3.mp4",
       "poster": "assets/img/stories/waa3ad17e/01-nd93751e3.jpg"
-    },
-    {
-      "world": "wc7c00124",
-      "node": "n7f7033eb",
-      "parent": null,
-      "order": 1,
-      "video": "https://aura-data-training.vicoo.ai/Musee/InWorld/story-library-20261013-v1/wc7c00124/01-n7f7033eb.mp4",
-      "poster": "assets/img/stories/wc7c00124/01-n7f7033eb.jpg"
     },
     {
       "world": "wd3171f31",

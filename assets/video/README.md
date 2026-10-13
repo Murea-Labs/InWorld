@@ -1,10 +1,22 @@
 # Story previews
 
-The page contains 337 clips from 36 worlds, arranged into one parent-connected
-path per world. `story-order.json` records the source gallery, world and node IDs,
+The page contains 334 clips from 35 worlds, arranged into one parent-connected
+sequence per world. `story-order.json` records the source gallery, world and node IDs,
 parent relationships, display order, video URLs, and local poster paths. Adjacent
 clips must satisfy `next.parent === previous.node`; do not sort by timestamp or
-combine branches. Worlds with one available clip are labelled as opening scenes.
+combine branches. A retained sequence may start after excluded source clips;
+the first parent ID remains the original ID even when that parent is not shown.
+`source_order`, when present, records the original turn number before display
+renumbering. Worlds with one available opening clip are labelled as opening scenes.
+
+The 2026-10-14 review covered all 337 previously displayed videos, decoding
+37,858 frames and visually reviewing six evenly spaced frames per clip plus
+flagged frames. Two Stellar academy clips with baked-in white side panels and
+the island of mist opening containing a white-background character reference
+were removed. Stellar academy retains its connected original turns 3–8, shown
+as turns 1–6. `quality-review.json` records the exclusions; do not restore them
+from the source gallery without a fresh visual review. Original media remains
+available at the source; removed posters are recoverable from Git history.
 
 The video files are hosted at:
 
