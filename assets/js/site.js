@@ -431,7 +431,7 @@
       return g;
     }
     var last = L.steps[L.steps.length - 1];
-    host.appendChild(el("p", { class: "viz__title", text: "End-to-end latency for one 5.04 s clip" }));
+    host.appendChild(el("p", { class: "viz__title", text: "H20 acceleration breakdown · one 5.04 s clip" }));
     host.appendChild(el("p", { class: "viz__sub", text: "Eight NVIDIA H20 GPUs, fused kernels enabled throughout. Lower is better." }));
     host.appendChild(group("Baseline and fully optimized", "Seconds, 0–250 scale.", 250, 50, [
       { label: L.baseline.label, note: L.baseline.note, value: base, total: "1.0×" },

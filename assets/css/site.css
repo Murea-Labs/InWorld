@@ -233,6 +233,15 @@ h4 { font-size: var(--fs-base); line-height: 1.3; }
 .board li.is-ours .name::before { content: ""; display: inline-block; width: .55rem; height: .55rem; border-radius: 50%; background: var(--ours); margin-right: .5rem; vertical-align: .05em; }
 .board li .cov { display: block; color: var(--muted); font-weight: 400; font-size: var(--fs-xs); }
 .board--plain li { grid-template-columns: 1fr auto; }
+.board--realtime { background: var(--night); color: var(--night-ink); border: 1px solid #28465a; border-radius: var(--radius); padding: 1.5rem; }
+.board__eyebrow { margin: 0 0 .5rem; color: #9ce6d3; font-size: var(--fs-xs); font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.board--realtime .board__title { color: var(--night-ink); font-size: var(--fs-md); }
+.board__metric { margin: 1.1rem 0 .3rem; font-size: 4.5rem; font-weight: 750; line-height: 1; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+.board__metric span { font-size: 2rem; font-weight: 450; letter-spacing: -.02em; }
+.board__result { margin: 0; font-size: var(--fs-sm); }
+.board__hardware { margin: .45rem 0 1.1rem; color: #b7c0cc; font-size: var(--fs-xs); }
+.board--realtime a { color: #9ce6d3; font-size: var(--fs-xs); font-weight: 600; }
+.board--realtime a:hover { color: #d4fff1; }
 
 /* ---------- worlds storyboard ---------- */
 .worlds { background: var(--night); color: var(--night-ink); }
@@ -419,6 +428,36 @@ h4 { font-size: var(--fs-base); line-height: 1.3; }
 .tooltip { position: fixed; z-index: 80; pointer-events: none; background: var(--ink); color: var(--bg); font-family: var(--sans); font-size: var(--fs-xs); line-height: 1.4; padding: .5rem .7rem; border-radius: 6px; max-width: 16rem; opacity: 0; transform: translateY(4px); transition: opacity .12s ease, transform .12s ease; }
 .tooltip.is-on { opacity: 1; transform: none; }
 .tooltip strong { display: block; font-size: var(--fs-sm); font-weight: 700; font-variant-numeric: tabular-nums; }
+
+/* Real-time Pro result, followed by the H20 acceleration breakdown. */
+.realtime { display: grid; gap: 2.5rem; padding: clamp(1.5rem, 4vw, 3rem); border: 1px solid #28465a; border-radius: var(--radius); background: radial-gradient(ellipse at 100% 0%, #173c43 0%, transparent 60%), var(--night); color: var(--night-ink); font-family: var(--sans); }
+.realtime > * { min-width: 0; }
+.realtime__eyebrow { margin: 0; color: #9ce6d3; font-size: var(--fs-sm); font-weight: 650; letter-spacing: .07em; text-transform: uppercase; }
+.realtime__value { margin: 1rem 0 .4rem; font-size: clamp(5rem, 10vw, 8.5rem); font-weight: 750; line-height: .95; letter-spacing: -.065em; font-variant-numeric: tabular-nums; }
+.realtime__value span { font-size: .38em; font-weight: 450; letter-spacing: -.02em; }
+.realtime__label { margin: 0; font-size: var(--fs-base); }
+.realtime__hardware { margin: .65rem 0 0; max-width: 23rem; color: #b7c0cc; font-size: var(--fs-sm); line-height: 1.5; }
+.realtime__comparison h3 { color: var(--night-ink); font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.15; }
+.realtime__timeline { display: grid; gap: 1rem; margin-top: 1.5rem; }
+.realtime__row p { display: flex; justify-content: space-between; gap: 1rem; margin: 0 0 .4rem; font-size: var(--fs-xs); color: #cdd6e1; }
+.realtime__row b { color: var(--night-ink); font-variant-numeric: tabular-nums; }
+.realtime__track { height: .6rem; border-radius: 999px; background: rgb(255 255 255 / .07); overflow: hidden; }
+.realtime__fill { display: block; width: 100%; height: 100%; border-radius: inherit; background: #64778e; }
+.realtime__fill--generation { width: 71.4286%; background: #9ce6d3; }
+.realtime__speed { margin: 1.35rem 0 0; font-size: var(--fs-sm); color: #9ce6d3; }
+.realtime__speed b { margin-right: .2rem; font-size: var(--fs-lg); font-weight: 700; }
+.realtime__speed span { display: inline-block; color: #b7c0cc; font-size: var(--fs-xs); }
+.realtime__note { margin: .85rem 0 0; max-width: 55rem; font-family: var(--sans); font-size: var(--fs-xs); line-height: 1.6; color: var(--muted); }
+.inference-detail { margin-block: 3.5rem 2rem; max-width: 49rem; }
+.inference-detail h3 { margin-bottom: .75rem; }
+.inference-detail p { margin: 0; color: var(--ink-2); }
+@media (min-width: 48rem) {
+  .realtime { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+  .realtime__comparison { border-left: 1px solid rgb(183 192 204 / .22); padding-left: clamp(2rem, 4vw, 3rem); }
+}
+@media (max-width: 47.99rem) {
+  .realtime__comparison { border-top: 1px solid rgb(183 192 204 / .22); padding-top: 1.75rem; }
+}
 
 /* bars (inference) */
 .bars { display: grid; gap: .5rem; }

@@ -30,7 +30,7 @@
 <link rel="preload" as="image" href="assets/img/hero-rebuilt-v1.png">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
-<link rel="stylesheet" href="assets/css/site.css?v=story-worlds-337-20261013">
+<link rel="stylesheet" href="assets/css/site.css?v=pro-realtime-20261013">
 
 <script type="application/ld+json">
 {
@@ -47,7 +47,7 @@
 <script defer src="assets/vendor/katex/katex.min.js"></script>
 <script defer src="assets/vendor/katex/auto-render.min.js"></script>
 <script defer src="assets/js/data.js"></script>
-<script defer src="assets/js/site.js?v=story-worlds-337-20261013"></script>
+<script defer src="assets/js/site.js?v=pro-realtime-20261013"></script>
 <script defer src="assets/js/motion.js?v=story-worlds-337-20261013"></script>
 </head>
 <body>
@@ -114,6 +114,14 @@
     </div>
 
     <aside class="boards" aria-label="Headline results">
+      <div class="board board--realtime">
+        <p class="board__eyebrow">Murea-Pro · Distilled</p>
+        <h3 class="board__title">Faster than real time</h3>
+        <p class="board__metric">3.6<span> s</span></p>
+        <p class="board__result">to generate a <b>5.04 s video clip</b></p>
+        <p class="board__hardware">NVIDIA RTX PRO 6000 Blackwell GPUs</p>
+        <a href="#inference">Explore real-time generation <span aria-hidden="true">↗</span></a>
+      </div>
       <div class="board">
         <h3 class="board__title">WBench Full-289, Overall</h3>
         <p class="board__note">Multi-turn interaction: 289 cases, 1,058 turns</p>
@@ -130,15 +138,6 @@
           <li><span class="rank">1</span><span class="name">Seedance 2.0<span class="cov">148 of 180 clips</span></span><span class="val">67.13</span></li>
           <li class="is-ours"><span class="rank">2</span><span class="name">Murea-Fast</span><span class="val">64.98</span></li>
           <li><span class="rank">3</span><span class="name">Bernini</span><span class="val">63.21</span></li>
-        </ol>
-      </div>
-      <div class="board board--plain">
-        <h3 class="board__title">Latency for one 5.04 s clip</h3>
-        <p class="board__note">End-to-end, eight NVIDIA H20 GPUs</p>
-        <ol>
-          <li><span class="name">50-step baseline</span><span class="val">231.6 s</span></li>
-          <li class="is-ours"><span class="name">Fully optimized</span><span class="val">6.96 s</span></li>
-          <li><span class="name">Same pipeline, RTX PRO 6000 Blackwell</span><span class="val">3.6 s</span></li>
         </ol>
       </div>
     </aside>
@@ -4782,11 +4781,33 @@
 <section class="section" id="inference" aria-labelledby="inf-h">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="inf-h">From minutes to seconds</h2>
-      <p class="lede">Long audiovisual token sequences make every denoising step expensive. Distillation cuts the number of steps; the rest of the stack cuts the cost of each step. Together they take one 5.04-second clip from 231.6 s to 6.96 s on eight NVIDIA H20 GPUs.</p>
+      <h2 id="inf-h">Murea-Pro, in real time</h2>
+      <p class="lede">The distilled version of Murea-Pro generates a complete <b>5.04-second video clip in 3.6 seconds</b> on NVIDIA RTX PRO 6000 Blackwell GPUs—faster than the clip plays.</p>
       <p class="paper-ref">Report section 4</p>
     </div>
 
+    <div class="realtime" aria-label="Distilled Murea-Pro real-time generation result">
+      <div class="realtime__primary">
+        <p class="realtime__eyebrow">Murea-Pro · Distilled</p>
+        <p class="realtime__value">3.6<span> s</span></p>
+        <p class="realtime__label">End-to-end clip generation</p>
+        <p class="realtime__hardware">NVIDIA RTX PRO 6000 Blackwell GPUs</p>
+      </div>
+      <div class="realtime__comparison">
+        <h3>Generate faster.<br>Keep the world moving.</h3>
+        <div class="realtime__timeline" aria-label="Generation takes 3.6 seconds; the resulting video plays for 5.04 seconds.">
+          <div class="realtime__row"><p><span>Generation time</span><b>3.6 s</b></p><div class="realtime__track" aria-hidden="true"><span class="realtime__fill realtime__fill--generation"></span></div></div>
+          <div class="realtime__row"><p><span>Video duration</span><b>5.04 s</b></p><div class="realtime__track" aria-hidden="true"><span class="realtime__fill"></span></div></div>
+        </div>
+        <p class="realtime__speed"><b>1.4×</b> real-time speed <span>· 0.71 real-time factor</span></p>
+      </div>
+    </div>
+    <p class="realtime__note">Timing covers generation of the complete clip, not streaming first-frame latency. WBench quality scores use a separate 50-step configuration.</p>
+
+    <div class="inference-detail">
+      <h3>How we reach real time</h3>
+      <p>Few-step distillation reduces denoising from 50 to 4 steps. Efficient attention, caching, and super-resolution reduce the cost of each step. On eight NVIDIA H20 GPUs, the same optimized pipeline takes a 5.04-second clip from 231.6 s to 6.96 s; on RTX PRO 6000 Blackwell GPUs, it reaches 3.6 s.</p>
+    </div>
     <div class="cols cols--text-aside">
       <div class="viz" id="latency-viz" style="margin-top:0"></div>
       <div>
@@ -4796,10 +4817,6 @@
           <li><b>Adaptive BlockCache and reference caching</b><span>Reuses a cached residual for a range of Transformer blocks while hidden-state drift stays small, and reuses VAE encodings of unchanged reference images.</span></li>
           <li><b>1.5× spatial super-resolution</b><span>VideoSharpenSR lets the base generator work at a lower resolution while keeping the delivered output size.</span></li>
         </ul>
-        <div class="facts">
-          <div><span class="fv">0.71</span><span class="fl">Real-time factor on NVIDIA RTX PRO 6000 Blackwell GPUs: the 5.04 s clip is generated in 3.6 s.</span></div>
-          <div><span class="fv">1.38</span><span class="fl">Real-time factor on eight NVIDIA H20 GPUs.<small>Both are full-clip latencies, not first-frame latency of the streaming path. WBench results use a separate 50-step configuration.</small></span></div>
-        </div>
       </div>
     </div>
   </div>
