@@ -156,9 +156,11 @@
 
   document.querySelectorAll(".story-world").forEach(function (world) {
     var track = world.querySelector(".story-track");
+    var navigation = world.querySelector(".story-nav");
     var previous = world.querySelector(".story-prev");
     var next = world.querySelector(".story-next");
     function buttons() {
+      navigation.hidden = track.scrollWidth <= track.clientWidth + 4;
       previous.disabled = track.scrollLeft < 4;
       next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
     }

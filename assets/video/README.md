@@ -19,3 +19,9 @@ while its video buffers. The original twelve MP4s remain available for old links
 pauses them outside it or when the document is hidden, and releases distant
 media after 20 seconds. It respects reduced motion and explicit pause controls.
 Cards stay 240–288 CSS pixels wide and use `object-fit: contain`.
+
+Worlds with one to three clips share compact grids within their existing story
+collections. Each world keeps its heading, anchor, and connected clip order;
+whole worlds are packed into four-card rows on wide screens. The grids adapt to
+three or two columns on smaller screens and return to individual story tracks
+on phones. Navigation arrows appear only when a track overflows.
