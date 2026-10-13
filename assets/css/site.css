@@ -1,4 +1,4 @@
-/* InWorld project page 鈥� Murea Labs
+/* InWorld project page — Murea Labs
    Colour tokens follow the technical report's musee.sty (Ink, Muted, Rule, Panel, Link),
    extended with a night surface taken from the report's teaser figure. */
 
@@ -153,15 +153,31 @@ h4 { font-size: var(--fs-base); line-height: 1.3; }
   color: var(--night-ink);
   overflow: hidden;
 }
-.hero__img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: 58% 40%; }
+.hero__img {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; object-fit: cover; object-position: 58% 40%;
+  /* The reconstructed artwork already contains crisp edges and balanced colour. */
+  filter: none;
+}
 .hero::before {
   content: ""; position: absolute; inset: 0; z-index: -1;
+  pointer-events: none;
+  /* Keep shade near the copy; let the airship and vortex retain their detail. */
   background:
-    linear-gradient(90deg, rgb(11 21 38 / .92) 0%, rgb(11 21 38 / .72) 34%, rgb(11 21 38 / .15) 68%, rgb(11 21 38 / 0) 100%),
-    linear-gradient(0deg, rgb(11 21 38 / .9) 0%, rgb(11 21 38 / 0) 42%),
-    linear-gradient(180deg, rgb(11 21 38 / .55) 0%, rgb(11 21 38 / 0) 18%);
+    linear-gradient(90deg, rgb(11 21 38 / .66) 0%, rgb(11 21 38 / .42) 30%, rgb(11 21 38 / .08) 56%, rgb(11 21 38 / 0) 74%),
+    linear-gradient(0deg, rgb(11 21 38 / .58) 0%, rgb(11 21 38 / .18) 18%, rgb(11 21 38 / 0) 40%),
+    linear-gradient(180deg, rgb(11 21 38 / .4) 0%, rgb(11 21 38 / 0) 16%);
 }
 .hero__content { padding-block: 8rem clamp(3rem, 7vw, 5.5rem); display: grid; gap: 1.4rem; }
+.hero__title, .hero__subtitle { text-shadow: 0 2px 14px rgb(0 0 0 / .5); }
+.hero__byline, .hero__credit, .nav:not(.is-solid) { text-shadow: 0 1px 6px rgb(0 0 0 / .7); }
+@media (max-width: 40rem) {
+  .hero::before {
+    background:
+      linear-gradient(0deg, rgb(11 21 38 / .78) 0%, rgb(11 21 38 / .46) 28%, rgb(11 21 38 / .08) 58%, rgb(11 21 38 / 0) 72%),
+      linear-gradient(180deg, rgb(11 21 38 / .42) 0%, rgb(11 21 38 / 0) 18%);
+  }
+}
 .hero__title {
   font-family: var(--sans);
   font-weight: 800;
@@ -202,7 +218,7 @@ h4 { font-size: var(--fs-base); line-height: 1.3; }
 .abstract summary { font-family: var(--sans); font-size: var(--fs-sm); font-weight: 600; color: var(--link); cursor: pointer; list-style: none; display: inline-flex; gap: .4rem; align-items: center; }
 .abstract summary::-webkit-details-marker { display: none; }
 .abstract summary::before { content: "+"; display: inline-block; width: 1em; text-align: center; }
-.abstract[open] summary::before { content: "鈭�"; }
+.abstract[open] summary::before { content: "−"; }
 .abstract[open] summary { margin-bottom: 1rem; }
 
 .boards { display: grid; gap: 1.75rem; align-content: start; }
@@ -459,7 +475,7 @@ h4 { font-size: var(--fs-base); line-height: 1.3; }
 .table-toggle summary { cursor: pointer; font-size: var(--fs-sm); font-weight: 600; color: var(--link); list-style: none; display: inline-flex; gap: .4rem; }
 .table-toggle summary::-webkit-details-marker { display: none; }
 .table-toggle summary::before { content: "+"; width: 1em; text-align: center; }
-.table-toggle[open] summary::before { content: "鈭�"; }
+.table-toggle[open] summary::before { content: "−"; }
 .table-scroll { overflow-x: auto; margin-top: .9rem; border: 1px solid var(--rule); border-radius: var(--radius-sm); }
 .data { border-collapse: collapse; width: 100%; font-size: var(--fs-xs); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .data caption { text-align: left; padding: .75rem .9rem; color: var(--muted); caption-side: bottom; white-space: normal; line-height: 1.5; border-top: 1px solid var(--rule); }
