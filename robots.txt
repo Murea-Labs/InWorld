@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://murea-labs.github.io/InWorld/sitemap.xml
