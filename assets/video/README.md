@@ -1,6 +1,6 @@
 # Story previews
 
-The page contains 334 clips from 35 worlds, arranged into one parent-connected
+The page contains 333 clips from 35 worlds, arranged into one parent-connected
 sequence per world. `story-order.json` records the source gallery, world and node IDs,
 parent relationships, display order, video URLs, and local poster paths. Adjacent
 clips must satisfy `next.parent === previous.node`; do not sort by timestamp or
@@ -17,6 +17,11 @@ were removed. Stellar academy retains its connected original turns 3–8, shown
 as turns 1–6. `quality-review.json` records the exclusions; do not restore them
 from the source gallery without a fresh visual review. Original media remains
 available at the source; removed posters are recoverable from Git history.
+
+A follow-up review removed the first of The star-sea island's two opening
+timer shots because their displayed times conflict. The original second clip
+is retained, followed by the original connected turns 3–37; the sequence is
+displayed as turns 1–36. This brings the current total to 333 clips.
 
 The video files are hosted at:
 
