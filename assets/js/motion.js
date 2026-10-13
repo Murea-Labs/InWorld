@@ -141,6 +141,7 @@
   } else {
     // Older browsers retain manual playback without loading the whole library.
     pausedAll = true;
+    controls.forEach(function (button) { button.hidden = true; });
     states.forEach(function (state) { state.visible = true; state.pausedByUser = true; });
   }
   document.addEventListener("visibilitychange", refresh);
