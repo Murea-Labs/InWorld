@@ -2,7 +2,7 @@ import { act, cleanup, fireEvent, render, waitFor } from '@testing-library/react
 import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import App from '../src/App'
 import * as api from '../src/api'
-import type { Health, RandomWorld, World } from '../src/types'
+import type { Health, Node, RandomWorld, TurnEvent, World } from '../src/types'
 import { setLanguage } from '../src/i18n'
 import { OPENING } from '../src/lib'
 
@@ -112,4 +112,54 @@ it('keeps input in an existing world on the normal action path', async () => {
   await waitFor(() => expect(api.turn).toHaveBeenCalled())
   expect(api.randomWorld).not.toHaveBeenCalled()
   expect(api.createWorld).not.toHaveBeenCalled()
+})
+
+it.each([true, false])('keeps cumulative progress when a later clip continues (replanned: %s)', async (replanned) => {
+  vi.mocked(api.listWorlds).mockResolvedValue([world] as never)
+  const requests: { emit: (event: TurnEvent) => void; finish: () => void }[] = []
+  vi.mocked(api.turn).mockImplementation((_id, _text, emit) => new Promise<void>((finish) => {
+    requests.push({ emit, finish })
+  }))
+  const ui = render(<App />)
+  const input = await ui.findByPlaceholderText('你要做什么（输入 @ 绑定资产）')
+  fireEvent.change(input, { target: { value: '沿山路前进，再穿过石桥' } })
+  fireEvent.click(ui.getByRole('button', { name: '发送' }))
+  await waitFor(() => expect(requests).toHaveLength(1))
+  act(() => requests[0].emit({ type: 'sequence', goal: '沿山路前进，再穿过石桥', current: 1,
+    total: 2, segments: [{ index: 1, content: '走向桥头' }, { index: 2, content: '穿过石桥' }] }))
+  expect(ui.getByText('连续生成 2 段')).toBeTruthy()
+
+  const complete = async (i: number, reply: string) => {
+    const node = { id: `n${i}`, reply, continue_with: '继续过桥', plan: ['过桥'],
+      options: [], clip: '', frames: [] } as unknown as Node
+    await act(async () => {
+      requests[i].emit({ type: 'done', reply, node,
+        world: { ...world, head: node.id, nodes: { [node.id]: node } } as unknown as World })
+      requests[i].finish()
+    })
+    await waitFor(() => expect(requests).toHaveLength(i + 2))
+  }
+  await complete(0, '已经抵达桥头')
+  if (replanned) {
+    act(() => requests[1].emit({ type: 'sequence', goal: '穿过石桥', current: 1, total: 2,
+      segments: [{ index: 1, content: '踏上石桥' }, { index: 2, content: '抵达对岸' }] }))
+    expect(ui.getByText('连续生成 3 段')).toBeTruthy()
+    expect(ui.container.querySelector('.turn-sequence')?.getAttribute('title'))
+      .toBe('总内容：沿山路前进，再穿过石桥')
+    expect(ui.container.querySelectorAll('.turn-segment-index')).toHaveLength(3)
+    expect(ui.container.querySelector('.turn-segment-index.done')?.getAttribute('title'))
+      .toContain('已经抵达桥头')
+    expect(ui.container.querySelector('.turn-segment-index.generating')?.textContent).toBe('2')
+  }
+  await complete(1, '走到了桥中央')
+  expect(ui.getByText('连续生成 3 段')).toBeTruthy()
+  expect(ui.getByText(/当前第 3 段/)).toBeTruthy()
+  expect([...ui.container.querySelectorAll('.turn-segment-index')].map((el) => el.textContent))
+    .toEqual(['1', '2', '3'])
+  expect(ui.container.querySelectorAll('.turn-segment-index.done')).toHaveLength(2)
+  expect(ui.container.querySelector('.turn-segment-index.generating')?.textContent).toBe('3')
+  await act(async () => {
+    requests[2].emit({ type: 'error', message: '测试结束' })
+    requests[2].finish()
+  })
 })
