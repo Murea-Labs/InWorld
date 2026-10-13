@@ -309,17 +309,30 @@ export default function App() {
         started: t?.started ?? Date.now(),
       }))
     else if (e.type === 'sequence') {
-      const active = sequenceStep.current + 1
-      setSequence({
-        goal: e.goal,
-        current: active,
-        total: e.total,
-        segments: e.segments.map((segment) => ({
-          index: segment.index,
-          content: segment.content,
-          subtitle: '',
-          status: segment.index === active ? 'generating' : 'pending',
-        })),
+      const completed = sequenceStep.current
+      setSequence((value) => {
+        // The server plan starts at this clip, not at the user's first clip.
+        // Preserve the completed prefix and replace only the remaining plan.
+        const segments: SequenceSegmentState[] = [
+          ...Array.from({ length: completed }, (_, i) => ({
+            index: i + 1,
+            content: value?.segments[i]?.content ?? '',
+            subtitle: value?.segments[i]?.subtitle ?? '',
+            status: 'done' as const,
+          })),
+          ...e.segments.map((segment, i) => ({
+            index: completed + i + 1,
+            content: segment.content,
+            subtitle: '',
+            status: i === 0 ? 'generating' as const : 'pending' as const,
+          })),
+        ]
+        return {
+          goal: value?.goal || e.goal,
+          current: completed + 1,
+          total: segments.length,
+          segments,
+        }
       })
     }
     // The world speaks first, the picture comes later. These are the earliest things to show in a
@@ -514,16 +527,20 @@ export default function App() {
     sequenceStep.current = sequenceIndex
     if (sequenceIndex > 0) {
       const active = sequenceIndex + 1
-      setSequence((value) => value ? {
-        ...value,
-        current: active,
-        segments: value.segments.map((segment) => ({
+      setSequence((value) => {
+        if (!value) return value
+        const segments: SequenceSegmentState[] = value.segments.map((segment) => ({
           ...segment,
           status: segment.index < active
             ? 'done'
             : segment.index === active ? 'generating' : 'pending',
-        })),
-      } : value)
+        }))
+        // An unplanned continuation may start without a new split event.
+        if (!segments.some((segment) => segment.index === active)) {
+          segments.push({ index: active, content: text, subtitle: '', status: 'generating' })
+        }
+        return { ...value, current: active, total: segments.length, segments }
+      })
     }
     flight.current = { wid, text, system, auto }
     lastNode.current = null
