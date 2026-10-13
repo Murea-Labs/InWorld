@@ -240,6 +240,7 @@ h4 { font-size: var(--fs-base); line-height: 1.3; }
 .board__metric span { font-size: 2rem; font-weight: 450; letter-spacing: -.02em; }
 .board__result { margin: 0; font-size: var(--fs-sm); }
 .board__hardware { margin: .45rem 0 1.1rem; color: #b7c0cc; font-size: var(--fs-xs); }
+.board__hardware b, .realtime__hardware b, .realtime__label b { color: #9ce6d3; }
 .board--realtime a { color: #9ce6d3; font-size: var(--fs-xs); font-weight: 600; }
 .board--realtime a:hover { color: #d4fff1; }
 

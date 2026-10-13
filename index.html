@@ -30,7 +30,7 @@
 <link rel="preload" as="image" href="assets/img/hero-rebuilt-v1.png">
 <link rel="stylesheet" href="assets/css/fonts.css">
 <link rel="stylesheet" href="assets/vendor/katex/katex.min.css">
-<link rel="stylesheet" href="assets/css/site.css?v=compact-worlds-20261013">
+<link rel="stylesheet" href="assets/css/site.css?v=single-gpu-720p-20261013">
 
 <script type="application/ld+json">
 {
@@ -125,10 +125,10 @@
     <aside class="boards" aria-label="Headline results">
       <div class="board board--realtime">
         <p class="board__eyebrow">Murea-Pro · Distilled</p>
-        <h3 class="board__title">Faster than real time</h3>
+        <h3 class="board__title">720P, real time on one GPU</h3>
         <p class="board__metric">3.6<span> s</span></p>
-        <p class="board__result">to generate a <b>5.04 s video clip</b></p>
-        <p class="board__hardware">NVIDIA RTX PRO 6000 Blackwell GPUs</p>
+        <p class="board__result">to generate a <b>5.04 s · 720P video clip</b></p>
+        <p class="board__hardware"><b>1×</b> NVIDIA RTX PRO 6000 Blackwell GPU</p>
         <a href="#inference">Explore real-time generation <span aria-hidden="true">↗</span></a>
       </div>
       <div class="board">
@@ -4800,23 +4800,23 @@
 <section class="section" id="inference" aria-labelledby="inf-h">
   <div class="wrap">
     <div class="section-head">
-      <h2 id="inf-h">Murea-Pro, in real time</h2>
-      <p class="lede">The distilled version of Murea-Pro generates a complete <b>5.04-second video clip in 3.6 seconds</b> on NVIDIA RTX PRO 6000 Blackwell GPUs—faster than the clip plays.</p>
+      <h2 id="inf-h">720P in real time on one GPU</h2>
+      <p class="lede">The distilled version of Murea-Pro generates a complete <b>5.04-second 720P video in 3.6 seconds</b> on <b>a single NVIDIA RTX PRO 6000 Blackwell GPU</b>.</p>
       <p class="paper-ref">Report section 4</p>
     </div>
 
-    <div class="realtime" aria-label="Distilled Murea-Pro real-time generation result">
+    <div class="realtime" aria-label="Distilled Murea-Pro: real-time 720P generation on a single NVIDIA RTX PRO 6000 Blackwell GPU">
       <div class="realtime__primary">
         <p class="realtime__eyebrow">Murea-Pro · Distilled</p>
         <p class="realtime__value">3.6<span> s</span></p>
-        <p class="realtime__label">End-to-end clip generation</p>
-        <p class="realtime__hardware">NVIDIA RTX PRO 6000 Blackwell GPUs</p>
+        <p class="realtime__label">End-to-end clip generation · <b>720P</b></p>
+        <p class="realtime__hardware"><b>1×</b> NVIDIA RTX PRO 6000 Blackwell GPU</p>
       </div>
       <div class="realtime__comparison">
-        <h3>Generate faster.<br>Keep the world moving.</h3>
-        <div class="realtime__timeline" aria-label="Generation takes 3.6 seconds; the resulting video plays for 5.04 seconds.">
-          <div class="realtime__row"><p><span>Generation time</span><b>3.6 s</b></p><div class="realtime__track" aria-hidden="true"><span class="realtime__fill realtime__fill--generation"></span></div></div>
-          <div class="realtime__row"><p><span>Video duration</span><b>5.04 s</b></p><div class="realtime__track" aria-hidden="true"><span class="realtime__fill"></span></div></div>
+        <h3>720P. One GPU.<br>Faster than real time.</h3>
+        <div class="realtime__timeline" aria-label="On a single NVIDIA RTX PRO 6000 Blackwell GPU, generating a 5.04-second 720P video takes 3.6 seconds.">
+          <div class="realtime__row"><p><span>Generation on one GPU</span><b>3.6 s</b></p><div class="realtime__track" aria-hidden="true"><span class="realtime__fill realtime__fill--generation"></span></div></div>
+          <div class="realtime__row"><p><span>720P video duration</span><b>5.04 s</b></p><div class="realtime__track" aria-hidden="true"><span class="realtime__fill"></span></div></div>
         </div>
         <p class="realtime__speed"><b>1.4×</b> real-time speed <span>· 0.71 real-time factor</span></p>
       </div>
@@ -4825,14 +4825,14 @@
 
     <div class="inference-detail">
       <h3>How we reach real time</h3>
-      <p>Few-step distillation reduces denoising from 50 to 4 steps. Efficient attention, caching, and super-resolution reduce the cost of each step. On eight NVIDIA H20 GPUs, the same optimized pipeline takes a 5.04-second clip from 231.6 s to 6.96 s; on RTX PRO 6000 Blackwell GPUs, it reaches 3.6 s.</p>
+      <p>Few-step distillation reduces denoising from 50 to 4 steps. Efficient attention, caching, and super-resolution reduce the cost of each step. Distilled Murea-Pro generates a 5.04-second 720P video in 3.6 s on a single NVIDIA RTX PRO 6000 Blackwell GPU. The H20 acceleration study below uses a separate eight-GPU setup, reducing latency for a 5.04-second clip from 231.6 s to 6.96 s.</p>
     </div>
     <div class="cols cols--text-aside">
       <div class="viz" id="latency-viz" style="margin-top:0"></div>
       <div>
-        <ul class="techs">
-          <li><b>Ulysses sequence parallelism</b><span>Splits the audiovisual sequence across GPUs; all-to-all exchanges let each device attend to the full sequence for a subset of heads.</span></li>
-          <li><b>SageAttention or FlashAttention-4</b><span>Chosen per GPU architecture. The measured configuration uses SageAttention's low-precision kernels.</span></li>
+        <ul class="techs" aria-label="Optimizations in the H20 acceleration study">
+          <li><b>Ulysses sequence parallelism (H20 setup)</b><span>For the eight-GPU H20 measurements, the audiovisual sequence is split across GPUs; all-to-all exchanges let each device attend to the full sequence for a subset of heads.</span></li>
+          <li><b>SageAttention or FlashAttention-4</b><span>Chosen per GPU architecture. The measured H20 configuration uses SageAttention's low-precision kernels.</span></li>
           <li><b>Adaptive BlockCache and reference caching</b><span>Reuses a cached residual for a range of Transformer blocks while hidden-state drift stays small, and reuses VAE encodings of unchanged reference images.</span></li>
           <li><b>1.5× spatial super-resolution</b><span>VideoSharpenSR lets the base generator work at a lower resolution while keeping the delivered output size.</span></li>
         </ul>
