@@ -475,7 +475,7 @@ export const EN: Record<string, string> = {
   "进程 commit": "Server commit",
   "进程跑的是 {version}，工作区已经是 {head} 了。改完后端必须重启（Ctrl+C 再 ./run.sh），Python 不会自己热重载。": "The server runs {version} but the checkout is at {head}. Restart the server (Ctrl+C, then ./run.sh); Python does not hot-reload.",
   "进行中": "in progress",
-  "连接中断，未找到本次已完成的片段。输入已保留，请确认网络后重试。": "Connection lost and no finished clip was found. Your input was kept; check your network and retry.",
+  "连接中断后无法确认本次请求状态，可能未被接收或服务已重启。输入已保留，请刷新确认片段后再重试。": "The request status could not be recovered after disconnection. It may not have arrived, or the service may have restarted. Your input was kept; refresh and check for a clip before retrying.",
   "连接中断，正在查询后台结果，请勿重复发送": "Connection lost; checking the server for the result. Do not send again.",
   "连接中断，正在确认生成结果": "Connection lost; checking the result",
   "连接暂时不可用，输入已保留。请恢复连接后刷新确认生成结果，避免重复发送。": "The connection is unavailable. Your input was kept; refresh once you are back online instead of sending it again.",

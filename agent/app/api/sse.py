@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from collections import OrderedDict
 import contextvars
 from contextlib import contextmanager
 import json
@@ -14,6 +15,7 @@ from collections.abc import Callable
 
 from fastapi.responses import StreamingResponse
 
+from murea_agent import reqlog
 from murea_agent.util import _say
 
 # ⚠️ The lock covers only the **video** part, not the whole beat.
@@ -55,6 +57,21 @@ _cancel: set[str] = set()
 _owner_guard = threading.Lock()
 # world_id -> owner_id of the beats running now
 _running: dict[str, str | None] = {}
+# Track the request before its worker starts, including time spent in the queue.
+# Keep only small failure/cancellation events; completed clips live in world nodes.
+_active_requests: set[tuple[str, str]] = set()
+_request_results: OrderedDict[tuple[str, str], dict] = OrderedDict()
+_MAX_REQUEST_RESULTS = 256
+
+
+def request_status(world_id: str, request_id: str) -> dict:
+    with _owner_guard:
+        key = (world_id, request_id)
+        event = _request_results.get(key)
+        if event is not None:
+            return {"status": "failed" if event["type"] == "error" else "cancelled", "event": dict(event)}
+        return {"status": "running" if key in _active_requests else "unknown"}
+
 
 Emit = Callable[[str, str], None]
 
@@ -128,11 +145,28 @@ def stream(
     job: Callable[[Emit, queue.Queue], None],
     owner_id: str | None = None,
     world_id: str = "",
+    request_id: str = "",
 ) -> StreamingResponse:
     events: queue.Queue[dict | None] = queue.Queue()
+    key = (world_id, request_id)
+    if request_id:
+        with _owner_guard:
+            _active_requests.add(key)
+            _request_results.pop(key, None)
+
+    def terminal(event: dict) -> None:
+        if request_id:
+            # Save before sending: a disconnected browser can miss the SSE event.
+            with _owner_guard:
+                _request_results[key] = event
+                while len(_request_results) > _MAX_REQUEST_RESULTS:
+                    _request_results.popitem(last=False)
+            reqlog.record("turn_terminal", request_id=request_id, event=event)
+        events.put(event)
 
     def run() -> None:
         token = _world_of.set(world_id)
+        log_token = reqlog.bind(world_id)
         lock = _world_lock(world_id)
         try:
             # ⚠️ Wait only for the previous beat of **the same world**; other worlds are unrelated.
@@ -185,9 +219,9 @@ def stream(
         except Cancelled:
             # Undo is the user's action, not a failure: a separate event, so the frontend shows no
             # red bar
-            events.put({"type": "cancelled"})
+            terminal({"type": "cancelled"})
         except Exception as exc:
-            events.put(
+            terminal(
                 {
                     "type": "error",
                     "message": f"{type(exc).__name__}: {exc}",
@@ -195,6 +229,10 @@ def stream(
                 }
             )
         finally:
+            if request_id:
+                with _owner_guard:
+                    _active_requests.discard(key)
+            reqlog.unbind(log_token)
             _world_of.reset(token)
             events.put(None)
 
