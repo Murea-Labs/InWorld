@@ -326,12 +326,15 @@ async def turn(wid: str, req: Request, user: CurrentUser) -> StreamingResponse:
         finally:
             reqlog.unbind(token)
 
-    return stream(job, owner_id=user["id"], world_id=wid)
+    return stream(job, owner_id=user["id"], world_id=wid, request_id=request_id)
 
 
 @router.get("/{wid}/turn-status/{request_id}")
 def turn_status(wid: str, request_id: str, user: CurrentUser) -> dict:
     """Read-only recovery: never submit the video again after a transport failure."""
+    # Read live status first: if the worker finishes during the subsequent load,
+    # the saved node below wins. Ownership is still checked before returning data.
+    status = sse.request_status(wid, request_id)
     world = load_owned_world(wid, user)
     for node in world.nodes.values():
         if node.get("request_id") == request_id:
@@ -344,7 +347,7 @@ def turn_status(wid: str, request_id: str, user: CurrentUser) -> dict:
                     "reply": node.get("reply", ""),
                 },
             }
-    return {"status": "running" if sse.busy(wid) else "unknown"}
+    return status
 
 
 @router.post("/{wid}/prefetch")

@@ -227,7 +227,7 @@ export async function turn(
     signal?.throwIfAborted()
     if (attempt) await new Promise(resolve => setTimeout(resolve, 2000))
     signal?.throwIfAborted()
-    let result: { status: string; event?: Extract<TurnEvent, { type: 'done' }> }
+    let result: { status: string; event?: Extract<TurnEvent, { type: 'done' | 'error' | 'cancelled' }> }
     try {
       result = await json(`api/worlds/${id}/turn-status/${requestId}`, { signal })
       failures = 0
@@ -237,8 +237,13 @@ export async function turn(
       throw new Error(t('连接暂时不可用，输入已保留。请恢复连接后刷新确认生成结果，避免重复发送。'), { cause: e })
     }
     if (result.status === 'done' && result.event) { onEvent(result.event); return }
+    if ((result.status === 'failed' && result.event?.type === 'error') ||
+        (result.status === 'cancelled' && result.event?.type === 'cancelled')) {
+      onEvent(result.event)
+      return
+    }
     if (result.status !== 'running') {
-      throw new Error(t('连接中断，未找到本次已完成的片段。输入已保留，请确认网络后重试。'))
+      throw new Error(t('连接中断后无法确认本次请求状态，可能未被接收或服务已重启。输入已保留，请刷新确认片段后再重试。'))
     }
   }
   throw new Error(t('后台仍未返回结果。请稍后刷新查看，避免重复发送。'))

@@ -59,7 +59,7 @@ test('unreceived request fails clearly and is never automatically resubmitted',a
     if(init.method==='POST'){posts++;throw new TypeError('Failed to fetch')}
     return Response.json({status:'unknown'})
   })
-  await assert.rejects(api.turn('w1','过桥',()=>{}),/未找到本次已完成的片段/)
+  await assert.rejects(api.turn('w1','过桥',()=>{}),/无法确认本次请求状态/)
   assert.equal(posts,1)
 })
 test('model error is terminal and never mistaken for a transport disconnect',async()=>{
@@ -74,4 +74,28 @@ test('user abort never triggers recovery',async()=>{
   const api=setup(async()=>{calls++;throw Object.assign(new Error('cancelled'),{name:'AbortError'})})
   await assert.rejects(api.turn('w1','过桥',()=>{},false,controller.signal),{name:'AbortError'})
   assert.equal(calls,1)
+})
+test('lost error event recovers the original model error without resubmitting',async()=>{
+  let posts=0
+  const events=[]
+  const failure={type:'error',message:'GeminiError: Expecting value: line 1 column 1 (char 0)'}
+  const api=setup(async(url,init)=>{
+    if(init.method==='POST'){posts++;return stream([])}
+    return Response.json({status:'failed',event:failure})
+  })
+  await api.turn('w1','过桥',e=>events.push(e))
+  assert.equal(posts,1)
+  assert.equal(events.at(-1).type,'error')
+  assert.equal(events.at(-1).message,failure.message)
+})
+test('lost cancellation event is recovered as cancellation, not a network error',async()=>{
+  let posts=0
+  const events=[]
+  const api=setup(async(url,init)=>{
+    if(init.method==='POST'){posts++;throw new TypeError('Failed to fetch')}
+    return Response.json({status:'cancelled',event:{type:'cancelled'}})
+  })
+  await api.turn('w1','过桥',e=>events.push(e))
+  assert.equal(posts,1)
+  assert.equal(events.at(-1).type,'cancelled')
 })
