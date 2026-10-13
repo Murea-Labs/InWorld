@@ -432,7 +432,7 @@
     }
     var last = L.steps[L.steps.length - 1];
     host.appendChild(el("p", { class: "viz__title", text: "H20 acceleration breakdown · one 5.04 s clip" }));
-    host.appendChild(el("p", { class: "viz__sub", text: "Eight NVIDIA H20 GPUs, fused kernels enabled throughout. Lower is better." }));
+    host.appendChild(el("p", { class: "viz__sub", text: "NVIDIA H20 GPUs, fused kernels enabled throughout. Lower is better." }));
     host.appendChild(group("Baseline and fully optimized", "Seconds, 0–250 scale.", 250, 50, [
       { label: L.baseline.label, note: L.baseline.note, value: base, total: "1.0×" },
       { label: "Fully optimized", note: "All four optimizations", value: last.value, total: (base / last.value).toFixed(1) + "×", stepNote: "vs. baseline", ours: true }
@@ -446,7 +446,7 @@
     var rows = [["Baseline (50 NFE, FlashAttention-3)", base, null, "1.0×", "—"]];
     L.steps.forEach(function (s) { rows.push([s.label + " (" + s.note + ")", s.value, +(base - s.value).toFixed(2), (base / s.value).toFixed(1) + "×", s.step]); });
     host.appendChild(tableToggle("Show the table", dataTable(
-      "Cumulative inference acceleration on eight NVIDIA H20 GPUs; each row keeps all preceding optimizations.",
+      "Cumulative inference acceleration on NVIDIA H20 GPUs; each row keeps all preceding optimizations.",
       [{ i: 0, label: "Configuration" }, { i: 1, label: "Latency (s)", d: 2 }, { i: 2, label: "Saved vs. baseline (s)", d: 2 }, { i: 3, label: "Total speedup" }, { i: 4, label: "Step speedup" }],
       [{ rows: rows }], function (r) { return r[1] === last.value; })));
   })();
