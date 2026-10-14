@@ -108,6 +108,7 @@ from murea_agent.shot.beat_assets import (
     _prune_passive_object_pending,
     _queue_missing_focal_object_refs,
     _six_section_speakers,
+    _subject_id,
     _warm_images,
 )
 from murea_agent.tools.frames import _grab_frames
@@ -239,6 +240,27 @@ def _walked_over(
     # materialize inside that courtyard. Subspaces of one main scene may still
     # share a continuous boundary crossing.
     return _continuous_scene_boundary(world, source, destination, new_destination=new_destination)
+
+
+def _missing_from_prefix(world: World, d: dict[str, Any], subject_ids: list[str]) -> list[str]:
+    """Ids of this clip's subjects the director saw missing from the previous clip's last frame.
+
+    A Murea continuation inherits only the last ~0.7 s of the previous clip and no reference
+    images. A subject absent there (off frame, behind the dragon, cut away from) is redrawn from
+    text alone: a two-handed runic greatsword came back as a short glowing axe. Only subjects
+    actually cast in this clip count; anything the director lists that is not cast here (a place,
+    an invented name) is ignored, so a stray entry never forces a cut.
+    """
+    raw = d.get("missing_from_last_frame")
+    if not isinstance(raw, list):
+        return []
+    cast = set(subject_ids)
+    missing: list[str] = []
+    for value in raw:
+        sid = _subject_id(world, value)
+        if sid is not None and sid in cast and sid not in missing:
+            missing.append(sid)
+    return missing
 
 
 def turn(
@@ -610,6 +632,37 @@ class TurnLoop:
                 new_destination=place_is_new,
             )
             self.continues = (mode == "continue" and head is not None) or self.walked_over
+            # A continuation that cannot carry reference images (Murea) redraws from text any
+            # subject the previous clip's tail does not show. When the director saw one missing,
+            # film this beat as a fresh referenced shot of the same place instead. Not for
+            # walking over: that crossing must stay one continuous take.
+            self.prefix_missing = []
+            if (
+                self.continues
+                and not self.walked_over
+                and not video.model(world.video_model).references_on_continuation
+            ):
+                self.prefix_missing = _missing_from_prefix(world, d, subject_ids)
+                if self.prefix_missing:
+                    self.continues = False
+                    mode = "cut"
+                    names = [str(world.subjects[sid].get("name") or sid) for sid in self.prefix_missing]
+                    reqlog.record(
+                        "continuation_decision",
+                        ok=True,
+                        continues=False,
+                        reason="missing_from_last_frame",
+                        missing=names,
+                        node=head.id if head else None,
+                    )
+                    self.progress(
+                        "image",
+                        _say(
+                            f"上一段末尾看不到{'、'.join(names)}，这一段带参考图重新拍",
+                            f"{', '.join(names)} not in the last frame; "
+                            "filming this clip fresh from the references",
+                        ),
+                    )
             motion_plan = self.motion_plan
             self.focus_text = " ".join(
                 str(value).strip()
@@ -652,6 +705,7 @@ class TurnLoop:
                 mode=mode,
                 new_place=place_is_new,
                 continues=self.continues,
+                prefix_missing=[str(world.subjects[sid].get("name") or sid) for sid in self.prefix_missing],
                 cast=[p["name"] for p in self.pictures if p["kind"] != "scene"],
                 to_draw=[p.key if p.kind == "place" else world.subjects[p.key]["name"] for p in pending],
                 dropped=list(self.dropped),
@@ -666,6 +720,7 @@ class TurnLoop:
             motion_plan=self.motion_plan,
             focus_text=self.focus_text,
             action_step=self.action_step,
+            force_item_ids=set(getattr(self, "prefix_missing", None) or ()),
         )
 
     # ---- act: references + prompt ----------------------------------------------

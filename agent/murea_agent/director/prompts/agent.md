@@ -93,6 +93,14 @@ last-frame pose and position; every top-level field (`place`, `mode`, `reply`,
 `motion_plan`, state updates, video prompt) describes step 1, not the final destination.
 Never reset people to their reference poses to hide unfinished movement.
 
+**missing_from_last_frame.** List every entry of `subjects` (same ids or names) that is
+**not visible in the last attached frame**: off frame, hidden behind something, or the
+clip ended on someone else's close-up. A carried item counts as visible only if the item
+itself can be seen. Write `[]` when everything in `subjects` is visible, and on the first
+turn when there is no frame. Judge only by the picture; never list a place, and never list
+a subject just because it is small. Accuracy matters: a listed subject makes the next clip
+a fresh shot from the reference images instead of a continuation.
+
 # action_sequence
 
 Split the user's complete intent into what fits one clip now and what continues later.
