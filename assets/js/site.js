@@ -52,18 +52,6 @@
     Object.keys(byId).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
   }
 
-  /* ---------- paper link: fall back to a disabled button until the PDF is uploaded ---------- */
-  var paperBtn = $('.hero__actions a[href$=".pdf"]');
-  if (paperBtn && location.protocol.indexOf("http") === 0) {
-    fetch(paperBtn.getAttribute("href"), { method: "HEAD" }).then(function (r) {
-      if (!r.ok) throw 0;
-    }).catch(function () {
-      paperBtn.removeAttribute("href");
-      paperBtn.setAttribute("aria-disabled", "true");
-      paperBtn.lastChild.textContent = " Paper, coming soon";
-    });
-  }
-
   /* ---------- the turn loop ---------- */
   (function loop() {
     var tabs = $$(".loop__node"), panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });
