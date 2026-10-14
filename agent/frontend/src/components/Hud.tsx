@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useId, useRef, useState } from 'react'
 import type { SequenceState, TurnState } from '../App'
 import { STEPS, STEP_CN, STEP_OF } from '../lib'
 import type { Node, TracePhase, World } from '../types'
@@ -244,6 +244,26 @@ export default function Hud({
   const highlightRef = useRef<HTMLDivElement>(null)
   const fileRef = useRef<HTMLInputElement>(null)
   const [addOpen, setAddOpen] = useState(false)
+  const optionTooltipId = useId()
+  const [previewOption, setPreviewOption] = useState<{
+    node: string; index: number; text: string; left: number; bottom: number; width: number; anchor: number
+  } | null>(null)
+  const showOptionPreview = (button: HTMLButtonElement, index: number, text: string) => {
+    if (!current || !button.parentElement) return
+    const bounds = button.getBoundingClientRect()
+    const row = button.parentElement.getBoundingClientRect()
+    const width = Math.min(360, Math.max(280, bounds.width), window.innerWidth - 24)
+    const center = Math.max(12 + width / 2,
+      Math.min(bounds.left + bounds.width / 2, window.innerWidth - 12 - width / 2))
+    setPreviewOption({ node: current.id, index, text, width,
+      left: center - row.left, bottom: row.bottom - bounds.top + 12,
+      anchor: Math.max(18, Math.min(width - 18, bounds.left + bounds.width / 2 - center + width / 2)) })
+  }
+  useEffect(() => {
+    const dismiss = () => setPreviewOption(null)
+    window.addEventListener('resize', dismiss)
+    return () => window.removeEventListener('resize', dismiss)
+  }, [])
   const [mentionStart, setMentionStart] = useState<number | null>(null)
   const [mentionEnd, setMentionEnd] = useState(0)
   const [mentionQuery, setMentionQuery] = useState('')
@@ -385,19 +405,35 @@ export default function Hud({
                 {objective}
               </div>
             )}
-            <div className="hud-options">
+            <div className="hud-options"
+              onMouseLeave={() => setPreviewOption(null)}
+              onKeyDown={(event) => { if (event.key === 'Escape') setPreviewOption(null) }}
+            >
               {options.map((o, i) => (
                 <button
                   key={i}
                   className={'option' + (i === recommend ? ' pick' : '')}
-                  onClick={() => onSend(o)}
+                  onClick={() => { setPreviewOption(null); onSend(o) }}
+                  onMouseEnter={(event) => showOptionPreview(event.currentTarget, i, o)}
+                  onFocus={(event) => showOptionPreview(event.currentTarget, i, o)}
+                  onBlur={() => setPreviewOption(null)}
+                  aria-describedby={previewOption && previewOption.node === current?.id && previewOption.index === i
+                    && previewOption.text === o ? optionTooltipId : undefined}
                   disabled={busy || playbackLocked}
-                  title={i === recommend ? t('世界建议走这条 —— 已经先替你想好了，点下去直接开拍') : undefined}
                 >
                   {i === recommend && <em>{t('推荐')}</em>}
                   {o}
                 </button>
               ))}
+              {previewOption?.node === current?.id && previewOption
+                && options[previewOption.index] === previewOption.text && (
+                <div id={optionTooltipId} role="tooltip"
+                  className="option-tooltip"
+                  style={{ left: previewOption.left, bottom: previewOption.bottom, width: previewOption.width }}>
+                  <span className="option-tooltip-text">{previewOption.text}</span>
+                  <span className="option-tooltip-tip" aria-hidden="true" style={{ left: previewOption.anchor }} />
+                </div>
+              )}
               <button
                 className="option other"
                 onClick={() => {
