@@ -310,6 +310,12 @@ GM_SCHEMA = {
         # if the story needs it.
         "recommend": {"type": "integer"},
         "subjects": {"type": "array", "items": {"type": "string"}},
+        # Of this clip's `subjects`, the ones **not visible in the last attached frame**. A
+        # continuation only inherits the last ~0.7 s of the previous clip and no reference images,
+        # so a subject missing there is redrawn from text alone (a greatsword came back as a
+        # short glowing axe). The server answers a non-empty list with a referenced fresh shot
+        # instead of a continuation. Read before the video is submitted: never a late field.
+        "missing_from_last_frame": {"type": "array", "items": {"type": "string"}},
         # While the world has no user-played character, the director must decide explicitly whether
         # this beat shows the implicit player's body for the first time. If so the server registers
         # it; an off-screen voice does not count.
@@ -415,6 +421,7 @@ GM_SCHEMA = {
         "options",
         "recommend",
         "subjects",
+        "missing_from_last_frame",
         "implicit_player",
         "new_subjects",
         "new_places",

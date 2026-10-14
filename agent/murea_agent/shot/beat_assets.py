@@ -153,12 +153,17 @@ def _pictures_and_refs(
     motion_plan: dict[str, Any] | None = None,
     focus_text: str = "",
     action_step: dict[str, Any] | None = None,
+    force_item_ids: set[str] | None = None,
 ) -> tuple[list[dict[str, Any]], list[str], list[str]]:
     """Reference files for this segment, in `<Picture N>` order.
 
     Characters and explicitly referenced objects first (director order), destination scene
     last. This order is also the order the files are sent to the video backend; the
     two must stay in sync.
+
+    `force_item_ids` are items that get their own image even when passively carried: a clip
+    re-filmed because the previous clip's tail did not show them has nothing else to keep
+    their shape.
 
     ⚠️ The provider accepts 1–5 images and the place takes one, so at most 4 subjects share a shot. Extra
     ones are **dropped** instead of failing the turn: a missing reference makes that person look
@@ -178,11 +183,15 @@ def _pictures_and_refs(
         # A passive carried item is intentionally not uploaded as an independent
         # reference. The parent latent and carry_over contain its current state;
         # sending the isolated catalog image encourages a second, oversized instance.
-        if _is_item_record(s) and not _item_needs_reference(
-            {**s, "id": sid},
-            motion_plan=motion_plan,
-            focus_text=focus_text,
-            action_step=action_step,
+        if (
+            _is_item_record(s)
+            and sid not in (force_item_ids or ())
+            and not _item_needs_reference(
+                {**s, "id": sid},
+                motion_plan=motion_plan,
+                focus_text=focus_text,
+                action_step=action_step,
+            )
         ):
             continue
         if subject_count >= MAX_CHARACTER_REFS:
