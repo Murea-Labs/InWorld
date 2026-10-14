@@ -66,7 +66,36 @@
 /* ─────────── Three choices + other ─────────── */
 .hud-deck{display:flex;flex-direction:column;gap:9px}
 .hud-options{
+  position:relative;
   display:flex;gap:8px;align-items:stretch;justify-content:center;flex-wrap:wrap;
+}
+.option-tooltip{
+  position:absolute;z-index:10;transform:translateX(-50%);
+  box-sizing:border-box;padding:14px 18px;border-radius:var(--r-lg,20px);
+  background:var(--s-bg,#17212c);color:var(--s-ink-2,#f4f7f9);
+  border:1px solid var(--s-line,rgba(232,241,247,.2));
+  box-shadow:0 4px 18px rgba(0,0,0,.07),0 1px 3px rgba(0,0,0,.03);
+  font:400 var(--text-sm)/1.75 var(--font-ui);text-align:left;
+  white-space:pre-wrap;overflow-wrap:anywhere;text-shadow:none;
+  animation:option-preview-in .14s ease-out;
+}
+/* Keep the preview open while crossing the small gap from the option to the text. */
+.option-tooltip::before{
+  content:'';position:absolute;left:0;right:0;top:100%;height:13px;
+}
+.option-tooltip-text{display:block;max-height:36vh;overflow:auto}
+.option-tooltip-tip{
+  position:absolute;bottom:-5px;width:9px;height:9px;
+  transform:translateX(-50%) rotate(45deg);background:inherit;
+  border-right:1px solid var(--s-line,rgba(232,241,247,.2));
+  border-bottom:1px solid var(--s-line,rgba(232,241,247,.2));
+}
+@keyframes option-preview-in{
+  from{opacity:0;transform:translate(-50%,3px)}
+  to{opacity:1;transform:translate(-50%,0)}
+}
+@media(prefers-reduced-motion:reduce){
+  .option-tooltip{animation:none}
 }
 .option{
   flex:1 1 190px;max-width:340px;min-width:0;
