@@ -2,7 +2,7 @@
 
 The page contains 333 clips from 35 worlds, arranged into one parent-connected
 sequence per world. `story-order.json` records the source gallery, world and node IDs,
-parent relationships, display order, video URLs, and local poster paths. Adjacent
+parent relationships, display order, video URLs, and poster paths relative to the repository-root `index.html`. Adjacent
 clips must satisfy `next.parent === previous.node`; do not sort by timestamp or
 combine branches. A retained sequence may start after excluded source clips;
 the first parent ID remains the original ID even when that parent is not shown.
@@ -29,10 +29,10 @@ The video files are hosted at:
 
 Previews use H.264, a maximum encoded width of 768 pixels, YUV 4:2:0, and MP4
 fast start. Audio is omitted for the silent looping previews. The source clips
-remain unchanged. Posters live in `assets/img/stories/` so a scene remains visible
-while its video buffers. The original twelve MP4s remain available for old links.
+remain unchanged. Posters live in `page/assets/img/stories/` so a scene remains visible
+while its video buffers. The original twelve MP4s are retained under `page/assets/video/`.
 
-`assets/js/motion.js` starts previews only after they settle in the viewport,
+`page/assets/js/motion.js` starts previews only after they settle in the viewport,
 pauses them outside it or when the document is hidden, and releases distant
 media after 20 seconds. It respects reduced motion and explicit pause controls.
 Cards stay 240–288 CSS pixels wide and use `object-fit: contain`.
