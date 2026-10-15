@@ -7,6 +7,7 @@
 Open-source video generation with synchronized sound from text and reference images,
 and an agent that turns your actions into a continuing, filmed story.
 
+[![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Agent CI](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml)
 [![Inference CI](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml)

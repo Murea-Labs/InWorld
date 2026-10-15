@@ -7,6 +7,7 @@
 开源的视频生成系统：根据文本和参考图生成带同步音频的视频，
 并提供一个 Agent，把你的每一步行动拍成连续的故事。
 
+[![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![Agent CI](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml)
 [![Inference CI](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml)
