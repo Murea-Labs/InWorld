@@ -1,6 +1,6 @@
 <div align="center">
 
-# InWorld
+# Murea-InWorld
 
 **说出你想做什么，世界替你拍出来。**
 
@@ -8,9 +8,9 @@
 并提供一个 Agent，把你的每一步行动拍成连续的故事。
 
 [![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
+[![Paper](https://img.shields.io/badge/Paper-ResearchGate-b31b1b)](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![Agent CI](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml)
-[![Inference CI](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml)
+[![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#动态)
 [![Blog](https://img.shields.io/badge/Blog-few--step%20inference-orange)](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
 
@@ -23,6 +23,27 @@
 > [!NOTE]
 > Murea-Fast 模型权重尚未发布，之后会在 Hugging Face 上发布。在此之前推理服务无法启动，
 > Agent 也就没有可用的视频模型。代码、文档和离线测试现在都可以使用。
+
+## 摘要
+
+以下摘要译自我们的[技术报告](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)，项目名称与本仓库保持一致。
+报告评测了 Murea-Pro 和 Murea-Fast；本仓库提供 Murea Agent 与 Murea-Fast 推理服务。
+
+交互式世界模型旨在模拟随用户行动而演化的环境，同时保留过去交互带来的影响。将这样的世界扩展到视觉与听觉，
+需要持续存在的实体、不断变化的场景状态以及局部视听动态在多轮交互中保持一致。
+本文提出 Murea-InWorld，一种将显式世界状态管理与神经网络视听生成相结合的交互式视听世界模型。
+其世界智能体 Murea-Agent 维护角色、物体、地点与叙事进展，结合上下文理解用户行动，并将规划的事件编译为生成条件。
+对生成帧的观察为后续规划和部分状态更新提供依据，从而形成交互闭环。
+
+视听生成器 Murea 通过全参考生成（Omni-Reference Generation）实现这些事件：使用视觉参考固定实体外观，
+并通过结构化描述指定动作与对话。流式生成采用各模态专属的历史上下文，并为尚未结束的话语保留更长的音频上下文。
+基于退化历史的训练使模型能够适应不完美的滚动生成上下文，而依次进行的 MeanFlow 蒸馏与分布匹配蒸馏则实现了少步合成。
+分支历史支持不同的后续发展，多人协作交互则将多位参与者的行动汇入同一个世界。
+
+我们在互补配置下评测生成组件。Murea-Pro 在 **WBench Full-289 上取得 81.13 的 Overall 分数**，
+在参与比较的系统中排名最高。Murea-Fast 在 **OpenS2V-Eval 上取得 64.98 的 Total 分数**，
+并在 **OS2V-Pro 上取得 69.9 的综合分数**；OS2V-Pro 是针对参考保真度、属性绑定、渲染质量和音频的扩展评测。
+Murea-Pro 和 Murea-Fast 在各自的基准上均达到最先进水平，且两者在各自评测中均超过大多数参评的商业系统。
 
 ## 动态
 
@@ -127,7 +148,7 @@ curl --fail http://127.0.0.1:30260/health
 （Gemini、任何 OpenAI 兼容接口，或阿里云百炼）：
 
 ```bash
-git clone https://github.com/sjsjhsu/InWorld && cd InWorld/agent
+git clone git@gitlab-server.hnminigames.fun:aura/Murea.git Murea-InWorld && cd Murea-InWorld/agent
 cp .env.example .env          # 填好 GEMINI_API_KEY 和 MUREA_URL=http://<GPU 主机>:30260
 ./run.sh                      # 然后打开 http://127.0.0.1:8080
 ```
@@ -137,7 +158,7 @@ cp .env.example .env          # 填好 GEMINI_API_KEY 和 MUREA_URL=http://<GPU 
 ## 目录结构
 
 ```text
-InWorld/
+Murea-InWorld/
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── SECURITY.md
@@ -168,7 +189,7 @@ InWorld/
 
 Murea-Fast 由 Lightricks 的 [LTX-2.5](https://github.com/Lightricks/LTX-2) 微调和蒸馏而来，
 通过 [SGLang](https://github.com/sgl-project/sglang) 提供服务。Agent 可选的旁白配音使用
-[OmniVoice](https://github.com/k2-fsa/OmniVoice)。InWorld 与 Lightricks 没有关联，也未获其背书。
+[OmniVoice](https://github.com/k2-fsa/OmniVoice)。Murea-InWorld 与 Lightricks 没有关联，也未获其背书。
 
 ## 许可证
 
@@ -181,10 +202,10 @@ Murea-Fast 由 Lightricks 的 [LTX-2.5](https://github.com/Lightricks/LTX-2) 微
 ## 引用
 
 ```bibtex
-@misc{inworld2026,
-  title        = {InWorld: Multi-Reference Audio-Video Generation and an Open-World Video Agent},
-  author       = {{The InWorld Authors}},
+@misc{murea_inworld2026,
+  title        = {InWorld: From Imagination to Living Worlds with Agents and Fast Video Generation},
+  author       = {{Murea Labs}},
   year         = {2026},
-  howpublished = {\url{https://github.com/sjsjhsu/InWorld}}
+  url          = {https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation}
 }
 ```

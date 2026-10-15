@@ -1,6 +1,6 @@
 <div align="center">
 
-# InWorld
+# Murea-InWorld
 
 **Type what you do, and the world films it.**
 
@@ -8,9 +8,9 @@ Open-source video generation with synchronized sound from text and reference ima
 and an agent that turns your actions into a continuing, filmed story.
 
 [![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
+[![Paper](https://img.shields.io/badge/Paper-ResearchGate-b31b1b)](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![Agent CI](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/agent.yml)
-[![Inference CI](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml/badge.svg)](https://github.com/sjsjhsu/InWorld/actions/workflows/inference.yml)
+[![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#news)
 [![Blog](https://img.shields.io/badge/Blog-few--step%20inference-orange)](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
 
@@ -24,6 +24,38 @@ and an agent that turns your actions into a continuing, filmed story.
 > The Murea-Fast weights are not published yet. They will be released on Hugging Face. Until
 > then the inference service cannot be started, so the agent has no video model to film with.
 > The code, the documentation and the offline tests are available now.
+
+## Abstract
+
+Adapted from our [technical report](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation).
+The report evaluates Murea-Pro and Murea-Fast; this repository provides Murea Agent and the
+Murea-Fast inference service.
+
+Interactive world models aim to simulate environments that evolve under user actions while
+retaining the consequences of past interactions. Extending such worlds to sight and sound
+requires persistent entities, changing scene states, and local audiovisual dynamics to
+remain coherent across turns. This paper presents Murea-InWorld, an interactive audiovisual
+world model that couples explicit world-state management with neural audiovisual generation.
+Its world agent, Murea-Agent, maintains characters, objects, locations, and narrative progress,
+interprets user actions in context, and compiles planned events into generation conditions.
+Observations of generated frames inform subsequent planning and selected state updates,
+closing the interaction loop.
+
+Its audiovisual generator, Murea, realizes these events through Omni-Reference Generation,
+using visual references to anchor entity appearance and structured descriptions to specify
+actions and dialogue. Streaming generation uses modality-specific histories, with longer
+audio context for unfinished utterances. Degraded-history training prepares the model for
+imperfect rollout context, while sequential MeanFlow and distribution matching distillation
+enable few-step synthesis. Branching histories support alternative continuations, and co-op
+interaction brings multiple participants' actions into the same world.
+
+We evaluate the generation components in complementary configurations. Murea-Pro achieves
+an Overall score of **81.13 on WBench Full-289**, the highest among the compared systems.
+Murea-Fast achieves a Total score of **64.98 on OpenS2V-Eval** and an aggregate score of
+**69.9 on OS2V-Pro**, an extended evaluation of reference fidelity, attribute binding,
+rendering quality, and audio. Murea-Pro and Murea-Fast achieve state-of-the-art performance
+on their respective benchmarks, and both models surpass most evaluated commercial systems
+in their respective evaluations.
 
 ## News
 
@@ -136,7 +168,7 @@ curl --fail http://127.0.0.1:30260/health
 for text and images (Gemini, any OpenAI-compatible server, or DashScope):
 
 ```bash
-git clone https://github.com/sjsjhsu/InWorld && cd InWorld/agent
+git clone git@gitlab-server.hnminigames.fun:aura/Murea.git Murea-InWorld && cd Murea-InWorld/agent
 cp .env.example .env          # set GEMINI_API_KEY and MUREA_URL=http://<gpu-host>:30260
 ./run.sh                      # then open http://127.0.0.1:8080
 ```
@@ -147,7 +179,7 @@ SSH tunnels.
 ## Repository layout
 
 ```text
-InWorld/
+Murea-InWorld/
 ├── LICENSE
 ├── CONTRIBUTING.md
 ├── SECURITY.md
@@ -180,7 +212,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the checks each part needs before a p
 Murea-Fast is fine-tuned and distilled from [LTX-2.5](https://github.com/Lightricks/LTX-2)
 by Lightricks and is served with [SGLang](https://github.com/sgl-project/sglang). The
 agent's optional narration voice uses [OmniVoice](https://github.com/k2-fsa/OmniVoice).
-InWorld is not affiliated with or endorsed by Lightricks.
+Murea-InWorld is not affiliated with or endorsed by Lightricks.
 
 ## License
 
@@ -195,10 +227,10 @@ language and image model APIs, which have their own terms.
 ## Citation
 
 ```bibtex
-@misc{inworld2026,
-  title        = {InWorld: Multi-Reference Audio-Video Generation and an Open-World Video Agent},
-  author       = {{The InWorld Authors}},
+@misc{murea_inworld2026,
+  title        = {InWorld: From Imagination to Living Worlds with Agents and Fast Video Generation},
+  author       = {{Murea Labs}},
   year         = {2026},
-  howpublished = {\url{https://github.com/sjsjhsu/InWorld}}
+  url          = {https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation}
 }
 ```
