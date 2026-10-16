@@ -45,6 +45,24 @@ def _walk(w: World, *places: str) -> None:
 
 
 class MapTest(unittest.TestCase):
+    def test_first_segment_cannot_be_rolled_back(self):
+        from dataclasses import asdict
+        w = _world()
+        _walk(w, "会议室")
+        w.history = [{"role": "user", "content": "开始"}, {"role": "model", "content": "开场"}]
+        before = asdict(w)
+        self.assertFalse(w.rollback())
+        self.assertEqual(before, asdict(w))
+
+    def test_rollback_stops_at_first_segment_even_with_detached_nodes(self):
+        w = _world()
+        _walk(w, "会议室", "走廊", "茶水间")
+        self.assertTrue(w.rollback())
+        self.assertTrue(w.rollback())
+        self.assertFalse(w.rollback())
+        self.assertEqual(w.head, "n0")
+        self.assertEqual(len(w.nodes), 3)
+
     def test_walking_records_the_door(self):
         w = _world()
         _walk(w, "会议室", "走廊", "茶水间")

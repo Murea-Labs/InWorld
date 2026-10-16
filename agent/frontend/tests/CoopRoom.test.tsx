@@ -76,7 +76,7 @@ it('stops immersive generation before switching the login cookie', async () => {
 
 it('confirms rollback of the latest shared clip and restores both action drafts', async () => {
   const current = { ...room, round: 2, rounds: [{ round: 1, inputs: [], merged_prompt: '',
-    node: { ...room.opening_node!, id: 'two', clip: 'two.mp4' } }] };
+    node: { ...room.opening_node!, id: 'two', parent: 'one', clip: 'two.mp4' } }] };
   vi.mocked(api.getRoom).mockResolvedValue(current);
   vi.mocked(api.rollback).mockResolvedValue({ ...room, revision: 2,
     members: room.members.map(p => ({ ...p, action: `重试${p.user_id}` })) });
@@ -92,6 +92,16 @@ it('confirms rollback of the latest shared clip and restores both action drafts'
   expect((getByLabelText('玩家 A 本轮动作') as HTMLTextAreaElement).value).toBe('重试a');
   fireEvent.click(getByRole('button', { name: '切换到玩家 B：角色b' }));
   expect((getByLabelText('玩家 B 本轮动作') as HTMLTextAreaElement).value).toBe('重试b');
+});
+
+it('disables rollback for the first shared clip', async () => {
+  const ui = render(<CoopRoom code={room.code}
+    user={{ id: 'a', name: '房主', locked: false, created: '' }} theme="mist" onThemeChange={() => undefined}
+    onExit={() => undefined} onSwitchUser={() => undefined} />);
+  const button = await ui.findByRole('button', { name: '撤回最新一段' });
+  expect((button as HTMLButtonElement).disabled).toBe(true);
+  fireEvent.click(button);
+  expect(api.rollback).not.toHaveBeenCalled();
 });
 
 it('hides shared rollback from non-host players', async () => {

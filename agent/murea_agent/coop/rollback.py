@@ -100,6 +100,8 @@ def rollback(code, uid, expected_node):
         world = World.load(room["world_id"])
         if world.head != expected_node:
             raise HTTPException(409, msg("世界片段已变化，请刷新后再撤回"))
+        if world.head_node is None or not world.head_node.parent:
+            raise HTTPException(409, msg("世界第一段不能撤回"))
         removed = rounds.pop() if rounds else None
         if removed is None:
             room.pop("opening_node", None)
