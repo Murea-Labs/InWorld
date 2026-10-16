@@ -522,7 +522,7 @@ class World(QuestsMixin, DynamicStateMixin):
         """Undo one segment. The clip and its artifact stay on disk -- redoing or
         branching later just points at them again."""
         node = self.head_node
-        if node is None:
+        if node is None or not node.parent:
             return False
         self.head = node.parent
         parent = self.head_node

@@ -107,6 +107,8 @@ def delete_world(wid: str, user: CurrentUser) -> dict:
 @router.post("/{wid}/rollback")
 def rollback(wid: str, user: CurrentUser) -> dict:
     w = load_owned_world(wid, user)
+    if w.head_node is not None and not w.head_node.parent:
+        raise HTTPException(409, "世界第一段不能撤回")
     ok = w.rollback()
     w.save()
     return {"ok": ok, "head": w.head, "here": w.here}

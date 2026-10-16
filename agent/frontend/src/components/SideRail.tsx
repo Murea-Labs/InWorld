@@ -39,8 +39,10 @@ export default function SideRail({
 }: Props) {
   const [confirmingUndo, setConfirmingUndo] = useState(false)
   const [undoing, setUndoing] = useState(false)
+  const canUndo = !!(world?.head && world.nodes[world.head]?.parent)
 
   const confirmUndo = async () => {
+    if (!canUndo || busy || undoing) return
     setUndoing(true)
     try {
       await onUndo()
@@ -77,8 +79,8 @@ export default function SideRail({
         {tab === 'chat' && (
           <button
             className="sm ghost" onClick={() => setConfirmingUndo(true)}
-            disabled={busy || !world?.head}
-            title={t('撤回最新一段')}
+            disabled={busy || !canUndo}
+            title={t(canUndo ? '撤回最新一段' : '世界第一段不能撤回')}
           >
             {t('撤回')}
           </button>

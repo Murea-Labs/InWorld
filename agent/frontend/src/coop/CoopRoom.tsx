@@ -564,7 +564,8 @@ export default function CoopRoom({
                 Agent
               </button>
               {host && (room.rounds.length > 0 || room.opening_node) && <button
-                className="ghost sm" disabled={busy || !!working || immersive}
+                className="ghost sm" disabled={busy || !!working || immersive || !currentVideo?.parent}
+                title={t(currentVideo?.parent ? "撤回最新一段" : "世界第一段不能撤回")}
                 onClick={() => { setError(""); setUndoNode(currentVideo!.id); }}>
                 {t("撤回最新一段")}
               </button>}
