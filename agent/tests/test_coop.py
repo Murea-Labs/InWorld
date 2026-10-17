@@ -985,17 +985,19 @@ class CoopTest(unittest.TestCase):
             fn(*args)
         self.assertEqual(409, self.a.post(self.url + "/rollback", json={"node_id": "old"}).status_code)
 
-    def test_rollback_legacy_opening_keeps_world_and_characters(self):
+    def test_rollback_rejects_legacy_opening_and_keeps_world_and_characters(self):
         room = self.ready()
         world = World.load(room["world_id"])
         node = self.video(world, "opening", mentions=[])
         with coop._edit(self.code) as saved:
             saved["opening_node"] = asdict(node)
+        before = asdict(World.load(world.id))
         response = self.a.post(self.url + "/rollback", json={"node_id": node.id})
-        self.assertEqual(200, response.status_code, response.text)
-        self.assertNotIn("opening_node", response.json())
-        self.assertEqual(2, len(response.json()["members"]))
-        self.assertFalse(World.load(world.id).head)
+        self.assertEqual(409, response.status_code, response.text)
+        current = self.a.get(self.url).json()
+        self.assertEqual(node.id, current["opening_node"]["id"])
+        self.assertEqual(2, len(current["members"]))
+        self.assertEqual(before, asdict(World.load(world.id)))
 
     def test_all_players_ready_and_host_only(self):
         self.create()

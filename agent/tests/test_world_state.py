@@ -47,6 +47,7 @@ def _walk(w: World, *places: str) -> None:
 class MapTest(unittest.TestCase):
     def test_first_segment_cannot_be_rolled_back(self):
         from dataclasses import asdict
+
         w = _world()
         _walk(w, "会议室")
         w.history = [{"role": "user", "content": "开始"}, {"role": "model", "content": "开场"}]

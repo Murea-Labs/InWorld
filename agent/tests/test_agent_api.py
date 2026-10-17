@@ -85,8 +85,14 @@ class AgentApiTest(unittest.TestCase):
         self.assertEqual("Inn", node.place)
         self.assertEqual(node.id, agent.load_world(world.id).head)
         self.assertIsNone(agent.reflect(world))  # no frames to look at
+        self.assertFalse(agent.undo(world))
+        self.assertEqual(node.id, world.head)
+        next_events = list(agent.stream(world, "I order a drink"))
+        self.assertEqual("done", next_events[-1]["type"])
+        self.assertEqual(node.id, next_events[-1]["node"].parent)
         self.assertTrue(agent.undo(world))
-        self.assertIsNone(world.head)
+        self.assertEqual(node.id, world.head)
+        self.assertEqual(node.id, agent.load_world(world.id).head)
 
     def test_stream_turns_failures_into_an_error_event(self) -> None:
         agent = murea_agent.MureaMind()

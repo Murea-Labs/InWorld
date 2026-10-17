@@ -80,6 +80,17 @@ class DynamicStateTest(unittest.TestCase):
 
     def test_rollback_restores_dynamic_state_for_branch(self) -> None:
         world = self._world()
+        world.add_node(
+            Node(
+                id="opening",
+                parent=None,
+                video_id="",
+                clip="opening.mp4",
+                place="会议室",
+                beat="阿明进入会议室",
+                mode="cut",
+            )
+        )
         before = world.dynamic_state_snapshot()
         world.apply_dynamic_updates(
             {
@@ -93,7 +104,7 @@ class DynamicStateTest(unittest.TestCase):
         world.add_node(
             Node(
                 id="n1",
-                parent=None,
+                parent=world.head,
                 video_id="",
                 clip="1.mp4",
                 place="会议室",
@@ -105,6 +116,7 @@ class DynamicStateTest(unittest.TestCase):
         )
         self.assertEqual("眉头紧皱", world.subjects["S1"]["state"]["mood"])
         self.assertTrue(world.rollback())
+        self.assertEqual("opening", world.head)
         self.assertEqual(before, world.dynamic_state_snapshot())
 
     def test_pipeline_applies_state_without_appending_machine_clause(self) -> None:

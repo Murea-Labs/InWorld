@@ -211,6 +211,17 @@ class QuestTest(unittest.TestCase):
 
     def test_rollback_restores_branch_quest_snapshot(self) -> None:
         world = _world()
+        world.add_node(
+            Node(
+                id="opening",
+                parent=None,
+                video_id="",
+                clip="opening.mp4",
+                place="码头",
+                beat="抵达码头",
+                mode="cut",
+            )
+        )
         before = world.quest_state_snapshot()
         world.objective = "进入旧泵房"
         world.apply_quest_updates(
@@ -233,7 +244,7 @@ class QuestTest(unittest.TestCase):
         world.add_node(
             Node(
                 id="n1",
-                parent=None,
+                parent=world.head,
                 video_id="",
                 clip="1.mp4",
                 place="旧泵房",
@@ -247,6 +258,7 @@ class QuestTest(unittest.TestCase):
 
         self.assertEqual(2, len(world.quests))
         self.assertTrue(world.rollback())
+        self.assertEqual("opening", world.head)
         self.assertEqual(before, world.quest_state_snapshot())
 
     def test_main_progress_follows_objective(self) -> None:
@@ -267,6 +279,17 @@ class QuestTest(unittest.TestCase):
         world = _world()
         world.mainline_phase = "找到入口"
         world.mainline_milestones = ["找到入口", "关闭闸门"]
+        world.add_node(
+            Node(
+                id="opening",
+                parent=None,
+                video_id="",
+                clip="opening.mp4",
+                place="旧泵房",
+                beat="找到泵房入口",
+                mode="cut",
+            )
+        )
         before = world.quest_state_snapshot()
         world.mainline_phase = "关闭闸门"
         world.objective = "确认闸门已经闭合"
@@ -274,7 +297,7 @@ class QuestTest(unittest.TestCase):
         world.add_node(
             Node(
                 id="nphase",
-                parent=None,
+                parent=world.head,
                 video_id="",
                 clip="1.mp4",
                 place="旧泵房",
@@ -287,6 +310,7 @@ class QuestTest(unittest.TestCase):
         )
 
         self.assertTrue(world.rollback())
+        self.assertEqual("opening", world.head)
         restored = world.quest_state_snapshot()
         self.assertEqual(before["mainline_phase"], restored["mainline_phase"])
         self.assertEqual(before["mainline_milestones"], restored["mainline_milestones"])
