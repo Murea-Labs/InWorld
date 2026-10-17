@@ -10,7 +10,7 @@ and an agent that turns your actions into a continuing, filmed story.
 [![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
 [![Paper](https://img.shields.io/badge/Paper-ResearchGate-b31b1b)](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
+[![GitHub](https://img.shields.io/badge/Code-GitHub-181717)](https://github.com/Murea-Labs/InWorld)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-Murea--Fast-yellow)](https://huggingface.co/MureaLabs/InWorld)
 
 **English** | [中文](README_zh.md)
@@ -166,7 +166,7 @@ curl --fail http://127.0.0.1:30260/health
 for text and images (Gemini, any OpenAI-compatible server, or DashScope):
 
 ```bash
-git clone git@gitlab-server.hnminigames.fun:aura/Murea.git Murea-InWorld && cd Murea-InWorld/agent
+git clone https://github.com/Murea-Labs/InWorld.git Murea-InWorld && cd Murea-InWorld/agent
 cp .env.example .env          # set GEMINI_API_KEY and MUREA_URL=http://<gpu-host>:30260
 ./run.sh                      # then open http://127.0.0.1:8080
 ```

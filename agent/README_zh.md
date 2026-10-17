@@ -35,7 +35,7 @@ flowchart LR
 需要装好 [uv](https://docs.astral.sh/uv/)，准备一个文字和出图用的 key，再起一个 [Murea-Fast](../inference/README_zh.md) 视频服务：
 
 ```bash
-git clone git@gitlab-server.hnminigames.fun:aura/Murea.git Murea-InWorld && cd Murea-InWorld/agent
+git clone https://github.com/Murea-Labs/InWorld.git Murea-InWorld && cd Murea-InWorld/agent
 cp .env.example .env          # 填好下面两行
 ./run.sh                      # 自动装好依赖，然后打开 http://127.0.0.1:8080
 ```

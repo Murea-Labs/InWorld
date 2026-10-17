@@ -10,7 +10,7 @@
 [![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
 [![Paper](https://img.shields.io/badge/Paper-ResearchGate-b31b1b)](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
+[![GitHub](https://img.shields.io/badge/Code-GitHub-181717)](https://github.com/Murea-Labs/InWorld)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-Murea--Fast-yellow)](https://huggingface.co/MureaLabs/InWorld)
 
 [English](README.md) | **中文**
@@ -147,7 +147,7 @@ curl --fail http://127.0.0.1:30260/health
 （Gemini、任何 OpenAI 兼容接口，或阿里云百炼）：
 
 ```bash
-git clone git@gitlab-server.hnminigames.fun:aura/Murea.git Murea-InWorld && cd Murea-InWorld/agent
+git clone https://github.com/Murea-Labs/InWorld.git Murea-InWorld && cd Murea-InWorld/agent
 cp .env.example .env          # 填好 GEMINI_API_KEY 和 MUREA_URL=http://<GPU 主机>:30260
 ./run.sh                      # 然后打开 http://127.0.0.1:8080
 ```

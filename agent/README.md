@@ -42,7 +42,7 @@ You need [uv](https://docs.astral.sh/uv/), a key for text and images, and a runn
 [Murea-Fast](../inference/README.md) service for video:
 
 ```bash
-git clone git@gitlab-server.hnminigames.fun:aura/Murea.git Murea-InWorld && cd Murea-InWorld/agent
+git clone https://github.com/Murea-Labs/InWorld.git Murea-InWorld && cd Murea-InWorld/agent
 cp .env.example .env          # fill in the two lines below
 ./run.sh                      # installs everything, then http://127.0.0.1:8080
 ```
