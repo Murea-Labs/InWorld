@@ -1,0 +1,49 @@
+[project]
+name = "murea-mind"
+version = "0.1.0"
+description = "An open-world video agent: type what you do, and the world films it."
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115,<1",
+    "httpx>=0.27,<1",
+    "Pillow>=10,<13",
+    "python-multipart>=0.0.9,<0.1",
+    "PyYAML>=6,<7",
+    "uvicorn>=0.30,<1",
+]
+
+[project.optional-dependencies]
+# A static ffmpeg (~50 MB) for machines without one; run.sh installs it only then.
+ffmpeg = ["imageio-ffmpeg>=0.5,<1"]
+# SGLang's grammar compiler, only for llm.json_max_whitespace.
+grammar = ["xgrammar"]
+
+[dependency-groups]
+dev = ["ruff>=0.14"]
+
+# requirements.txt is the lock run.sh, Docker and CI install from. After changing
+# the dependencies above, regenerate it:
+#   uv pip compile pyproject.toml -o requirements.txt --universal --python-version 3.12
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"
+extend-exclude = ["frontend", "data*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "B", "UP", "SIM", "BLE"]
+ignore = [
+    "E501",    # long lines: prompts and messages read better unwrapped; the formatter handles code
+    "B008",    # FastAPI's File()/Form() defaults
+    "SIM105",  # try/except/pass reads clearer than contextlib.suppress in the hot paths here
+    "SIM102",  # nested ifs here carry a comment per condition
+    "SIM108",  # ternaries are not always clearer
+    "BLE001",  # best-effort side work (prefetch, logging, listeners) must never break a turn
+    "B905",    # zip() over lists that are built together
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["B011", "B023", "SIM", "E402"]
+"scripts/*" = ["E402"]

@@ -1,0 +1,161 @@
+/* ═══ Global: reset, typography, form controls, buttons and small shared atoms ═══ */
+
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+
+body{
+  margin:0;
+  background:linear-gradient(145deg,#1b2530 0%,var(--bg-0) 54%,#202b36 100%);
+  color:var(--fg);
+  overflow:hidden;
+  font:var(--text-base)/1.62 var(--font-ui);
+  font-feature-settings:"tnum" 1;      /* 等宽数字，时长/段号跳动时不抖 */
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+
+/* Base glow: an almost invisible center light so large black areas do not look dead */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(80% 70% at 16% 4%,rgba(121,196,188,.09),transparent 58%),
+    radial-gradient(70% 72% at 92% 12%,rgba(211,167,109,.075),transparent 58%);
+}
+
+/* ─────────── Scrollbars: 3px, almost invisible ─────────── */
+*{scrollbar-width:thin;scrollbar-color:var(--w-14) transparent}
+::-webkit-scrollbar{width:3px;height:3px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--w-14);border-radius:99px}
+::-webkit-scrollbar-thumb:hover{background:var(--w-38)}
+
+/* ─────────── Buttons ─────────── */
+button{
+  font:500 var(--text-sm)/1.4 var(--font-ui);
+  cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
+  padding:7px 15px;
+  border-radius:var(--btn-radius);
+  background:var(--w-05);
+  color:var(--fg);
+  border:1px solid var(--line);
+  box-shadow:var(--lip);
+  transition:background var(--t-fast),border-color var(--t-fast),
+             color var(--t-fast),transform var(--t-fast);
+  white-space:nowrap;
+}
+button:hover:not(:disabled){background:var(--w-09);border-color:var(--line-strong)}
+button:active:not(:disabled){transform:translateY(.5px)}
+button:disabled{opacity:.36;cursor:not-allowed}
+
+button.primary{
+  background:var(--accent);color:var(--accent-ink);
+  border-color:transparent;font-weight:600;box-shadow:none;
+}
+button.primary:hover:not(:disabled){background:#a6ddd7}
+
+button.ghost{background:transparent;border-color:transparent;box-shadow:none;color:var(--dim)}
+button.ghost:hover:not(:disabled){background:var(--w-05);color:var(--fg)}
+
+button.danger{color:#e2a6a1;border-color:rgba(176,82,75,.3);background:rgba(176,82,75,.12)}
+button.danger:hover:not(:disabled){background:rgba(176,82,75,.2);border-color:rgba(176,82,75,.45)}
+
+button.sm{padding:4px 11px;font-size:var(--text-xs)}
+
+/* Round icon buttons */
+button.icon{padding:0;width:32px;height:32px;border-radius:50%;flex:none}
+button.icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.6;
+  stroke-linecap:round;stroke-linejoin:round}
+
+:focus-visible{outline:none;box-shadow:var(--focus-ring)}
+button:focus-visible{box-shadow:var(--focus-ring)}
+
+/* Export is an <a> but must look exactly like the buttons next to it */
+.btn-link{
+  display:inline-flex;align-items:center;
+  font:500 var(--text-xs)/1.4 var(--font-ui);
+  padding:4px 11px;border-radius:var(--btn-radius);
+  background:var(--w-05);color:var(--fg);border:1px solid var(--line);
+  box-shadow:var(--lip);text-decoration:none;white-space:nowrap;
+  transition:background var(--t-fast),border-color var(--t-fast);
+}
+.btn-link:hover{background:var(--w-09);border-color:var(--line-strong)}
+.btn-link[aria-disabled=true]{opacity:.36;pointer-events:none}
+
+/* ─────────── Forms ─────────── */
+input,textarea,select{
+  font:var(--text-base)/1.55 var(--font-ui);
+  background:var(--input-bg);color:var(--fg);
+  border:1px solid var(--input-border);border-radius:var(--r-sm);
+  padding:8px 12px;width:100%;outline:none;
+  transition:border-color var(--t-fast),background var(--t-fast);
+}
+input::placeholder,textarea::placeholder{color:var(--faint)}
+input:hover,textarea:hover{border-color:var(--w-09)}
+input:focus,textarea:focus,select:focus{border-color:rgba(121,196,188,.48);background:rgba(24,33,43,.96)}
+textarea{resize:none}
+
+/* Image without a name: submission is blocked, so highlight it first */
+input.need{border-color:var(--c-warn)}
+input.need::placeholder{color:var(--c-warn);opacity:.8}
+
+/* ─────────── Small shared atoms ─────────── */
+
+/* Eyebrow: uppercase with letter spacing */
+.eyebrow{
+  font:600 10px/1 var(--font-ui);
+  letter-spacing:var(--tracking-caps);text-transform:uppercase;
+  color:var(--dimmer);
+}
+
+.spacer{flex:1}
+
+/* Status pills (video model online, model name, commit…) */
+.pill{
+  display:inline-flex;align-items:center;gap:6px;
+  font:500 var(--text-xs)/1 var(--font-ui);
+  color:var(--dim);background:var(--w-03);
+  border:1px solid var(--line);border-radius:var(--r-pill);
+  padding:5px 11px;white-space:nowrap;
+}
+.pill .dot{width:6px;height:6px;border-radius:50%;background:var(--faint);flex:none}
+.pill .dot.ok{background:var(--c-ok);box-shadow:0 0 7px rgba(111,138,134,.75)}
+.pill .dot.err{background:var(--c-err);box-shadow:0 0 7px rgba(176,82,75,.7)}
+
+/* Clip badges. Only "continued" gets a color: it is the only state meaning the picture really connects. */
+.tag{
+  display:inline-flex;align-items:center;
+  font:500 10.5px/1 var(--font-ui);letter-spacing:.02em;
+  padding:4px 8px;border-radius:var(--r-xs);
+  border:1px solid var(--line);color:var(--dim);background:var(--w-02);
+  white-space:nowrap;
+}
+.tag.cont{border-color:rgba(121,196,188,.42);color:#addbd6;background:rgba(121,196,188,.14)}
+.tag.cut{border-color:var(--w-14);color:var(--dim)}
+.tag.take{border-color:var(--w-14);color:var(--fg);background:var(--w-05)}
+
+.chip{
+  display:inline-block;font-size:var(--text-sm);
+  padding:5px 12px;border-radius:var(--r-pill);
+  background:var(--w-03);border:1px solid var(--line);color:var(--dim);
+}
+.chip.here{border-color:var(--w-22);color:var(--fg);background:var(--w-07)}
+
+/* Segmented control (character / place, video model…) */
+.seg{
+  /* Shrink to the content width; alone on a line it must not stretch into an empty pill */
+  display:flex;flex:none;width:max-content;max-width:100%;gap:2px;padding:3px;
+  background:var(--surface-deep);border:1px solid var(--line);border-radius:var(--r-pill);
+}
+.seg button{
+  padding:4px 13px;font-size:var(--text-xs);
+  border:0;border-radius:var(--r-pill);background:none;color:var(--dim);box-shadow:none;
+}
+.seg button:hover:not(:disabled){background:var(--w-05);color:var(--fg)}
+.seg button.on{background:var(--w-14);color:var(--fg);box-shadow:var(--lip)}
+
+@keyframes pulse{0%,100%{opacity:.28}50%{opacity:1}}
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.01ms !important;animation-iteration-count:1 !important;
+    transition-duration:.01ms !important}
+}

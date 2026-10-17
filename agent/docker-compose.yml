@@ -1,0 +1,19 @@
+services:
+  murea-mind:
+    build: .
+    ports:
+      # This machine only: the agent has no login of its own (see SECURITY.md).
+      - "127.0.0.1:8080:8080"
+    # A Murea-Fast service on this machine is http://host.docker.internal:<port> from inside
+    # the container (127.0.0.1 there is the container itself).
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    # API keys (see .env.example).
+    env_file:
+      - path: .env
+        required: false
+    volumes:
+      - ./data:/app/data
+      # Only if you made a config.yaml (copy of config.example.yaml):
+      # - ./config.yaml:/app/config.yaml:ro
+    restart: unless-stopped

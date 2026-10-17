@@ -1,0 +1,29 @@
+name: Inference
+
+on:
+  push:
+    paths:
+      - "inference/**"
+      - ".github/workflows/inference.yml"
+      - "!inference/vendor/**"
+  pull_request:
+    paths:
+      - "inference/**"
+      - ".github/workflows/inference.yml"
+      - "!inference/vendor/**"
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: inference
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: PYTHONPATH=src python -m unittest discover -s tests -p 'test_*.py' -v
+      - run: python -m compileall -q src scripts tests
+      - run: bash -n scripts/murea-fast
+      - run: pip wheel . --no-deps -w /tmp/wheel

@@ -1,0 +1,259 @@
+/* ═══ Stage: the picture area; everything else floats over it ═══ */
+
+/* overflow must clip: .stage-atmos deliberately extends 140px past its box (the blurred edge must not
+   show). Unclipped, it makes #app scrollable: the user cannot scroll it (#app is hidden too), but
+   focus changes trigger implicit scrolling that shifts the whole UI. */
+#stage{position:absolute;inset:0;z-index:1;overflow:hidden}
+
+/* Atmosphere: the current place's reference image, scaled up and blurred to fill the screen. It changes
+   with the place, so the room's mood arrives before the picture. It uses the reference image rather than
+   the video's first frame because that image is already on disk. */
+.stage-atmos{
+  position:absolute;inset:-140px;z-index:0;pointer-events:none;
+  background-position:center;background-size:cover;background-repeat:no-repeat;
+  filter:blur(56px) saturate(108%);
+  opacity:.50;transform:scale(1.12);
+  transition:background-image var(--t-slow) ease,opacity var(--t-slow) ease;
+}
+.stage-atmos::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at center, transparent 0 44%, rgba(18,25,33,.54) 100%),
+    linear-gradient(180deg, rgba(22,30,39,.34), transparent 36%, rgba(19,27,35,.48));
+}
+
+/* ⚠ The layer holding the picture must **position itself** above the atmosphere.
+   .stage-atmos is positioned with z-index:0; in CSS paint order positioned elements (even at z-index 0)
+   paint **above** non-positioned content, so an unpositioned picture would sit under the blurred,
+   vignetted image and the whole video would look grey.
+   
+   This box is the picture's rectangle (--reel-*, computed in layout.css), centered at the video's own
+   aspect ratio. The HUD uses the same rectangle, so dialogue sits **in the picture**. */
+#stage-body{
+  position:absolute;z-index:1;
+  left:var(--reel-l);width:var(--reel-w);
+  top:var(--reel-t);height:var(--reel-h);
+  right:auto;bottom:auto;
+  /* grid instead of flex: the two <video> elements share one cell without JS sizing.
+     ⚠️ grid-template must be a fixed 100%/100%: percentages of grid items resolve against the grid area,
+     and with auto implicit rows the block-axis percentage would be indefinite. */
+  display:grid;grid-template:100% / 100%;place-items:center;
+  overflow:hidden;border-radius:var(--r-md);
+  box-shadow:0 30px 80px rgba(4,9,14,.46),0 0 0 1px rgba(232,241,247,.11);
+  transition:left var(--t-slow) var(--ease-out),top var(--t-slow) var(--ease-out),
+             width var(--t-slow) var(--ease-out),height var(--t-slow) var(--ease-out),
+             border-radius var(--t-slow) var(--ease-out),box-shadow var(--t-slow);
+}
+/* The box has the video's own aspect ratio (--video-ratio written by App from the real metadata), so in
+   normal mode cover fits exactly and crops nothing; in immersive mode the box grows up to --immersive-crop
+   and only then does cover eat the black bars. One rule for both modes. */
+#stage video.reel{
+  grid-area:1/1;
+  width:100%;height:100%;object-fit:cover;display:block;
+  background:transparent;
+  /* Both videos keep painting; only the current clip is on top. Chromium treats an opacity:0 video as an
+     invisible layer and may not commit its first frame even when buffered, so switching would flash black.
+     The background clip decodes underneath and moves on top after its first-frame callback, so there is
+     always one layer with a real picture. */
+  z-index:0;pointer-events:none;
+}
+#stage video.reel.on{
+  z-index:1;pointer-events:auto;
+  /* Only the new picture fades in; the old last frame stays fully opaque underneath. The 120ms hand-off
+     becomes a short cross-fade instead of a hard cut, with a real picture at every moment. */
+  animation:reel-enter .12s ease-out both;
+}
+@keyframes reel-enter{from{opacity:0}to{opacity:1}}
+/* In immersive mode the picture is the screen; no radius or shadow framing it as a card */
+#app.immersive #stage-body{border-radius:0;box-shadow:none}
+
+/* A new world was just created and its first beat is still running */
+#empty .ring.spin{
+  border-color:var(--w-09);
+  border-top-color:var(--w-38);
+  animation:ring-spin 1s linear infinite;
+}
+#empty .ring.spin::after{display:none}
+@keyframes ring-spin{to{transform:rotate(360deg)}}
+
+/* ─────────── Empty state ─────────── */
+#empty{
+  position:absolute;inset:0;z-index:1;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  text-align:center;color:var(--faint);pointer-events:none;
+}
+#empty .ring{
+  width:56px;height:56px;border-radius:50%;
+  border:1px solid var(--w-09);
+  display:grid;place-items:center;margin-bottom:6px;
+  box-shadow:inset 0 0 26px rgba(255,255,255,.035);
+}
+#empty .ring::after{
+  content:"";width:9px;height:9px;border-radius:50%;
+  background:var(--w-22);animation:pulse 2.4s ease-in-out infinite;
+}
+#empty b{
+  display:block;font:500 var(--text-lg)/1.3 var(--font-display);
+  color:var(--dim);font-weight:500;
+}
+#empty span{font-size:var(--text-sm);color:var(--faint)}
+
+/* ─────────── Transport bar: a strip **outside** the picture ─────────── */
+/* It must not sit on the picture. "Clip N / place / play all / inspector" belong to the workbench, not
+   the world. It sits in the reserved band above the picture (--transport-h, already subtracted in
+   layout.css), as wide as the picture. In immersive mode it hides and returns with the header when the
+   mouse reaches the top edge. */
+#transport{
+  position:absolute;z-index:5;
+  left:var(--reel-l);width:var(--reel-w);
+  top:calc(var(--reel-t) - var(--transport-h) - var(--transport-gap));
+  display:flex;gap:10px;align-items:center;
+  height:var(--transport-h);padding:0 4px 0 10px;
+  border-radius:var(--r-sm);
+  background:var(--w-05);
+  border:1px solid var(--w-09);
+  transition:left var(--t-slow) var(--ease-out),top var(--t-slow) var(--ease-out),
+             width var(--t-slow) var(--ease-out),
+             opacity var(--t-normal),transform var(--t-normal) var(--ease-out);
+}
+#transport .sm{padding:3px 11px;font-size:var(--text-xs)}
+
+#seg-label{
+  flex:1;min-width:0;
+  display:flex;align-items:center;gap:8px;
+  color:var(--dim);font-size:var(--text-xs);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+/* "3 / 12" uses tabular digits so it does not jitter while playing */
+#seg-label .idx{
+  font:600 var(--text-xs)/1 var(--mono);letter-spacing:var(--tracking-code);
+  color:var(--fg);flex:none;
+}
+#seg-label .sep{color:var(--faint);flex:none}
+
+/* ═══ Something new appears: a card popping up on the picture ═══
+   Each beat may draw a new person, monster or object. In normal mode they are listed in the chat; in
+   immersive mode the chat gives way to the picture, so the card pops up on the picture for a few seconds.
+   
+   entity sets the presence: a monster is bigger, slower and has a glow compared with a prop, because it
+   weighs more in the story.
+   
+   Only transform / opacity: this layer is over a playing video and a dropped frame is visible. */
+.stage-pops{
+  position:absolute;z-index:4;pointer-events:none;
+  left:var(--reel-l);width:var(--reel-w);
+  /* Clear of the floating transport bar on top, and leave room for the HUD at the bottom */
+  top:calc(var(--reel-t) + var(--transport-h) + 22px);
+  height:calc(var(--reel-h) * .44);
+  padding-right:clamp(14px,2.2vw,32px);
+  display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-end;
+  gap:10px;
+}
+/* Bottom-aligned on purpose: new cards grow from the bottom, the oldest leaves first, and the others
+   stay put; a column pushing upward cannot be done with transform alone. */
+.stage-pop{
+  position:relative;margin:0;
+  display:flex;align-items:center;gap:11px;
+  width:236px;padding:9px 13px 9px 9px;
+  border-radius:var(--r-lg);
+  /* The glass panel recipe rather than the card one: the card sits on a video of any brightness and
+     needs a dense background. No backdrop-filter: it re-blurs the playing video every frame, not worth
+     it for a card shown four seconds. */
+  background:var(--glass-bg);
+  border:1px solid var(--glass-border);
+  box-shadow:var(--shadow-float),var(--lip);
+  /* --pop-life is written by Stage.tsx per tier, the same number as its removal timer */
+  animation:stage-pop var(--pop-life,4.4s) var(--ease-pop) both;
+  will-change:transform,opacity;
+}
+.stage-pop img{
+  flex:none;width:64px;height:64px;object-fit:cover;
+  border-radius:var(--r-md);background:var(--w-09);
+}
+.stage-pop figcaption{min-width:0;display:flex;flex-direction:column;gap:2px}
+.stage-pop em{
+  font:600 9px/1.4 var(--font-ui);font-style:normal;
+  letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dimmer);
+}
+.stage-pop b{
+  font:600 var(--text-base)/1.35 var(--font-ui);color:var(--fg);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.stage-pop span{
+  font-size:var(--text-xs);line-height:1.5;color:var(--dim);
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+}
+
+/* Four presence tiers. Duration follows --pop-life, not hard-coded here. */
+.stage-pop.is-prop{width:206px}
+.stage-pop.is-prop img{width:52px;height:52px}
+.stage-pop.is-place{width:252px}
+.stage-pop.is-place img{width:90px;height:58px;border-radius:var(--r-sm)}
+.stage-pop.is-life{
+  width:300px;
+  border-color:color-mix(in srgb,var(--c-story) 58%,transparent);
+  box-shadow:var(--shadow-float),var(--lip),
+             0 0 0 1px color-mix(in srgb,var(--c-story) 26%,transparent);
+}
+.stage-pop.is-life img{width:96px;height:96px}
+.stage-pop.is-life em{color:var(--c-story)}
+.stage-pop.is-life b{font-size:var(--text-md)}
+.stage-pop.is-life span{-webkit-line-clamp:3}
+
+/* Glow. z-index:-1 puts it behind the card's own background so only the part outside the card shows.
+   Same delay as the card (animation-delay:inherit). */
+.stage-pop-glow{display:none}
+.stage-pop.is-life .stage-pop-glow{
+  display:block;position:absolute;inset:-30px;z-index:-1;pointer-events:none;
+  border-radius:var(--r-xl);
+  background:radial-gradient(closest-side,
+    color-mix(in srgb,var(--c-story) 52%,transparent),
+    color-mix(in srgb,var(--c-story) 17%,transparent) 58%,transparent);
+  animation:stage-pop-glow var(--pop-life,6.4s) var(--ease-out) both;
+  animation-delay:inherit;
+}
+
+@keyframes stage-pop{
+  0%   {opacity:0;transform:translate3d(34px,10px,0) scale(.82)}
+  7%   {opacity:1;transform:translate3d(-5px,0,0) scale(1.035)}
+  12%  {opacity:1;transform:translate3d(0,0,0) scale(1)}
+  86%  {opacity:1;transform:translate3d(0,0,0) scale(1)}
+  100% {opacity:0;transform:translate3d(0,-16px,0) scale(.97)}
+}
+@keyframes stage-pop-glow{
+  0%   {opacity:0;transform:scale(.66)}
+  14%  {opacity:1;transform:scale(1.02)}
+  46%  {opacity:.55;transform:scale(.98)}
+  78%  {opacity:.9;transform:scale(1.05)}
+  100% {opacity:0;transform:scale(.92)}
+}
+
+/* With reduced motion the card must still enter and leave, otherwise it never disappears (removal
+   relies on animationend). Same duration, no movement. */
+@media(prefers-reduced-motion:reduce){
+  .stage-pop,.stage-pop.is-life .stage-pop-glow{animation-name:stage-pop-flat}
+}
+@keyframes stage-pop-flat{
+  0%{opacity:0}7%{opacity:1}86%{opacity:1}100%{opacity:0}
+}
+
+@media(max-width:760px){
+  .stage-pop,.stage-pop.is-life,.stage-pop.is-place,.stage-pop.is-prop{
+    width:min(268px,72vw);
+  }
+}
+/* Short screens (small windows, vertical split): little room between the header and the HUD, and a boss
+   card plus an item card at full size would reach under the header. Shrink the whole tier. */
+@media(max-height:660px){
+  .stage-pop{width:198px;padding:7px 10px 7px 7px;gap:9px}
+  .stage-pop img{width:48px;height:48px}
+  .stage-pop.is-prop{width:178px}
+  .stage-pop.is-prop img{width:42px;height:42px}
+  .stage-pop.is-place{width:208px}
+  .stage-pop.is-place img{width:68px;height:44px}
+  .stage-pop.is-life{width:236px}
+  .stage-pop.is-life img{width:68px;height:68px}
+  .stage-pop b,.stage-pop.is-life b{font-size:var(--text-sm)}
+  .stage-pop span,.stage-pop.is-life span{-webkit-line-clamp:2}
+  .stage-pop.is-life .stage-pop-glow{inset:-20px}
+}

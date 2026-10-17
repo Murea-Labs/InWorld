@@ -1,0 +1,138 @@
+/* ═══════════════════════════════════════════════════════════════════
+   Murea-Mind design tokens
+   
+   Three layers: primitives → semantics → component recipes.
+   The current skin (studio.css) maps these tokens onto its own palette.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* ─────────── Layer 1: primitives ─────────── */
+
+  /* Backgrounds: enough contrast between the three levels that panels do not melt into black. */
+  --bg-0: #151c24;          /* 舞台、最底 */
+  --bg-1: #222c37;          /* 面板 */
+  --bg-2: #2d3946;          /* 抬起来的东西（菜单、抽屉） */
+
+  /* Light as a material: borders, dividers, hover and selection all come from this set */
+  --w-02: rgba(230,239,247,.035);
+  --w-03: rgba(230,239,247,.055);
+  --w-05: rgba(230,239,247,.075);
+  --w-07: rgba(230,239,247,.10);
+  --w-09: rgba(230,239,247,.13);
+  --w-14: rgba(230,239,247,.18);
+  --w-22: rgba(230,239,247,.28);
+  --w-38: rgba(230,239,247,.44);
+
+  /* Text */
+  --fg:     #f2f5f7;
+  --dim:    rgba(224,232,239,.72);
+  --dimmer: rgba(211,222,231,.50);
+  --faint:  rgba(202,215,226,.36);
+
+  /* Status colors, all desaturated */
+  --c-ok:   #79c4bc;
+  --c-warn: #d3a76d;
+  --c-err:  #c97c78;
+  --c-map:  #79c4bc;
+  --c-story:#d3a76d;
+
+  /* The four segments of the inspector's timing bar. The UI is otherwise monochrome; this is
+     the only place that needs distinct hues, and they stay muted so the bar does not dominate.
+     lib.ts STAGE_COLOR references these, so colors are not scattered into TS. */
+  --c-gm:      #55617a;
+  --c-image:   #9c8030;
+  --c-rewrite: #6e6480;
+  --c-video:      #566e6a;
+
+  /* Typography: Latin and digits use the UI font; Chinese falls back to PingFang. */
+  --font-ui:      Poppins, Inter, -apple-system, BlinkMacSystemFont,
+                  "PingFang SC", "Microsoft YaHei UI", sans-serif;
+  --font-display: "Playfair Display", Poppins, "PingFang SC", serif;
+  --mono:         "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --text-xs:   11px;
+  --text-sm:   12.5px;
+  --text-base: 13.5px;
+  --text-md:   15px;
+  --text-lg:   17px;
+  --text-xl:   20px;
+  --text-2xl:  25px;
+
+  --tracking-caps: .11em;   /* 小标题全大写时的字距 */
+  --tracking-code: .04em;
+
+  /* Radii */
+  --r-xs:   6px;
+  --r-sm:   8px;
+  --r-md:   10px;
+  --r-lg:   14px;
+  --r-xl:   18px;
+  --r-pill: 999px;
+
+  /* Shadows. The inset top highlight gives flat surfaces some thickness. */
+  --lip:           inset 0 1px 0 rgba(242,247,251,.09);
+  --shadow-card:   0 12px 30px rgba(5,10,16,.26);
+  --shadow-float:  0 24px 68px rgba(5,10,16,.42);
+  --shadow-drawer: -24px 0 70px rgba(5,10,16,.46);
+
+  /* Motion */
+  --t-fast:   .12s;
+  --t-normal: .18s;
+  --t-slow:   .26s;
+  --ease-out: cubic-bezier(.2,.8,.2,1);
+
+  /* Layers */
+  --z-menu:      50;
+  --z-scrim:     60;
+  --z-drawer:    61;
+  --z-map:       80;
+  --z-toast:     90;
+
+  /* ─────────── Layer 2: semantics ─────────── */
+
+  --line:        var(--w-07);
+  --line-strong: var(--w-14);
+
+  --accent:     #91cec7;
+  --accent-ink: #12201f;
+
+  --focus-ring: 0 0 0 2px rgba(121,196,188,.58);
+
+  --surface-deep:  rgba(20,28,37,.82);
+  --surface-panel: rgba(38,49,62,.90);
+  --surface-card:  rgba(48,61,75,.76);
+  --surface-hover: rgba(63,79,95,.72);
+
+  /* ─────────── Layer 3: component recipes ─────────── */
+
+  /* Card: a faint top gradient, a base color and a top highlight. */
+  --card-bg:
+    linear-gradient(180deg, rgba(236,244,250,.07), transparent 48%),
+    var(--surface-card);
+  --card-border: var(--line);
+
+  /* Glass panel: shared by drawers, dialogs and dropdowns */
+  --glass-bg:
+    linear-gradient(180deg, rgba(239,246,251,.09), rgba(225,237,246,.035)),
+    var(--surface-panel);
+  --glass-border: rgba(222,235,244,.17);
+  --glass-blur:   blur(22px) saturate(112%);
+
+  --input-bg:     rgba(24,33,43,.84);
+  --input-border: var(--w-14);
+
+  --btn-radius:   var(--r-pill);
+
+  /* Immersive HUD: the layer on top of the picture. The video's colors are generated and
+     uncontrollable, so this layer brings its own contrast: a gradient behind the text and an
+     opaque surface under bubbles. Only these values flip per theme in themes.css. */
+  --hud-scrim:
+    linear-gradient(180deg,transparent,rgba(9,13,18,.30) 38%,rgba(6,10,14,.70));
+  --hud-veil: rgba(30,40,51,.74);
+  --hud-line: rgba(232,241,247,.16);
+  --hud-blur: blur(16px) saturate(112%);
+
+  /* Entrance of pop-up cards: fast start, soft landing, no overshoot. linear would look
+     like a texture refresh instead of something entering the picture. */
+  --ease-pop: cubic-bezier(.22,1,.32,1);
+}

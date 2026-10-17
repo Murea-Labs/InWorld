@@ -1,0 +1,19 @@
+.env
+config.yaml
+.venv/
+__pycache__/
+*.pyc
+# data/ is runtime output (worlds, clips, reference images).
+data/*
+!data/clips/
+!data/refs/
+!data/sessions/
+data/clips/*
+data/refs/*
+data/sessions/*
+!data/*/.gitkeep
+state/
+
+node_modules/
+*.tsbuildinfo
+

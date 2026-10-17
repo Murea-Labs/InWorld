@@ -1,0 +1,28 @@
+__pycache__/
+*.py[cod]
+.DS_Store
+*.tmp
+*.egg-info/
+.venv/
+.env
+.env.*
+!.env.example
+*.safetensors
+*.pt
+*.pth
+*.mp4
+# Published demo media for the README.
+!/docs/assets/murea-inworld-demo.mp4
+*.wav
+*.log
+
+# Local service output; anchored so vendored source directories named
+# models/ or cache/ are never ignored.
+/inference/build/
+/inference/dist/
+/inference/run/
+/inference/outputs/
+/inference/cache/
+/inference/weights/
+/inference/models/
+/inference/inputs/

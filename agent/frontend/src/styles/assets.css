@@ -1,0 +1,111 @@
+/* ═══ Asset panel: a drawer on the right of the stage, can be closed ═══ */
+
+#assets{right:var(--rail-gap);width:var(--rail-r);max-width:calc(100vw - var(--rail-gap) * 2)}
+#assets .scroll{
+  flex:1;min-height:0;overflow-y:auto;
+  -webkit-mask-image:linear-gradient(180deg,#000 calc(100% - 18px),transparent);
+  mask-image:linear-gradient(180deg,#000 calc(100% - 18px),transparent);
+}
+
+.group{position:relative;padding:13px 14px}
+.group+.group::before{
+  content:"";position:absolute;left:12px;right:12px;top:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--w-05),transparent);
+}
+.group h3{
+  margin:0 0 10px;
+  font:600 10px/1 var(--font-ui);
+  letter-spacing:var(--tracking-caps);text-transform:uppercase;color:var(--dimmer);
+  display:flex;align-items:center;gap:8px;
+}
+.group h3 button{margin-left:auto}
+.group .none{color:var(--faint);font-size:var(--text-xs);padding:2px 0}
+
+.asset-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+
+.asset-card-wrap{position:relative;min-width:0}
+.asset-card-wrap>.asset-card{width:100%;height:100%}
+.asset-card-delete{
+  position:absolute;right:6px;top:6px;z-index:2;
+  width:26px;height:26px;padding:0;display:grid;place-items:center;
+  color:rgba(255,255,255,.72);background:rgba(24,33,43,.72);
+  border:1px solid rgba(255,255,255,.16);border-radius:50%;
+  box-shadow:0 4px 12px rgba(5,10,16,.24);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+  opacity:.76;transition:opacity var(--t-fast),color var(--t-fast),
+    background var(--t-fast),border-color var(--t-fast),transform var(--t-fast);
+}
+.asset-card-delete svg{
+  width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.35;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+.asset-card-wrap:hover .asset-card-delete,.asset-card-delete:focus-visible{opacity:1}
+.asset-card-delete:hover:not(:disabled){
+  color:#f0c2bd;background:rgba(176,82,75,.64);
+  border-color:rgba(240,194,189,.46);transform:scale(1.06);
+}
+
+.asset-card{
+  min-width:0;padding:0;overflow:hidden;text-align:left;display:block;
+  background:rgba(48,61,75,.72);border:1px solid var(--w-09);
+  border-radius:var(--r-md);box-shadow:var(--lip);
+  transition:border-color var(--t-fast),transform var(--t-fast),box-shadow var(--t-fast);
+}
+.asset-card:hover:not(:disabled){
+  border-color:rgba(121,196,188,.38);transform:translateY(-2px);
+  box-shadow:0 12px 26px rgba(5,10,16,.30),var(--lip);
+}
+.asset-card-image{
+  position:relative;display:block;width:100%;aspect-ratio:16/10;
+  overflow:hidden;background:var(--bg-0);
+}
+.asset-card-image img{width:100%;height:100%;object-fit:cover;display:block}
+/* Characters are full-body portraits; cover would crop the face */
+.asset-card.is-subject .asset-card-image img{object-fit:contain}
+.asset-card-image::after{
+  content:"";position:absolute;inset:auto 0 0;height:38%;pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(20,27,35,.88));
+}
+.asset-card-image em{
+  position:absolute;right:6px;top:6px;z-index:1;
+  padding:2px 7px;border-radius:var(--r-pill);
+  background:rgba(24,33,43,.78);border:1px solid rgba(121,196,188,.38);color:#c5ebe7;
+  font:500 9px/1.6 var(--font-ui);font-style:normal;letter-spacing:.02em;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+}
+.asset-card-meta{display:block;padding:7px 9px 9px;min-width:0}
+.asset-card-meta b,.asset-card-meta small{
+  display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.asset-card-meta b{font-size:var(--text-xs);font-weight:600;color:var(--fg)}
+.asset-card-meta small{margin-top:2px;font-size:9.5px;color:var(--faint)}
+.asset-card-meta small.asset-ref-status{color:var(--c-map);font-size:9px}
+.asset-card-meta small.asset-ref-status.failed{color:#e9a49d}
+
+/* ─────────── Clip tree ─────────── */
+#tree{font-size:var(--text-xs);display:flex;flex-direction:column;gap:1px}
+#tree .row{display:flex;align-items:center;gap:7px;min-width:0}
+#tree .tag{flex:none;padding:3px 6px;font-size:9px}
+#tree .rail-mark{
+  flex:none;width:12px;font:11px/1 var(--mono);color:var(--faint);text-align:center;
+}
+#tree a{
+  flex:1;min-width:0;text-decoration:none;color:var(--dim);
+  padding:4px 8px;border-radius:var(--r-xs);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  transition:background var(--t-fast),color var(--t-fast);
+}
+#tree a:hover{color:var(--fg);background:var(--w-05)}
+#tree a.head{color:#c8ebe7;font-weight:600;background:rgba(121,196,188,.12)}
+#tree a .n{font-family:var(--mono);color:var(--faint);margin-right:6px;font-size:10px}
+#tree a.head .n{color:var(--dim)}
+/* The clip shown in the player: the one selection shared by the map and the clip tree.
+   head is still the world's latest clip and is-current is the clip being reviewed;
+   they can be the same row or different rows. */
+#tree .row.is-current .rail-mark{color:var(--c-map)}
+#tree a.is-current{
+  color:var(--fg);font-weight:600;
+  background:rgba(121,196,188,.18);
+  box-shadow:inset 2px 0 0 var(--c-map);
+}
+#tree a.is-current .n{color:var(--c-map)}

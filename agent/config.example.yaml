@@ -1,0 +1,121 @@
+# Murea-Mind configuration.
+#
+# You do not need to edit this file to get started: put your API keys in .env
+# (see .env.example) and run ./run.sh. Providers are chosen from the keys you
+# set. Copy this file to config.yaml only to change something.
+#
+# Any value can be written as ${ENV_NAME}; it is read from the process
+# environment or from the .env file next to this one.
+
+# single: one player explores a world.  coop: 2-4 players share a room
+# (see the README's Co-op mode section and docs/coop.md).
+mode: single
+
+server:
+  host: 127.0.0.1
+  port: 8080
+  # Where worlds, reference images and clips are stored. Relative to the repo.
+  data_dir: data
+  # Show a finished demo world to users who have none yet (works without API keys).
+  # Only takes effect when examples/demo/rainy-harbour.zip exists; none is bundled yet,
+  # so this does nothing for now.
+  # demo_world: true
+
+# ── Language model (the agent) ────────────────────────────────────────────
+llm:
+  # auto: DASHSCOPE_API_KEY, else GEMINI_API_KEY, else OPENAI_API_KEY.
+  provider: auto              # auto | dashscope | gemini | openai
+  # Model names. Defaults: dashscope deepseek-v4.1-flash, gemini
+  # gemini-3.5-flash-lite (text gemini-3.5-flash). Required for openai.
+  # models:
+  #   agent: deepseek-v4.1-flash     # plans every beat
+  #   rewriter: deepseek-v4.1-flash  # rewrites / compresses the video prompt
+  #   text: deepseek-v4.1-flash      # world generation and action audits
+  # Thinking budget in tokens. 0 turns thinking off (fastest; the agent output
+  # is schema-constrained so it does not need it). Remove the line to use the
+  # model's own default.
+  thinking: 0
+  # A second OpenAI-compatible replica for background calls (option prefetch, action
+  # audits), so they never queue in front of the player's own request.
+  # background_base_url: http://127.0.0.1:30001/v1
+  # SGLang servers only: bound the whitespace between JSON tokens of structured output
+  # (0 = off). Needs xgrammar: pip install '.[grammar]'.
+  # json_max_whitespace: 0
+
+# For llm.provider: openai — any OpenAI-compatible server (OpenAI, vLLM, SGLang, ...).
+openai:
+  base_url: https://api.openai.com/v1
+# For llm.provider: gemini — a compatible reverse proxy if Google is not reachable directly.
+gemini:
+  base_url: https://generativelanguage.googleapis.com/v1beta
+
+# ── Image model (character / place reference images) ──────────────────────
+image:
+  # auto follows the language model: dashscope qwen-image-2.0, gemini
+  # gemini-3.1-flash-lite-image, openai gpt-image-1.
+  provider: auto              # auto | dashscope | gemini | openai
+  # model: qwen-image-2.0
+  # API base: the DashScope endpoint, or an OpenAI-compatible images endpoint (defaults
+  # to openai.base_url).
+  # base_url: https://dashscope.aliyuncs.com/api/v1
+  # DashScope image key, only if it differs from DASHSCOPE_API_KEY.
+  # api_key: ""
+  # Self-hosted Qwen-Image services (POST /generate), comma separated; when set they draw
+  # every reference image instead of the provider above.
+  # service_urls: http://127.0.0.1:8001,http://127.0.0.1:8002
+
+# ── Video model ───────────────────────────────────────────────────────────
+# Your Murea service: set MUREA_URL in .env (or url: here).
+video:
+  # Seconds per beat. The agent picks a length inside [min, max] for each beat; a longer action
+  # is split into several beats. At most 20 (Murea-Fast). Longer clips take longer to film:
+  # 3.4-4 s of inference time per second of video on 4 H20s. On a single-GPU service, where
+  # only 5 s clips have been tested, every clip is 5 s whatever these values say. On 96 GB
+  # GPUs keep max_seconds below 10 (and coop.max_seconds too).
+  min_seconds: 6
+  max_seconds: 10
+  # Hard limit on the video prompt length; longer prompts are compressed. Murea-Fast reads
+  # 1,024 text tokens, so it never gets more than 4,200 characters.
+  max_prompt_chars: 6000
+  # Only if an authenticating proxy sits in front of the service (or MUREA_API_KEY in .env).
+  # api_key: ""
+
+# ── Voice (optional) ──────────────────────────────────────────────────────
+# A self-hosted OmniVoice server (https://github.com/k2-fsa/OmniVoice) used to
+# give each character a fixed voice. Leave url empty to disable voice.
+tts:
+  url: ""
+  key: ""
+
+# ── Agent behaviour ───────────────────────────────────────────────────────
+agent:
+  # Story language: narration, choices, names and dialogue. en | zh
+  language: en
+  # While a clip is playing, plan the three suggested choices in the
+  # background so that clicking one skips the ~6 s planning wait. Costs up to
+  # three extra agent calls per beat, so it is off by default.
+  prefetch_options: false
+  # How much recent story the director reads every beat (two messages per beat).
+  history_window: 24
+  # Memory tools (recall_story, inspect_asset) the director may call to look up
+  # older beats. auto = offered once the story is longer than history_window.
+  tools: auto                 # auto | on | off
+  # Log one line per LLM call (tokens + latency) to stderr.
+  trace_llm: false
+
+# ── Co-op rooms (mode: coop) ──────────────────────────────────────────────
+coop:
+  # Public address of this server, used in room invite links. Empty: the address the
+  # host opened the page with.
+  public_url: ""
+  opening_seconds: 6        # opening clip of a room
+  min_seconds: 6            # shortest round
+  max_seconds: 15           # longest round (at most 20); a round is one clip and is not split
+  # Film the recommended choices while players are still deciding. Saves
+  # waiting time, costs one extra video generation per round.
+  speculative_video: true
+  # llm: AI teammates are played by the language model. offline: rule-based
+  # teammates for testing without a model.
+  ai_mode: llm
+  # Model for the AI teammates; empty = llm.models.agent.
+  # ai_model: ""

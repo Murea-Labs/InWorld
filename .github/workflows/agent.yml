@@ -1,0 +1,43 @@
+name: Agent
+
+on:
+  push:
+    paths:
+      - "agent/**"
+      - ".github/workflows/agent.yml"
+  pull_request:
+    paths:
+      - "agent/**"
+      - ".github/workflows/agent.yml"
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agent
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt imageio-ffmpeg ruff
+      - run: ruff check .
+      - run: ruff format --check .
+      - run: python tests/run_all.py
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: agent/frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: npm ci
+      - run: npx tsc --noEmit
+      - run: npm run lint
+      - run: npm test
+      - run: python3 ../scripts/frontend.py check
