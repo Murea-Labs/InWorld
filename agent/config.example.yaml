@@ -1,4 +1,4 @@
-# Murea Agent configuration.
+# Murea-Mind configuration.
 #
 # You do not need to edit this file to get started: put your API keys in .env
 # (see .env.example) and run ./run.sh. Providers are chosen from the keys you

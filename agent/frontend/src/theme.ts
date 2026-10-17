@@ -13,7 +13,7 @@ export const MUREA_THEMES: ThemeOption[] = [
   { id: 'studio', label: t('暗场'), description: t('纯黑，画面优先'), swatch: '#000000' },
 ]
 
-const THEME_STORAGE_KEY = 'murea-agent:theme'
+const THEME_STORAGE_KEY = 'murea-mind:theme'
 
 export function loadTheme(): MureaTheme {
   let saved: string | null = null

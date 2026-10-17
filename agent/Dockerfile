@@ -1,8 +1,8 @@
-# Murea Agent: one image with the API server and the prebuilt front end (frontend/dist).
+# Murea-Mind: one image with the API server and the prebuilt front end (frontend/dist).
 #
-#   docker build -t murea-agent .
+#   docker build -t murea-mind .
 #   docker run -p 127.0.0.1:8080:8080 --add-host host.docker.internal:host-gateway \
-#     --env-file .env -v $PWD/data:/app/data murea-agent
+#     --env-file .env -v $PWD/data:/app/data murea-mind
 #
 # A Murea-Fast service on the host is MUREA_URL=http://host.docker.internal:<port>.
 

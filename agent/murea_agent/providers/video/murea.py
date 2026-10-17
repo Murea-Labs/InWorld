@@ -325,7 +325,7 @@ def _wait(
     while True:
         status = str(job.get("status") or "")
         if on_status:
-            # SGLang reports only queued -> completed. Murea Agent sends one video at a time, so a
+            # SGLang reports only queued -> completed. Murea-Mind sends one video at a time, so a
             # submitted job is almost always rendering; say so instead of "queued behind others".
             on_status({"status": status, "started_at": started})
         if status == "completed":

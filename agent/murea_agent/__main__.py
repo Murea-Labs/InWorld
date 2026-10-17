@@ -60,7 +60,7 @@ def main(argv: list[str] | None = None) -> int:
 
     from murea_agent import config
 
-    agent = murea_agent.MureaAgent()
+    agent = murea_agent.MureaMind()
     world = (
         agent.load_world(args.world)
         if args.world

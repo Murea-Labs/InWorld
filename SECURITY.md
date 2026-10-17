@@ -35,13 +35,13 @@ and `diffusers_kwargs` have been removed: requests that set them are always refu
 their model fields would make the server download and load other models.
 
 Do not expose the service directly. Put it behind a reverse proxy that authenticates
-clients; forwarding only `/health`, `/v1/models` and `/v1/videos` is enough for Murea Agent.
+clients; forwarding only `/health`, `/v1/models` and `/v1/videos` is enough for Murea-Mind.
 Run it under an account that can read only the model files and write only its runtime
 directory.
 
-## Running Murea Agent safely
+## Running Murea-Mind safely
 
-Murea Agent is built to run on your own machine or a small trusted server.
+Murea-Mind is built to run on your own machine or a small trusted server.
 Before exposing it to the internet, keep in mind:
 
 - **API keys** live in `.env` and `config.yaml`, both ignored by git. Never

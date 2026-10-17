@@ -39,7 +39,7 @@ curl -s -o video.mp4 http://127.0.0.1:30260/v1/videos/0c2dc7e2-.../content
 
 在 Python 中可以调用 `murea_fast.client.generate(base_url, payload, output_dir)`：
 它会提交任务、轮询、下载视频并校验结果，`scripts/murea-fast generate` 用的就是它。
-[Murea Agent](../../agent/README_zh.md) 通过 `agent/murea_agent/providers/video/murea.py`
+[Murea-Mind](../../agent/README_zh.md) 通过 `agent/murea_agent/providers/video/murea.py`
 调用同一套 API。它始终按[在其他机器上调用](#在其他机器上调用)的方式发送请求，因此服务可以在
 同一台机器上、其他机器上，或通过 SSH 隧道访问。
 

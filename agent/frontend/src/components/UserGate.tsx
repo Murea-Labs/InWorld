@@ -77,7 +77,7 @@ export default function UserGate({ users, loading, onSelect, onCreate, onDelete 
         <div className="user-gate-brand">
           <span className="user-gate-mark" aria-hidden="true">A</span>
           <div>
-            <p>Murea Agent</p>
+            <p>Murea-Mind</p>
             <span>{t('进入你的世界')}</span>
           </div>
         </div>

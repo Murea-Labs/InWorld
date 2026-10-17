@@ -93,7 +93,7 @@ const BRANCH_ROW_HEIGHT = 116
 const DRAG_THRESHOLD = 4
 const EMPTY_POSITIONS: Record<string, Point> = {}
 
-const layoutStorageKey = (worldId: string) => `murea-agent:map-layout:v1:${worldId}`
+const layoutStorageKey = (worldId: string) => `murea-mind:map-layout:v1:${worldId}`
 
 function constrainPoint(point: Point, width: number, height: number): Point {
   const margin = 58
@@ -701,7 +701,7 @@ export default function WorldMap({
       <div className="world-map-shell">
         <div className="world-map-topbar">
           <div className="world-map-heading">
-            <span className="world-map-eyebrow">MUREA AGENT · SCENE MAP</span>
+            <span className="world-map-eyebrow">MUREA-MIND · SCENE MAP</span>
             <div>
               <h2 id="world-map-title">{world.title || t('未命名世界')}</h2>
               <span className="world-map-summary">

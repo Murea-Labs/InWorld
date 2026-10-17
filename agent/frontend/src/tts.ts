@@ -13,7 +13,7 @@
  */
 import { BASE } from './api'
 
-const KEY = 'murea-agent:tts'
+const KEY = 'murea-mind:tts'
 
 export function loadTts(): boolean {
   try {

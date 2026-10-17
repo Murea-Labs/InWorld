@@ -1,5 +1,5 @@
 [project]
-name = "murea-agent"
+name = "murea-mind"
 version = "0.1.0"
 description = "An open-world video agent: type what you do, and the world films it."
 readme = "README.md"

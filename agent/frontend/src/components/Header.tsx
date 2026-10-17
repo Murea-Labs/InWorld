@@ -102,7 +102,7 @@ export default function Header({
   return (
     <header>
       <div className="brand">
-        <h1>Murea Agent</h1>
+        <h1>Murea-Mind</h1>
         {setting && <span className="setting">{setting}</span>}
       </div>
 

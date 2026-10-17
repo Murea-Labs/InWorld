@@ -1,8 +1,8 @@
-"""`MureaAgent`: the public entry point for using the agent from Python.
+"""`MureaMind`: the public entry point for using the agent from Python.
 
-    from murea_agent import MureaAgent
+    from murea_agent import MureaMind
 
-    agent = MureaAgent()
+    agent = MureaMind()
     world = agent.create_world(title="Rainy Harbour", setting="A harbour town at night.")
     for event in agent.stream(world, "I step into the inn and look around."):
         print(event["type"], event.get("name", ""), event.get("summary", ""))
@@ -25,7 +25,7 @@ from murea_agent.memory.world import Node, World
 Listener = Callable[[dict[str, Any]], None]
 
 
-class MureaAgent:
+class MureaMind:
     """Plays an open world as generated video, one beat per user action.
 
     Each beat runs the fixed loop perceive -> plan -> check -> act -> commit
@@ -170,3 +170,7 @@ class MureaAgent:
     @property
     def tools(self) -> list[tools.Tool]:
         return tools.all_tools()
+
+
+# Backwards-compatible alias for callers using the former class name.
+MureaAgent = MureaMind

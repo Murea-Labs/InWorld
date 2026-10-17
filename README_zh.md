@@ -26,12 +26,12 @@
 ## 摘要
 
 以下摘要译自我们的[技术报告](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)，项目名称与本仓库保持一致。
-报告评测了 Murea-Pro 和 Murea-Fast；本仓库提供 Murea Agent 与 Murea-Fast 推理服务。
+报告评测了 Murea-Pro 和 Murea-Fast；本仓库提供 Murea-Mind 与 Murea-Fast 推理服务。
 
 交互式世界模型旨在模拟随用户行动而演化的环境，同时保留过去交互带来的影响。将这样的世界扩展到视觉与听觉，
 需要持续存在的实体、不断变化的场景状态以及局部视听动态在多轮交互中保持一致。
 本文提出 Murea-InWorld，一种将显式世界状态管理与神经网络视听生成相结合的交互式视听世界模型。
-其世界智能体 Murea-Agent 维护角色、物体、地点与叙事进展，结合上下文理解用户行动，并将规划的事件编译为生成条件。
+其世界智能体 Murea-Mind 维护角色、物体、地点与叙事进展，结合上下文理解用户行动，并将规划的事件编译为生成条件。
 对生成帧的观察为后续规划和部分状态更新提供依据，从而形成交互闭环。
 
 视听生成器 Murea 通过全参考生成（Omni-Reference Generation）实现这些事件：使用视觉参考固定实体外观，
@@ -47,7 +47,7 @@ Murea-Pro 和 Murea-Fast 在各自的基准上均达到最先进水平，且两�
 ## 动态
 
 - **即将发布** · Murea-Fast 权重（Hugging Face）与演示视频。
-- **2026-10** · 首次开源：Murea-Fast 推理服务与 Murea Agent，文档提供中英文两版。
+- **2026-10** · 首次开源：Murea-Fast 推理服务与 Murea-Mind，文档提供中英文两版。
 
 ## 亮点
 
@@ -82,7 +82,7 @@ Murea-Pro 和 Murea-Fast 在各自的基准上均达到最先进水平，且两�
       <!-- <img src="docs/assets/agent.gif" width="100%"> -->
       <b>玩一个故事</b><br>
       输入一个动作，看它发生，再选下一步。
-      <a href="agent/README_zh.md#快速开始">Murea Agent</a>
+      <a href="agent/README_zh.md#快速开始">Murea-Mind</a>
     </td>
     <td width="50%" valign="top">
       <!-- <img src="docs/assets/coop.gif" width="100%"> -->
@@ -97,7 +97,7 @@ Murea-Pro 和 Murea-Fast 在各自的基准上均达到最先进水平，且两�
 
 ```mermaid
 flowchart LR
-    P([玩家]) -->|动作| A[Murea Agent<br/>规划、检查、记忆]
+    P([玩家]) -->|动作| A[Murea-Mind<br/>规划、检查、记忆]
     A <-->|文本和图片| L[(语言模型与生图 API<br/>Gemini / OpenAI 兼容接口 / 百炼)]
     A -->|提示词 + 参考图| F[Murea-Fast<br/>GPU 上的推理服务]
     F -->|带声音的视频| A
@@ -111,7 +111,7 @@ flowchart LR
 
 | 我想… | 从这里开始 |
 | --- | --- |
-| 在浏览器里玩一个故事 | [Murea Agent 快速开始](agent/README_zh.md#快速开始) |
+| 在浏览器里玩一个故事 | [Murea-Mind 快速开始](agent/README_zh.md#快速开始) |
 | 和朋友一起玩 | [双人模式](agent/README_zh.md#双人模式) |
 | 在命令行里生成或续写一段视频 | [Murea-Fast 快速开始](inference/README_zh.md#快速开始) |
 | 在自己的代码里调用模型 | [API 文档](inference/docs/api_zh.md) |
@@ -121,7 +121,7 @@ flowchart LR
 
 ## 组成部分
 
-| | [Murea-Fast](inference/README_zh.md) | [Murea Agent](agent/README_zh.md) |
+| | [Murea-Fast](inference/README_zh.md) | [Murea-Mind](agent/README_zh.md) |
 | --- | --- | --- |
 | 是什么 | 推理服务，运行一个由 LTX-2.5 衍生、8 步蒸馏的模型，基于固定版本的 SGLang | 网页应用和 Python 包：语言模型导演、确定性检查、世界记忆和评审 |
 | 运行环境 | Linux 与支持 CUDA 的 NVIDIA GPU。已在单张和 4 张 H20 上验证 | 任意装有 Python 3.12 的机器；需要语言模型与生图的 API key，以及一个 Murea-Fast 服务 |
@@ -141,7 +141,7 @@ bash scripts/murea-fast start --config configs/single-gpu.json
 curl --fail http://127.0.0.1:30260/health
 ```
 
-**2. 在任意机器上运行 Murea Agent。** 需要 [uv](https://docs.astral.sh/uv/)，以及一个文本和出图用的 key
+**2. 在任意机器上运行 Murea-Mind。** 需要 [uv](https://docs.astral.sh/uv/)，以及一个文本和出图用的 key
 （Gemini、任何 OpenAI 兼容接口，或阿里云百炼）：
 
 ```bash
@@ -150,7 +150,7 @@ cp .env.example .env          # 填好 GEMINI_API_KEY 和 MUREA_URL=http://<GPU 
 ./run.sh                      # 然后打开 http://127.0.0.1:8080
 ```
 
-换用其他模型服务商、Docker 和 SSH 隧道的用法见 [Murea Agent README](agent/README_zh.md#快速开始)。
+换用其他模型服务商、Docker 和 SSH 隧道的用法见 [Murea-Mind README](agent/README_zh.md#快速开始)。
 
 ## 目录结构
 
@@ -166,7 +166,7 @@ Murea-InWorld/
 │   ├── src/murea_fast/   启动器和客户端
 │   ├── tests/
 │   └── vendor/sglang/    带模型实现的固定版本 SGLang
-└── agent/                Murea Agent
+└── agent/                Murea-Mind
     ├── murea_agent/      agent 本体（Python 包）
     ├── app/              FastAPI 服务端
     ├── frontend/         React 界面（构建产物在 frontend/dist）

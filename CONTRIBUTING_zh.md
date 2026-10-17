@@ -5,7 +5,7 @@
 InWorld 由两部分组成，各有各的检查。提交 pull request 前，请在你改动的那部分目录下运行它的检查。
 对应目录有改动时，CI 会运行同样的检查。
 
-## Murea Agent（`agent/`）
+## Murea-Mind（`agent/`）
 
 见 [Agent 贡献指南](agent/CONTRIBUTING_zh.md)：ruff、离线测试、前端类型检查、lint 和测试，以及随仓库提交的前端构建产物。
 

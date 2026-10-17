@@ -25,5 +25,5 @@ def _setup_line() -> str:
 
 
 if __name__ == "__main__":
-    print(f"Murea Agent on http://{config.HOST}:{config.PORT}\n  {_setup_line()}", flush=True)
+    print(f"Murea-Mind on http://{config.HOST}:{config.PORT}\n  {_setup_line()}", flush=True)
     uvicorn.run("app.main:app", host=config.HOST, port=config.PORT, log_level="warning")

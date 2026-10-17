@@ -91,7 +91,7 @@ three characters, about half the clips at every size lost a character or merged 
 case is unreliable regardless of size. A few seeds per size are not a quality evaluation.
 
 Keep references at about the size the image model draws (around 1.8 megapixels) and crop
-plain backdrops; [Murea Agent](../../agent/README.md#clip-length) does both before it sends
+plain backdrops; [Murea-Mind](../../agent/README.md#clip-length) does both before it sends
 them.
 
 The reference size is the likely reason the two one-GPU runs differ. The continuation, which has no

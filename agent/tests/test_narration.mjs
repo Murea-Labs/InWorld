@@ -6,7 +6,7 @@ import vm from 'node:vm'
 import ts from '../frontend/node_modules/typescript/lib/typescript.js'
 
 const source = readFileSync(new URL('../frontend/src/tts.ts', import.meta.url), 'utf8')
-  .replace("import { BASE } from './api'", "const BASE = '/murea-agent/'")
+  .replace("import { BASE } from './api'", "const BASE = '/murea-mind/'")
 const code = ts.transpileModule(source, { compilerOptions: {
   module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022,
 } }).outputText

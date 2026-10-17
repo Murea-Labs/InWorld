@@ -12,9 +12,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-from murea_agent import MureaAgent  # noqa: E402
+from murea_agent import MureaMind  # noqa: E402
 
-agent = MureaAgent()
+agent = MureaMind()
 world = agent.create_world(
     title="Rainy Harbour",
     setting="A small harbour town on a stormy night; lanterns, wet cobblestones, an old inn.",

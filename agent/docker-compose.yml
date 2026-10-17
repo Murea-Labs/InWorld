@@ -1,5 +1,5 @@
 services:
-  murea-agent:
+  murea-mind:
     build: .
     ports:
       # This machine only: the agent has no login of its own (see SECURITY.md).

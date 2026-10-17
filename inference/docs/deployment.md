@@ -124,7 +124,7 @@ Choosing a GPU count does not make a configuration fit every memory size; see
 ### Server paths
 
 By default the service accepts images as `data:` or `http(s)` URLs and the continuation
-prefix as a multipart upload, which is what Murea Agent sends. It refuses with HTTP 400 any
+prefix as a multipart upload, which is what Murea-Mind sends. It refuses with HTTP 400 any
 request that names a file on the server: `output_path`, `perf_dump_path`, and a local path in
 `video_path`, `input_reference` or `reference_image_paths`.
 

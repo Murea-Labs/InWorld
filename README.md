@@ -27,7 +27,7 @@ and an agent that turns your actions into a continuing, filmed story.
 ## Abstract
 
 Adapted from our [technical report](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation).
-The report evaluates Murea-Pro and Murea-Fast; this repository provides Murea Agent and the
+The report evaluates Murea-Pro and Murea-Fast; this repository provides Murea-Mind and the
 Murea-Fast inference service.
 
 Interactive world models aim to simulate environments that evolve under user actions while
@@ -35,7 +35,7 @@ retaining the consequences of past interactions. Extending such worlds to sight 
 requires persistent entities, changing scene states, and local audiovisual dynamics to
 remain coherent across turns. This paper presents Murea-InWorld, an interactive audiovisual
 world model that couples explicit world-state management with neural audiovisual generation.
-Its world agent, Murea-Agent, maintains characters, objects, locations, and narrative progress,
+Its world agent, Murea-Mind, maintains characters, objects, locations, and narrative progress,
 interprets user actions in context, and compiles planned events into generation conditions.
 Observations of generated frames inform subsequent planning and selected state updates,
 closing the interaction loop.
@@ -59,7 +59,7 @@ in their respective evaluations.
 ## News
 
 - **Coming soon** · Murea-Fast weights on Hugging Face, and demo videos.
-- **2026-10** · First open-source release: the Murea-Fast inference service and Murea Agent,
+- **2026-10** · First open-source release: the Murea-Fast inference service and Murea-Mind,
   with documentation in English and Chinese.
 
 ## Highlights
@@ -100,7 +100,7 @@ in their respective evaluations.
       <!-- <img src="docs/assets/agent.gif" width="100%"> -->
       <b>Play a story</b><br>
       Type an action, watch it happen, choose what comes next.
-      <a href="agent/README.md#quick-start">Murea Agent</a>
+      <a href="agent/README.md#quick-start">Murea-Mind</a>
     </td>
     <td width="50%" valign="top">
       <!-- <img src="docs/assets/coop.gif" width="100%"> -->
@@ -115,7 +115,7 @@ in their respective evaluations.
 
 ```mermaid
 flowchart LR
-    P([Player]) -->|action| A[Murea Agent<br/>plans, checks, remembers]
+    P([Player]) -->|action| A[Murea-Mind<br/>plans, checks, remembers]
     A <-->|text and images| L[(Language and image model APIs<br/>Gemini / OpenAI-compatible / DashScope)]
     A -->|prompt + reference images| F[Murea-Fast<br/>inference service on GPUs]
     F -->|video with sound| A
@@ -129,7 +129,7 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 
 | I want to… | Start here |
 | --- | --- |
-| Play a story in the browser | [Murea Agent quick start](agent/README.md#quick-start) |
+| Play a story in the browser | [Murea-Mind quick start](agent/README.md#quick-start) |
 | Play with friends | [Co-op mode](agent/README.md#co-op-mode) |
 | Generate or continue a clip from the command line | [Murea-Fast quick start](inference/README.md#quick-start) |
 | Call the model from my own code | [API reference](inference/docs/api.md) |
@@ -139,7 +139,7 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 
 ## Components
 
-| | [Murea-Fast](inference/README.md) | [Murea Agent](agent/README.md) |
+| | [Murea-Fast](inference/README.md) | [Murea-Mind](agent/README.md) |
 | --- | --- | --- |
 | What it is | Inference service for an 8-step distilled derivative of LTX-2.5, on a pinned SGLang | Web app and Python package: a language-model director, deterministic checks, world memory and a critic |
 | Runs on | Linux and NVIDIA GPUs with CUDA. Verified on one H20 and on four H20s | Any machine with Python 3.12; needs a language and image model API key and a Murea-Fast service |
@@ -160,7 +160,7 @@ bash scripts/murea-fast start --config configs/single-gpu.json
 curl --fail http://127.0.0.1:30260/health
 ```
 
-**2. Run Murea Agent on any machine.** It needs [uv](https://docs.astral.sh/uv/) and a key
+**2. Run Murea-Mind on any machine.** It needs [uv](https://docs.astral.sh/uv/) and a key
 for text and images (Gemini, any OpenAI-compatible server, or DashScope):
 
 ```bash
@@ -169,7 +169,7 @@ cp .env.example .env          # set GEMINI_API_KEY and MUREA_URL=http://<gpu-hos
 ./run.sh                      # then open http://127.0.0.1:8080
 ```
 
-See the [Murea Agent README](agent/README.md#quick-start) for other providers, Docker and
+See the [Murea-Mind README](agent/README.md#quick-start) for other providers, Docker and
 SSH tunnels.
 
 ## Repository layout
@@ -186,7 +186,7 @@ Murea-InWorld/
 │   ├── src/murea_fast/   launcher and client
 │   ├── tests/
 │   └── vendor/sglang/    pinned SGLang with the model implementation
-└── agent/                Murea Agent
+└── agent/                Murea-Mind
     ├── murea_agent/      the agent (Python package)
     ├── app/              FastAPI server
     ├── frontend/         React UI (prebuilt in frontend/dist)

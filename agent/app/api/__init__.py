@@ -32,7 +32,7 @@ def create_app() -> FastAPI:
         logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
         # httpx logs every request at INFO; uvicorn's access log already covers ours.
         logging.getLogger("httpx").setLevel(logging.WARNING)
-    app = FastAPI(title="Murea Agent")
+    app = FastAPI(title="Murea-Mind")
     if config.WORLD_MODE == "coop":
         from app.api.routes import coop
 

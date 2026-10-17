@@ -1,4 +1,4 @@
-"""The public API (`murea_agent.MureaAgent`) and the terminal CLI, with fake models."""
+"""The public API (`murea_agent.MureaMind`) and the terminal CLI, with fake models."""
 
 from __future__ import annotations
 
@@ -73,7 +73,7 @@ class AgentApiTest(unittest.TestCase):
             self.addCleanup(p.stop)
 
     def test_stream_reports_steps_and_ends_with_the_clip(self) -> None:
-        agent = murea_agent.MureaAgent()
+        agent = murea_agent.MureaMind()
         world = agent.create_world(title="Harbour", setting="a harbour town")
         events = list(agent.stream(world, "I step into the inn"))
         kinds = [e["type"] for e in events]
@@ -89,7 +89,7 @@ class AgentApiTest(unittest.TestCase):
         self.assertIsNone(world.head)
 
     def test_stream_turns_failures_into_an_error_event(self) -> None:
-        agent = murea_agent.MureaAgent()
+        agent = murea_agent.MureaMind()
         world = agent.create_world(title="Harbour")
         with patch.object(loop.video, "generate", side_effect=RuntimeError("video service down")):
             events = list(agent.stream(world, "I step into the inn"))

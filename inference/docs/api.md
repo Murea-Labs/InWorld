@@ -41,7 +41,7 @@ curl -s -o video.mp4 http://127.0.0.1:30260/v1/videos/0c2dc7e2-.../content
 
 From Python, `murea_fast.client.generate(base_url, payload, output_dir)` submits a job,
 polls it, downloads the video and validates it. It is what `scripts/murea-fast generate`
-uses. [Murea Agent](../../agent/README.md) calls the same API from
+uses. [Murea-Mind](../../agent/README.md) calls the same API from
 `agent/murea_agent/providers/video/murea.py`. It always sends requests the way a
 [client on another machine](#clients-on-another-machine) does, so the service may run on the
 same machine, on another one or behind an SSH tunnel.

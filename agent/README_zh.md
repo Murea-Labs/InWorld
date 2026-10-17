@@ -1,4 +1,4 @@
-# Murea Agent
+# Murea-Mind
 
 [English](README.md) | **中文**
 
@@ -85,9 +85,9 @@ Agent 会据此补全世界观、玩家身份、起始地点、主线目标和�
 ### 从 Python 调用
 
 ```python
-from murea_agent import MureaAgent
+from murea_agent import MureaMind
 
-agent = MureaAgent()
+agent = MureaMind()
 world = agent.create_world(title="雨夜港口", setting="暴雨夜里的海港小镇。")
 
 for event in agent.stream(world, "我走进客栈，四处看看。"):
@@ -99,7 +99,7 @@ for event in agent.stream(world, "我走进客栈，四处看看。"):
 agent.reflect(world)  # 播放后让评审对照画面检查
 ```
 
-`MureaAgent` 还有 `continue_story`、`plan_ahead`、`regenerate`、`undo`。示例见 [`examples/play.py`](examples/play.py)。
+`MureaMind` 还有 `continue_story`、`plan_ahead`、`regenerate`、`undo`。示例见 [`examples/play.py`](examples/play.py)。
 
 ## 双人模式
 
@@ -216,7 +216,7 @@ key 放在 `.env`。其余都是可选的：没有 `config.yaml` 时使用 [`con
 
 ```
 murea_agent/          Agent 本体（Python 包，不依赖网页）
-  agent.py            MureaAgent：对外接口
+  agent.py            MureaMind：对外接口
   loop.py             回合循环：感知 → 规划 → 检查 → 行动 → 提交
   events.py           步骤、事件、每段的轨迹
   director/           导演：提示词、输出结构、预推演

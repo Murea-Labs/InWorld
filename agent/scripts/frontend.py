@@ -1,6 +1,6 @@
 """The prebuilt front end in frontend/dist and the sources it was built from.
 
-The repo ships frontend/dist so running Murea Agent needs no Node.js. A fingerprint of
+The repo ships frontend/dist so running Murea-Mind needs no Node.js. A fingerprint of
 the front-end sources is stored next to the build:
 
     python scripts/frontend.py check   # exit 1 when dist is older than the sources

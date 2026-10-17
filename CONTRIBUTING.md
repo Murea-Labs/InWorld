@@ -6,7 +6,7 @@ InWorld has two parts, each with its own checks. Run the checks of the part you 
 its directory, before sending a pull request. CI runs the same checks when that directory
 changes.
 
-## Murea Agent (`agent/`)
+## Murea-Mind (`agent/`)
 
 See the [agent contributing guide](agent/CONTRIBUTING.md): ruff, the offline tests, the
 front-end type check, lint and tests, and the committed front-end build.

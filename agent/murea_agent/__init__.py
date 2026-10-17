@@ -1,12 +1,12 @@
-"""Murea Agent: an open-world agent that turns each player action into a video beat.
+"""Murea-Mind: an open-world agent that turns each player action into a video beat.
 
     import murea_agent
     murea_agent.configure("config.yaml")          # optional; defaults to ./config.yaml
-    agent = murea_agent.MureaAgent()
+    agent = murea_agent.MureaMind()
 
 Package layout:
 
-    agent.py      MureaAgent, the public API
+    agent.py      MureaMind, the public API
     loop.py       the turn loop: perceive -> plan -> check -> act -> commit
     events.py     steps, events and the per-clip trace
     director/     the planning model: prompts, output schema, prefetch
@@ -25,7 +25,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-__all__ = ["MureaAgent", "World", "Node", "configure"]
+__all__ = ["MureaMind", "MureaAgent", "World", "Node", "configure"]
 
 
 def configure(path: str | os.PathLike[str]) -> None:
@@ -38,10 +38,10 @@ def configure(path: str | os.PathLike[str]) -> None:
 
 def __getattr__(name: str) -> Any:
     # Lazy, so `murea_agent.configure()` can run before config.yaml is read.
-    if name == "MureaAgent":
-        from murea_agent.agent import MureaAgent
+    if name in {"MureaMind", "MureaAgent"}:
+        from murea_agent.agent import MureaMind
 
-        return MureaAgent
+        return MureaMind
     if name in {"World", "Node"}:
         from murea_agent.memory import world
 

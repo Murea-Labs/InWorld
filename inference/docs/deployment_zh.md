@@ -112,7 +112,7 @@ bash scripts/murea-fast verify /path/to/model_ema_distilled8_step_07000.safetens
 ### 服务器路径
 
 默认情况下，服务接受 `data:` 或 `http(s)` URL 形式的图片，续写前缀以 multipart 上传，
-Murea Agent 发送的正是这两种。凡是指定服务器上文件的请求都会被拒绝并返回 HTTP 400：
+Murea-Mind 发送的正是这两种。凡是指定服务器上文件的请求都会被拒绝并返回 HTTP 400：
 `output_path`、`perf_dump_path`，以及 `video_path`、`input_reference` 或
 `reference_image_paths` 中的本地路径。
 

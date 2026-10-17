@@ -440,7 +440,7 @@ export default function CoopRoom({
       <div className="coop-shell">
         <header className="coop-topbar">
           <button className="brand ghost coop-brand" onClick={exitToLobby}>
-            <h1>Murea Agent</h1>
+            <h1>Murea-Mind</h1>
           </button>
           <span className="head-sep" />
           <span className="coop-mode">

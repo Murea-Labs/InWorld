@@ -1,4 +1,4 @@
-# Murea Agent
+# Murea-Mind
 
 **English** | [中文](README_zh.md)
 
@@ -110,9 +110,9 @@ The clip path, the narration and three suggested actions follow.
 ### From Python
 
 ```python
-from murea_agent import MureaAgent
+from murea_agent import MureaMind
 
-agent = MureaAgent()
+agent = MureaMind()
 world = agent.create_world(title="Rainy Harbour", setting="A harbour town on a stormy night.")
 
 for event in agent.stream(world, "I step into the inn and look around."):
@@ -124,7 +124,7 @@ for event in agent.stream(world, "I step into the inn and look around."):
 agent.reflect(world)  # let the critic check the clip against the plan
 ```
 
-`MureaAgent` also has `continue_story`, `plan_ahead`, `regenerate` and `undo`.
+`MureaMind` also has `continue_story`, `plan_ahead`, `regenerate` and `undo`.
 See [`examples/play.py`](examples/play.py).
 
 ## Co-op mode
@@ -310,7 +310,7 @@ and photos with a real background are not cropped, and the files you upload stay
 
 ```
 murea_agent/          the agent (a Python package, no web dependencies)
-  agent.py            MureaAgent: the public API
+  agent.py            MureaMind: the public API
   loop.py             the turn loop: perceive → plan → check → act → commit
   events.py           steps, events, the per-clip trace
   director/           the planning model: prompts, schema, prefetch
