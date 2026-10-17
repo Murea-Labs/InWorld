@@ -15,9 +15,14 @@
 
 [English](README.md) | **中文**
 
-<!-- 预告视频放在这里（上传到 GitHub 的 MP4，或 docs/assets/ 下的 GIF）。 -->
-
 </div>
+
+## 演示视频
+
+**Murea-InWorld 文字驱动剧情演示** · 2 分 19 秒 ·
+[观看原画质视频](docs/assets/murea-inworld-demo.mp4)
+
+https://github.com/user-attachments/assets/2617c0f3-ded2-4a8f-81bb-b77095c92b0e
 
 > [!NOTE]
 > Murea-Fast 权重已在 [Hugging Face](https://huggingface.co/MureaLabs/InWorld) 发布。
@@ -47,7 +52,7 @@ Murea-Pro 和 Murea-Fast 在各自的基准上均达到最先进水平，且两�
 
 ## 动态
 
-- **即将发布** · 演示视频。
+- **2026-10-17** · [文字驱动剧情演示视频](#演示视频)已发布。
 - **2026-10-17** · [Murea-Fast 权重](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)
   已在 Hugging Face 发布。
 - **2026-10** · 首次开源：Murea-Fast 推理服务与 Murea-Mind，文档提供中英文两版。

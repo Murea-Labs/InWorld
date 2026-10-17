@@ -15,9 +15,14 @@ and an agent that turns your actions into a continuing, filmed story.
 
 **English** | [中文](README_zh.md)
 
-<!-- Teaser video goes here (an MP4 uploaded to GitHub, or a GIF in docs/assets/). -->
-
 </div>
+
+## Demo
+
+**Text-driven storytelling with Murea-InWorld** · 2 min 19 s ·
+[Watch the full-quality video](docs/assets/murea-inworld-demo.mp4)
+
+https://github.com/user-attachments/assets/2617c0f3-ded2-4a8f-81bb-b77095c92b0e
 
 > [!NOTE]
 > The Murea-Fast weights are available on [Hugging Face](https://huggingface.co/MureaLabs/InWorld).
@@ -58,7 +63,7 @@ in their respective evaluations.
 
 ## News
 
-- **Coming soon** · Demo videos.
+- **2026-10-17** · Watch the [text-driven storytelling demo](#demo).
 - **2026-10-17** · [Murea-Fast weights](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)
   are now available on Hugging Face.
 - **2026-10** · First open-source release: the Murea-Fast inference service and Murea-Mind,
