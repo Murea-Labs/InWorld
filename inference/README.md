@@ -2,9 +2,8 @@
 
 **English** | [中文](README_zh.md)
 
-> **Status:** the Murea-Fast weights are not published yet. They will be released on Hugging
-> Face (see [Model](#model)). Until then the service cannot be started; the code, the
-> documentation and the standard-library tests are available.
+> **Status:** the Murea-Fast weights are available on [Hugging Face](https://huggingface.co/MureaLabs/InWorld).
+> See [Model](#model) for the download link and SHA-256, and [Quick start](#quick-start) to run the service.
 
 Murea-Fast is the inference service of [Murea-InWorld](../README.md). It generates videos with
 synchronized audio from a text prompt and an ordered list of reference images, and can
@@ -31,11 +30,11 @@ and a CUDA environment.
 
 | Item | Value |
 | --- | --- |
-| Checkpoint | `model_ema_distilled8_step_07000.safetensors` |
+| Checkpoint | `murea-fast.safetensors` |
 | Size | 42,018,192,440 bytes |
 | SHA-256 | `1a2c0d8e23032994b52f2c67e14c930d3be8224f321c51353f0a2954ccbb9385` |
 | Base model | Fine-tuned and distilled from [LTX-2.5](https://huggingface.co/Lightricks/LTX-2.5-Diffusers) |
-| Download | Will be published on Hugging Face; the link will be added here |
+| Download | [murea-fast.safetensors on Hugging Face](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors) |
 
 The checkpoint holds the DiT and 258 trained text-connector tensors. `prepare` merges those
 connectors into the base components: the 258 tensors replace their base counterparts, and the
@@ -61,8 +60,11 @@ as a drop-in DiT replacement on its own. The launcher only accepts this exact ch
 2. Download the Murea-Fast checkpoint and verify it:
 
    ```bash
-   bash scripts/murea-fast verify /path/to/model_ema_distilled8_step_07000.safetensors --sha256
+   hf download MureaLabs/InWorld murea-fast.safetensors --local-dir /path/to
+   bash scripts/murea-fast verify /path/to/murea-fast.safetensors --sha256
    ```
+
+   Replace `/path/to` with the directory where you want to store the checkpoint.
 
 3. Edit the four paths in `configs/single-gpu.json` (Python, base components, checkpoint,
    runtime directory) and choose a free GPU in `gpus`.

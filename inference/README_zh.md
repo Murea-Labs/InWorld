@@ -2,8 +2,8 @@
 
 [English](README.md) | **中文**
 
-> **状态：** Murea-Fast 权重尚未发布，将在 Hugging Face 上发布（见[模型](#模型)）。在此之前服务无法启动；
-> 代码、文档和只依赖标准库的测试可以使用。
+> **状态：** Murea-Fast 权重已在 [Hugging Face](https://huggingface.co/MureaLabs/InWorld) 发布。
+> 下载链接与 SHA-256 见[模型](#模型)，启动步骤见[快速开始](#快速开始)。
 
 Murea-Fast 是 [Murea-InWorld](../README_zh.md) 的推理服务：根据文本提示和按顺序排列的参考图，
 生成带同步音频的视频；也可以从一段已有视频的末尾帧接着往下生成。模型通过 HTTP API 提供服务。
@@ -26,11 +26,11 @@ LTX-2.5 基础组件和 CUDA 环境。
 
 | 项目 | 值 |
 | --- | --- |
-| 权重文件 | `model_ema_distilled8_step_07000.safetensors` |
+| 权重文件 | `murea-fast.safetensors` |
 | 大小 | 42,018,192,440 字节 |
 | SHA-256 | `1a2c0d8e23032994b52f2c67e14c930d3be8224f321c51353f0a2954ccbb9385` |
 | 基础模型 | 基于 [LTX-2.5](https://huggingface.co/Lightricks/LTX-2.5-Diffusers) 微调并蒸馏 |
-| 下载 | 将发布到 Hugging Face，链接发布后补充 |
+| 下载 | [Hugging Face 上的 murea-fast.safetensors](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors) |
 
 权重中包含 DiT 和 258 个训练过的 text connector 张量。`prepare` 会把这些 connector
 合并进基础组件：这 258 个张量替换基础组件中的对应张量，基础组件独有的 4 个 text projection
@@ -52,8 +52,11 @@ LTX-2.5 基础组件和 CUDA 环境。
 2. 下载 Murea-Fast 权重并校验：
 
    ```bash
-   bash scripts/murea-fast verify /path/to/model_ema_distilled8_step_07000.safetensors --sha256
+   hf download MureaLabs/InWorld murea-fast.safetensors --local-dir /path/to
+   bash scripts/murea-fast verify /path/to/murea-fast.safetensors --sha256
    ```
+
+   将 `/path/to` 替换为存放权重的实际目录。
 
 3. 修改 `configs/single-gpu.json` 中的四个路径（Python、基础组件、权重、运行目录），
    并在 `gpus` 中选择一张空闲的卡。

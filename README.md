@@ -11,7 +11,7 @@ and an agent that turns your actions into a continuing, filmed story.
 [![Paper](https://img.shields.io/badge/Paper-ResearchGate-b31b1b)](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
-[![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#news)
+[![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-Murea--Fast-yellow)](https://huggingface.co/MureaLabs/InWorld)
 
 **English** | [中文](README_zh.md)
 
@@ -20,9 +20,9 @@ and an agent that turns your actions into a continuing, filmed story.
 </div>
 
 > [!NOTE]
-> The Murea-Fast weights are not published yet. They will be released on Hugging Face. Until
-> then the inference service cannot be started, so the agent has no video model to film with.
-> The code, the documentation and the offline tests are available now.
+> The Murea-Fast weights are available on [Hugging Face](https://huggingface.co/MureaLabs/InWorld).
+> Download `murea-fast.safetensors` and follow the [deployment guide](inference/docs/deployment.md)
+> to verify the checkpoint and set up the LTX-2.5 base components.
 
 ## Abstract
 
@@ -58,7 +58,9 @@ in their respective evaluations.
 
 ## News
 
-- **Coming soon** · Murea-Fast weights on Hugging Face, and demo videos.
+- **Coming soon** · Demo videos.
+- **2026-10-17** · [Murea-Fast weights](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)
+  are now available on Hugging Face.
 - **2026-10** · First open-source release: the Murea-Fast inference service and Murea-Mind,
   with documentation in English and Chinese.
 
@@ -147,11 +149,11 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 
 ## Quick start
 
-These steps need the Murea-Fast weights, which are [not published yet](#news).
-
 **1. Start Murea-Fast on a GPU machine.** Install the environment and the LTX-2.5 base
 components as described in [Deployment](inference/docs/deployment.md), download the
-checkpoint, and set the four paths in `inference/configs/single-gpu.json`. Then:
+[murea-fast.safetensors checkpoint](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors),
+and set the four paths in `inference/configs/single-gpu.json`. Set `checkpoint` to the
+absolute path of the downloaded file. Then:
 
 ```bash
 cd inference

@@ -11,7 +11,7 @@ SGLang 依靠它们选择模型实现，保留它们也便于跟进上游。第�
 | --- | --- |
 | 推理引擎 | [sgl-project/sglang](https://github.com/sgl-project/sglang)，提交 `ace7314173c8221ecf5f213575302eab98f4e84f`，加上下文列出的修改 |
 | 基础组件 | [Lightricks/LTX-2.5-Diffusers](https://huggingface.co/Lightricks/LTX-2.5-Diffusers)，revision `a6de4b5354f078db24d9cf4778c14846788aea3d` |
-| 模型权重 | Murea-Fast 权重 `model_ema_distilled8_step_07000.safetensors`，42,018,192,440 字节，SHA-256 `1a2c0d8e23032994b52f2c67e14c930d3be8224f321c51353f0a2954ccbb9385` |
+| 模型权重 | Murea-Fast 权重 [murea-fast.safetensors](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)，42,018,192,440 字节，SHA-256 `1a2c0d8e23032994b52f2c67e14c930d3be8224f321c51353f0a2954ccbb9385` |
 
 `vendor/sglang/python/` 和 `vendor/sglang/LICENSE` 来自上述 SGLang 提交。其中 4,315 个文件里，
 4,288 个与上游逐字节一致，22 个经过修改，另新增 3 个（2 个测试文件和请求字段策略模块）；其余 2 个文件

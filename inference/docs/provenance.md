@@ -12,7 +12,7 @@ and keeping them makes it easier to follow upstream. Third-party notices are ret
 | --- | --- |
 | Inference engine | [sgl-project/sglang](https://github.com/sgl-project/sglang) at commit `ace7314173c8221ecf5f213575302eab98f4e84f`, with the changes listed below |
 | Base components | [Lightricks/LTX-2.5-Diffusers](https://huggingface.co/Lightricks/LTX-2.5-Diffusers) at revision `a6de4b5354f078db24d9cf4778c14846788aea3d` |
-| Model weights | Murea-Fast checkpoint `model_ema_distilled8_step_07000.safetensors`, 42,018,192,440 bytes, SHA-256 `1a2c0d8e23032994b52f2c67e14c930d3be8224f321c51353f0a2954ccbb9385` |
+| Model weights | Murea-Fast checkpoint [murea-fast.safetensors](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors), 42,018,192,440 bytes, SHA-256 `1a2c0d8e23032994b52f2c67e14c930d3be8224f321c51353f0a2954ccbb9385` |
 
 `vendor/sglang/python/` and `vendor/sglang/LICENSE` come from that SGLang commit. Of its
 4,315 files, 4,288 are byte-identical to upstream, 22 were modified and 3 were added (two

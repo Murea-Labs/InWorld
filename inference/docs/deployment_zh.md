@@ -64,11 +64,16 @@ hf download Lightricks/LTX-2.5-Diffusers \
 
 ## 权重
 
-下载 Murea-Fast 权重（见 [README](../README_zh.md#模型)）并校验：
+从 `MureaLabs/InWorld` 下载 [murea-fast.safetensors](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)
+并校验：
 
 ```bash
-bash scripts/murea-fast verify /path/to/model_ema_distilled8_step_07000.safetensors --sha256
+hf download MureaLabs/InWorld murea-fast.safetensors --local-dir /path/to
+bash scripts/murea-fast verify /path/to/murea-fast.safetensors --sha256
 ```
+
+将 `/path/to` 替换为存放权重的实际目录，并将服务配置中的 `checkpoint` 设为
+`murea-fast.safetensors` 的绝对路径。
 
 不加 `--sha256` 时，`verify` 检查文件大小、张量数量以及权重元数据中记录的采样约束；
 加上 `--sha256` 会额外对整个 42 GB 文件计算哈希。

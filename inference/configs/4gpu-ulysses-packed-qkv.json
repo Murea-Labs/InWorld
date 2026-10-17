@@ -1,7 +1,7 @@
 {
   "python": "/path/to/murea/inference/.venv/bin/python",
   "model_dir": "/path/to/LTX-2.5-Diffusers",
-  "checkpoint": "/path/to/model_ema_distilled8_step_07000.safetensors",
+  "checkpoint": "/path/to/murea-fast.safetensors",
   "runtime_dir": "/path/to/murea-runtime",
   "gpus": "4,5,6,7",
   "parallel": "ulysses",

@@ -71,11 +71,16 @@ hf download Lightricks/LTX-2.5-Diffusers \
 
 ## Checkpoint
 
-Download the Murea-Fast checkpoint (see the [README](../README.md#model)) and verify it:
+Download [murea-fast.safetensors](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)
+from `MureaLabs/InWorld` and verify it:
 
 ```bash
-bash scripts/murea-fast verify /path/to/model_ema_distilled8_step_07000.safetensors --sha256
+hf download MureaLabs/InWorld murea-fast.safetensors --local-dir /path/to
+bash scripts/murea-fast verify /path/to/murea-fast.safetensors --sha256
 ```
+
+Replace `/path/to` with the directory where you want to store the checkpoint. Set
+`checkpoint` in your service configuration to the absolute path of `murea-fast.safetensors`.
 
 Without `--sha256`, `verify` checks the file size, the tensor count and the sampling
 contract stored in the checkpoint metadata. With `--sha256` it also hashes the whole

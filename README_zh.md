@@ -11,7 +11,7 @@
 [![Paper](https://img.shields.io/badge/Paper-ResearchGate-b31b1b)](https://www.researchgate.net/publication/415845088_InWorld_From_Imagination_to_Living_Worlds_with_Agents_and_Fast_Video_Generation)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
-[![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#动态)
+[![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-Murea--Fast-yellow)](https://huggingface.co/MureaLabs/InWorld)
 
 [English](README.md) | **中文**
 
@@ -20,8 +20,9 @@
 </div>
 
 > [!NOTE]
-> Murea-Fast 模型权重尚未发布，之后会在 Hugging Face 上发布。在此之前推理服务无法启动，
-> Agent 也就没有可用的视频模型。代码、文档和离线测试现在都可以使用。
+> Murea-Fast 权重已在 [Hugging Face](https://huggingface.co/MureaLabs/InWorld) 发布。
+> 下载 `murea-fast.safetensors`，并按[部署说明](inference/docs/deployment_zh.md)
+> 校验权重、准备 LTX-2.5 基础组件。
 
 ## 摘要
 
@@ -46,7 +47,9 @@ Murea-Pro 和 Murea-Fast 在各自的基准上均达到最先进水平，且两�
 
 ## 动态
 
-- **即将发布** · Murea-Fast 权重（Hugging Face）与演示视频。
+- **即将发布** · 演示视频。
+- **2026-10-17** · [Murea-Fast 权重](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)
+  已在 Hugging Face 发布。
 - **2026-10** · 首次开源：Murea-Fast 推理服务与 Murea-Mind，文档提供中英文两版。
 
 ## 亮点
@@ -129,10 +132,9 @@ flowchart LR
 
 ## 快速上手
 
-以下步骤需要 Murea-Fast 权重，权重[尚未发布](#动态)。
-
 **1. 在 GPU 机器上启动 Murea-Fast。** 按[部署说明](inference/docs/deployment_zh.md)安装环境和 LTX-2.5
-基础组件，下载权重，并填好 `inference/configs/single-gpu.json` 里的四个路径。然后：
+基础组件，下载 [murea-fast.safetensors 权重](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)，
+并填好 `inference/configs/single-gpu.json` 里的四个路径。`checkpoint` 应指向下载文件的绝对路径。然后：
 
 ```bash
 cd inference
