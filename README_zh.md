@@ -20,7 +20,7 @@
 ## 演示视频
 
 **Murea-InWorld 文字驱动剧情演示** · 2 分 19 秒 ·
-[观看原画质视频](docs/assets/murea-inworld-demo.mp4)
+[下载原画质视频](docs/assets/murea-inworld-demo.mp4?raw=true)
 
 https://github.com/user-attachments/assets/2617c0f3-ded2-4a8f-81bb-b77095c92b0e
 

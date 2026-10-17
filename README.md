@@ -20,7 +20,7 @@ and an agent that turns your actions into a continuing, filmed story.
 ## Demo
 
 **Text-driven storytelling with Murea-InWorld** · 2 min 19 s ·
-[Watch the full-quality video](docs/assets/murea-inworld-demo.mp4)
+[Download the original-quality video](docs/assets/murea-inworld-demo.mp4?raw=true)
 
 https://github.com/user-attachments/assets/2617c0f3-ded2-4a8f-81bb-b77095c92b0e
 
