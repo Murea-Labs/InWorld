@@ -52,6 +52,26 @@
     Object.keys(byId).forEach(function (id) { var s = document.getElementById(id); if (s) io.observe(s); });
   }
 
+  /* ---------- featured demo: user-initiated playback, independent of looping previews ---------- */
+  (function () {
+    var video = $("#inworld-demo"), button = $("#demo-play"), error = $("#demo-error");
+    if (!video || !button) return;
+    function sync() { button.hidden = !video.paused || !!video.error; }
+    function failed() { button.hidden = true; error.hidden = false; }
+    button.hidden = false;
+    button.addEventListener("click", function () {
+      error.hidden = true;
+      var result = video.play();
+      if (result && result.catch) result.catch(function (reason) {
+        if (reason.name !== "AbortError") failed();
+      });
+    });
+    video.addEventListener("play", sync);
+    video.addEventListener("pause", sync);
+    video.addEventListener("ended", sync);
+    video.addEventListener("error", failed);
+  })();
+
   /* ---------- the turn loop ---------- */
   (function loop() {
     var tabs = $$(".loop__node"), panels = tabs.map(function (t) { return document.getElementById(t.getAttribute("aria-controls")); });

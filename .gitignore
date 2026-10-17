@@ -13,6 +13,7 @@ __pycache__/
 *.mp4
 # Published demo media for the README.
 !/docs/assets/murea-inworld-demo.mp4
+!/page/assets/video/inworld-demo-720p.mp4
 *.wav
 *.log
 
