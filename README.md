@@ -8,7 +8,7 @@ Open-source video generation with synchronized sound from text and reference ima
 and an agent that turns your actions into a continuing, filmed story.
 
 [![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
-[![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b)](https://github.com/Murea-Labs/InWorld/blob/main/page/paper/InWorld-technical-report.pdf)
+[![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b)](https://murea.ai/page/paper/InWorld-technical-report.pdf)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![GitHub](https://img.shields.io/badge/Code-GitHub-181717)](https://github.com/Murea-Labs/InWorld)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-Murea--Fast-yellow)](https://huggingface.co/MureaLabs/InWorld)
@@ -31,7 +31,7 @@ https://github.com/user-attachments/assets/2617c0f3-ded2-4a8f-81bb-b77095c92b0e
 
 ## Abstract
 
-Adapted from our [technical report](https://github.com/Murea-Labs/InWorld/blob/main/page/paper/InWorld-technical-report.pdf).
+Adapted from our [technical report](https://murea.ai/page/paper/InWorld-technical-report.pdf).
 The report evaluates Murea-Pro and Murea-Fast; this repository provides Murea-Mind and the
 Murea-Fast inference service.
 
@@ -227,6 +227,6 @@ language and image model APIs, which have their own terms.
   title        = {InWorld: From Imagination to Living Worlds with Agents and Fast Video Generation},
   author       = {{Murea Labs}},
   year         = {2026},
-  url          = {https://github.com/Murea-Labs/InWorld/blob/main/page/paper/InWorld-technical-report.pdf}
+  url          = {https://murea.ai/page/paper/InWorld-technical-report.pdf}
 }
 ```

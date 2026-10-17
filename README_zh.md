@@ -8,7 +8,7 @@
 并提供一个 Agent，把你的每一步行动拍成连续的故事。
 
 [![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
-[![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b)](https://github.com/Murea-Labs/InWorld/blob/main/page/paper/InWorld-technical-report.pdf)
+[![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b)](https://murea.ai/page/paper/InWorld-technical-report.pdf)
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![GitHub](https://img.shields.io/badge/Code-GitHub-181717)](https://github.com/Murea-Labs/InWorld)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-Murea--Fast-yellow)](https://huggingface.co/MureaLabs/InWorld)
@@ -31,7 +31,7 @@ https://github.com/user-attachments/assets/2617c0f3-ded2-4a8f-81bb-b77095c92b0e
 
 ## 摘要
 
-以下摘要译自我们的[技术报告](https://github.com/Murea-Labs/InWorld/blob/main/page/paper/InWorld-technical-report.pdf)，项目名称与本仓库保持一致。
+以下摘要译自我们的[技术报告](https://murea.ai/page/paper/InWorld-technical-report.pdf)，项目名称与本仓库保持一致。
 报告评测了 Murea-Pro 和 Murea-Fast；本仓库提供 Murea-Mind 与 Murea-Fast 推理服务。
 
 交互式世界模型旨在模拟随用户行动而演化的环境，同时保留过去交互带来的影响。将这样的世界扩展到视觉与听觉，
@@ -204,6 +204,6 @@ Murea-InWorld/
   title        = {InWorld: From Imagination to Living Worlds with Agents and Fast Video Generation},
   author       = {{Murea Labs}},
   year         = {2026},
-  url          = {https://github.com/Murea-Labs/InWorld/blob/main/page/paper/InWorld-technical-report.pdf}
+  url          = {https://murea.ai/page/paper/InWorld-technical-report.pdf}
 }
 ```
