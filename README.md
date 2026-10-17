@@ -12,7 +12,6 @@ and an agent that turns your actions into a continuing, filmed story.
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#news)
-[![Blog](https://img.shields.io/badge/Blog-few--step%20inference-orange)](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
 
 **English** | [中文](README_zh.md)
 
@@ -62,8 +61,6 @@ in their respective evaluations.
 - **Coming soon** · Murea-Fast weights on Hugging Face, and demo videos.
 - **2026-10** · First open-source release: the Murea-Fast inference service and Murea Agent,
   with documentation in English and Chinese.
-- **2026-09** · Blog: [few-step inference of the full Murea model: speed and quality](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
-  (the unreleased full model, not Murea-Fast).
 
 ## Highlights
 
@@ -138,7 +135,6 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 | Call the model from my own code | [API reference](inference/docs/api.md) |
 | Run the service on my GPUs | [Deployment](inference/docs/deployment.md) |
 | Know how fast it is and how much memory it needs | [Performance](inference/docs/performance.md) |
-| Read how the full Murea model was sped up with few-step inference | [Blog](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html) |
 | Contribute | [CONTRIBUTING.md](CONTRIBUTING.md) |
 
 ## Components
@@ -206,13 +202,6 @@ before deploying them on a shared network.
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the checks each part needs before a pull request.
-
-## Acknowledgements
-
-Murea-Fast is fine-tuned and distilled from [LTX-2.5](https://github.com/Lightricks/LTX-2)
-by Lightricks and is served with [SGLang](https://github.com/sgl-project/sglang). The
-agent's optional narration voice uses [OmniVoice](https://github.com/k2-fsa/OmniVoice).
-Murea-InWorld is not affiliated with or endorsed by Lightricks.
 
 ## License
 

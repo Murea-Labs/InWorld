@@ -12,7 +12,6 @@
 [![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
 [![GitLab](https://img.shields.io/badge/Code-GitLab-FC6D26)](http://gitlab-server.hnminigames.fun/aura/Murea)
 [![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-coming%20soon-lightgrey)](#动态)
-[![Blog](https://img.shields.io/badge/Blog-few--step%20inference-orange)](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)
 
 [English](README.md) | **中文**
 
@@ -49,7 +48,6 @@ Murea-Pro 和 Murea-Fast 在各自的基准上均达到最先进水平，且两�
 
 - **即将发布** · Murea-Fast 权重（Hugging Face）与演示视频。
 - **2026-10** · 首次开源：Murea-Fast 推理服务与 Murea Agent，文档提供中英文两版。
-- **2026-09** · 博客：[完整版 Murea 模型少步推理的性能与质量评估](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html)（评测对象是尚未发布的完整版模型，不是 Murea-Fast）。
 
 ## 亮点
 
@@ -119,7 +117,6 @@ flowchart LR
 | 在自己的代码里调用模型 | [API 文档](inference/docs/api_zh.md) |
 | 在自己的 GPU 上部署服务 | [部署说明](inference/docs/deployment_zh.md) |
 | 了解速度和显存占用 | [性能](inference/docs/performance_zh.md) |
-| 了解完整版 Murea 模型的少步推理加速 | [博客](https://aura-data-training.vicoo.ai/Musee/MuseFlow/Musee-H3-Blog-v0.9-20260928/index.html) |
 | 参与贡献 | [CONTRIBUTING_zh.md](CONTRIBUTING_zh.md) |
 
 ## 组成部分
@@ -184,12 +181,6 @@ Murea-InWorld/
 ## 参与贡献
 
 提交 pull request 前各部分需要运行的检查，见 [CONTRIBUTING_zh.md](CONTRIBUTING_zh.md)。
-
-## 致谢
-
-Murea-Fast 由 Lightricks 的 [LTX-2.5](https://github.com/Lightricks/LTX-2) 微调和蒸馏而来，
-通过 [SGLang](https://github.com/sgl-project/sglang) 提供服务。Agent 可选的旁白配音使用
-[OmniVoice](https://github.com/k2-fsa/OmniVoice)。Murea-InWorld 与 Lightricks 没有关联，也未获其背书。
 
 ## 许可证
 
