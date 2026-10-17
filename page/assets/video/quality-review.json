@@ -1,0 +1,35 @@
+{
+  "review_date": "2026-10-14",
+  "reviewed_clips": 337,
+  "reviewed_decoded_frames": 37858,
+  "method": "Downloaded every deployed preview, verified expected file size, decoded the full clip, checked borders and frame motion, and visually reviewed six evenly spaced frames per clip plus flagged frames.",
+  "retained_worlds": 35,
+  "retained_clips": 333,
+  "excluded": [
+    {
+      "world": "w0a0518a8",
+      "node": "na045a72e",
+      "source_order": 1,
+      "reason": "Wide white side panels appear during the clip."
+    },
+    {
+      "world": "w0a0518a8",
+      "node": "n8e13b61d",
+      "source_order": 2,
+      "reason": "Wide white side panels persist at the start of the clip."
+    },
+    {
+      "world": "wc7c00124",
+      "node": "n7f7033eb",
+      "source_order": 1,
+      "reason": "Opening contains a white-background character reference before the scene."
+    },
+    {
+      "world": "w3911e1d0",
+      "node": "n65ee93c7",
+      "source_order": 1,
+      "reason": "Removed at the user's request to retain only one of the two opening timer shots, whose displayed times conflict. The original second clip is retained to connect directly to the following scene."
+    }
+  ],
+  "continuity": "Stellar academy retains the original connected turns 3–8, displayed as turns 1–6. The star-sea island retains original connected turns 2–37, displayed as turns 1–36. All original parent IDs and media filenames remain unchanged."
+}
