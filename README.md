@@ -1,23 +1,27 @@
 <div align="center">
 
-# Murea-InWorld
+<a href="https://murea.ai/"><img src="page/assets/img/readme-banner.png" alt="Murea-InWorld — From imagination to living worlds" width="100%"></a>
 
 **Type what you do, and the world films it.**
 
 Open-source video generation with synchronized sound from text and reference images,
 and an agent that turns your actions into a continuing, filmed story.
 
-[![Website](https://img.shields.io/badge/Website-murea.ai-black)](https://murea.ai/)
-[![Paper](https://img.shields.io/badge/Paper-PDF-b31b1b)](https://murea.ai/page/paper/InWorld-technical-report.pdf)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue)](LICENSE)
-[![GitHub](https://img.shields.io/badge/Code-GitHub-181717)](https://github.com/Murea-Labs/InWorld)
-[![Weights](https://img.shields.io/badge/%F0%9F%A4%97%20weights-Murea--Fast-yellow)](https://huggingface.co/MureaLabs/InWorld)
+[![Website](https://img.shields.io/badge/Website-murea.ai-207D74?style=for-the-badge)](https://murea.ai/)
+[![Paper PDF](https://img.shields.io/badge/Paper-PDF-465D86?style=for-the-badge)](https://murea.ai/page/paper/InWorld-technical-report.pdf)
+[![GitHub code](https://img.shields.io/badge/Code-GitHub-182635?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Murea-Labs/InWorld)
+[![Hugging Face weights](https://img.shields.io/badge/Weights-Murea--Fast-C18B2E?style=for-the-badge&logo=huggingface&logoColor=white)](https://huggingface.co/MureaLabs/InWorld)
+[![Code license](https://img.shields.io/badge/Code_License-Apache--2.0-526578?style=for-the-badge)](LICENSE)
 
 **English** | [中文](README_zh.md)
 
+🎬 [Demo](#demo) · 🚀 [Quick start](#quick-start) · 🧭 [Guides](#where-to-start) · 📚 [Citation](#citation) · ✉️ [Contact](mailto:labs@murea.ai)
+
 </div>
 
-## Demo
+<a name="demo"></a>
+
+## 🎬 Demo
 
 **Text-driven storytelling with Murea-InWorld** · 2 min 19 s ·
 [Download the original-quality video](docs/assets/murea-inworld-demo.mp4?raw=true)
@@ -29,7 +33,9 @@ https://github.com/user-attachments/assets/2617c0f3-ded2-4a8f-81bb-b77095c92b0e
 > Download `murea-fast.safetensors` and follow the [deployment guide](inference/docs/deployment.md)
 > to verify the checkpoint and set up the LTX-2.5 base components.
 
-## Abstract
+<a name="abstract"></a>
+
+## 📄 Abstract
 
 Adapted from our [technical report](https://murea.ai/page/paper/InWorld-technical-report.pdf).
 The report evaluates Murea-Pro and Murea-Fast; this repository provides Murea-Mind and the
@@ -61,7 +67,9 @@ rendering quality, and audio. Murea-Pro and Murea-Fast achieve state-of-the-art 
 on their respective benchmarks, and both models surpass most evaluated commercial systems
 in their respective evaluations.
 
-## News
+<a name="news"></a>
+
+## 📣 News
 
 - **2026-10-17** · Watch the [text-driven storytelling demo](#demo).
 - **2026-10-17** · [Murea-Fast weights](https://huggingface.co/MureaLabs/InWorld/blob/main/murea-fast.safetensors)
@@ -69,7 +77,9 @@ in their respective evaluations.
 - **2026-10** · First open-source release: the Murea-Fast inference service and Murea-Mind,
   with documentation in English and Chinese.
 
-## Highlights
+<a name="highlights"></a>
+
+## ✨ Highlights
 
 - **Video with sound from several references.** Bind people, objects and a place as ordered
   reference images, refer to them in the prompt, and get 1280×704, 24 fps video with
@@ -85,19 +95,21 @@ in their respective evaluations.
 - **Play together.** In co-op rooms 2–4 players, people or AI teammates, each bring a
   character, and every round is filmed as one shared clip.
 
-## What you can do
+<a name="what-you-can-do"></a>
+
+## 🎮 What you can do
 
 <table>
   <tr>
     <td width="50%" valign="top">
       <!-- <img src="docs/assets/reference.gif" width="100%"> -->
-      <b>Film a scene from references</b><br>
+      <b>🖼️ Film a scene from references</b><br>
       Two characters and a place, one prompt, a clip with dialogue and sound.
       <a href="inference/README.md#multi-reference-generation">Murea-Fast</a>
     </td>
     <td width="50%" valign="top">
       <!-- <img src="docs/assets/continuation.gif" width="100%"> -->
-      <b>Continue a clip</b><br>
+      <b>🔄 Continue a clip</b><br>
       Pick up from the last frames and keep the action going.
       <a href="inference/README.md#continuation">Murea-Fast</a>
     </td>
@@ -105,20 +117,22 @@ in their respective evaluations.
   <tr>
     <td width="50%" valign="top">
       <!-- <img src="docs/assets/agent.gif" width="100%"> -->
-      <b>Play a story</b><br>
+      <b>🎭 Play a story</b><br>
       Type an action, watch it happen, choose what comes next.
       <a href="agent/README.md#quick-start">Murea-Mind</a>
     </td>
     <td width="50%" valign="top">
       <!-- <img src="docs/assets/coop.gif" width="100%"> -->
-      <b>Play with friends</b><br>
+      <b>👥 Play with friends</b><br>
       A shared room, one clip per round, with optional AI teammates.
       <a href="agent/README.md#co-op-mode">Co-op mode</a>
     </td>
   </tr>
 </table>
 
-## How it fits together
+<a name="how-it-fits-together"></a>
+
+## 🧩 How it fits together
 
 ```mermaid
 flowchart LR
@@ -132,7 +146,9 @@ flowchart LR
 The two parts talk over a documented [HTTP API](inference/docs/api.md), so the service can
 run on another machine or behind an SSH tunnel, and other clients can use it too.
 
-## Where to start
+<a name="where-to-start"></a>
+
+## 🧭 Where to start
 
 | I want to… | Start here |
 | --- | --- |
@@ -144,7 +160,9 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 | Know how fast it is and how much memory it needs | [Performance](inference/docs/performance.md) |
 | Contribute | [CONTRIBUTING.md](CONTRIBUTING.md) |
 
-## Components
+<a name="components"></a>
+
+## ⚙️ Components
 
 | | [Murea-Fast](inference/README.md) | [Murea-Mind](agent/README.md) |
 | --- | --- | --- |
@@ -152,7 +170,9 @@ run on another machine or behind an SSH tunnel, and other clients can use it too
 | Runs on | Linux and NVIDIA GPUs with CUDA. Verified on one H20 and on four H20s | Any machine with Python 3.12; needs a language and image model API key and a Murea-Fast service |
 | Interface | HTTP API, command line | Web UI, terminal, Python API |
 
-## Quick start
+<a name="quick-start"></a>
+
+## 🚀 Quick start
 
 **1. Start Murea-Fast on a GPU machine.** Install the environment and the LTX-2.5 base
 components as described in [Deployment](inference/docs/deployment.md), download the
@@ -179,7 +199,9 @@ cp .env.example .env          # set GEMINI_API_KEY and MUREA_URL=http://<gpu-hos
 See the [Murea-Mind README](agent/README.md#quick-start) for other providers, Docker and
 SSH tunnels.
 
-## Repository layout
+<a name="repository-layout"></a>
+
+## 🗂️ Repository layout
 
 ```text
 Murea-InWorld/
@@ -201,16 +223,22 @@ Murea-InWorld/
     └── tests/
 ```
 
-## Security
+<a name="security"></a>
+
+## 🔒 Security
 
 Neither the inference service nor the agent has authentication. Read [SECURITY.md](SECURITY.md)
 before deploying them on a shared network.
 
-## Contributing
+<a name="contributing"></a>
+
+## 🤝 Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for the checks each part needs before a pull request.
 
-## License
+<a name="license"></a>
+
+## 📜 License
 
 The code is released under the [Apache License 2.0](LICENSE). The vendored SGLang in
 `inference/vendor/` keeps its own copyright and license notices, including the files it
@@ -220,7 +248,9 @@ and are governed by the
 see [Provenance](inference/docs/provenance.md) for details. The agent calls third-party
 language and image model APIs, which have their own terms.
 
-## Citation
+<a name="citation"></a>
+
+## 📚 Citation
 
 ```bibtex
 @misc{murea_inworld2026,
@@ -231,6 +261,8 @@ language and image model APIs, which have their own terms.
 }
 ```
 
-## Contact
+<a name="contact"></a>
+
+## ✉️ Contact
 
 Email: [labs@murea.ai](mailto:labs@murea.ai)

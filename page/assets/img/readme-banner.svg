@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="440" viewBox="0 0 1600 440" role="img" aria-labelledby="title desc">
+  <title id="title">Murea-InWorld by Murea Labs</title>
+  <desc id="desc">From imagination to living worlds. World memory, video and sound, interactive stories.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1"><stop stop-color="#0b1526"/><stop offset="1" stop-color="#152e40"/></linearGradient>
+    <radialGradient id="glow"><stop stop-color="#76e6ce" stop-opacity=".18"/><stop offset="1" stop-color="#76e6ce" stop-opacity="0"/></radialGradient>
+    <linearGradient id="ring"><stop stop-color="#9ff5de"/><stop offset="1" stop-color="#5b85ce" stop-opacity=".2"/></linearGradient>
+    <clipPath id="clip"><rect width="1600" height="440" rx="24"/></clipPath>
+  </defs>
+  <g clip-path="url(#clip)">
+    <rect width="1600" height="440" fill="url(#bg)"/>
+    <circle cx="1280" cy="215" r="370" fill="url(#glow)"/>
+    <g fill="none" stroke="#93b9cb" stroke-opacity=".07">
+      <path d="M0 110H1600M0 220H1600M0 330H1600M200 0V440M400 0V440M600 0V440M800 0V440M1000 0V440M1200 0V440M1400 0V440"/>
+    </g>
+    <path d="M0 0h123l177 232L477 0h123v375H0z" transform="translate(72 54) scale(.08)" fill="#9ff5de"/>
+    <text x="139" y="78" fill="#c4d9e5" font-family="Arial, Helvetica, sans-serif" font-size="23" font-weight="700" letter-spacing="5">MUREA LABS</text>
+    <text x="68" y="213" fill="#f5f7f3" font-family="Arial, Helvetica, sans-serif" font-size="88" font-weight="700" letter-spacing="-3">Murea-InWorld</text>
+    <text x="73" y="270" fill="#b9cfdd" font-family="Arial, Helvetica, sans-serif" font-size="29">From imagination to living worlds.</text>
+    <g fill="#132e3d" stroke="#3a6270">
+      <rect x="72" y="326" width="209" height="47" rx="23.5"/>
+      <rect x="295" y="326" width="215" height="47" rx="23.5"/>
+      <rect x="524" y="326" width="283" height="47" rx="23.5"/>
+    </g>
+    <g fill="#b9e9df" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="600" letter-spacing="1.3" text-anchor="middle">
+      <text x="176.5" y="356">WORLD MEMORY</text>
+      <text x="402.5" y="356">VIDEO + SOUND</text>
+      <text x="665.5" y="356">INTERACTIVE STORIES</text>
+    </g>
+    <g transform="translate(1270 220)" fill="none">
+      <circle r="165" stroke="#7fc5cb" stroke-opacity=".16"/>
+      <circle r="124" stroke="#7fc5cb" stroke-opacity=".2"/>
+      <ellipse rx="200" ry="77" transform="rotate(-32)" stroke="url(#ring)" stroke-width="2"/>
+      <ellipse rx="190" ry="69" transform="rotate(35)" stroke="#78a6d6" stroke-opacity=".35"/>
+      <rect x="-77" y="-56" width="154" height="112" rx="20" fill="#163241" stroke="#8de6d0" stroke-opacity=".65"/>
+      <path d="M-38-24h16L0 5l22-29h16v48h-76z" fill="#d5fff1"/>
+      <circle cx="-169" cy="87" r="7" fill="#9ff5de"/>
+      <circle cx="126" cy="-123" r="5" fill="#a0c9ff"/>
+      <circle cx="163" cy="91" r="4" fill="#9ff5de"/>
+    </g>
+    <rect x=".5" y=".5" width="1599" height="439" rx="24" fill="none" stroke="#557783" stroke-opacity=".3"/>
+  </g>
+</svg>
