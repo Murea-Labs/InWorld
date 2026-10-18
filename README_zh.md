@@ -207,3 +207,7 @@ Murea-InWorld/
   url          = {https://murea.ai/page/paper/InWorld-technical-report.pdf}
 }
 ```
+
+## 联系方式
+
+联系邮箱：[labs@murea.ai](mailto:labs@murea.ai)

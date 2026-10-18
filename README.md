@@ -230,3 +230,7 @@ language and image model APIs, which have their own terms.
   url          = {https://murea.ai/page/paper/InWorld-technical-report.pdf}
 }
 ```
+
+## Contact
+
+Email: [labs@murea.ai](mailto:labs@murea.ai)
