@@ -199,6 +199,34 @@ cp .env.example .env          # set GEMINI_API_KEY and MUREA_URL=http://<gpu-hos
 See the [Murea-Mind README](agent/README.md#quick-start) for other providers, Docker and
 SSH tunnels.
 
+## Inference with Reactor Runtime
+
+The [Reactor integration](reactor/README.md) serves Murea-Fast with a small browser
+demo for text, ordered reference images, video continuation and live prompt changes.
+On a GPU machine with Docker, NVIDIA Container Toolkit and the Reactor CLI, set
+`HF_TOKEN` after accepting the LTX-2.5 model licence, then:
+
+```sh
+cd reactor
+reactor build
+reactor run --gpus '"device=0,1,2,3"' --port 8080 --shm-size 4g -e HF_TOKEN
+```
+
+Wait for `curl -fsS http://localhost:8080/health` to report `"state":"available"`.
+In a second terminal, from the repository root:
+
+```sh
+cd reactor/demo
+npm ci
+npm run dev
+```
+
+Open the printed frontend URL, set the Runtime endpoint to `http://localhost:8080`,
+click **Connect**, enter your prompt and optional media, then click **Start
+video**. **Update prompt** affects upcoming segments while continuing the same
+video. See the [guide](reactor/README.md) for requirements, controls, timing and
+SSH/WebRTC connectivity.
+
 <a name="repository-layout"></a>
 
 ## 🗂️ Repository layout
